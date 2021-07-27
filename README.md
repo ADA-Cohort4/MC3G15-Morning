@@ -1,6 +1,6 @@
-# Knotties 
+# Rekord 
 
-Knotties is an iOS App that aims to user learns how to knot tie based on suit type
+Rekord is an iOS App that aims to user learns how to knot tie based on suit type
 
 
 # Starting the project
@@ -18,11 +18,11 @@ Clone this project using git clone
     1. Open Terminal
     2. `brew install swiftgen`
 
-- Open `Knotties.xcodeproj`
+- Open `Rekord.xcodeproj`
 
 ## Disable SwiftLint
 1. Open project information
-2. Select Knotties in Targets
+2. Select Rekord in Targets
 3. Select Build Phases
 4. Open Run Script
 
@@ -190,6 +190,3 @@ Sample Video : [Link video](https://www.dropbox.com/s/gxt0bzlfr6ga2mj/codestylin
     Sample Video Approach #1 : [Link video](https://www.dropbox.com/s/kmv9iukemcloxho/git%20simple%20collab.mov?dl=0)
 
     Sample Video Approach #2 : [Link video](https://www.dropbox.com/s/0qs8r3gx228yv5d/git%20feature%20collab.mov?dl=0)
-
-
-
