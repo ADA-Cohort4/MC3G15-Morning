@@ -54,6 +54,15 @@
 		D4D3D374267063B3005A4ABA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D373267063B3005A4ABA /* Constants.swift */; };
 		D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D375267063C8005A4ABA /* CommonFunction.swift */; };
 		D4D3D37926706523005A4ABA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D3D37826706523005A4ABA /* Colors.xcassets */; };
+		EC14CB0826B13A4100D17CE6 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB0726B13A4100D17CE6 /* UserModel.swift */; };
+		EC14CB0A26B13B9900D17CE6 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB0926B13B9900D17CE6 /* RoleType.swift */; };
+		EC14CB0C26B13BCF00D17CE6 /* PartnerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB0B26B13BCF00D17CE6 /* PartnerType.swift */; };
+		EC14CB0E26B13C2300D17CE6 /* TransactionStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB0D26B13C2300D17CE6 /* TransactionStatusType.swift */; };
+		EC14CB1026B13F5E00D17CE6 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB0F26B13F5E00D17CE6 /* TransactionModel.swift */; };
+		EC14CB1226B1432600D17CE6 /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB1126B1432600D17CE6 /* BusinessModel.swift */; };
+		EC14CB1426B143EC00D17CE6 /* PartnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB1326B143EC00D17CE6 /* PartnerModel.swift */; };
+		EC14CB1626B143FD00D17CE6 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB1526B143FD00D17CE6 /* PaymentModel.swift */; };
+		EC14CB1B26B1493700D17CE6 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14CB1A26B1493700D17CE6 /* UserRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +115,15 @@
 		D4D3D373267063B3005A4ABA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4D3D375267063C8005A4ABA /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		D4D3D37826706523005A4ABA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		EC14CB0726B13A4100D17CE6 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = "../../../../../Other Swift Proj/UserModel.swift"; sourceTree = "<group>"; };
+		EC14CB0926B13B9900D17CE6 /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoleType.swift; path = "../../../../../Other Swift Proj/RoleType.swift"; sourceTree = "<group>"; };
+		EC14CB0B26B13BCF00D17CE6 /* PartnerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PartnerType.swift; path = "../../../../../Other Swift Proj/PartnerType.swift"; sourceTree = "<group>"; };
+		EC14CB0D26B13C2300D17CE6 /* TransactionStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionStatusType.swift; path = "../../../../../Other Swift Proj/TransactionStatusType.swift"; sourceTree = "<group>"; };
+		EC14CB0F26B13F5E00D17CE6 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionModel.swift; path = "../../../../../Other Swift Proj/TransactionModel.swift"; sourceTree = "<group>"; };
+		EC14CB1126B1432600D17CE6 /* BusinessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BusinessModel.swift; path = "../../../../../Other Swift Proj/BusinessModel.swift"; sourceTree = "<group>"; };
+		EC14CB1326B143EC00D17CE6 /* PartnerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PartnerModel.swift; path = "../../../../../Other Swift Proj/PartnerModel.swift"; sourceTree = "<group>"; };
+		EC14CB1526B143FD00D17CE6 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentModel.swift; path = "../../../../../Other Swift Proj/PaymentModel.swift"; sourceTree = "<group>"; };
+		EC14CB1A26B1493700D17CE6 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserRepository.swift; path = "../../../../../Other Swift Proj/UserRepository.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,9 +269,9 @@
 		D4A90316266F0A08007D5D2E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				D4A9033F266F0BCE007D5D2E /* Mock Data */,
-				D4A9033E266F0BC7007D5D2E /* Repositories */,
-				D4A9033D266F0BC1007D5D2E /* Entities */,
+				EC14CB1826B1483400D17CE6 /* Repositories */,
+				EC14CB1726B1482B00D17CE6 /* MockData */,
+				EC14CB0626B13A0C00D17CE6 /* Entities */,
 				D43FEFB326AFA7D50057F616 /* Rekord.xcdatamodeld */,
 			);
 			path = Core;
@@ -268,13 +286,6 @@
 				D4D3D351267062AF005A4ABA /* Extension */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		D4A90318266F0A14007D5D2E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D4A90319266F0A30007D5D2E /* Notification Center */ = {
@@ -318,27 +329,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		D4A9033D266F0BC1007D5D2E /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		D4A9033E266F0BC7007D5D2E /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
-		D4A9033F266F0BCE007D5D2E /* Mock Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Mock Data";
-			sourceTree = "<group>";
-		};
 		D4D20528266DEF1800CDC2D6 = {
 			isa = PBXGroup;
 			children = (
@@ -358,7 +348,7 @@
 		D4D20533266DEF1900CDC2D6 /* Rekord */ = {
 			isa = PBXGroup;
 			children = (
-				D4A90318266F0A14007D5D2E /* Supporting Files */,
+				EC14CB1926B1485900D17CE6 /* SupportingFiles */,
 				D4A90317266F0A0E007D5D2E /* Helpers */,
 				D4A90316266F0A08007D5D2E /* Core */,
 				D4A90315266F09F1007D5D2E /* Resources */,
@@ -412,6 +402,43 @@
 				D4D3D36926706386005A4ABA /* BarChartPresenter.swift */,
 			);
 			path = Chart;
+			sourceTree = "<group>";
+		};
+		EC14CB0626B13A0C00D17CE6 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				EC14CB0926B13B9900D17CE6 /* RoleType.swift */,
+				EC14CB0B26B13BCF00D17CE6 /* PartnerType.swift */,
+				EC14CB0D26B13C2300D17CE6 /* TransactionStatusType.swift */,
+				EC14CB0F26B13F5E00D17CE6 /* TransactionModel.swift */,
+				EC14CB0726B13A4100D17CE6 /* UserModel.swift */,
+				EC14CB1126B1432600D17CE6 /* BusinessModel.swift */,
+				EC14CB1326B143EC00D17CE6 /* PartnerModel.swift */,
+				EC14CB1526B143FD00D17CE6 /* PaymentModel.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		EC14CB1726B1482B00D17CE6 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
+		EC14CB1826B1483400D17CE6 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				EC14CB1A26B1493700D17CE6 /* UserRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		EC14CB1926B1485900D17CE6 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -497,17 +524,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC14CB1026B13F5E00D17CE6 /* TransactionModel.swift in Sources */,
 				D43FEFDE26AFBA030057F616 /* Login.swift in Sources */,
 				D43FEFE026AFBA1B0057F616 /* SetupBusiness.swift in Sources */,
 				D4D3D36D26706386005A4ABA /* BarChart.swift in Sources */,
 				D43FEFE226AFBA2B0057F616 /* SetupPin.swift in Sources */,
 				D4D3D374267063B3005A4ABA /* Constants.swift in Sources */,
 				D4D3D361267062EF005A4ABA /* UIBezierPath+Extension.swift in Sources */,
+				EC14CB1226B1432600D17CE6 /* BusinessModel.swift in Sources */,
+				EC14CB0A26B13B9900D17CE6 /* RoleType.swift in Sources */,
 				D4D3D35E267062EF005A4ABA /* UIView+Extension.swift in Sources */,
 				D4D20535266DEF1900CDC2D6 /* AppDelegate.swift in Sources */,
 				D4D3D362267062EF005A4ABA /* TableViewCell+Extension.swift in Sources */,
 				D4D3D35F267062EF005A4ABA /* UIImage+Extension.swift in Sources */,
 				D43FEFF026AFBB000057F616 /* Partner.swift in Sources */,
+				EC14CB0C26B13BCF00D17CE6 /* PartnerType.swift in Sources */,
+				EC14CB1626B143FD00D17CE6 /* PaymentModel.swift in Sources */,
 				D43FEFE626AFBAB80057F616 /* Dashboard.swift in Sources */,
 				D43FEFE426AFBAAF0057F616 /* LockScreen.swift in Sources */,
 				D4D20537266DEF1900CDC2D6 /* SceneDelegate.swift in Sources */,
@@ -515,18 +547,22 @@
 				D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */,
 				D4D3D36E26706386005A4ABA /* BarChartEntry.swift in Sources */,
 				D4D3D36C26706386005A4ABA /* BarChartPresenter.swift in Sources */,
+				EC14CB1426B143EC00D17CE6 /* PartnerModel.swift in Sources */,
 				D43FEFB526AFA7D50057F616 /* Rekord.xcdatamodeld in Sources */,
 				D43FEFEC26AFBAE80057F616 /* Transaction.swift in Sources */,
 				D4D3D35C267062EF005A4ABA /* UIColor+Extension.swift in Sources */,
 				D4D3D365267062EF005A4ABA /* CALayer+Extension.swift in Sources */,
 				D4D3D363267062EF005A4ABA /* Int+Extension.swift in Sources */,
+				EC14CB0E26B13C2300D17CE6 /* TransactionStatusType.swift in Sources */,
 				D4D3D35D267062EF005A4ABA /* UIButton+Extension.swift in Sources */,
 				D4D3D371267063A1005A4ABA /* HorizontalCalendar.swift in Sources */,
 				D43FEFF226AFC1AE0057F616 /* Settings.swift in Sources */,
+				EC14CB0826B13A4100D17CE6 /* UserModel.swift in Sources */,
 				D43FEFE826AFBAC60057F616 /* AddTransaction.swift in Sources */,
 				D43FEFEA26AFBAD10057F616 /* History.swift in Sources */,
 				D4D3D364267062EF005A4ABA /* Array+Extension.swift in Sources */,
 				D4D3D360267062EF005A4ABA /* Date+Extension.swift in Sources */,
+				EC14CB1B26B1493700D17CE6 /* UserRepository.swift in Sources */,
 				D43FEFEE26AFBAF40057F616 /* DocumentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

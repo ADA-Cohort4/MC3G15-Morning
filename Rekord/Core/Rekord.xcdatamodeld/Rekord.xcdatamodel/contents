@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Business" representedClassName="Business" syncable="YES" codeGenerationType="class">
+        <attribute name="adress" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id_business" optional="YES" attributeType="String"/>
+        <attribute name="id_user" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Partner" representedClassName="Partner" syncable="YES" codeGenerationType="class">
+        <attribute name="id_business" optional="YES" attributeType="String"/>
+        <attribute name="id_partner" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Payment" representedClassName="Payment" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="created_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="document" optional="YES" attributeType="String"/>
+        <attribute name="id_payment" optional="YES" attributeType="String"/>
+        <attribute name="id_transaction" optional="YES" attributeType="String"/>
+        <attribute name="id_user" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
+        <attribute name="created_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="document" optional="YES" attributeType="String"/>
+        <attribute name="due_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id_partner" optional="YES" attributeType="String"/>
+        <attribute name="id_transaction" optional="YES" attributeType="String"/>
+        <attribute name="payment_count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="total_price" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="updated_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="apple_id" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id_user" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="passcode" optional="YES" attributeType="String"/>
+        <attribute name="profile_url" optional="YES" attributeType="String"/>
+        <attribute name="role" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="User" positionX="-4510.04443359375" positionY="-4438.864471435547" width="128" height="148"/>
+        <element name="Partner" positionX="-4071.854248046875" positionY="-4462.024566650391" width="128" height="74"/>
+        <element name="Payment" positionX="-4319.774841308594" positionY="-4449.351470947266" width="128" height="119"/>
+        <element name="Transaction" positionX="-4477.084350585938" positionY="-4237.189270019531" width="128" height="178"/>
+        <element name="Business" positionX="-4222.728515625" positionY="-4242.388732910156" width="128" height="119"/>
+    </elements>
 </model>
