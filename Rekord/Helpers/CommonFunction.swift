@@ -31,5 +31,12 @@ class CommonFunction {
         alert.addAction(cancelButton)
         viewController.present(alert, animated: true, completion: nil)
     }
+    func addShadow(view : UIView){//buat nambahin shadow ke element
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
+        view.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowRadius = 5
+    }
     
 }
