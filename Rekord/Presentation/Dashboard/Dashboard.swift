@@ -11,16 +11,21 @@ import UIKit
 class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     static let shared = Dashboard()
     @IBOutlet weak var mainTableView: UITableView!
-    
+    //MARK: TODO: Ubah background jadi gradient
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTableView.dataSource = self
         mainTableView.delegate = self
+        //MARK: TODO: Ubah value AR/PR dan cashflow sesuai dengan total dan tanggal
+        
+        
+        //MARK: TODO: Ubah label cashflow color tergantung plus ama minus
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         5
     }
+    //MARK: TODO: Filter by date
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,6 +48,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             cell.partnerNameLabel.text = "poggers"
             cell.selectedBackgroundView = UIView()
             
+            //MARK: TODO: Ubah cell text menjadi sesuai transaction
+            
             return cell
         
         }
@@ -52,9 +59,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         performSegue(withIdentifier: "toAddTransaction", sender: nil)
         
     }
-   /* func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toAddTransaction", sender: nil)
-    }*/
+   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
