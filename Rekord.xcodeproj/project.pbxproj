@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99DC76D526B0577200BFD14D /* dateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC76D426B0577200BFD14D /* dateCell.swift */; };
+		99DC76D726B0587600BFD14D /* balanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC76D626B0587600BFD14D /* balanceCell.swift */; };
+		99DC76D926B058D800BFD14D /* transactionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC76D826B058D800BFD14D /* transactionsCell.swift */; };
+		99DC76DB26B2F3FA00BFD14D /* rootTabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99DC76DA26B2F3FA00BFD14D /* rootTabBar.storyboard */; };
 		D43FEFB526AFA7D50057F616 /* Rekord.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFB326AFA7D50057F616 /* Rekord.xcdatamodeld */; };
 		D43FEFBC26AFAE890057F616 /* ProfilePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFBB26AFAE890057F616 /* ProfilePage.storyboard */; };
 		D43FEFBE26AFB6110057F616 /* DataSharing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFBD26AFB6110057F616 /* DataSharing.storyboard */; };
@@ -67,6 +71,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		99DC76D426B0577200BFD14D /* dateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateCell.swift; sourceTree = "<group>"; };
+		99DC76D626B0587600BFD14D /* balanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = balanceCell.swift; sourceTree = "<group>"; };
+		99DC76D826B058D800BFD14D /* transactionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactionsCell.swift; sourceTree = "<group>"; };
+		99DC76DA26B2F3FA00BFD14D /* rootTabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = rootTabBar.storyboard; sourceTree = "<group>"; };
 		D43FEFB426AFA7D50057F616 /* Rekord.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rekord.xcdatamodel; sourceTree = "<group>"; };
 		D43FEFBB26AFAE890057F616 /* ProfilePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfilePage.storyboard; sourceTree = "<group>"; };
 		D43FEFBD26AFB6110057F616 /* DataSharing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DataSharing.storyboard; sourceTree = "<group>"; };
@@ -219,6 +227,9 @@
 				D43FEFE326AFBAAF0057F616 /* LockScreen.swift */,
 				D43FEFE526AFBAB80057F616 /* Dashboard.swift */,
 				D43FEFE726AFBAC60057F616 /* AddTransaction.swift */,
+				99DC76D426B0577200BFD14D /* dateCell.swift */,
+				99DC76D626B0587600BFD14D /* balanceCell.swift */,
+				99DC76D826B058D800BFD14D /* transactionsCell.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -307,6 +318,7 @@
 		D4A9031B266F0A4E007D5D2E /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				99DC76DA26B2F3FA00BFD14D /* rootTabBar.storyboard */,
 				D43FEFBA26AFAE610057F616 /* Settings&DataSharing */,
 				D43FEFB926AFAE580057F616 /* Partner */,
 				D43FEFB826AFAE4C0057F616 /* Transactions&History */,
@@ -511,6 +523,7 @@
 				D4D20541266DEF1900CDC2D6 /* Assets.xcassets in Resources */,
 				D43FEFBC26AFAE890057F616 /* ProfilePage.storyboard in Resources */,
 				D43FEFCA26AFB7720057F616 /* SetupBusiness.storyboard in Resources */,
+				99DC76DB26B2F3FA00BFD14D /* rootTabBar.storyboard in Resources */,
 				D43FEFD026AFB7CE0057F616 /* Transaction.storyboard in Resources */,
 				D43FEFC826AFB7270057F616 /* Login.storyboard in Resources */,
 				D43FEFCC26AFB7850057F616 /* SetupPin.storyboard in Resources */,
@@ -529,6 +542,10 @@
 			files = (
 				D43FEFDE26AFBA030057F616 /* Login.swift in Sources */,
 				D43FEFE026AFBA1B0057F616 /* SetupBusiness.swift in Sources */,
+				ECC223FD26B24DE700DDF743 /* PaymentModel.swift in Sources */,
+				99DC76D526B0577200BFD14D /* dateCell.swift in Sources */,
+				99DC76D926B058D800BFD14D /* transactionsCell.swift in Sources */,
+				99DC76D726B0587600BFD14D /* balanceCell.swift in Sources */,
 				ECC223FD26B24DE700DDF743 /* PaymentModel.swift in Sources */,
 				D4D3D36D26706386005A4ABA /* BarChart.swift in Sources */,
 				D43FEFE226AFBA2B0057F616 /* SetupPin.swift in Sources */,
