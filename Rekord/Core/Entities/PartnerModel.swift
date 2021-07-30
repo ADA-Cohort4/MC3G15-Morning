@@ -7,12 +7,16 @@
 
 class PartnerModel {
     var idPartner: String?
-    var idBusiness: String?
+    var idUser: String?
     var type: PartnerType?
+    var phone: String?
+    var status: PartnerActivationStatus?
     
-    init(idPartner: String, idBusiness: String, type: PartnerType) {
+    init(idPartner: String, idUser: String, type: PartnerType, phone: String, status: PartnerActivationStatus) {
         self.idPartner = idPartner
-        self.idBusiness = idBusiness
+        self.idUser = idUser
         self.type = type
+        self.phone = phone
+        self.status = status
     }
 }

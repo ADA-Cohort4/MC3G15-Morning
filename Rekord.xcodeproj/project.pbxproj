@@ -54,6 +54,7 @@
 		D4D3D374267063B3005A4ABA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D373267063B3005A4ABA /* Constants.swift */; };
 		D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D375267063C8005A4ABA /* CommonFunction.swift */; };
 		D4D3D37926706523005A4ABA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D3D37826706523005A4ABA /* Colors.xcassets */; };
+		EC68569B26B3B1C400148313 /* InviteLinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68569A26B3B1C400148313 /* InviteLinkModel.swift */; };
 		ECC223F526B24DE700DDF743 /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223EC26B24DE700DDF743 /* BusinessModel.swift */; };
 		ECC223F626B24DE700DDF743 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223ED26B24DE700DDF743 /* RoleType.swift */; };
 		ECC223F726B24DE700DDF743 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223EE26B24DE700DDF743 /* UserModel.swift */; };
@@ -115,6 +116,7 @@
 		D4D3D373267063B3005A4ABA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4D3D375267063C8005A4ABA /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		D4D3D37826706523005A4ABA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		EC68569A26B3B1C400148313 /* InviteLinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkModel.swift; sourceTree = "<group>"; };
 		ECC223EC26B24DE700DDF743 /* BusinessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
 		ECC223ED26B24DE700DDF743 /* RoleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
 		ECC223EE26B24DE700DDF743 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				ECC223F026B24DE700DDF743 /* TransactionModel.swift */,
 				ECC223F126B24DE700DDF743 /* TransactionStatusType.swift */,
 				ECC223EE26B24DE700DDF743 /* UserModel.swift */,
+				EC68569A26B3B1C400148313 /* InviteLinkModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				D43FEFEC26AFBAE80057F616 /* Transaction.swift in Sources */,
 				D4D3D35C267062EF005A4ABA /* UIColor+Extension.swift in Sources */,
 				D4D3D365267062EF005A4ABA /* CALayer+Extension.swift in Sources */,
+				EC68569B26B3B1C400148313 /* InviteLinkModel.swift in Sources */,
 				ECC223FB26B24DE700DDF743 /* PartnerType.swift in Sources */,
 				D4D3D363267062EF005A4ABA /* Int+Extension.swift in Sources */,
 				ECC2240026B24E3900DDF743 /* UserRepository.swift in Sources */,

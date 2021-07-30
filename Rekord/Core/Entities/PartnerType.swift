@@ -9,3 +9,14 @@ enum PartnerType: String {
     case customer = "customer"
     case suplier = "suplier"
 }
+
+enum PartnerActivationStatus: String {
+    case active = "active"
+    case inactive = "inactive"
+}
+
+
+enum InvitationActivationStatus: String {
+    case active = "active"
+    case expired = "expired"
+}
