@@ -8,9 +8,18 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="InviteLink" representedClassName="InviteLink" syncable="YES" codeGenerationType="class">
+        <attribute name="created_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id_invitelink" optional="YES" attributeType="String"/>
+        <attribute name="id_recipient" optional="YES" attributeType="String"/>
+        <attribute name="id_user" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Partner" representedClassName="Partner" syncable="YES" codeGenerationType="class">
         <attribute name="id_business" optional="YES" attributeType="String"/>
-        <attribute name="id_partner" optional="YES" attributeType="String"/>
+        <attribute name="id_user" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Payment" representedClassName="Payment" syncable="YES" codeGenerationType="class">
@@ -38,14 +47,16 @@
         <attribute name="id_user" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="passcode" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
         <attribute name="profile_url" optional="YES" attributeType="String"/>
         <attribute name="role" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="User" positionX="-4510.04443359375" positionY="-4438.864471435547" width="128" height="148"/>
-        <element name="Partner" positionX="-4071.854248046875" positionY="-4462.024566650391" width="128" height="74"/>
+        <element name="Business" positionX="-4222.728515625" positionY="-4242.388732910156" width="128" height="119"/>
+        <element name="Partner" positionX="-4071.854248046875" positionY="-4462.024566650391" width="128" height="104"/>
         <element name="Payment" positionX="-4319.774841308594" positionY="-4449.351470947266" width="128" height="119"/>
         <element name="Transaction" positionX="-4477.084350585938" positionY="-4237.189270019531" width="128" height="178"/>
-        <element name="Business" positionX="-4222.728515625" positionY="-4242.388732910156" width="128" height="119"/>
+        <element name="User" positionX="-4510.04443359375" positionY="-4438.864471435547" width="128" height="149"/>
+        <element name="InviteLink" positionX="-4302" positionY="-4302" width="128" height="104"/>
     </elements>
 </model>
