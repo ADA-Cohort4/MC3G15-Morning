@@ -32,6 +32,15 @@
 		D43FEFF026AFBB000057F616 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFEF26AFBB000057F616 /* Partner.swift */; };
 		D43FEFF226AFC1AE0057F616 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFF126AFC1AE0057F616 /* Settings.swift */; };
 		D43FEFF426AFC1C30057F616 /* DataSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFF326AFC1C30057F616 /* DataSharing.swift */; };
+		D48BC0CF26B3AE90001D7D9C /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0CE26B3AE90001D7D9C /* BaseRequest.swift */; };
+		D48BC0D126B3B39E001D7D9C /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0D026B3B39E001D7D9C /* APIRequest.swift */; };
+		D48BC0D426B3BE42001D7D9C /* UsersModel+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0D326B3BE41001D7D9C /* UsersModel+Networking.swift */; };
+		D48BC0D726B3BEDC001D7D9C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0D626B3BEDC001D7D9C /* DataManager.swift */; };
+		D48BC0DA26B52B27001D7D9C /* PartnersModel+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0D926B52B27001D7D9C /* PartnersModel+Networking.swift */; };
+		D48BC0DC26B52C1B001D7D9C /* BusinessModel+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0DB26B52C1B001D7D9C /* BusinessModel+Networking.swift */; };
+		D48BC0DE26B52D52001D7D9C /* TransactionsModel+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0DD26B52D52001D7D9C /* TransactionsModel+Networking.swift */; };
+		D48BC0E026B52E69001D7D9C /* PaymentsModel+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0DF26B52E69001D7D9C /* PaymentsModel+Networking.swift */; };
+		D48BC0E226B52ECA001D7D9C /* InviteLinksModel+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48BC0E126B52ECA001D7D9C /* InviteLinksModel+Networking.swift */; };
 		D4D20535266DEF1900CDC2D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D20534266DEF1900CDC2D6 /* AppDelegate.swift */; };
 		D4D20537266DEF1900CDC2D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D20536266DEF1900CDC2D6 /* SceneDelegate.swift */; };
 		D4D20541266DEF1900CDC2D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D20540266DEF1900CDC2D6 /* Assets.xcassets */; };
@@ -91,6 +100,15 @@
 		D43FEFEF26AFBB000057F616 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
 		D43FEFF126AFC1AE0057F616 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D43FEFF326AFC1C30057F616 /* DataSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSharing.swift; sourceTree = "<group>"; };
+		D48BC0CE26B3AE90001D7D9C /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		D48BC0D026B3B39E001D7D9C /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		D48BC0D326B3BE41001D7D9C /* UsersModel+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersModel+Networking.swift"; sourceTree = "<group>"; };
+		D48BC0D626B3BEDC001D7D9C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		D48BC0D926B52B27001D7D9C /* PartnersModel+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PartnersModel+Networking.swift"; sourceTree = "<group>"; };
+		D48BC0DB26B52C1B001D7D9C /* BusinessModel+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessModel+Networking.swift"; sourceTree = "<group>"; };
+		D48BC0DD26B52D52001D7D9C /* TransactionsModel+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionsModel+Networking.swift"; sourceTree = "<group>"; };
+		D48BC0DF26B52E69001D7D9C /* PaymentsModel+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentsModel+Networking.swift"; sourceTree = "<group>"; };
+		D48BC0E126B52ECA001D7D9C /* InviteLinksModel+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InviteLinksModel+Networking.swift"; sourceTree = "<group>"; };
 		D4D20531266DEF1900CDC2D6 /* Rekord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rekord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D20534266DEF1900CDC2D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4D20536266DEF1900CDC2D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +249,38 @@
 			path = "Onboarding&Login";
 			sourceTree = "<group>";
 		};
+		D48BC0CB26B3AC74001D7D9C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D48BC0D526B3BEC9001D7D9C /* DataManager */,
+				D48BC0D226B3BE03001D7D9C /* Model */,
+				D48BC0CE26B3AE90001D7D9C /* BaseRequest.swift */,
+				D48BC0D026B3B39E001D7D9C /* APIRequest.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		D48BC0D226B3BE03001D7D9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D48BC0D326B3BE41001D7D9C /* UsersModel+Networking.swift */,
+				D48BC0D926B52B27001D7D9C /* PartnersModel+Networking.swift */,
+				D48BC0DB26B52C1B001D7D9C /* BusinessModel+Networking.swift */,
+				D48BC0DD26B52D52001D7D9C /* TransactionsModel+Networking.swift */,
+				D48BC0DF26B52E69001D7D9C /* PaymentsModel+Networking.swift */,
+				D48BC0E126B52ECA001D7D9C /* InviteLinksModel+Networking.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D48BC0D526B3BEC9001D7D9C /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				D48BC0D626B3BEDC001D7D9C /* DataManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
 		D4A90313266F09CD007D5D2E /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,8 +319,8 @@
 		D4A90316266F0A08007D5D2E /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D48BC0CB26B3AC74001D7D9C /* Networking */,
 				ECC223FE26B24E2400DDF743 /* Repositories */,
-				EC14CB1726B1482B00D17CE6 /* MockData */,
 				EC14CB0626B13A0C00D17CE6 /* Entities */,
 				D43FEFB326AFA7D50057F616 /* Rekord.xcdatamodeld */,
 			);
@@ -419,13 +469,6 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		EC14CB1726B1482B00D17CE6 /* MockData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MockData;
-			sourceTree = "<group>";
-		};
 		EC14CB1926B1485900D17CE6 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,17 +580,25 @@
 				D4D3D362267062EF005A4ABA /* TableViewCell+Extension.swift in Sources */,
 				D4D3D35F267062EF005A4ABA /* UIImage+Extension.swift in Sources */,
 				ECC223F926B24DE700DDF743 /* TransactionModel.swift in Sources */,
+				D48BC0DE26B52D52001D7D9C /* TransactionsModel+Networking.swift in Sources */,
 				D43FEFF026AFBB000057F616 /* Partner.swift in Sources */,
+				D48BC0CF26B3AE90001D7D9C /* BaseRequest.swift in Sources */,
+				D48BC0D426B3BE42001D7D9C /* UsersModel+Networking.swift in Sources */,
 				D43FEFE626AFBAB80057F616 /* Dashboard.swift in Sources */,
+				D48BC0E226B52ECA001D7D9C /* InviteLinksModel+Networking.swift in Sources */,
 				D43FEFE426AFBAAF0057F616 /* LockScreen.swift in Sources */,
 				D4D20537266DEF1900CDC2D6 /* SceneDelegate.swift in Sources */,
+				D48BC0DA26B52B27001D7D9C /* PartnersModel+Networking.swift in Sources */,
 				ECC223FA26B24DE700DDF743 /* TransactionStatusType.swift in Sources */,
 				D43FEFF426AFC1C30057F616 /* DataSharing.swift in Sources */,
 				D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */,
 				D4D3D36E26706386005A4ABA /* BarChartEntry.swift in Sources */,
+				D48BC0D126B3B39E001D7D9C /* APIRequest.swift in Sources */,
 				ECC223F626B24DE700DDF743 /* RoleType.swift in Sources */,
 				D4D3D36C26706386005A4ABA /* BarChartPresenter.swift in Sources */,
+				D48BC0DC26B52C1B001D7D9C /* BusinessModel+Networking.swift in Sources */,
 				D43FEFB526AFA7D50057F616 /* Rekord.xcdatamodeld in Sources */,
+				D48BC0E026B52E69001D7D9C /* PaymentsModel+Networking.swift in Sources */,
 				D43FEFEC26AFBAE80057F616 /* Transaction.swift in Sources */,
 				D4D3D35C267062EF005A4ABA /* UIColor+Extension.swift in Sources */,
 				D4D3D365267062EF005A4ABA /* CALayer+Extension.swift in Sources */,
@@ -562,6 +613,7 @@
 				D4D3D364267062EF005A4ABA /* Array+Extension.swift in Sources */,
 				D4D3D360267062EF005A4ABA /* Date+Extension.swift in Sources */,
 				D43FEFEE26AFBAF40057F616 /* DocumentView.swift in Sources */,
+				D48BC0D726B3BEDC001D7D9C /* DataManager.swift in Sources */,
 				ECC223F826B24DE700DDF743 /* PartnerModel.swift in Sources */,
 				ECC223F526B24DE700DDF743 /* BusinessModel.swift in Sources */,
 			);
@@ -703,7 +755,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = 99K489U5L8;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -722,7 +774,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = 99K489U5L8;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
