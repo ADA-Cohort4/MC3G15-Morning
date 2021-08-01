@@ -14,14 +14,24 @@ class LockScreen: UIViewController {
     @IBOutlet var pass: [UIView]!
     @IBOutlet var numPad: [UIButton]!
     
-    
+    var code: String = ""
     
     @IBAction func relogin(_ sender: Any) {
         //navigate to login email (sign in)
     }
     
     @IBAction func buttonsTap(_ sender: UIButton){
-        //save ke array gitu(?)
+        let buttonTitle = sender.title(for: .normal)!
+        if  code.count < 6 && (buttonTitle != ""){
+            pass[0].layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            for i in 1..<code.count+1{
+                pass[i].layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            }
+            code.append(buttonTitle)
+            print("The code is \(code)")
+        } else if code.count == 6{
+            //navigate to dashboard if true, try again if false
+        }
     }
     
     @IBAction func faceID(_ sender: UIButton){
@@ -29,7 +39,9 @@ class LockScreen: UIViewController {
     }
     
     @IBAction func deletePIN(_ sender: UIButton){
-        //delete the last value of the array
+        code.removeLast()
+        pass[code.count].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        print("The code is \(code)")
     }
     
     override func viewDidLoad(){
