@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct InviteLinksData: Codable {
-    let records: [InviteLinksDataResponse]?
+struct InviteLinksNetworkData: Codable {
+    let records: [InviteLinksNetworkDataResponse]?
 }
 
-struct InviteLinksDataResponse: Codable {
+struct InviteLinksNetworkDataResponse: Codable {
     let id: String?
-    let fields: InviteLinksDataFieldResponse?
+    let fields: InviteLinksNetworkDataFieldResponse?
     let createdTime: String?
 }
 
-struct InviteLinksDataFieldResponse: Codable {
+struct InviteLinksNetworkDataFieldResponse: Codable {
     let id_invitelink: String?
     let id_user: String?
     let id_recepient: String?

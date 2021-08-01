@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIRequest: NSObject{
+class UsersAPIRequest: NSObject{
     
     //GET USERS METHOD USING NETWORK
     static func getUsersData(url:String,
@@ -86,7 +86,5 @@ class APIRequest: NSObject{
     }
     //END PATCH USER NETWORK
     
-    
-    
-    
+     
 }

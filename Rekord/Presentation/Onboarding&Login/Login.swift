@@ -62,14 +62,14 @@ class Login: UIViewController {
             // STARTING LOGIC
             // fetch the data from API
             // This is logic to check if users that want to be registered already exist or not
-            APIRequest.getUsersData(url: url, filter: filter+formula, header: Constants.HEADER_URL, showLoader: true) { response in
+            UsersAPIRequest.getUsersData(url: url, filter: filter+formula, header: Constants.HEADER_URL, showLoader: true) { response in
                 // handle response and store it to the data model
                 self.userModel = response
                 // check if user model not empty means data is exist
                 // the checking need false if you want to patching/edit the user
                 if self.userModel?.records?.isEmpty == false{
                     // post the data to API
-                    APIRequest.editUser(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
+                    UsersAPIRequest.editUser(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
                         //handle if success
                         print(response)
                     } failCompletion: { message in
