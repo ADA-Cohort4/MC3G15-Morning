@@ -11,57 +11,40 @@ class LockScreen: UIViewController {
     
     @IBOutlet weak var PINlabel: UILabel!
     
-    @IBOutlet weak var pass1: UIView!
-    @IBOutlet weak var pass2: UIView!
-    @IBOutlet weak var pass3: UIView!
-    @IBOutlet weak var pass4: UIView!
-    @IBOutlet weak var pass5: UIView!
-    @IBOutlet weak var pass6: UIView!
-    
-    @IBOutlet weak var num0: UIButton!
-    @IBOutlet weak var num1: UIButton!
-    @IBOutlet weak var num2: UIButton!
-    @IBOutlet weak var num3: UIButton!
-    @IBOutlet weak var num4: UIButton!
-    @IBOutlet weak var num5: UIButton!
-    @IBOutlet weak var num6: UIButton!
-    @IBOutlet weak var num7: UIButton!
-    @IBOutlet weak var num8: UIButton!
-    @IBOutlet weak var num9: UIButton!
-    
-    @IBOutlet weak var faceid: UIButton!
-    @IBOutlet weak var delete: UIButton!
+    @IBOutlet var pass: [UIView]!
+    @IBOutlet var numPad: [UIButton]!
     
     
-    @IBAction func forgotPIN(_ sender: Any) {
-        
-    }
     
     @IBAction func relogin(_ sender: Any) {
-        
+        //navigate to login email (sign in)
     }
     
+    @IBAction func buttonsTap(_ sender: UIButton){
+        //save ke array gitu(?)
+    }
+    
+    @IBAction func faceID(_ sender: UIButton){
+        //faceID function
+    }
+    
+    @IBAction func deletePIN(_ sender: UIButton){
+        //delete the last value of the array
+    }
     
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        pass1.layer.cornerRadius = 10
-        pass2.layer.cornerRadius = 10
-        pass3.layer.cornerRadius = 10
-        pass4.layer.cornerRadius = 10
-        pass5.layer.cornerRadius = 10
-        pass6.layer.cornerRadius = 10
+        for i in 0..<6{
+            pass[i].layer.cornerRadius = 10
+            pass[i].layer.borderWidth = 3
+            pass[i].layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
         
-        num0.layer.cornerRadius = 37.5
-        num1.layer.cornerRadius = 37.5
-        num2.layer.cornerRadius = 37.5
-        num3.layer.cornerRadius = 37.5
-        num4.layer.cornerRadius = 37.5
-        num5.layer.cornerRadius = 37.5
-        num6.layer.cornerRadius = 37.5
-        num7.layer.cornerRadius = 37.5
-        num8.layer.cornerRadius = 37.5
-        num9.layer.cornerRadius = 37.5
+        for j in 0..<10{
+            numPad[j].layer.cornerRadius = 37.5
+        }
+        // num[10] face id, num[11] delete
         
     }
     
