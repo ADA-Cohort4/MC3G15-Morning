@@ -49,17 +49,27 @@ class BaseRequest: NSObject {
     }
     
     static func POST(url: String,
-                    header: [String:String],
-                    jsonData: Data,
-                    showLoader: Bool,
-                    completionHandler: @escaping (Any) -> Void) {
+                     filter: String,
+                     header: [String:String],
+                     jsonData: Data,
+                     showLoader: Bool,
+                     completionHandler: @escaping (Any) -> Void) {
         
         if showLoader {
             //display loader
         }
         
+        //newURL add new url and filter
+        var newurl:String = ""
+        //Logic filter on Rekord
+        if filter.isEmpty == false{
+            newurl = url+filter
+        }else{
+            newurl = url
+        }
+        
         //init request
-        let request = NSMutableURLRequest(url: NSURL(string: url)! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+        let request = NSMutableURLRequest(url: NSURL(string: newurl)! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         
         //configure request and set header
         request.httpMethod = "POST"
