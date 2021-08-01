@@ -11,7 +11,7 @@ import UIKit
 class Login: UIViewController {
     //parameter that need to filter logic
     var email = "lixus.julius17@gmail.com"
-    var passcode = "123456"
+    var passcode = "234567"
 
     // prepare json data
     var jsonData: Data?
@@ -28,15 +28,18 @@ class Login: UIViewController {
         
             // set the json parameter to send
             let json: [String:Any] = [
-                "fields" : [
-                    "id_user": UUID().uuidString,
-                    "apple_id": "axlwibisono@gmail.com",
-                    "passcode": "123456",
-                    "name": "Axal",
-                    "role": "edit",
-                    "email": "axlwibisono@gmail.com",
-                    "phone": "6281288540387"
-                ]
+                "records" : [[
+                    "id": "rec83bAKy532NG6wy", //id that you got from airtable ##MAKESURE IT SAVE INTO CORE DATA##
+                    "fields" : [
+                        //"id_user": UUID().uuidString, --> do not send this on update or the id will be change and all relation will be broken
+                        "apple_id": "lixus.julius17@gmail.com",
+                        "passcode": "234567",
+                        "name": "Panjulipa",
+                        "role": "edit",
+                        "email": "lixus.julius17@gmail.com",
+                        "phone": "6281288540387"
+                    ]
+                ]]
             ]
             //change type data array to json so our api can retrieve it
             do {
@@ -45,9 +48,11 @@ class Login: UIViewController {
                 print(error.localizedDescription)
             }
             
-            //for getting method spesific data
-            let formula = "?filterByFormula=AND(email%3D%22\(email)%22%2Cpasscode%3D%22\(passcode)%22)"
-            
+            //for getting method spesific data, it different when you want to update record
+            //let formula = "?filterByFormula=AND(email%3D%22\(email)%22%2Cpasscode%3D%22\(passcode)%22)"
+            //id that you got from airtable ##MAKESURE IT SAVE INTO CORE DATA##
+            let formula = "/rec83bAKy532NG6wy"
+        
             // for filtering tabledata
             let filter = "Users"
             
@@ -61,9 +66,10 @@ class Login: UIViewController {
                 // handle response and store it to the data model
                 self.userModel = response
                 // check if user model not empty means data is exist
-                if self.userModel?.records?.isEmpty == true{
+                // the checking need false if you want to patching/edit the user
+                if self.userModel?.records?.isEmpty == false{
                     // post the data to API
-                    APIRequest.createUser(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
+                    APIRequest.editUser(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
                         //handle if success
                         print(response)
                     } failCompletion: { message in
