@@ -82,6 +82,9 @@
 		D4D3D374267063B3005A4ABA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D373267063B3005A4ABA /* Constants.swift */; };
 		D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D375267063C8005A4ABA /* CommonFunction.swift */; };
 		D4D3D37926706523005A4ABA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D3D37826706523005A4ABA /* Colors.xcassets */; };
+		E7A9B69C26B6423A009C2876 /* ChooseTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9B69B26B6423A009C2876 /* ChooseTypeViewController.swift */; };
+		E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */; };
+		E7A9B6A026B64279009C2876 /* JoinBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9B69F26B64279009C2876 /* JoinBusinessViewController.swift */; };
 		EC68569B26B3B1C400148313 /* InviteLinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68569A26B3B1C400148313 /* InviteLinkModel.swift */; };
 		ECC223F526B24DE700DDF743 /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223EC26B24DE700DDF743 /* BusinessModel.swift */; };
 		ECC223F626B24DE700DDF743 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223ED26B24DE700DDF743 /* RoleType.swift */; };
@@ -172,6 +175,10 @@
 		D4D3D373267063B3005A4ABA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4D3D375267063C8005A4ABA /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		D4D3D37826706523005A4ABA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		E7A9B69A26B64064009C2876 /* Rekord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rekord.entitlements; sourceTree = "<group>"; };
+		E7A9B69B26B6423A009C2876 /* ChooseTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTypeViewController.swift; sourceTree = "<group>"; };
+		E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupBusinessViewController.swift; sourceTree = "<group>"; };
+		E7A9B69F26B64279009C2876 /* JoinBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinBusinessViewController.swift; sourceTree = "<group>"; };
 		EC68569A26B3B1C400148313 /* InviteLinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkModel.swift; sourceTree = "<group>"; };
 		ECC223EC26B24DE700DDF743 /* BusinessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
 		ECC223ED26B24DE700DDF743 /* RoleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
@@ -305,6 +312,9 @@
 				D43FEFDD26AFBA030057F616 /* Login.swift */,
 				D43FEFDF26AFBA1B0057F616 /* SetupBusiness.swift */,
 				D43FEFE126AFBA2B0057F616 /* SetupPin.swift */,
+				E7A9B69B26B6423A009C2876 /* ChooseTypeViewController.swift */,
+				E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */,
+				E7A9B69F26B64279009C2876 /* JoinBusinessViewController.swift */,
 			);
 			path = "Onboarding&Login";
 			sourceTree = "<group>";
@@ -464,6 +474,7 @@
 		D4D20533266DEF1900CDC2D6 /* Rekord */ = {
 			isa = PBXGroup;
 			children = (
+				E7A9B69A26B64064009C2876 /* Rekord.entitlements */,
 				EC14CB1926B1485900D17CE6 /* SupportingFiles */,
 				D4A90317266F0A0E007D5D2E /* Helpers */,
 				D4A90316266F0A08007D5D2E /* Core */,
@@ -654,6 +665,7 @@
 				D444D4DB26B6A0E600431C1B /* PartnersAPIRequest.swift in Sources */,
 				D4D3D374267063B3005A4ABA /* Constants.swift in Sources */,
 				D4D3D361267062EF005A4ABA /* UIBezierPath+Extension.swift in Sources */,
+				E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */,
 				D4D3D35E267062EF005A4ABA /* UIView+Extension.swift in Sources */,
 				D4D20535266DEF1900CDC2D6 /* AppDelegate.swift in Sources */,
 				ECC223F726B24DE700DDF743 /* UserModel.swift in Sources */,
@@ -689,6 +701,7 @@
 				ECC223FB26B24DE700DDF743 /* PartnerType.swift in Sources */,
 				D4D3D363267062EF005A4ABA /* Int+Extension.swift in Sources */,
 				ECC2240026B24E3900DDF743 /* UserRepository.swift in Sources */,
+				E7A9B69C26B6423A009C2876 /* ChooseTypeViewController.swift in Sources */,
 				D4D3D35D267062EF005A4ABA /* UIButton+Extension.swift in Sources */,
 				67FC69DA26B4698500836E3F /* PartnerTypeCell.swift in Sources */,
 				67FC69D626B4696F00836E3F /* PartnerListCell.swift in Sources */,
@@ -700,6 +713,7 @@
 				D444D4DF26B6A3FE00431C1B /* BusinessAPIRequest.swift in Sources */,
 				D4D3D364267062EF005A4ABA /* Array+Extension.swift in Sources */,
 				D4D3D360267062EF005A4ABA /* Date+Extension.swift in Sources */,
+				E7A9B6A026B64279009C2876 /* JoinBusinessViewController.swift in Sources */,
 				D43FEFEE26AFBAF40057F616 /* DocumentView.swift in Sources */,
 				D48BC0D726B3BEDC001D7D9C /* DataManager.swift in Sources */,
 				674415B626B526E10087BA61 /* EditPartner.swift in Sources */,
@@ -843,8 +857,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 99K489U5L8;
+				DEVELOPMENT_TEAM = H7G3L89F8C;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -862,8 +877,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 99K489U5L8;
+				DEVELOPMENT_TEAM = H7G3L89F8C;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
