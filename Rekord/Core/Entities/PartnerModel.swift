@@ -11,12 +11,14 @@ class PartnerModel {
     var type: PartnerType?
     var phone: String?
     var status: PartnerActivationStatus?
+    var airtableId: String?
     
-    init(idPartner: String, idUser: String, type: PartnerType, phone: String, status: PartnerActivationStatus) {
+    init(idPartner: String, idUser: String, type: PartnerType, phone: String, status: PartnerActivationStatus, airtableId: String) {
         self.idPartner = idPartner
         self.idUser = idUser
         self.type = type
         self.phone = phone
         self.status = status
+        self.airtableId = airtableId
     }
 }

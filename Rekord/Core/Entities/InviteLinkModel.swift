@@ -13,12 +13,14 @@ class InviteLinkModel {
     var idRecepient: String?
     var status: InvitationActivationStatus?
     var createdDate: String?
+    var airtableId: String?
     
-    init(idInviteLink: String, idUser: String, idRecepient: String, status: InvitationActivationStatus, createdDate: String) {
+    init(idInviteLink: String, idUser: String, idRecepient: String, status: InvitationActivationStatus, createdDate: String, airtableId: String) {
         self.idInviteLink = idInviteLink
         self.idUser = idUser
         self.idRecepient = idRecepient
         self.status = status
         self.createdDate = createdDate
+        self.airtableId = airtableId
     }
 }
