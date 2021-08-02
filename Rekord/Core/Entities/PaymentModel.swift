@@ -12,13 +12,15 @@ class PaymentModel {
     var createdDate: String?
     var amount: Float?
     var document: String?
+    var airtableId: String?
     
-    init(idPayment: String, idTransaction: String, idUser: String, createdDate: String, amount: Float, document: String) {
+    init(idPayment: String, idTransaction: String, idUser: String, createdDate: String, amount: Float, document: String, airtableId: String) {
         self.idPayment = idPayment
         self.idTransaction = idTransaction
         self.idUser = idUser
         self.createdDate = createdDate
         self.amount = amount
         self.document = document
+        self.airtableId = airtableId
     }
 }

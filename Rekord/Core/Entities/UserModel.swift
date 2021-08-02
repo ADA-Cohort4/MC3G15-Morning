@@ -14,13 +14,17 @@ class UserModel {
     var role: RoleType?
     var email: String?
     var profileUrl: String?
+    var phone: String?
+    var airtableId: String?
     
-    init(idUser: String, appleId: String, passcode: String, role: RoleType, email: String, profileUrl: String) {
+    init(idUser: String, appleId: String, passcode: String, role: RoleType, email: String, profileUrl: String, phone: String, airtableId: String) {
         self.idUser = idUser
         self.appleId = appleId
         self.passcode = passcode
         self.role = role
         self.email = email
         self.profileUrl = profileUrl
+        self.phone = phone
+        self.airtableId = airtableId
     }
 }
