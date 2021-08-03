@@ -32,8 +32,8 @@ class AddTransaction: UIViewController {
     
     
     let partnerList: [PartnerModel] = [
-        PartnerModel(idPartner: "1", idUser: "1", type: .customer, phone: "081377020333", status: .active),
-        PartnerModel(idPartner: "2", idUser: "1", type: .customer, phone: "081377020333", status: .active),
+        PartnerModel(idPartner: "1", idUser: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "2"),
+        PartnerModel(idPartner: "2", idUser: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "1"),
     ]
     
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ class AddTransaction: UIViewController {
     }
     
     @IBAction func createTransaction(_ sender: Any) {
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: totalPrice.text ?? "", paymentCount: 2, document: imageName, dueDate: dateFormatter.string(from: datePicker.date), createdDate: "Todey", updatedDate: "todey", status: .waiting)
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: totalPrice.text ?? "", paymentCount: 2, document: imageName, dueDate: dateFormatter.string(from: datePicker.date), createdDate: "Todey", updatedDate: "todey", status: .waiting, airtableId: "1")
         
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)

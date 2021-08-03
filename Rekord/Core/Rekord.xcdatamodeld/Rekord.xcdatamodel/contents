@@ -58,20 +58,11 @@
         <attribute name="role" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-<<<<<<< HEAD
         <element name="Business" positionX="-4222.728515625" positionY="-4242.388732910156" width="128" height="134"/>
         <element name="InviteLink" positionX="-4302" positionY="-4302" width="128" height="119"/>
         <element name="Partner" positionX="-4071.854248046875" positionY="-4462.024566650391" width="128" height="119"/>
         <element name="Payment" positionX="-4319.774841308594" positionY="-4449.351470947266" width="128" height="134"/>
         <element name="Transaction" positionX="-4477.084350585938" positionY="-4237.189270019531" width="128" height="179"/>
         <element name="User" positionX="-4510.04443359375" positionY="-4438.864471435547" width="128" height="164"/>
-=======
-        <element name="Business" positionX="-4222.728515625" positionY="-4242.388732910156" width="128" height="119"/>
-        <element name="InviteLink" positionX="-4302" positionY="-4302" width="128" height="104"/>
-        <element name="Partner" positionX="-4071.854248046875" positionY="-4462.024566650391" width="128" height="104"/>
-        <element name="Payment" positionX="-4319.774841308594" positionY="-4449.351470947266" width="128" height="119"/>
-        <element name="Transaction" positionX="-4477.084350585938" positionY="-4237.189270019531" width="128" height="164"/>
-        <element name="User" positionX="-4510.04443359375" positionY="-4438.864471435547" width="128" height="149"/>
->>>>>>> 58dd15f (Add Transaction)
     </elements>
 </model>
