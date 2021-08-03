@@ -29,7 +29,8 @@ class TransactionRepository {
         transactionData.setValue(transaction.dueDate, forKeyPath: "due_date")
         transactionData.setValue(transaction.createdDate, forKeyPath: "created_date")
         transactionData.setValue(transaction.updatedDate, forKeyPath: "updated_date")
-        transactionData.setValue(transaction.status, forKeyPath: "status")
+        transactionData.setValue(transaction.status?.rawValue, forKeyPath: "status")
+        transactionData.setValue(transaction.airtableId, forKeyPath: "airtable_id")
         
         do {
             try managedContext.save()

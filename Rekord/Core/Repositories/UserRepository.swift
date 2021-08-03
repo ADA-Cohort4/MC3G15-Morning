@@ -37,4 +37,42 @@ class UserRepository {
             completion(false)
         }
     }
+    
+    func updateUser(user: UserModel, completion: @escaping (_ status: Bool) -> ()) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("app delegate nil")
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "id_user = %@", user.idUser!)
+        do {
+            let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+            data.setValue(user.email, forKeyPath: "email")
+            try managedContext.save()
+            completion(true)
+        }catch let err {
+            print("err = \(err.localizedDescription)")
+            completion(false)
+        }
+    }
+    
+    func getUser(completion: @escaping(_ email: String, _ passcode: String) -> ()) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("app delegate nil")
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
+        do {
+            let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+            completion(data.value(forKey: "email") as! String, data.value(forKey: "passcode") as! String)
+        } catch let err {
+            print("failed get all card = \(err.localizedDescription)")
+            completion("", "")
+        }
+    }
+    
 }
