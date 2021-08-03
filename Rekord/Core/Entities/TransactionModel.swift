@@ -8,7 +8,7 @@
 class TransactionModel {
     var idTransaction: String?
     var idPartner: String?
-    var totalPrice: Float?
+    var totalPrice: String?
     var paymentCount: Int?
     var document: String?
     var dueDate: String?
@@ -30,3 +30,5 @@ class TransactionModel {
         self.airtableId = airtableId
     }
 }
+
+

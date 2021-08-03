@@ -26,7 +26,6 @@
 		D43FEFBE26AFB6110057F616 /* DataSharing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFBD26AFB6110057F616 /* DataSharing.storyboard */; };
 		D43FEFC026AFB6870057F616 /* LockScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFBF26AFB6870057F616 /* LockScreen.storyboard */; };
 		D43FEFC226AFB6940057F616 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFC126AFB6940057F616 /* Dashboard.storyboard */; };
-		D43FEFC426AFB69F0057F616 /* AddTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFC326AFB69F0057F616 /* AddTransaction.storyboard */; };
 		D43FEFC826AFB7270057F616 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFC726AFB7270057F616 /* Login.storyboard */; };
 		D43FEFCA26AFB7720057F616 /* SetupBusiness.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFC926AFB7720057F616 /* SetupBusiness.storyboard */; };
 		D43FEFCC26AFB7850057F616 /* SetupPin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFCB26AFB7850057F616 /* SetupPin.storyboard */; };
@@ -83,6 +82,8 @@
 		D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D375267063C8005A4ABA /* CommonFunction.swift */; };
 		D4D3D37926706523005A4ABA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D3D37826706523005A4ABA /* Colors.xcassets */; };
 		EC68569B26B3B1C400148313 /* InviteLinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68569A26B3B1C400148313 /* InviteLinkModel.swift */; };
+		EC68569D26B3B6EB00148313 /* AddTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */; };
+		EC87E50426B78A9A0098148B /* TransactionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC87E50326B78A9A0098148B /* TransactionRepository.swift */; };
 		ECC223F526B24DE700DDF743 /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223EC26B24DE700DDF743 /* BusinessModel.swift */; };
 		ECC223F626B24DE700DDF743 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223ED26B24DE700DDF743 /* RoleType.swift */; };
 		ECC223F726B24DE700DDF743 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223EE26B24DE700DDF743 /* UserModel.swift */; };
@@ -114,7 +115,6 @@
 		D43FEFBD26AFB6110057F616 /* DataSharing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DataSharing.storyboard; sourceTree = "<group>"; };
 		D43FEFBF26AFB6870057F616 /* LockScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LockScreen.storyboard; sourceTree = "<group>"; };
 		D43FEFC126AFB6940057F616 /* Dashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
-		D43FEFC326AFB69F0057F616 /* AddTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTransaction.storyboard; sourceTree = "<group>"; };
 		D43FEFC726AFB7270057F616 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		D43FEFC926AFB7720057F616 /* SetupBusiness.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetupBusiness.storyboard; sourceTree = "<group>"; };
 		D43FEFCB26AFB7850057F616 /* SetupPin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetupPin.storyboard; sourceTree = "<group>"; };
@@ -173,6 +173,9 @@
 		D4D3D375267063C8005A4ABA /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		D4D3D37826706523005A4ABA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		EC68569A26B3B1C400148313 /* InviteLinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkModel.swift; sourceTree = "<group>"; };
+		EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTransaction.storyboard; sourceTree = "<group>"; };
+		EC87E50326B78A9A0098148B /* TransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
+		EC87E50526B795840098148B /* Rekord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rekord.entitlements; sourceTree = "<group>"; };
 		ECC223EC26B24DE700DDF743 /* BusinessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
 		ECC223ED26B24DE700DDF743 /* RoleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
 		ECC223EE26B24DE700DDF743 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -221,9 +224,9 @@
 		D43FEFB726AFAE420057F616 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */,
 				D43FEFBF26AFB6870057F616 /* LockScreen.storyboard */,
 				D43FEFC126AFB6940057F616 /* Dashboard.storyboard */,
-				D43FEFC326AFB69F0057F616 /* AddTransaction.storyboard */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 		D4D20533266DEF1900CDC2D6 /* Rekord */ = {
 			isa = PBXGroup;
 			children = (
+				EC87E50526B795840098148B /* Rekord.entitlements */,
 				EC14CB1926B1485900D17CE6 /* SupportingFiles */,
 				D4A90317266F0A0E007D5D2E /* Helpers */,
 				D4A90316266F0A08007D5D2E /* Core */,
@@ -548,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				ECC223FF26B24E3900DDF743 /* UserRepository.swift */,
+				EC87E50326B78A9A0098148B /* TransactionRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -611,7 +616,6 @@
 			files = (
 				D4D20544266DEF1900CDC2D6 /* LaunchScreen.storyboard in Resources */,
 				D43FEFC026AFB6870057F616 /* LockScreen.storyboard in Resources */,
-				D43FEFC426AFB69F0057F616 /* AddTransaction.storyboard in Resources */,
 				D43FEFBE26AFB6110057F616 /* DataSharing.storyboard in Resources */,
 				D43FEFC226AFB6940057F616 /* Dashboard.storyboard in Resources */,
 				D43FEFD426AFB8180057F616 /* Partner.storyboard in Resources */,
@@ -625,6 +629,7 @@
 				D43FEFD026AFB7CE0057F616 /* Transaction.storyboard in Resources */,
 				67FC69DF26B469AE00836E3F /* SelectFromContactCell.xib in Resources */,
 				D43FEFC826AFB7270057F616 /* Login.storyboard in Resources */,
+				EC68569D26B3B6EB00148313 /* AddTransaction.storyboard in Resources */,
 				D43FEFCC26AFB7850057F616 /* SetupPin.storyboard in Resources */,
 				D43FEFCE26AFB7AF0057F616 /* History.storyboard in Resources */,
 				D43FEFD226AFB7E60057F616 /* DocumentView.storyboard in Resources */,
@@ -667,6 +672,7 @@
 				D43FEFE626AFBAB80057F616 /* Dashboard.swift in Sources */,
 				D48BC0E226B52ECA001D7D9C /* InviteLinksModel+Networking.swift in Sources */,
 				D43FEFE426AFBAAF0057F616 /* LockScreen.swift in Sources */,
+				EC87E50426B78A9A0098148B /* TransactionRepository.swift in Sources */,
 				D4D20537266DEF1900CDC2D6 /* SceneDelegate.swift in Sources */,
 				D48BC0DA26B52B27001D7D9C /* PartnersModel+Networking.swift in Sources */,
 				ECC223FA26B24DE700DDF743 /* TransactionStatusType.swift in Sources */,
@@ -843,6 +849,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 99K489U5L8;
 				INFOPLIST_FILE = Rekord/Info.plist;
@@ -862,6 +869,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 99K489U5L8;
 				INFOPLIST_FILE = Rekord/Info.plist;
