@@ -16,8 +16,8 @@ class UserModel {
     var profileUrl: String?
     var phone: String?
     var airtableId: String?
-    
-    init(idUser: String, appleId: String, passcode: String, role: RoleType, email: String, profileUrl: String, phone: String, airtableId: String) {
+    var status: String?
+    init(idUser: String, appleId: String, passcode: String, role: RoleType, email: String, profileUrl: String, phone: String, airtableId: String, status: String) {
         self.idUser = idUser
         self.appleId = appleId
         self.passcode = passcode
@@ -26,5 +26,6 @@ class UserModel {
         self.profileUrl = profileUrl
         self.phone = phone
         self.airtableId = airtableId
+        self.status = status
     }
 }
