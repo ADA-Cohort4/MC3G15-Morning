@@ -17,6 +17,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var yourTListEmpty: UILabel!
     
+    @IBOutlet weak var receiptImage: UIImageView!
     //DUMMY DATA FOR TESTING, NTAR DIAPUS AJA
     //urutan: PartnerName, TRID, Type, Status, Total, NextPayment
   //  let transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
@@ -33,7 +34,6 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         
         if transData.isEmpty{
             CommonFunction.shared.addShadow(view: addTransactionBtnFirst)
-            print("empty")
         }
      
     }
@@ -53,8 +53,10 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         mainTableView.isHidden = false
         mainTableView.dataSource = self
         mainTableView.delegate = self
+        receiptImage.isHidden = true
         
         if transData.isEmpty {
+            receiptImage.isHidden = false
             mainTableView.isHidden = true
             mainTableView.isUserInteractionEnabled = false
             addTransactionBtnFirst.isHidden = false
@@ -81,7 +83,6 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if transData.isEmpty == false{
             
-        
         switch indexPath.row {
         //cell 0 = date picker, cell 1 = balance, cell 2 = ongoing trans
         case 0:

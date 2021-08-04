@@ -21,35 +21,37 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var headerPadding: UIView!
     
+    @IBOutlet weak var emptyHistoryLabel: UILabel!
     @IBOutlet weak var filterView: FilterView!
     
     
     //nanti data hasil query masukin sini, kalo filter / search reload view dan restart query
     //URUTAN: 0 = partner name, 1 = trid, 2 = type, 3 = status, 4 = total
     let transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000"]]
+    //let transData : [[String]] = []
     let customerData : [String] = ["Sinar Jaya", "Epic Corp"]
     let typeData : [String] = ["Customer", "Supplier"]
     var selectedCustomerData : String = ""
     var selectedFilter : String = ""
-    
-    var filterViewShown : Bool = false
-    
+
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
     }
     override func viewDidLoad() {
         
+       
         super.viewDidLoad()
         historyTable.dataSource = self
         historyTable.delegate = self
         configViews()
         //filterView.customerData = customerData
         //add target for filter buttons
-        typeDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("onTypeFilterClick")))
-        partnerDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("onPartnerFilterClick")))
+        typeDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTypeFilterClick)))
+        partnerDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onPartnerFilterClick)))
         //add target for done button in filter view
-        filterView.doneBtn.addTarget(self, action: Selector("onFilterDoneBtnClick"), for: .touchUpInside)
+        filterView.doneBtn.addTarget(self, action: #selector(self.onFilterDoneBtnClick), for: .touchUpInside)
         
     }
     
@@ -61,6 +63,12 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         dateDrop.layer.cornerRadius = 10
         partnerDrop.layer.cornerRadius = 10
         typeDrop.layer.cornerRadius = 10
+        emptyHistoryLabel.isHidden = true
+        
+        if transData.isEmpty{
+            historyTable.isHidden = true
+            emptyHistoryLabel.isHidden = false
+        }
         
         headerPadding.layer.cornerRadius = 10
         
@@ -84,7 +92,9 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = historyTable.dequeueReusableCell(withIdentifier: "historyCell") as! historyCell
+        cell.selectedBackgroundView = UIView()
         cell.partnerNameLabel.text = transData[indexPath.row][0]
         cell.transactionIDLabel.text = transData[indexPath.row][1]
         cell.typeLabel.text = transData[indexPath.row][2]
@@ -93,7 +103,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: "toTransactionDetail", sender: nil)
     }
     
     @IBAction func onFilterDoneBtnClick(){

@@ -63,7 +63,11 @@
                                     <action selector="onFirstAddBtnClick:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PE4-Aq-XJz"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="350" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1v6-HB-smh">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="receipt" translatesAutoresizingMaskIntoConstraints="NO" id="Qps-MF-hHk">
+                                <rect key="frame" x="147" y="278" width="97" height="177"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="350" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1v6-HB-smh">
                                 <rect key="frame" x="0.0" y="69" width="390" height="775"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -347,12 +351,18 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.070264987649999999" green="0.33625107999999998" blue="0.60743623970000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="1v6-HB-smh"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="cMa-ag-E7p"/>
                     <connections>
                         <outlet property="addTransactionBtnFirst" destination="FoH-09-vM2" id="FgX-2x-OR4"/>
                         <outlet property="headerPadding" destination="ASR-zy-9ZS" id="pqP-YM-c8N"/>
                         <outlet property="mainTableView" destination="1v6-HB-smh" id="1sw-Fk-5zc"/>
+                        <outlet property="receiptImage" destination="Qps-MF-hHk" id="mWI-Tn-atg"/>
                         <outlet property="welcomeLabel" destination="veZ-9d-1P5" id="sV6-fo-iJ8"/>
                         <outlet property="yourTListEmpty" destination="VaO-Tr-KPq" id="Cb8-Oc-Typ"/>
                         <segue destination="y4o-dg-lRw" kind="show" identifier="toAddTransaction" id="bAh-Rk-nWN"/>
@@ -387,6 +397,7 @@
     <resources>
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="receipt" width="840" height="1545"/>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

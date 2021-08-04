@@ -23,7 +23,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var paymentTable: UITableView!
     override func viewWillAppear(_ animated: Bool) {
-        self.title = "Payment Details"
+        self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
     }
     override func viewDidLoad() {
