@@ -13,8 +13,9 @@ class BusinessModel {
     var phone: String?
     var address: String?
     var airtableId: String?
+    var status: String?
     
-    init(idBusiness: String, idUser: String, name: String, email: String, phone: String, address: String, airtableId: String) {
+    init(idBusiness: String, idUser: String, name: String, email: String, phone: String, address: String, airtableId: String, status: String) {
         self.idBusiness = idBusiness
         self.idUser = idUser
         self.name = name
@@ -22,5 +23,6 @@ class BusinessModel {
         self.phone = phone
         self.address = address
         self.airtableId = airtableId
+        self.status = status
     }
 }

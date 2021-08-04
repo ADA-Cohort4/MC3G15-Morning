@@ -95,7 +95,9 @@ class BusinessRepository {
                     email: business.value(forKey: "email") as! String,
                     phone: business.value(forKey: "phone") as! String,
                     address: business.value(forKey: "address") as! String,
-                    airtableId: business.value(forKey: "airtable_id") as! String))
+                    airtableId: business.value(forKey: "airtable_id") as! String,
+                    status: business.value(forKey: "status") as! String
+                ))
             }
             completion(listBusiness, nil)
         } catch let err {
