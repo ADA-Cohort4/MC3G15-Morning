@@ -31,7 +31,8 @@ class UserRepository {
                     "role": user.role?.rawValue,
                     "email": user.email!,
                     "phone": user.phone ?? "",
-                    "profile_url": user.profileUrl ?? ""
+                    "profile_url": user.profileUrl ?? "",
+                    "status": "active"
                 ]
             ]]
         ]
@@ -271,7 +272,7 @@ class UserRepository {
     }
     
     //LOGIN USER
-    func loginUser(_ email: String, _ passcode: String, completion: @escaping(_ email: String, _ passcode: String) -> ()) {
+    func loginUser(_ appleId: String, _ passcode: String, completion: @escaping(_ idUser: String) -> ()) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             print("app delegate nil")
             return
@@ -279,13 +280,13 @@ class UserRepository {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "email = %@ && passcode = %@", email, passcode)
+        fetchRequest.predicate = NSPredicate(format: "apple_id = %@ && passcode = %@", appleId, passcode)
         do {
             let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
-            completion(data.value(forKey: "email") as! String, data.value(forKey: "passcode") as! String)
+            completion(data.value(forKey: "id_user") as! String)
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
-            completion("", "")
+            completion("")
         }
     }
     
