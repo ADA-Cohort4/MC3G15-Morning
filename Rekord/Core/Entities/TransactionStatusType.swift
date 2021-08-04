@@ -9,4 +9,5 @@ enum TransactionStatusType: String {
     case paid = "paid"
     case ongoing = "ongoing"
     case waiting = "waiting"
+    case void = "void"
 }
