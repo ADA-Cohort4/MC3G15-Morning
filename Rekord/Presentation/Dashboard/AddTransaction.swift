@@ -35,7 +35,11 @@ class AddTransaction: UIViewController {
         PartnerModel(idPartner: "1", idUser: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "2"),
         PartnerModel(idPartner: "2", idUser: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "1"),
     ]
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         partnerType.dataSource = self

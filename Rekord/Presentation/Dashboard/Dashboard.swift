@@ -9,35 +9,71 @@ import Foundation
 import UIKit
 
 class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
-    static let shared = Dashboard()
+    
+    var usermodel = UserModel?.self
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var headerPadding: UIView!
+    @IBOutlet weak var addTransactionBtnFirst: UIButton!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var yourTListEmpty: UILabel!
+    
+    @IBOutlet weak var receiptImage: UIImageView!
     //DUMMY DATA FOR TESTING, NTAR DIAPUS AJA
     //urutan: PartnerName, TRID, Type, Status, Total, NextPayment
-    let transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"],
-                                 ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
+  //  let transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
+  let transData : [[String]] = []
     // 0 = receivable, 1 = payable
     let queuedPayment : [[Double]] = [[1450000, 2560000, 1440000], [2445000]]
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBarItem.image = UIImage(systemName: "book")
+        self.tabBarController?.tabBarItem.title = "Dashboard"
+        self.title = "Dashboard"
+        
+        if transData.isEmpty{
+            CommonFunction.shared.addShadow(view: addTransactionBtnFirst)
+        }
+     
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(transData)
         //MARK:Ubah background jadi gradient
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
         gradientLayer.colors = [UIColor.white.cgColor, UIColor.init(displayP3Red: 17.0/255.0, green: 86.0/255.0, blue: 155.0/255.0, alpha: 1.0).cgColor]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
         
+        yourTListEmpty.isHidden = true
+        welcomeLabel.isHidden = true
+        addTransactionBtnFirst.isHidden = true
+        mainTableView.isHidden = false
         mainTableView.dataSource = self
         mainTableView.delegate = self
+        receiptImage.isHidden = true
+        
+        if transData.isEmpty {
+            receiptImage.isHidden = false
+            mainTableView.isHidden = true
+            mainTableView.isUserInteractionEnabled = false
+            addTransactionBtnFirst.isHidden = false
+            addTransactionBtnFirst.layer.cornerRadius = 10
+            yourTListEmpty.isHidden = false
+            welcomeLabel.isHidden = false
+            
+        }
+        
+       
         headerPadding.layer.cornerRadius = 10
-        self.navigationController?.isNavigationBarHidden = true
+        
+        //self.navigationController?.isNavigationBarHidden = true
       
         
     }
-    func configBalance(){
-       
-        
-    }
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return transData.count + 2
     }
@@ -45,6 +81,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if transData.isEmpty == false{
+            
         switch indexPath.row {
         //cell 0 = date picker, cell 1 = balance, cell 2 = ongoing trans
         case 0:
@@ -92,12 +130,19 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             return cell
         
         }
+        } else{
+            return UITableViewCell()
+        }
     }
     @IBAction func onAddBtnClick() {
        // move to add transaction storyboard
         performSegue(withIdentifier: "toAddTransaction", sender: nil)
         
     }
+    @IBAction func onFirstAddBtnClick(_ sender: Any) {
+        performSegue(withIdentifier: "toAddTransaction", sender: nil)
+    }
+    
     func compareDates(dateString: String) -> String{
         //func untuk calculate due time left
         let dateFormatter = DateFormatter()
@@ -116,6 +161,16 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             return CGFloat(270)
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row{
+        case 0,1:
+            print("Index date filter / balance clicked")
+        default:
+            performSegue(withIdentifier: "toTransactionDetail", sender: nil)
+            
+        }
+    }
+    
     
    
  
