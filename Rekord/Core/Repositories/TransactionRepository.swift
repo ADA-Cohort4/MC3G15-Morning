@@ -8,10 +8,16 @@ import UIKit
 import CoreData
 
 class TransactionRepository {
+    // prepare json data
+    var jsonData: Data?
+
+    // variable to store the data response that will be displayed
+    var transactionModel: TransactionsNetworkData?
+    
     static let shared = TransactionRepository()
     
     private init() {}
-    
+
     func saveTransaction(transaction: TransactionModel, completion: @escaping (_ status: Bool) -> ()) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
