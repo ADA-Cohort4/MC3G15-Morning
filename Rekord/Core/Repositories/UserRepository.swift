@@ -25,9 +25,11 @@ class UserRepository {
         userData.setValue(user.idUser, forKeyPath: "id_user")
         userData.setValue(user.appleId, forKeyPath: "apple_id")
         userData.setValue(user.passcode, forKeyPath: "passcode")
-        userData.setValue(user.role, forKeyPath: "role")
+        userData.setValue(user.role?.rawValue, forKeyPath: "role")
         userData.setValue(user.email, forKeyPath: "email")
         userData.setValue(user.profileUrl, forKeyPath: "profile_url")
+        userData.setValue(user.phone, forKeyPath: "phone")
+        userData.setValue(user.airtableId, forKeyPath: "airtable_id")
         
         do {
             try managedContext.save()
@@ -72,6 +74,35 @@ class UserRepository {
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
             completion("", "")
+        }
+    }
+    
+    func getAllUsers(completion: @escaping(_ users: [UserModel], _ error: String?) -> ())  {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("app delegate nil")
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
+        do {
+            var users: [UserModel] = []
+            let result = try managedContext.fetch(fetchRequest) as! [NSManagedObject]
+            result.forEach { (user) in
+                users.append(UserModel(
+                    idUser: user.value(forKey: "id_user") as! String,
+                    appleId: user.value(forKey: "apple_id") as! String,
+                    passcode: user.value(forKey: "passcode") as! String,
+                    role: user.value(forKey: "role") as! RoleType,
+                    email: user.value(forKey: "email") as! String,
+                    profileUrl: user.value(forKey: "profile_url") as! String,
+                    phone: user.value(forKey: "phone") as! String,
+                    airtableId: user.value(forKey: "airtable_id") as! String))
+            }
+            completion(users, nil)
+        } catch let err {
+            print("failed get all users = \(err.localizedDescription)")
+            completion([], "Error Save")
         }
     }
     

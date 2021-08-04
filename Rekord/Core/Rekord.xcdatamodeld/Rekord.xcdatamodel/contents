@@ -27,7 +27,7 @@
     </entity>
     <entity name="Payment" representedClassName="Payment" syncable="YES" codeGenerationType="class">
         <attribute name="airtable_id" optional="YES" attributeType="String"/>
-        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="amount" optional="YES" attributeType="String"/>
         <attribute name="created_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="document" optional="YES" attributeType="String"/>
         <attribute name="id_payment" optional="YES" attributeType="String"/>

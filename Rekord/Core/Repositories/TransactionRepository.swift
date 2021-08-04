@@ -62,4 +62,35 @@ class TransactionRepository {
             return false
         }
     }
+    
+    func getAllTransaction(completion: @escaping(_ listTransaction: [TransactionModel], _ error: String?) -> ())  {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("app delegate nil")
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Transaction")
+        do {
+            var listTransaction: [TransactionModel] = []
+            let result = try managedContext.fetch(fetchRequest) as! [NSManagedObject]
+            result.forEach { (transaction) in
+                listTransaction.append(TransactionModel(
+                idTransaction: transaction.value(forKey: "id_transaction") as! String,
+                idPartner: transaction.value(forKey: "id_partner") as! String,
+                totalPrice: transaction.value(forKey: "total_price") as! String,
+                paymentCount: transaction.value(forKey: "payment_count") as! Int,
+                document: transaction.value(forKey: "document") as! String,
+                dueDate: transaction.value(forKey: "due_date") as! String,
+                createdDate: transaction.value(forKey: "created_date") as! String,
+                updatedDate: transaction.value(forKey: "updated_date") as! String,
+                status: transaction.value(forKey: "status") as! TransactionStatusType,
+                airtableId: transaction.value(forKey: "airtable_id") as! String))
+            }
+            completion(listTransaction, nil)
+        } catch let err {
+            print("failed get all users = \(err.localizedDescription)")
+            completion([], "Error Save")
+        }
+    }
 }
