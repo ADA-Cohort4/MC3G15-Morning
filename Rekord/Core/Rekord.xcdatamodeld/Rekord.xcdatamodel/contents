@@ -36,15 +36,15 @@
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
         <attribute name="airtable_id" optional="YES" attributeType="String"/>
-        <attribute name="created_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="created_date" optional="YES" attributeType="String"/>
         <attribute name="document" optional="YES" attributeType="String"/>
-        <attribute name="due_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="due_date" optional="YES" attributeType="String"/>
         <attribute name="id_partner" optional="YES" attributeType="String"/>
         <attribute name="id_transaction" optional="YES" attributeType="String"/>
         <attribute name="payment_count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="status" optional="YES" attributeType="String"/>
-        <attribute name="total_price" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="updated_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="total_price" optional="YES" attributeType="String"/>
+        <attribute name="updated_date" optional="YES" attributeType="String"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="airtable_id" optional="YES" attributeType="String"/>

@@ -8,7 +8,7 @@
 class TransactionModel {
     var idTransaction: String?
     var idPartner: String?
-    var totalPrice: Float?
+    var totalPrice: String?
     var paymentCount: Int?
     var document: String?
     var dueDate: String?
@@ -17,7 +17,7 @@ class TransactionModel {
     var status: TransactionStatusType?
     var airtableId: String?
     
-    init(idTransaction: String, idPartner: String, totalPrice: Float, paymentCount: Int, document: String, dueDate: String, createdDate: String, updatedDate: String, status: TransactionStatusType, airtableId: String) {
+    init(idTransaction: String, idPartner: String, totalPrice: String, paymentCount: Int, document: String, dueDate: String, createdDate: String, updatedDate: String, status: TransactionStatusType, airtableId: String) {
         self.idTransaction = idTransaction
         self.idPartner = idPartner
         self.totalPrice = totalPrice
@@ -30,3 +30,5 @@ class TransactionModel {
         self.airtableId = airtableId
     }
 }
+
+
