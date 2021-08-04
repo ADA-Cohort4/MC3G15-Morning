@@ -64,13 +64,13 @@ class AddTransaction: UIViewController {
     }
     
     @IBAction func createTransaction(_ sender: Any) {
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: totalPrice.text ?? "test", paymentCount: 2, document: imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "Todey", updatedDate: "todey", status: .waiting, airtableId: "1")
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Float(totalPrice.text ?? "0") ?? 0, paymentCount: 2, document: imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "Todey", updatedDate: "todey", status: .waiting, airtableId: "1",idBusiness: "1")
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
         
         TransactionRepository.shared.saveTransaction(transaction: newTransaction){ (result) in
-            if result {
+            if result.airtableId != "" || result.airtableId != nil {
                 self.navigationController?.popViewController(animated: true)
             } else {
                 print("error save")
