@@ -25,4 +25,6 @@ struct UsersNetworkDataFieldResponse: Codable {
     let id_user: String?
     let phone: String?
     let name: String?
+    let profile_url: String?
+    let status: String?
 }

@@ -13,6 +13,6 @@ struct DataManager {
     static var BUSINESSNETWORKDATA: BusinessNetworkData!
     static var TRANSACTIONSNETWORKDATA: TransactionsNetworkData!
     static var PAYMENTSNETWORKDATA: PaymentsNetworkData!
-    static var INVITELINKSNETWROKDATA: InviteLinksData!
+    static var INVITELINKSNETWROKDATA: InviteLinksNetworkData!
     
 }

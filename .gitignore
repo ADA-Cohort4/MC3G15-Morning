@@ -93,3 +93,5 @@ iOSInjectionProject/
 *.DS_Store
 
 Rekord/Info.plist
+
+Rekord/Rekord.entitlements
