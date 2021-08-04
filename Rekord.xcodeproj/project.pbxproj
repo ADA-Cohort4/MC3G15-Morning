@@ -13,6 +13,10 @@
 		674415B626B526E10087BA61 /* EditPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674415B526B526E10087BA61 /* EditPartner.swift */; };
 		679A041B26BA942600676D96 /* EmptyState.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 679A041A26BA942600676D96 /* EmptyState.storyboard */; };
 		679A041D26BA944700676D96 /* EmptyStatePartnerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A041C26BA944700676D96 /* EmptyStatePartnerList.swift */; };
+		679A041F26BA96FA00676D96 /* UpdateTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 679A041E26BA96FA00676D96 /* UpdateTransaction.storyboard */; };
+		679A042126BA97D100676D96 /* UpdateTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A042026BA97D100676D96 /* UpdateTransaction.swift */; };
+		679A042526BA9A7800676D96 /* PaymentStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679A042326BA9A7800676D96 /* PaymentStatusCell.swift */; };
+		679A042626BA9A7800676D96 /* PaymentStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 679A042426BA9A7800676D96 /* PaymentStatusCell.xib */; };
 		67FC69D626B4696F00836E3F /* PartnerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FC69D426B4696F00836E3F /* PartnerListCell.swift */; };
 		67FC69D726B4696F00836E3F /* PartnerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67FC69D526B4696F00836E3F /* PartnerListCell.xib */; };
 		67FC69DA26B4698500836E3F /* PartnerTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FC69D826B4698500836E3F /* PartnerTypeCell.swift */; };
@@ -116,6 +120,10 @@
 		674415B526B526E10087BA61 /* EditPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPartner.swift; sourceTree = "<group>"; };
 		679A041A26BA942600676D96 /* EmptyState.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EmptyState.storyboard; sourceTree = "<group>"; };
 		679A041C26BA944700676D96 /* EmptyStatePartnerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStatePartnerList.swift; sourceTree = "<group>"; };
+		679A041E26BA96FA00676D96 /* UpdateTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UpdateTransaction.storyboard; sourceTree = "<group>"; };
+		679A042026BA97D100676D96 /* UpdateTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTransaction.swift; sourceTree = "<group>"; };
+		679A042326BA9A7800676D96 /* PaymentStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatusCell.swift; sourceTree = "<group>"; };
+		679A042426BA9A7800676D96 /* PaymentStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentStatusCell.xib; sourceTree = "<group>"; };
 		67FC69D426B4696F00836E3F /* PartnerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerListCell.swift; sourceTree = "<group>"; };
 		67FC69D526B4696F00836E3F /* PartnerListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartnerListCell.xib; sourceTree = "<group>"; };
 		67FC69D826B4698500836E3F /* PartnerTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerTypeCell.swift; sourceTree = "<group>"; };
@@ -226,6 +234,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		679A042226BA9A5000676D96 /* Update Transaction Cells */ = {
+			isa = PBXGroup;
+			children = (
+				679A042326BA9A7800676D96 /* PaymentStatusCell.swift */,
+				679A042426BA9A7800676D96 /* PaymentStatusCell.xib */,
+			);
+			path = "Update Transaction Cells";
+			sourceTree = "<group>";
+		};
 		67FC69D326B4691A00836E3F /* Partner Storyboard Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +285,7 @@
 				99DC76DC26B7B16400BFD14D /* TransactionDetail.storyboard */,
 				99837E1226B9911800EFCA58 /* FilterView.xib */,
 				995083DB26B999E3008350D7 /* NormalOptViewCell.xib */,
+				679A041E26BA96FA00676D96 /* UpdateTransaction.storyboard */,
 			);
 			path = "Transactions&History";
 			sourceTree = "<group>";
@@ -323,6 +341,7 @@
 				99DC76E026B83D9C00BFD14D /* paymentCell.swift */,
 				99DC76E226B84A0300BFD14D /* historyCell.swift */,
 				99837E1426B9915E00EFCA58 /* FilterView.swift */,
+				679A042026BA97D100676D96 /* UpdateTransaction.swift */,
 			);
 			path = "Transaction&History";
 			sourceTree = "<group>";
@@ -581,6 +600,7 @@
 		EC14CB1926B1485900D17CE6 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				679A042226BA9A5000676D96 /* Update Transaction Cells */,
 				67FC69D326B4691A00836E3F /* Partner Storyboard Cells */,
 			);
 			path = SupportingFiles;
@@ -672,6 +692,7 @@
 				67FC69DB26B4698500836E3F /* PartnerTypeCell.xib in Resources */,
 				99DC76DB26B2F3FA00BFD14D /* rootTabBar.storyboard in Resources */,
 				D43FEFD026AFB7CE0057F616 /* Transaction.storyboard in Resources */,
+				679A041F26BA96FA00676D96 /* UpdateTransaction.storyboard in Resources */,
 				67FC69DF26B469AE00836E3F /* SelectFromContactCell.xib in Resources */,
 				679A041B26BA942600676D96 /* EmptyState.storyboard in Resources */,
 				D43FEFC826AFB7270057F616 /* Login.storyboard in Resources */,
@@ -681,6 +702,7 @@
 				D43FEFD226AFB7E60057F616 /* DocumentView.storyboard in Resources */,
 				D4D3D372267063A1005A4ABA /* library in Resources */,
 				674415B026B51FF10087BA61 /* PartnerDetail.storyboard in Resources */,
+				679A042626BA9A7800676D96 /* PaymentStatusCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,6 +715,8 @@
 			files = (
 				D43FEFDE26AFBA030057F616 /* Login.swift in Sources */,
 				D444D4E326B6A76300431C1B /* InviteeLinksAPIRequest.swift in Sources */,
+				679A042526BA9A7800676D96 /* PaymentStatusCell.swift in Sources */,
+				679A042126BA97D100676D96 /* UpdateTransaction.swift in Sources */,
 				D43FEFE026AFBA1B0057F616 /* SetupBusiness.swift in Sources */,
 				ECC223FD26B24DE700DDF743 /* PaymentModel.swift in Sources */,
 				99DC76D526B0577200BFD14D /* dateCell.swift in Sources */,
