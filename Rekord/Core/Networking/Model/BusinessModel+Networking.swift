@@ -8,7 +8,7 @@
 import Foundation
 
 struct BusinessNetworkData: Codable {
-    let records: [PartnersNetworkDataResponse]?
+    let records: [BusinessNetworkDataResponse]?
 }
 
 struct BusinessNetworkDataResponse: Codable {
@@ -24,5 +24,6 @@ struct BusinessNetworkDataFieldResponse: Codable {
     let email: String?
     let phone: String?
     let address: String?
+    let status: String?
 }
 

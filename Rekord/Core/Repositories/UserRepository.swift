@@ -15,7 +15,7 @@ class UserRepository {
     // variable to store the data response that will be displayed
     var userModel: UsersNetworkData?
     
-    static let share = UserRepository()
+    static let shared = UserRepository()
     
     private init() {}
 
@@ -155,7 +155,7 @@ class UserRepository {
             // handle response and store it to the data model
             self.userModel = response
             // check if user model not empty means data is exist
-            if self.userModel?.records?.isEmpty == true{
+            if self.userModel?.records?.isEmpty == false{
                 // post the data to API
                 UsersAPIRequest.editUser(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
                     //handle if success
@@ -241,7 +241,7 @@ class UserRepository {
                 fetchRequest.predicate = NSPredicate(format: "id_user = %@", idUser)
                 do {
                     let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
-                    data.setValue(status, forKeyPath: "status")
+                    data.setValue("inactive", forKeyPath: "status")
                     try managedContext.save()
                     completion(true)
                 }catch let err {
@@ -329,6 +329,7 @@ class UserRepository {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "status = %@", "active")
         do {
             var users: [UserModel] = []
             let result = try managedContext.fetch(fetchRequest) as! [NSManagedObject]

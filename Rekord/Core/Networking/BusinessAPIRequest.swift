@@ -14,18 +14,18 @@ class BusinessAPIRequest: NSObject{
                              filter:String,
                              header: [String: String],
                              showLoader: Bool,
-                             successCompletion: @escaping (TransactionsNetworkData)->Void,
+                             successCompletion: @escaping (BusinessNetworkData)->Void,
                              failCompletion:@escaping (String)-> Void) {
         // create request
         BaseRequest.GET(url: url, filter: filter, header: header, showLoader: showLoader) { response in
             print(response)
             // prepare the data model
-            var dataModel = DataManager.TRANSACTIONSNETWORKDATA
+            var dataModel = DataManager.BUSINESSNETWORKDATA
             
             // handle the response and parsing the data to data model
             do {
-                let transactionsModel = try JSONDecoder().decode(TransactionsNetworkData.self, from: response as! Data)
-                dataModel = transactionsModel
+                let businessModel = try JSONDecoder().decode(BusinessNetworkData.self, from: response as! Data)
+                dataModel = businessModel
                 successCompletion(dataModel!)
             } catch let error { //handle error
                 print("error reading json file content: \(error.localizedDescription)")
@@ -40,18 +40,18 @@ class BusinessAPIRequest: NSObject{
                            header: [String: String],
                            jsonData: Data,
                            showLoader: Bool,
-                           successCompletion: @escaping (TransactionsNetworkData)->Void,
+                           successCompletion: @escaping (BusinessNetworkData)->Void,
                            failCompletion:@escaping (String)-> Void) {
         // create request
         BaseRequest.POST(url: url, filter: filter, header: header, jsonData: jsonData, showLoader: showLoader) { response in
             print(response)
             // prepare the data model
-            var dataModel = DataManager.TRANSACTIONSNETWORKDATA
+            var dataModel = DataManager.BUSINESSNETWORKDATA
             
             // handle the response and parsing the data to data model
             do {
-                let transactionsModel = try JSONDecoder().decode(TransactionsNetworkData.self, from: response as! Data)
-                dataModel = transactionsModel
+                let businessModel = try JSONDecoder().decode(BusinessNetworkData.self, from: response as! Data)
+                dataModel = businessModel
                 successCompletion(dataModel!)
             } catch let error { //handle error
                 print("error reading json file content: \(error.localizedDescription)")
@@ -66,18 +66,18 @@ class BusinessAPIRequest: NSObject{
                          header: [String: String],
                          jsonData: Data,
                          showLoader: Bool,
-                         successCompletion: @escaping (TransactionsNetworkData)->Void,
+                         successCompletion: @escaping (BusinessNetworkData)->Void,
                          failCompletion:@escaping (String)-> Void) {
         // create request
         BaseRequest.PATCH(url: url, filter: filter, header: header, jsonData: jsonData, showLoader: showLoader) { response in
             print(response)
             // prepare the data model
-            var dataModel = DataManager.TRANSACTIONSNETWORKDATA
+            var dataModel = DataManager.BUSINESSNETWORKDATA
             
             // handle the response and parsing the data to data model
             do {
-                let transactionsModel = try JSONDecoder().decode(TransactionsNetworkData.self, from: response as! Data)
-                dataModel = transactionsModel
+                let businessModel = try JSONDecoder().decode(BusinessNetworkData.self, from: response as! Data)
+                dataModel = businessModel
                 successCompletion(dataModel!)
             } catch let error { //handle error
                 print("error reading json file content: \(error.localizedDescription)")
