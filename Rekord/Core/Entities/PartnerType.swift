@@ -15,7 +15,6 @@ enum PartnerActivationStatus: String {
     case inactive = "inactive"
 }
 
-
 enum InvitationActivationStatus: String {
     case active = "active"
     case expired = "expired"
