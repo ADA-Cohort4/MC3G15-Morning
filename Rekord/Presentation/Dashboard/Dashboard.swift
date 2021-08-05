@@ -18,10 +18,13 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var yourTListEmpty: UILabel!
     
     @IBOutlet weak var receiptImage: UIImageView!
+    
+    
+    var selectedEntry : String = ""
     //DUMMY DATA FOR TESTING, NTAR DIAPUS AJA
     //urutan: PartnerName, TRID, Type, Status, Total, NextPayment
-  //  let transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
-  let transData : [[String]] = []
+   let transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
+  //let transData : [[String]] = []
     // 0 = receivable, 1 = payable
     let queuedPayment : [[Double]] = [[1450000, 2560000, 1440000], [2445000]]
     
@@ -39,6 +42,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         print(transData)
         //MARK:Ubah background jadi gradient
@@ -166,8 +170,15 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         case 0,1:
             print("Index date filter / balance clicked")
         default:
+            selectedEntry = transData[indexPath.row-2][1]
             performSegue(withIdentifier: "toTransactionDetail", sender: nil)
             
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is TransactionDetails{
+            let vc = segue.destination as? TransactionDetails
+            vc?.inputArray[1] = selectedEntry
         }
     }
     
