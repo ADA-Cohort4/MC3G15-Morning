@@ -13,7 +13,7 @@ struct PaymentsNetworkData: Codable {
 
 struct PaymentsNetworkDataResponse: Codable {
     let id: String?
-    let fields: TransactionsNetworkDataFieldResponse?
+    let fields: PaymentsNetworkDataFieldResponse?
     let createdTime: String?
 }
 

@@ -11,7 +11,7 @@
         <!--Lock Screen-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="LockScreen" customModule="Rekord" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LockScreen" id="Y6W-OH-hqX" customClass="LockScreen" customModule="Rekord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -279,7 +279,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.1578157842" green="0.32994335889999998" blue="0.58826267720000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.0" green="0.078431372550000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="PINlabel" destination="ven-Ex-q1T" id="zAt-jh-ZA2"/>
@@ -301,11 +301,22 @@
                         <outletCollection property="numPad" destination="otv-99-2Ji" collectionClass="NSMutableArray" id="cqb-EK-1x8"/>
                         <outletCollection property="numPad" destination="43t-7H-X2g" collectionClass="NSMutableArray" id="zPL-GF-w8G"/>
                         <outletCollection property="numPad" destination="fB4-xe-045" collectionClass="NSMutableArray" id="Dcj-hC-bv3"/>
+                        <segue destination="SC7-nj-q9q" kind="show" identifier="toDashboardSegue" id="hje-aG-q7c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="95.652173913043484" y="93.75"/>
+        </scene>
+        <!--Dashboard-->
+        <scene sceneID="wa6-Qv-fK3">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Dashboard" storyboardName="Dashboard" referencedIdentifier="Dashboard" id="SC7-nj-q9q" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="wy6-Tv-480"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jdh-7x-jPo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="117"/>
         </scene>
     </scenes>
     <resources>

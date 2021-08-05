@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Setup View Controller-->
+        <!--Setup Pin View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController wantsFullScreenLayout="YES" modalPresentationStyle="fullScreen" id="Y6W-OH-hqX" customClass="SetupViewController" customModule="Rekord" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SetupPin" wantsFullScreenLayout="YES" modalPresentationStyle="fullScreen" id="Y6W-OH-hqX" customClass="SetupPinViewController" customModule="Rekord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -261,7 +261,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" red="0.1578157842" green="0.32994335889999998" blue="0.58826267720000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.0" green="0.078431372550000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="PINlabel" destination="ICi-sI-Bs7" id="y5S-6B-TVc"/>
@@ -290,10 +290,10 @@
             </objects>
             <point key="canvasLocation" x="28" y="131"/>
         </scene>
-        <!--Setup View Controller-->
+        <!--Confirm Pin View Controller-->
         <scene sceneID="UI5-19-VRg">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="zag-Rz-7id" customClass="SetupViewController" customModule="Rekord" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="zag-Rz-7id" customClass="ConfirmPinViewController" customModule="Rekord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rwb-gZ-OcK">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -540,7 +540,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hwS-Jj-yyi"/>
-                        <color key="backgroundColor" red="0.1578157842" green="0.32994335889999998" blue="0.58826267720000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.0" green="0.078431372550000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="aRm-9w-Nrj"/>
                     <connections>
@@ -563,11 +563,22 @@
                         <outletCollection property="numPad2" destination="ivo-cb-uIc" collectionClass="NSMutableArray" id="iyy-DZ-nmc"/>
                         <outletCollection property="numPad2" destination="eBH-C8-CTL" collectionClass="NSMutableArray" id="8BB-0n-lXM"/>
                         <outletCollection property="numPad2" destination="3zs-Jg-dIb" collectionClass="NSMutableArray" id="aqe-9h-GlM"/>
+                        <segue destination="det-GM-dRh" kind="show" identifier="confirmPINSegue" id="Q6f-rt-ha2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEo-Zd-WIU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="968" y="131"/>
+        </scene>
+        <!--Dashboard-->
+        <scene sceneID="E94-gk-2AM">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Dashboard" storyboardName="Dashboard" referencedIdentifier="Dashboard" id="det-GM-dRh" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="o9g-jU-sUc"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="orG-82-pKJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1851" y="101"/>
         </scene>
     </scenes>
     <resources>
