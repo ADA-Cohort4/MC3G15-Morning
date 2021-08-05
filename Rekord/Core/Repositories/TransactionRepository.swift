@@ -61,7 +61,7 @@ class TransactionRepository {
                     return
                 }
                 let managedContext = appDelegate.persistentContainer.viewContext
-                let transactionEntity = NSEntityDescription.entity(forEntityName: "Transactions", in: managedContext)!
+                let transactionEntity = NSEntityDescription.entity(forEntityName: "Transaction", in: managedContext)!
                 let transactionData = NSManagedObject(entity: transactionEntity, insertInto: managedContext)
                 //VALUE SET CORE DATA TOBE SAVE
                 transactionData.setValue(response.records?.first?.fields?.id_transaction, forKeyPath: "id_transaction")
@@ -158,7 +158,7 @@ class TransactionRepository {
                             return
                         }
                         let managedContext = appDelegate.persistentContainer.viewContext
-                        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Transcations")
+                        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Transaction")
                         fetchRequest.predicate = NSPredicate(format: "id_transaction = %@", transaction.idTransaction!)
                         //VALUE SET CORE DATA TOBE SAVE
                         do {
