@@ -320,6 +320,54 @@ class UserRepository {
         }
     }
     
+    
+    //BY APPLE ID
+    func getUserByAppleId(_ appleId: String, completion: @escaping(UserModel) -> ()) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("app delegate nil")
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
+        fetchRequest.predicate = NSPredicate(format: "apple_id = %@", appleId)
+        do {
+//            let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+//            //SET USER CORE DATA TO CONTROLLER
+//            let userData = UserModel(
+//                idUser: data.value(forKey: "id_user") as! String,
+//                appleId: data.value(forKey: "apple_id") as! String,
+//                passcode: "",
+//                role:data.value(forKey: "role") as! RoleType,
+//                email: data.value(forKey: "email") as! String,
+//                profileUrl: data.value(forKey: "profile_url") as! String,
+//                phone: data.value(forKey: "phone") as! String,
+//                airtableId: data.value(forKey: "airtable_id") as! String,
+//                status: data.value(forKey: "status") as! String)
+//            completion(userData)
+            let fetchRequestAppleId = try managedContext.fetch(fetchRequest)
+                        if (fetchRequestAppleId.count > 0 ) {
+                            let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+                            let userData = UserModel(
+                                idUser: data.value(forKey: "id_user") as! String,
+                                appleId: data.value(forKey: "apple_id") as! String,
+                                passcode: "",
+                                role: .owner,
+                                email: data.value(forKey: "email") as! String,
+                                profileUrl: "",
+                                phone: "",
+                                airtableId: "",
+                                status: "")
+                            completion(userData)
+                        }
+                        let nullUserData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
+                        completion(nullUserData)
+        } catch let err {
+            print("failed get all card = \(err.localizedDescription)")
+            let userData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
+            completion(userData)
+        }
+    }
+    
     //GET ALL USERS
     func getAllUsers(completion: @escaping(_ users: [UserModel], _ error: String?) -> ())  {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {

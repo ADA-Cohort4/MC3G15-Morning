@@ -12,6 +12,8 @@ import AuthenticationServices
 class Login: UIViewController {
     
     var userID = ""
+    let userDefaults = UserDefaults()
+
     
     
     override func viewDidLoad() {
@@ -45,9 +47,15 @@ class Login: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "LoginSegue"{
-            let destinationVC = segue.destination as! ChooseTypeViewController
+        
+//        let destinationNavigationController = segue.destination as! UINavigationController
+//        let targetController = destinationNavigationController.topViewController
+        if segue.identifier == "ToSetupBusinessSegue"{
+            let destionationNavigationController = segue.destination as? UINavigationController
+            let destinationVC = destionationNavigationController?.topViewController as! SetupBusinessViewController
             destinationVC.userID = userID
+        } else if segue.identifier == "ToKeypadSegue" {
+            let destinationVC = segue.destination as! LockScreen
         }
     }
 }
@@ -60,9 +68,33 @@ extension Login: ASAuthorizationControllerDelegate {
         
         case let credentials as ASAuthorizationAppleIDCredential:
             userID = credentials.user
-            performSegue(withIdentifier: "LoginSegue", sender: userID)
+            var appleIdCore = ""
+            
+            let appleId = UserRepository.shared.getUserByAppleId(userID){ (result) in
+                if result.airtableId != "" || result.airtableId != nil {
+//                    appleIdCore = result.appleId!
+                    self.navigationController?.popViewController(animated: true)
+                    if credentials.user == result.appleId{
+                        self.toKeypadSegue()
+                    } else {
+                        self.toSetupBusinessSegue()
+                    }
+                    
+                } else {
+                    print("error save")
+                }
+            }
+            
         default: break
         }
+    }
+    
+    func toKeypadSegue(){
+        performSegue(withIdentifier: "ToKeypadSegue", sender: self)
+    }
+    
+    func toSetupBusinessSegue(){
+        performSegue(withIdentifier: "ToSetupBusinessSegue", sender: self)
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

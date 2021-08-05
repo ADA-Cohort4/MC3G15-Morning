@@ -15,6 +15,7 @@ class LockScreen: UIViewController {
     @IBOutlet var numPad: [UIButton]!
     
     var code: String = ""
+    var click: Int = 0
     
     @IBAction func relogin(_ sender: Any) {
         //navigate to login email (sign in)
@@ -28,9 +29,30 @@ class LockScreen: UIViewController {
                 pass[i].layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             }
             code.append(buttonTitle)
+            click += 1
             print("The code is \(code)")
-        } else if code.count == 6{
+        }
+        if click == 6{
+            let defaults = UserDefaults.standard
+            let userCode = defaults.value(forKey: "passcode") as? String
+            if code == userCode {
+                performSegue(withIdentifier: "toDashboardSegue", sender: self)
+                print(userCode)
+            } else {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                PINlabel.text = "Wrong pin"
+                code.removeAll()
+                for i in 0..<6{
+                    pass[i].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+                }
+            }
             //navigate to dashboard if true, try again if false
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDashboardSegue" {
+            let destinationVC = segue.destination as! Dashboard
         }
     }
     
