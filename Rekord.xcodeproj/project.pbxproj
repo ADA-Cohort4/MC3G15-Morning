@@ -43,14 +43,12 @@
 		D43FEFC026AFB6870057F616 /* LockScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFBF26AFB6870057F616 /* LockScreen.storyboard */; };
 		D43FEFC226AFB6940057F616 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFC126AFB6940057F616 /* Dashboard.storyboard */; };
 		D43FEFC826AFB7270057F616 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFC726AFB7270057F616 /* Login.storyboard */; };
-		D43FEFCA26AFB7720057F616 /* SetupBusiness.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFC926AFB7720057F616 /* SetupBusiness.storyboard */; };
 		D43FEFCC26AFB7850057F616 /* SetupPin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFCB26AFB7850057F616 /* SetupPin.storyboard */; };
 		D43FEFCE26AFB7AF0057F616 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFCD26AFB7AF0057F616 /* History.storyboard */; };
 		D43FEFD026AFB7CE0057F616 /* Transaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFCF26AFB7CE0057F616 /* Transaction.storyboard */; };
 		D43FEFD226AFB7E60057F616 /* DocumentView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFD126AFB7E60057F616 /* DocumentView.storyboard */; };
 		D43FEFD426AFB8180057F616 /* Partner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D43FEFD326AFB8180057F616 /* Partner.storyboard */; };
 		D43FEFDE26AFBA030057F616 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFDD26AFBA030057F616 /* Login.swift */; };
-		D43FEFE026AFBA1B0057F616 /* SetupBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFDF26AFBA1B0057F616 /* SetupBusiness.swift */; };
 		D43FEFE226AFBA2B0057F616 /* SetupPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE126AFBA2B0057F616 /* SetupPin.swift */; };
 		D43FEFE426AFBAAF0057F616 /* LockScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE326AFBAAF0057F616 /* LockScreen.swift */; };
 		D43FEFE626AFBAB80057F616 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE526AFBAB80057F616 /* Dashboard.swift */; };
@@ -97,13 +95,14 @@
 		D4D3D374267063B3005A4ABA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D373267063B3005A4ABA /* Constants.swift */; };
 		D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D375267063C8005A4ABA /* CommonFunction.swift */; };
 		D4D3D37926706523005A4ABA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D3D37826706523005A4ABA /* Colors.xcassets */; };
+		E790D39726BB5BB5000D8435 /* ConfirmPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */; };
+		E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */; };
 		EC68569B26B3B1C400148313 /* InviteLinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68569A26B3B1C400148313 /* InviteLinkModel.swift */; };
 		EC68569D26B3B6EB00148313 /* AddTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */; };
 		EC87E50426B78A9A0098148B /* TransactionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC87E50326B78A9A0098148B /* TransactionRepository.swift */; };
 		ECA4ADFD26B91304007C4F74 /* BusinessRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4ADFC26B91304007C4F74 /* BusinessRepository.swift */; };
 		ECA4ADFF26B9133A007C4F74 /* PartnerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4ADFE26B9133A007C4F74 /* PartnerRepository.swift */; };
 		ECA4AE0126B91357007C4F74 /* InviteLinkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4AE0026B91357007C4F74 /* InviteLinkRepository.swift */; };
-		ECA4AE0326B9139E007C4F74 /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4AE0226B9139E007C4F74 /* PaymentRepository.swift */; };
 		ECC223F526B24DE700DDF743 /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223EC26B24DE700DDF743 /* BusinessModel.swift */; };
 		ECC223F626B24DE700DDF743 /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223ED26B24DE700DDF743 /* RoleType.swift */; };
 		ECC223F726B24DE700DDF743 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC223EE26B24DE700DDF743 /* UserModel.swift */; };
@@ -152,14 +151,12 @@
 		D43FEFBF26AFB6870057F616 /* LockScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LockScreen.storyboard; sourceTree = "<group>"; };
 		D43FEFC126AFB6940057F616 /* Dashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
 		D43FEFC726AFB7270057F616 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		D43FEFC926AFB7720057F616 /* SetupBusiness.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetupBusiness.storyboard; sourceTree = "<group>"; };
 		D43FEFCB26AFB7850057F616 /* SetupPin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetupPin.storyboard; sourceTree = "<group>"; };
 		D43FEFCD26AFB7AF0057F616 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
 		D43FEFCF26AFB7CE0057F616 /* Transaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Transaction.storyboard; sourceTree = "<group>"; };
 		D43FEFD126AFB7E60057F616 /* DocumentView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DocumentView.storyboard; sourceTree = "<group>"; };
 		D43FEFD326AFB8180057F616 /* Partner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Partner.storyboard; sourceTree = "<group>"; };
 		D43FEFDD26AFBA030057F616 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		D43FEFDF26AFBA1B0057F616 /* SetupBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupBusiness.swift; sourceTree = "<group>"; };
 		D43FEFE126AFBA2B0057F616 /* SetupPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPin.swift; sourceTree = "<group>"; };
 		D43FEFE326AFBAAF0057F616 /* LockScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreen.swift; sourceTree = "<group>"; };
 		D43FEFE526AFBAB80057F616 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
@@ -208,10 +205,12 @@
 		D4D3D373267063B3005A4ABA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4D3D375267063C8005A4ABA /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		D4D3D37826706523005A4ABA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPinViewController.swift; sourceTree = "<group>"; };
+		E7A9B69A26B64064009C2876 /* Rekord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rekord.entitlements; sourceTree = "<group>"; };
+		E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupBusinessViewController.swift; sourceTree = "<group>"; };
 		EC68569A26B3B1C400148313 /* InviteLinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkModel.swift; sourceTree = "<group>"; };
 		EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTransaction.storyboard; sourceTree = "<group>"; };
 		EC87E50326B78A9A0098148B /* TransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
-		EC87E50526B795840098148B /* Rekord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rekord.entitlements; sourceTree = "<group>"; };
 		ECA4ADFC26B91304007C4F74 /* BusinessRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessRepository.swift; sourceTree = "<group>"; };
 		ECA4ADFE26B9133A007C4F74 /* PartnerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerRepository.swift; sourceTree = "<group>"; };
 		ECA4AE0026B91357007C4F74 /* InviteLinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkRepository.swift; sourceTree = "<group>"; };
@@ -264,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				D43FEFC726AFB7270057F616 /* Login.storyboard */,
-				D43FEFC926AFB7720057F616 /* SetupBusiness.storyboard */,
 				D43FEFCB26AFB7850057F616 /* SetupPin.storyboard */,
 			);
 			path = "Onboarding&Login";
@@ -369,8 +367,9 @@
 			isa = PBXGroup;
 			children = (
 				D43FEFDD26AFBA030057F616 /* Login.swift */,
-				D43FEFDF26AFBA1B0057F616 /* SetupBusiness.swift */,
 				D43FEFE126AFBA2B0057F616 /* SetupPin.swift */,
+				E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */,
+				E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */,
 			);
 			path = "Onboarding&Login";
 			sourceTree = "<group>";
@@ -530,7 +529,7 @@
 		D4D20533266DEF1900CDC2D6 /* Rekord */ = {
 			isa = PBXGroup;
 			children = (
-				EC87E50526B795840098148B /* Rekord.entitlements */,
+				E7A9B69A26B64064009C2876 /* Rekord.entitlements */,
 				EC14CB1926B1485900D17CE6 /* SupportingFiles */,
 				D4A90317266F0A0E007D5D2E /* Helpers */,
 				D4A90316266F0A08007D5D2E /* Core */,
@@ -693,7 +692,6 @@
 				679A042826BA9E6000676D96 /* PaymentDetail.storyboard in Resources */,
 				D4D20541266DEF1900CDC2D6 /* Assets.xcassets in Resources */,
 				D43FEFBC26AFAE890057F616 /* ProfilePage.storyboard in Resources */,
-				D43FEFCA26AFB7720057F616 /* SetupBusiness.storyboard in Resources */,
 				67FC69D726B4696F00836E3F /* PartnerListCell.xib in Resources */,
 				995083DD26B999E3008350D7 /* NormalOptViewCell.xib in Resources */,
 				67FC69DB26B4698500836E3F /* PartnerTypeCell.xib in Resources */,
@@ -736,6 +734,7 @@
 				D444D4DB26B6A0E600431C1B /* PartnersAPIRequest.swift in Sources */,
 				D4D3D374267063B3005A4ABA /* Constants.swift in Sources */,
 				D4D3D361267062EF005A4ABA /* UIBezierPath+Extension.swift in Sources */,
+				E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */,
 				D4D3D35E267062EF005A4ABA /* UIView+Extension.swift in Sources */,
 				D4D20535266DEF1900CDC2D6 /* AppDelegate.swift in Sources */,
 				ECA4AE0126B91357007C4F74 /* InviteLinkRepository.swift in Sources */,
@@ -760,6 +759,7 @@
 				D48BC0D126B3B39E001D7D9C /* UsersAPIRequest.swift in Sources */,
 				ECC223F626B24DE700DDF743 /* RoleType.swift in Sources */,
 				674415B226B520AE0087BA61 /* PartnerDetail.swift in Sources */,
+				E790D39726BB5BB5000D8435 /* ConfirmPinViewController.swift in Sources */,
 				D4D3D36C26706386005A4ABA /* BarChartPresenter.swift in Sources */,
 				ECA4ADFD26B91304007C4F74 /* BusinessRepository.swift in Sources */,
 				D48BC0DC26B52C1B001D7D9C /* BusinessModel+Networking.swift in Sources */,
@@ -778,7 +778,6 @@
 				ECC223FB26B24DE700DDF743 /* PartnerType.swift in Sources */,
 				D4D3D363267062EF005A4ABA /* Int+Extension.swift in Sources */,
 				ECC2240026B24E3900DDF743 /* UserRepository.swift in Sources */,
-				ECA4AE0326B9139E007C4F74 /* PaymentRepository.swift in Sources */,
 				D4D3D35D267062EF005A4ABA /* UIButton+Extension.swift in Sources */,
 				99837E1526B9915E00EFCA58 /* FilterView.swift in Sources */,
 				67FC69DA26B4698500836E3F /* PartnerTypeCell.swift in Sources */,
@@ -939,7 +938,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P289J6CTPZ;
+				DEVELOPMENT_TEAM = H7G3L89F8C;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -959,7 +958,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P289J6CTPZ;
+				DEVELOPMENT_TEAM = H7G3L89F8C;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
