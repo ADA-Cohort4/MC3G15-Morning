@@ -92,7 +92,7 @@ class BusinessRepository {
                             business.name = response.records?.first?.fields?.name
                             business.phone = response.records?.first?.fields?.phone
                             business.email = response.records?.first?.fields?.email
-                            business.email = response.records?.first?.fields?.status
+                            business.status = response.records?.first?.fields?.status
                             completion(business)
                         } catch let error {
                             print("failed save user = \(error.localizedDescription)")
