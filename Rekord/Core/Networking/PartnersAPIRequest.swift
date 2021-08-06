@@ -47,7 +47,7 @@ class PartnersAPIRequest: NSObject{
             print(response)
             // prepare the data model
             var dataModel = DataManager.PARTNERSNETWORKDATA
-            
+        
             // handle the response and parsing the data to data model
             do {
                 let partnersModel = try JSONDecoder().decode(PartnersNetworkData.self, from: response as! Data)

@@ -308,10 +308,10 @@
             </objects>
             <point key="canvasLocation" x="95.652173913043484" y="93.75"/>
         </scene>
-        <!--Dashboard-->
+        <!--rootTabBar-->
         <scene sceneID="wa6-Qv-fK3">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Dashboard" storyboardName="Dashboard" referencedIdentifier="Dashboard" id="SC7-nj-q9q" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="rootTabBar" storyboardName="rootTabBar" referencedIdentifier="rootTabBar" id="SC7-nj-q9q" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="wy6-Tv-480"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jdh-7x-jPo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

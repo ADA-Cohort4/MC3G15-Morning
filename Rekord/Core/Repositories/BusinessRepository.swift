@@ -31,8 +31,7 @@ class BusinessRepository {
                     "email": business.email!,
                     "phone": business.phone ?? "",
                     "address": business.address ?? "",
-                    "status": "active",
-                    "airtable_id": business.airtableId!
+                    "status": "active"
                 ]
             ]]
         ]
@@ -66,37 +65,39 @@ class BusinessRepository {
                     //Checking response
                     if(response.records?.isEmpty == false){
                         //SAVE CORE DATA
-                        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                            print("app delegate nil")
-                            return
-                        }
-                        let managedContext = appDelegate.persistentContainer.viewContext
-                        let businessEntity = NSEntityDescription.entity(forEntityName: "Business", in: managedContext)!
-                        let businessData = NSManagedObject(entity: businessEntity, insertInto: managedContext)
-                        //VALUE SET CORE DATA TOBE SAVE
-                        businessData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
-                        businessData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
-                        businessData.setValue(response.records?.first?.fields?.address, forKeyPath: "address")
-                        businessData.setValue(response.records?.first?.fields?.email, forKeyPath: "email")
-                        businessData.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
-                        businessData.setValue(response.records?.first?.fields?.phone, forKeyPath: "phone")
-                        businessData.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
-                        businessData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
-                        do {
-                            try managedContext.save()
-                            //SET USER CORE DATA TO CONTROLLER
-                            business.airtableId = response.records?.first?.id
-                            business.idUser = response.records?.first?.fields?.id_user
-                            business.idBusiness = response.records?.first?.fields?.id_business
-                            business.address = response.records?.first?.fields?.address
-                            business.name = response.records?.first?.fields?.name
-                            business.phone = response.records?.first?.fields?.phone
-                            business.email = response.records?.first?.fields?.email
-                            business.status = response.records?.first?.fields?.status
-                            completion(business)
-                        } catch let error {
-                            print("failed save user = \(error.localizedDescription)")
-                            completion(business)
+                        DispatchQueue.main.async {
+                            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                                print("app delegate nil")
+                                return
+                            }
+                            let managedContext = appDelegate.persistentContainer.viewContext
+                            let businessEntity = NSEntityDescription.entity(forEntityName: "Business", in: managedContext)!
+                            let businessData = NSManagedObject(entity: businessEntity, insertInto: managedContext)
+                            //VALUE SET CORE DATA TOBE SAVE
+                            businessData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
+                            businessData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
+//                            businessData.setValue(response.records?.first?.fields?.address, forKeyPath: "address")
+                            businessData.setValue(response.records?.first?.fields?.email, forKeyPath: "email")
+                            businessData.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
+                            businessData.setValue(response.records?.first?.fields?.phone, forKeyPath: "phone")
+                            businessData.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
+                            businessData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
+                            do {
+                                try managedContext.save()
+                                //SET USER CORE DATA TO CONTROLLER
+                                business.airtableId = response.records?.first?.id
+                                business.idUser = response.records?.first?.fields?.id_user
+                                business.idBusiness = response.records?.first?.fields?.id_business
+//                                business.address = response.records?.first?.fields?.address
+                                business.name = response.records?.first?.fields?.name
+                                business.phone = response.records?.first?.fields?.phone
+                                business.email = response.records?.first?.fields?.email
+                                business.status = response.records?.first?.fields?.status
+                                completion(business)
+                            } catch let error {
+                                print("failed save user = \(error.localizedDescription)")
+                                completion(business)
+                            }
                         }
                         //END SAVE CORE DATA
                     }else{
@@ -165,28 +166,30 @@ class BusinessRepository {
                     //Checking response
                     if(response.records?.isEmpty == false){
                         //SAVE CORE DATA
-                        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                            print("app delegate nil")
-                            return
-                        }
-                        let managedContext = appDelegate.persistentContainer.viewContext
-                        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Business")
-                        fetchRequest.predicate = NSPredicate(format: "id_business = %@", business.idBusiness!)
-                        //VALUE SET CORE DATA TOBE SAVE
-                        do {
-                            let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
-                            data.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
-                            data.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
-                            data.setValue(response.records?.first?.fields?.email, forKeyPath: "email")
-                            data.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
-                            data.setValue(response.records?.first?.fields?.address, forKeyPath: "address")
-                            data.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
-                            data.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
-                            try managedContext.save()
-                            completion(true)
-                        }catch let err {
-                            print("err = \(err.localizedDescription)")
-                            completion(false)
+                        DispatchQueue.main.async {
+                            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                                print("app delegate nil")
+                                return
+                            }
+                            let managedContext = appDelegate.persistentContainer.viewContext
+                            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Business")
+                            fetchRequest.predicate = NSPredicate(format: "id_business = %@", business.idBusiness!)
+                            //VALUE SET CORE DATA TOBE SAVE
+                            do {
+                                let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+                                data.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
+                                data.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
+                                data.setValue(response.records?.first?.fields?.email, forKeyPath: "email")
+                                data.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
+//                                data.setValue(response.records?.first?.fields?.address, forKeyPath: "address")
+                                data.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
+                                data.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
+                                try managedContext.save()
+                                completion(true)
+                            }catch let err {
+                                print("err = \(err.localizedDescription)")
+                                completion(false)
+                            }
                         }
                         //END SAVE CORE DATA
                     }else{
@@ -235,31 +238,33 @@ class BusinessRepository {
             //Checking response
             if(response.records?.isEmpty == false){
                 //SAVE CORE DATA
-                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                    print("app delegate nil")
-                    return
-                }
-                let managedContext = appDelegate.persistentContainer.viewContext
-                let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Business")
-                fetchRequest.predicate = NSPredicate(format: "id_user = %@", idBusiness)
-                do {
-                    let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
-                    data.setValue("inactive", forKeyPath: "status")
-                    try managedContext.save()
-                    completion(true)
-                }catch let err {
-                    print("err = \(err.localizedDescription)")
-                    completion(false)
-                }
-                //VALUE SET CORE DATA TOBE SAVE
-                
-                do {
-                    try managedContext.save()
-                    //SET USER CORE DATA TO CONTROLLER
-                    completion(true)
-                } catch let error {
-                    print("failed save user = \(error.localizedDescription)")
-                    completion(true)
+                DispatchQueue.main.async {
+                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                        print("app delegate nil")
+                        return
+                    }
+                    let managedContext = appDelegate.persistentContainer.viewContext
+                    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Business")
+                    fetchRequest.predicate = NSPredicate(format: "id_user = %@", idBusiness)
+                    do {
+                        let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+                        data.setValue("inactive", forKeyPath: "status")
+                        try managedContext.save()
+                        completion(true)
+                    }catch let err {
+                        print("err = \(err.localizedDescription)")
+                        completion(false)
+                    }
+                    //VALUE SET CORE DATA TOBE SAVE
+                    
+                    do {
+                        try managedContext.save()
+                        //SET USER CORE DATA TO CONTROLLER
+                        completion(true)
+                    } catch let error {
+                        print("failed save user = \(error.localizedDescription)")
+                        completion(true)
+                    }
                 }
                 //END SAVE CORE DATA
             }else{
