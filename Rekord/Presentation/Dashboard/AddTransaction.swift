@@ -48,11 +48,15 @@ class AddTransaction: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         partnerType.isHidden = true
         datePicker.datePickerMode = .date
-        
+        totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
     }
     
     @IBAction func selectInvoice(_ sender: Any) {
         selectImageFrom(.photoLibrary)
+    }
+    
+    @objc func editingChanged() {
+        totalPrice.text = self.totalPrice.text?.currencyInputFormatting()
     }
     
     func selectImageFrom(_ source: ImageSource) {
