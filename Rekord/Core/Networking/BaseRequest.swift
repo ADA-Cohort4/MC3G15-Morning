@@ -78,8 +78,8 @@ class BaseRequest: NSObject {
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = header
         // Set HTTP Request Headers
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.setValue("application/json", forHTTPHeaderField: "Accept")
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         // Set HTTP Request Body
         request.httpBody = jsonData;
         

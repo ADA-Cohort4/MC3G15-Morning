@@ -34,6 +34,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             self.tabBarController?.tabBar.isHidden = false
             self.tabBarController?.tabBarItem.image = UIImage(systemName: "book")
             self.tabBarController?.tabBarItem.title = "Dashboard"
+            self.tabBarController?.navigationController?.navigationBar.isHidden = true
             self.title = "Dashboard"
             
             if self.transData.isEmpty{

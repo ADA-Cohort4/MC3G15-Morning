@@ -20,6 +20,8 @@ class Constants  {
     static let TypeTransactionList = ["Expense","Income"]
     static let CategoryBusinessList = ["Utilities","Transportation","Workstation"]
     static let CategoryPersonalList = ["Utilities","Transportation","Games"]
-    static let HEADER_URL = ["Authorization": "Bearer keyapsxyrejarJKHb"]
+    static let HEADER_URL = ["Authorization": "Bearer keyapsxyrejarJKHb",
+                             "Content-Type": "application/json",
+                             "Accept": "application/json"]
     static let NETWORK_URL = "https://api.airtable.com/v0/appEZWGomcyIcENLJ/"
 }
