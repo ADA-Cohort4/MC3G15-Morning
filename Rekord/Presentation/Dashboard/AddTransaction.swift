@@ -32,8 +32,8 @@ class AddTransaction: UIViewController {
     
     
     let partnerList: [PartnerModel] = [
-        PartnerModel(idPartner: "1", idUser: "1", idBusiness: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "2"),
-        PartnerModel(idPartner: "2", idUser: "1", idBusiness: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "1"),
+        PartnerModel(idPartner: "1", idUser: "1", idBusiness: "1", type: .customer, name: "Budi", phone: "081377020333", status: .active, airtableId: "2"),
+        PartnerModel(idPartner: "2", idUser: "1", idBusiness: "1", type: .customer, name: "Anto", phone: "081377020333", status: .active, airtableId: "1"),
     ]
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false

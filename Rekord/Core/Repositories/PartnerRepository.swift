@@ -319,7 +319,7 @@ class PartnerRepository {
                     idUser: partner.value(forKey: "id_user") as! String,
                     idBusiness: partner.value(forKey: "id_business") as! String,
                     type: partner.value(forKey: "type") as! PartnerType,
-                    name:data.value(forKey: "name") as! String,
+                    name: partner.value(forKey: "name") as! String,
                     phone: partner.value(forKey: "phone") as! String,
                     status: partner.value(forKey: "status") as! PartnerActivationStatus,
                     airtableId: partner.value(forKey: "airtable_id") as! String))

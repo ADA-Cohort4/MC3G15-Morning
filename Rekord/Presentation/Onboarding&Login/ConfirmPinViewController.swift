@@ -57,6 +57,7 @@ class ConfirmPinViewController: UIViewController {
                 //navigate ke Page berikutnya
                 let userID = UUID().uuidString
                 let newUser = UserModel(idUser: userID, appleId: appleID!, passcode: confirm, role: .owner, email: email!, profileUrl: "", phone: phone!, airtableId: "", status: "")
+                
                 UserRepository.shared.saveUser(user: newUser) { (result) in
                     if result.airtableId != "" || result.airtableId != nil {
                         DispatchQueue.main.async {
@@ -68,6 +69,22 @@ class ConfirmPinViewController: UIViewController {
                         print("error save")
                     }
                 }
+                
+                
+                let businessID = UUID().uuidString
+                let newBusiness = BusinessModel(idBusiness: businessID, idUser: userID, name: businessName!, email: email!, phone: phone!, address: address!, airtableId: "", status: "")
+                BusinessRepository.shared.saveBusiness(business: newBusiness) { (result) in
+                    if result.airtableId != "" || result.airtableId != nil {
+                        DispatchQueue.main.async {
+                            
+                        
+                        self.navigationController?.popViewController(animated: true)
+                        }
+                    } else {
+                        print("error save")
+                    }
+                }
+                
                 userDefaults.setValue(newUser.appleId, forKey: "appleID")
                 userDefaults.setValue(newUser.idUser, forKey: "userID")
                 userDefaults.setValue(newUser.passcode, forKey: "passcode")
