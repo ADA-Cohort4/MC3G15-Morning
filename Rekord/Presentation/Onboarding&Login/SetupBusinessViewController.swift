@@ -24,7 +24,9 @@ class SetupBusinessViewController: UIViewController {
     @IBOutlet weak var addressView: UIView!
     @IBOutlet weak var phoneView: UIView!
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Setup Your Business"

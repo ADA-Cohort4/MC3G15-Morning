@@ -25,10 +25,34 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     
     var inputArray : [String] = ["Sinar Jaya", "TR#10928329103", "Supplier", "Incomplete", "Rp24.000.000", "Rp11.000.000", "2 of 4"]
     var paymentArray : [String] = ["14/6/21", "23/7/21"]
+    var selectedID : String = ""
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
+        
+        
+       /* TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.value(forKey: "businessID") as! String) { resultList, result in
+             for result in resultList{
+                if result.airtableId == self.selectedID{
+                    
+                 var partnerID = ""
+                 var type = ""
+                    
+                 PartnerRepository.shared.getPartner { resultPartner in
+                     if resultPartner.idPartner == result.idPartner{
+                         partnerID = resultPartner.idPartner!
+                         type = resultPartner.type!.rawValue//CHANGE TO PARTNER NAME
+                     }
+                     
+                 }
+                    let list : [String] = [partnerID, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), "Rp11.000.000", String(result.paymentCount!)]
+                 self.inputArray = list
+                }
+                
+             }
+         }*/
     }
+    
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false

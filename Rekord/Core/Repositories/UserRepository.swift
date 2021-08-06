@@ -66,6 +66,9 @@ class UserRepository {
                     //Checking response
                     if(response.records?.isEmpty == false){
                         //SAVE CORE DATA
+                        DispatchQueue.main.async {
+                            
+                        
                         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                             print("app delegate nil")
                             return
@@ -95,6 +98,7 @@ class UserRepository {
                         } catch let error {
                             print("failed save user = \(error.localizedDescription)")
                             completion(user)
+                        }
                         }
                         //END SAVE CORE DATA
                     }else{
@@ -338,7 +342,7 @@ class UserRepository {
 //                appleId: data.value(forKey: "apple_id") as! String,
 //                passcode: "",
 //                role:data.value(forKey: "role") as! RoleType,
-//                email: data.value(forKey: "email") as! String,
+//                email: data.value(forKey: "email")f as! String,
 //                profileUrl: data.value(forKey: "profile_url") as! String,
 //                phone: data.value(forKey: "phone") as! String,
 //                airtableId: data.value(forKey: "airtable_id") as! String,
@@ -355,12 +359,14 @@ class UserRepository {
                                 email: data.value(forKey: "email") as! String,
                                 profileUrl: "",
                                 phone: "",
-                                airtableId: "",
+                                airtableId: data.value(forKey: "airtable_id") as! String,
                                 status: "")
                             completion(userData)
-                        }
+                        }else{
                         let nullUserData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
-                        completion(nullUserData)
+                            completion(nullUserData)
+                            
+                        }
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
             let userData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")

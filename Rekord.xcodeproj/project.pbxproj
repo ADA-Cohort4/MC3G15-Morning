@@ -722,7 +722,6 @@
 				D444D4E326B6A76300431C1B /* InviteeLinksAPIRequest.swift in Sources */,
 				679A042526BA9A7800676D96 /* PaymentStatusCell.swift in Sources */,
 				679A042126BA97D100676D96 /* UpdateTransaction.swift in Sources */,
-				D43FEFE026AFBA1B0057F616 /* SetupBusiness.swift in Sources */,
 				ECC223FD26B24DE700DDF743 /* PaymentModel.swift in Sources */,
 				99DC76D526B0577200BFD14D /* dateCell.swift in Sources */,
 				99DC76D926B058D800BFD14D /* transactionsCell.swift in Sources */,
