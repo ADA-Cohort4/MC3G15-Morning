@@ -147,7 +147,7 @@ class PaymentRepository {
                 idTransaction: payment.value(forKey: "id_payment") as! String,
                 idUser: payment.value(forKey: "id_user") as! String,
                 createdDate: payment.value(forKey: "created_date") as! String,
-                amount: payment.value(forKey: "amount") as! Float,
+                amount: payment.value(forKey: "amount") as! Double,
                 document: payment.value(forKey: "document") as! String,
                 airtableId: payment.value(forKey: "document") as! String))
             }

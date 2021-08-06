@@ -21,7 +21,7 @@ struct TransactionsNetworkDataFieldResponse: Codable {
     let id_transaction: String?
     let id_partner: String?
     let id_business: String?
-    let total_price: Float?
+    let total_price: Double?
     let payment_count: Int?
     let document: String?
     let due_date: String?
