@@ -31,8 +31,7 @@ class BusinessRepository {
                     "email": business.email!,
                     "phone": business.phone ?? "",
                     "address": business.address ?? "",
-                    "status": "active",
-                    "airtable_id": business.airtableId!
+                    "status": "active"
                 ]
             ]]
         ]
