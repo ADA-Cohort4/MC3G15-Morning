@@ -50,11 +50,11 @@ class LockScreen: UIViewController {
             //navigate to dashboard if true, try again if false
         }
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toDashboardSegue" {
-            let destinationVC = segue.destination as! Dashboard
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toDashboardSegue" {
+//            let destinationVC = segue.destination as! Dashboard
+//        }
+//    }
     
     @IBAction func faceID(_ sender: UIButton){
         //faceID function

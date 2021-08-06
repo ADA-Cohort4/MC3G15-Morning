@@ -32,8 +32,8 @@ class AddTransaction: UIViewController {
     
     
     let partnerList: [PartnerModel] = [
-        PartnerModel(idPartner: "1", idUser: "1", idBusiness: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "2"),
-        PartnerModel(idPartner: "2", idUser: "1", idBusiness: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "1"),
+        PartnerModel(idPartner: "1", idUser: "1", type: .customer, name: "Test 1", phone: "081377020333", status: .active, airtableId: "2"),
+        PartnerModel(idPartner: "2", idUser: "1", type: .customer, name: "Test 2", phone: "081377020333", status: .active, airtableId: "1"),
     ]
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
@@ -72,14 +72,17 @@ class AddTransaction: UIViewController {
     }
     
     @IBAction func createTransaction(_ sender: Any) {
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Float(totalPrice.text ?? "0") ?? 0, paymentCount: 2, document: imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "Todey", updatedDate: "todey", status: .waiting, airtableId: "1",idBusiness: "1")
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Float(totalPrice.text ?? "0") ?? 0, paymentCount: 2, document: imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: "1")
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
         
+        
         TransactionRepository.shared.saveTransaction(transaction: newTransaction){ (result) in
             if result.airtableId != "" || result.airtableId != nil {
-                self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             } else {
                 print("error save")
             }
@@ -104,7 +107,7 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return partnerList[row].idPartner
+        return partnerList[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

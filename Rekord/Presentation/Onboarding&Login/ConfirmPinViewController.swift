@@ -57,17 +57,36 @@ class ConfirmPinViewController: UIViewController {
                 //navigate ke Page berikutnya
                 let userID = UUID().uuidString
                 let newUser = UserModel(idUser: userID, appleId: appleID!, passcode: confirm, role: .owner, email: email!, profileUrl: "", phone: phone!, airtableId: "", status: "")
+                
                 UserRepository.shared.saveUser(user: newUser) { (result) in
                     if result.airtableId != "" || result.airtableId != nil {
                         DispatchQueue.main.async {
                             
                         
-                        self.navigationController?.popViewController(animated: true)
+//                        self.navigationController?.popViewController(animated: true)
                         }
                     } else {
                         print("error save")
                     }
                 }
+                
+                
+                let businessID = UUID().uuidString
+                let newBusiness = BusinessModel(idBusiness: businessID, idUser: userID, name: businessName!, email: email!, phone: phone!, address: address!, airtableId: "", status: "active")
+                BusinessRepository.shared.saveBusiness(business: newBusiness) { (result) in
+                    if result.airtableId != "" || result.airtableId != nil {
+                        DispatchQueue.main.async {
+                            
+//                        self.navigationController?.popViewController(animated: true)
+                        }
+                    } else {
+                        print("error save")
+                    }
+                }
+                
+                performSegue(withIdentifier: "confirmPINSegue", sender: self)
+                print("success")
+                
                 userDefaults.setValue(newUser.appleId, forKey: "appleID")
                 userDefaults.setValue(newUser.idUser, forKey: "userID")
                 userDefaults.setValue(newUser.passcode, forKey: "passcode")
@@ -77,8 +96,8 @@ class ConfirmPinViewController: UIViewController {
                 userDefaults.setValue(newUser.phone, forKey: "phone")
                 userDefaults.setValue(newUser.airtableId, forKey: "airtableId")
                 userDefaults.setValue(newUser.status, forKey: "status")
-                performSegue(withIdentifier: "confirmPINSegue", sender: self)
-                print("success")
+                userDefaults.setValue(newBusiness.idBusiness, forKey: "businessID")
+                
             } else {
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
@@ -93,11 +112,11 @@ class ConfirmPinViewController: UIViewController {
         }
         
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "confirmPINSegue" {
-            let destinationVC = segue.destination as! Dashboard
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "confirmPINSegue" {
+//            let destinationVC = segue.destination as!
+//        }
+//    }
     
     @IBAction func deleteCfmPIN(_ sender: UIButton){
         confirm.removeLast()
