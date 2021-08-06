@@ -31,8 +31,7 @@ class BusinessRepository {
                     "email": business.email!,
                     "phone": business.phone ?? "",
                     "address": business.address ?? "",
-                    "status": "active",
-                    "airtable_id": business.airtableId!
+                    "status": "active"
                 ]
             ]]
         ]
@@ -77,7 +76,7 @@ class BusinessRepository {
                             //VALUE SET CORE DATA TOBE SAVE
                             businessData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
                             businessData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
-                            businessData.setValue(response.records?.first?.fields?.address, forKeyPath: "address")
+//                            businessData.setValue(response.records?.first?.fields?.address, forKeyPath: "address")
                             businessData.setValue(response.records?.first?.fields?.email, forKeyPath: "email")
                             businessData.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
                             businessData.setValue(response.records?.first?.fields?.phone, forKeyPath: "phone")
@@ -89,7 +88,7 @@ class BusinessRepository {
                                 business.airtableId = response.records?.first?.id
                                 business.idUser = response.records?.first?.fields?.id_user
                                 business.idBusiness = response.records?.first?.fields?.id_business
-                                business.address = response.records?.first?.fields?.address
+//                                business.address = response.records?.first?.fields?.address
                                 business.name = response.records?.first?.fields?.name
                                 business.phone = response.records?.first?.fields?.phone
                                 business.email = response.records?.first?.fields?.email
@@ -182,7 +181,7 @@ class BusinessRepository {
                                 data.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
                                 data.setValue(response.records?.first?.fields?.email, forKeyPath: "email")
                                 data.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
-                                data.setValue(response.records?.first?.fields?.address, forKeyPath: "address")
+//                                data.setValue(response.records?.first?.fields?.address, forKeyPath: "address")
                                 data.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
                                 data.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
                                 try managedContext.save()
