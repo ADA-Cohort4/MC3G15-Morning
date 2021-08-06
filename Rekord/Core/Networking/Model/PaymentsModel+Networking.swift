@@ -22,6 +22,6 @@ struct PaymentsNetworkDataFieldResponse: Codable {
     let id_transaction: String?
     let id_user: String?
     let created_date: String?
-    let amount: String?
+    let amount: Float?
     let document: String?
 }
