@@ -22,10 +22,37 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var viewInvoiceBtn: UIButton!
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var paymentTable: UITableView!
+    
+    var inputArray : [String] = ["Sinar Jaya", "TR#10928329103", "Supplier", "Incomplete", "Rp24.000.000", "Rp11.000.000", "2 of 4"]
+    var paymentArray : [String] = ["14/6/21", "23/7/21"]
+    var selectedID : String = ""
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
+        
+        
+       /* TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.value(forKey: "businessID") as! String) { resultList, result in
+             for result in resultList{
+                if result.airtableId == self.selectedID{
+                    
+                 var partnerID = ""
+                 var type = ""
+                    
+                 PartnerRepository.shared.getPartner { resultPartner in
+                     if resultPartner.idPartner == result.idPartner{
+                         partnerID = resultPartner.idPartner!
+                         type = resultPartner.type!.rawValue//CHANGE TO PARTNER NAME
+                     }
+                     
+                 }
+                    let list : [String] = [partnerID, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), "Rp11.000.000", String(result.paymentCount!)]
+                 self.inputArray = list
+                }
+                
+             }
+         }*/
     }
+    
     override func viewDidLoad() {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
@@ -45,9 +72,17 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         
         viewInvoiceBtn.layer.borderWidth = 2
         viewInvoiceBtn.layer.borderColor = UIColor.link.cgColor
+        
+        partnerNameLabel.text = inputArray[0]
+        TRIDLabel.text = inputArray[1]
+        typeLabel.text = inputArray[2]
+        statusLabel.text = inputArray[3]
+        totalValueLabel.text = inputArray[4]
+        totalDueLabel.text = inputArray[5]
+        paymentCountLabel.text = inputArray[6]
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return paymentArray.count
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Payment History"
@@ -55,8 +90,8 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = paymentTable.dequeueReusableCell(withIdentifier: "paymentCell") as! paymentCell
-        cell.paymentDateLabel.text = "4/20/69"
-        cell.paymentCountLabel.text = "Payment 420"
+        cell.paymentDateLabel.text = paymentArray[indexPath.row]
+        cell.paymentCountLabel.text = "Payment \(indexPath.row+1)"
         return cell
     }
     

@@ -59,7 +59,11 @@ class ConfirmPinViewController: UIViewController {
                 let newUser = UserModel(idUser: userID, appleId: appleID!, passcode: confirm, role: .owner, email: email!, profileUrl: "", phone: phone!, airtableId: "", status: "")
                 UserRepository.shared.saveUser(user: newUser) { (result) in
                     if result.airtableId != "" || result.airtableId != nil {
+                        DispatchQueue.main.async {
+                            
+                        
                         self.navigationController?.popViewController(animated: true)
+                        }
                     } else {
                         print("error save")
                     }

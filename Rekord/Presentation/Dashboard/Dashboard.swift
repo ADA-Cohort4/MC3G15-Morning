@@ -18,27 +18,50 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var yourTListEmpty: UILabel!
     
     @IBOutlet weak var receiptImage: UIImageView!
+    
+    
+    var selectedEntry : String = ""
     //DUMMY DATA FOR TESTING, NTAR DIAPUS AJA
-    //urutan: PartnerName, TRID, Type, Status, Total, NextPayment
-  //  let transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
-  let transData : [[String]] = []
+    //urutan: PartnerName, TRID, Type, Status, Total, NextPayment, idPartner
+   var transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
+  //let transData : [[String]] = []
     // 0 = receivable, 1 = payable
     let queuedPayment : [[Double]] = [[1450000, 2560000, 1440000], [2445000]]
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
-        self.tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBarItem.image = UIImage(systemName: "book")
-        self.tabBarController?.tabBarItem.title = "Dashboard"
-        self.title = "Dashboard"
-        
-        if transData.isEmpty{
-            CommonFunction.shared.addShadow(view: addTransactionBtnFirst)
+        DispatchQueue.main.async {
+            self.navigationController?.navigationBar.isHidden = true
+            self.tabBarController?.tabBar.isHidden = false
+            self.tabBarController?.tabBarItem.image = UIImage(systemName: "book")
+            self.tabBarController?.tabBarItem.title = "Dashboard"
+            self.title = "Dashboard"
+            
+            if self.transData.isEmpty{
+                CommonFunction.shared.addShadow(view: self.addTransactionBtnFirst)
+            }
         }
+        // MARK: -QUERY FOR DASHBOARD
+       /* TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.value(forKey: "businessID") as! String) { resultList, result in
+            for result in resultList{
+                var partnerID = ""
+                var type = ""
+                PartnerRepository.shared.getPartner { resultPartner in
+                    if resultPartner.idPartner == result.idPartner{
+                        partnerID = resultPartner.idPartner!
+                        type = resultPartner.type!.rawValue//CHANGE TO PARTNER NAME
+                    }
+                    
+                }
+                let list : [String] = [partnerID, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), result.dueDate!]
+                self.transData.append(list)
+            }
+        }*/
+       
      
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         print(transData)
         //MARK:Ubah background jadi gradient
@@ -166,8 +189,16 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         case 0,1:
             print("Index date filter / balance clicked")
         default:
+            selectedEntry = transData[indexPath.row-2][1]
             performSegue(withIdentifier: "toTransactionDetail", sender: nil)
             
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is TransactionDetails{
+            let vc = segue.destination as? TransactionDetails
+            //VC INPUT ARRAY ADALAH TRID
+            vc?.selectedID = selectedEntry
         }
     }
     

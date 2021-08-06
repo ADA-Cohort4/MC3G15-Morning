@@ -24,7 +24,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var emptyHistoryLabel: UILabel!
     @IBOutlet weak var filterView: FilterView!
     
-    
+    private let refreshControl = UIRefreshControl()
     //nanti data hasil query masukin sini, kalo filter / search reload view dan restart query
     //URUTAN: 0 = partner name, 1 = trid, 2 = type, 3 = status, 4 = total
     let transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000"]]
@@ -33,6 +33,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     let typeData : [String] = ["Customer", "Supplier"]
     var selectedCustomerData : String = ""
     var selectedFilter : String = ""
+    var selectedEntry : String = ""
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +53,8 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         partnerDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onPartnerFilterClick)))
         //add target for done button in filter view
         filterView.doneBtn.addTarget(self, action: #selector(self.onFilterDoneBtnClick), for: .touchUpInside)
+        //add target for refresh control
+        refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
         
     }
     
@@ -72,6 +75,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         
         headerPadding.layer.cornerRadius = 10
         
+        historyTable.addSubview(refreshControl)
         searchBar.backgroundColor = UIColor.init(displayP3Red: 17.0/255.0, green: 86.0/255.0, blue: 155.0/255.0, alpha: 1.0)
         searchBar.barTintColor = UIColor.init(displayP3Red: 17.0/255.0, green: 86.0/255.0, blue: 155.0/255.0, alpha: 1.0)
         searchBar.searchTextField.backgroundColor = UIColor.white
@@ -103,6 +107,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedEntry = transData[indexPath.row][1]
         performSegue(withIdentifier: "toTransactionDetail", sender: nil)
     }
     
@@ -158,6 +163,18 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
             containerView.mask = nil
             filterView.isHidden = true
         
+        }
+    }
+    @IBAction func onRefreshPull(){
+        print("refreshed")
+        
+        self.refreshControl.endRefreshing()
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is TransactionDetails{
+            let vc = segue.destination as? TransactionDetails
+            vc?.inputArray[1] = selectedEntry
         }
     }
     

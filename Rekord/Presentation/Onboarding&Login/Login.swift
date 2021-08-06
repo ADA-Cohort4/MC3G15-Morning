@@ -14,7 +14,9 @@ class Login: UIViewController {
     var userID = ""
     let userDefaults = UserDefaults()
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +53,10 @@ class Login: UIViewController {
 //        let destinationNavigationController = segue.destination as! UINavigationController
 //        let targetController = destinationNavigationController.topViewController
         if segue.identifier == "ToSetupBusinessSegue"{
-            let destionationNavigationController = segue.destination as? UINavigationController
-            let destinationVC = destionationNavigationController?.topViewController as! SetupBusinessViewController
-            destinationVC.userID = userID
+           
+            let destinationVC = segue.destination as? SetupBusinessViewController
+   
+            destinationVC?.userID = userID
         } else if segue.identifier == "ToKeypadSegue" {
             let destinationVC = segue.destination as! LockScreen
         }
@@ -71,9 +74,11 @@ extension Login: ASAuthorizationControllerDelegate {
             var appleIdCore = ""
             
             let appleId = UserRepository.shared.getUserByAppleId(userID){ (result) in
+                print(result.appleId)
                 if result.airtableId != "" || result.airtableId != nil {
 //                    appleIdCore = result.appleId!
-                    self.navigationController?.popViewController(animated: true)
+                    
+                   // self.navigationController?.popViewController(animated: true)
                     if credentials.user == result.appleId{
                         self.toKeypadSegue()
                     } else {

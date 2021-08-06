@@ -35,7 +35,6 @@
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
 					<string>Login</string>
-					<string>PaymentDetail</string>
 				</dict>
 			</array>
 		</dict>
