@@ -78,7 +78,7 @@ class PaymentRepository {
                         payment.idUser = response.records?.first?.fields?.id_user
                         payment.idPayment = response.records?.first?.fields?.id_payment
                         payment.idTransaction = response.records?.first?.fields?.id_transaction
-                        payment.amount = Float(response.records?.first?.fields?.amount ?? "0")
+                        payment.amount = response.records?.first?.fields?.amount
                         payment.createdDate = response.records?.first?.fields?.created_date
                         payment.document = response.records?.first?.fields?.document
                         completion(payment)
@@ -147,7 +147,7 @@ class PaymentRepository {
                 idTransaction: payment.value(forKey: "id_payment") as! String,
                 idUser: payment.value(forKey: "id_user") as! String,
                 createdDate: payment.value(forKey: "created_date") as! String,
-                amount: payment.value(forKey: "amount") as! Float,
+                amount: payment.value(forKey: "amount") as! Double,
                 document: payment.value(forKey: "document") as! String,
                 airtableId: payment.value(forKey: "document") as! String))
             }

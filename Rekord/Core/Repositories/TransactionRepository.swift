@@ -28,7 +28,7 @@ class TransactionRepository {
 //                    "id_business": transaction.idBusiness!,
                     "id_partner": transaction.idPartner!,
                     "id_transaction": transaction.idTransaction!,
-                    "total_price": transaction.totalPrice ?? "0.00",
+                    "total_price": transaction.totalPrice ?? "0",
                     "payment_count": transaction.paymentCount ?? "0",
                     "document": transaction.document ?? "",
                     "due_date": transaction.dueDate!,
@@ -85,11 +85,11 @@ class TransactionRepository {
                         transaction.idPartner = response.records?.first?.fields?.id_partner
                         transaction.document = response.records?.first?.fields?.document
                         transaction.status = TransactionStatusType(rawValue: (response.records?.first?.fields?.status)!)
-//                        transaction.totalPrice = Float(response.records?.first?.fields?.total_price ?? "0")
+//                        transaction.totalPrice = response.records?.first?.fields?.total_price ?? 0
 //                        transaction.createdDate = response.records?.first?.fields?.created_date
 //                        transaction.dueDate = response.records?.first?.fields?.created_date
 //                        transaction.updatedDate = response.records?.first?.fields?.due_date
-                        transaction.paymentCount = Int(response.records?.first?.fields?.payment_count ?? "0")
+                        transaction.paymentCount = response.records?.first?.fields?.payment_count ?? 0
                         completion(transaction)
                     } catch let error {
                         print("failed save user = \(error.localizedDescription)")
@@ -119,7 +119,7 @@ class TransactionRepository {
                 "id" : transaction.airtableId!,
                 "fields" : [
                     "status": transaction.status?.rawValue ?? "waiting",
-                    "total_price": transaction.totalPrice ?? "0.00",
+                    "total_price": transaction.totalPrice ?? "0",
                     "payment_count": transaction.paymentCount ?? "0",
                     "updated_date": transaction.updatedDate ?? ""
                 ]
@@ -238,7 +238,7 @@ class TransactionRepository {
                 listTransaction.append(TransactionModel(
                     idTransaction: transaction.value(forKey: "id_transaction") as! String,
                     idPartner: transaction.value(forKey: "id_partner") as! String,
-                    totalPrice: transaction.value(forKey: "total_price") as! Float,
+                    totalPrice: transaction.value(forKey: "total_price") as! Double,
                     paymentCount: transaction.value(forKey: "payment_count") as! Int,
                     document: transaction.value(forKey: "document") as! String,
                     dueDate: transaction.value(forKey: "due_date") as! String,
