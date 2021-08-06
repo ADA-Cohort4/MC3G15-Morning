@@ -55,35 +55,37 @@ class PaymentRepository {
             //Checking response
             if(response.records?.isEmpty == false){
                 //SAVE CORE DATA
-                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                    print("app delegate nil")
-                    return
-                }
-                let managedContext = appDelegate.persistentContainer.viewContext
-                let paymentEntity = NSEntityDescription.entity(forEntityName: "Payment", in: managedContext)!
-                let paymentData = NSManagedObject(entity: paymentEntity, insertInto: managedContext)
-                //VALUE SET CORE DATA TOBE SAVE
-                paymentData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
-                paymentData.setValue(response.records?.first?.fields?.id_payment, forKeyPath: "id_payment")
-                paymentData.setValue(response.records?.first?.fields?.id_transaction, forKeyPath: "id_transaction")
-                paymentData.setValue(response.records?.first?.fields?.amount, forKeyPath: "amount")
-                paymentData.setValue(response.records?.first?.fields?.created_date, forKeyPath: "created_date")
-                paymentData.setValue(response.records?.first?.fields?.document, forKeyPath: "document")
-                paymentData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
-                do {
-                    try managedContext.save()
-                    //SET USER CORE DATA TO CONTROLLER
-                    payment.airtableId = response.records?.first?.id
-                    payment.idUser = response.records?.first?.fields?.id_user
-                    payment.idPayment = response.records?.first?.fields?.id_payment
-                    payment.idTransaction = response.records?.first?.fields?.id_transaction
-                    payment.amount = Float(response.records?.first?.fields?.amount ?? "0")
-                    payment.createdDate = response.records?.first?.fields?.created_date
-                    payment.document = response.records?.first?.fields?.document
-                    completion(payment)
-                } catch let error {
-                    print("failed save user = \(error.localizedDescription)")
-                    completion(payment)
+                DispatchQueue.main.async {
+                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                        print("app delegate nil")
+                        return
+                    }
+                    let managedContext = appDelegate.persistentContainer.viewContext
+                    let paymentEntity = NSEntityDescription.entity(forEntityName: "Payment", in: managedContext)!
+                    let paymentData = NSManagedObject(entity: paymentEntity, insertInto: managedContext)
+                    //VALUE SET CORE DATA TOBE SAVE
+                    paymentData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
+                    paymentData.setValue(response.records?.first?.fields?.id_payment, forKeyPath: "id_payment")
+                    paymentData.setValue(response.records?.first?.fields?.id_transaction, forKeyPath: "id_transaction")
+                    paymentData.setValue(response.records?.first?.fields?.amount, forKeyPath: "amount")
+                    paymentData.setValue(response.records?.first?.fields?.created_date, forKeyPath: "created_date")
+                    paymentData.setValue(response.records?.first?.fields?.document, forKeyPath: "document")
+                    paymentData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
+                    do {
+                        try managedContext.save()
+                        //SET USER CORE DATA TO CONTROLLER
+                        payment.airtableId = response.records?.first?.id
+                        payment.idUser = response.records?.first?.fields?.id_user
+                        payment.idPayment = response.records?.first?.fields?.id_payment
+                        payment.idTransaction = response.records?.first?.fields?.id_transaction
+                        payment.amount = Float(response.records?.first?.fields?.amount ?? "0")
+                        payment.createdDate = response.records?.first?.fields?.created_date
+                        payment.document = response.records?.first?.fields?.document
+                        completion(payment)
+                    } catch let error {
+                        print("failed save user = \(error.localizedDescription)")
+                        completion(payment)
+                    }
                 }
                 //END SAVE CORE DATA
             }else{
