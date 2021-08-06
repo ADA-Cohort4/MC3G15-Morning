@@ -47,7 +47,7 @@ class TransactionsAPIRequest: NSObject{
             print(response)
             // prepare the data model
             var dataModel = DataManager.TRANSACTIONSNETWORKDATA
-            
+        
             // handle the response and parsing the data to data model
             do {
                 let transactionsModel = try JSONDecoder().decode(TransactionsNetworkData.self, from: response as! Data)

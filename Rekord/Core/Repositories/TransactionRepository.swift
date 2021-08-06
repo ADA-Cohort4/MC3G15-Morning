@@ -25,7 +25,7 @@ class TransactionRepository {
         let json: [String:Any] = [
             "records" : [[
                 "fields" : [
-                    "id_business": transaction.idBusiness!,
+//                    "id_business": transaction.idBusiness!,
                     "id_partner": transaction.idPartner!,
                     "id_transaction": transaction.idTransaction!,
                     "total_price": transaction.totalPrice ?? "0.00",
@@ -66,14 +66,14 @@ class TransactionRepository {
                     let transactionData = NSManagedObject(entity: transactionEntity, insertInto: managedContext)
                     //VALUE SET CORE DATA TOBE SAVE
                     transactionData.setValue(response.records?.first?.fields?.id_transaction, forKeyPath: "id_transaction")
-                    transactionData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
+//                    transactionData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
                     transactionData.setValue(response.records?.first?.fields?.id_partner, forKeyPath: "id_partner")
                     transactionData.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
                     transactionData.setValue(response.records?.first?.fields?.document, forKeyPath: "document")
-                    transactionData.setValue(response.records?.first?.fields?.total_price, forKeyPath: "total_price")
-                    transactionData.setValue(response.records?.first?.fields?.created_date, forKeyPath: "created_date")
-                    transactionData.setValue(response.records?.first?.fields?.updated_date, forKeyPath: "updated_date")
-                    transactionData.setValue(response.records?.first?.fields?.due_date, forKeyPath: "due_date")
+//                    transactionData.setValue(response.records?.first?.fields?.total_price, forKeyPath: "total_price")
+//                    transactionData.setValue(response.records?.first?.fields?.created_date, forKeyPath: "created_date")
+//                    transactionData.setValue(response.records?.first?.fields?.updated_date, forKeyPath: "updated_date")
+//                    transactionData.setValue(response.records?.first?.fields?.due_date, forKeyPath: "due_date")
                     transactionData.setValue(response.records?.first?.fields?.payment_count, forKeyPath: "payment_count")
                     transactionData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
                     do {
@@ -81,14 +81,14 @@ class TransactionRepository {
                         //SET USER CORE DATA TO CONTROLLER
                         transaction.airtableId = response.records?.first?.id
                         transaction.idTransaction = response.records?.first?.fields?.id_transaction
-                        transaction.idBusiness = response.records?.first?.fields?.id_business
+//                        transaction.idBusiness = response.records?.first?.fields?.id_business
                         transaction.idPartner = response.records?.first?.fields?.id_partner
                         transaction.document = response.records?.first?.fields?.document
                         transaction.status = TransactionStatusType(rawValue: (response.records?.first?.fields?.status)!)
-                        transaction.totalPrice = Float(response.records?.first?.fields?.total_price ?? "0")
-                        transaction.createdDate = response.records?.first?.fields?.created_date
-                        transaction.dueDate = response.records?.first?.fields?.created_date
-                        transaction.updatedDate = response.records?.first?.fields?.due_date
+//                        transaction.totalPrice = Float(response.records?.first?.fields?.total_price ?? "0")
+//                        transaction.createdDate = response.records?.first?.fields?.created_date
+//                        transaction.dueDate = response.records?.first?.fields?.created_date
+//                        transaction.updatedDate = response.records?.first?.fields?.due_date
                         transaction.paymentCount = Int(response.records?.first?.fields?.payment_count ?? "0")
                         completion(transaction)
                     } catch let error {

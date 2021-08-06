@@ -27,7 +27,6 @@ class PartnerRepository {
                 "fields" : [
                     "id_partner": partner.idPartner!,
                     "id_user": partner.idUser!,
-                    "id_business": partner.idBusiness!,
                     "name": partner.name!,
                     "phone": partner.phone!,
                     "type": partner.type!,
@@ -43,7 +42,7 @@ class PartnerRepository {
         }
         
         //for getting method spesific data
-        let formula = "?filterByFormula=AND(id_business%3D%22\(String(describing: partner.idBusiness))%22%2Cphone%3D%22\(String(describing: partner.phone))%22)"
+        let formula = "?filterByFormula=AND(id_partner%3D%22\(String(describing: partner.idPartner))%22%2Cphone%3D%22\(String(describing: partner.phone))%22)"
         
         // for filtering tabledata
         let filter = "Partners"
@@ -76,7 +75,7 @@ class PartnerRepository {
                             //VALUE SET CORE DATA TOBE SAVE
                             partnerData.setValue(response.records?.first?.fields?.id_partner, forKeyPath: "id_partner")
                             partnerData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
-                            partnerData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
+//                            partnerData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
                             partnerData.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
                             partnerData.setValue(response.records?.first?.fields?.phone, forKeyPath: "phone")
                             partnerData.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
@@ -87,7 +86,7 @@ class PartnerRepository {
                                 //SET USER CORE DATA TO CONTROLLER
                                 partner.airtableId = response.records?.first?.id
                                 partner.idUser = response.records?.first?.fields?.id_user
-                                partner.idBusiness = response.records?.first?.fields?.id_business
+//                                partner.idBusiness = response.records?.first?.fields?.id_business
                                 partner.idPartner = response.records?.first?.fields?.id_partner
                                 partner.type = PartnerType(rawValue: (response.records?.first?.fields?.status)!)
                                 partner.name = response.records?.first?.fields?.name
@@ -287,7 +286,7 @@ class PartnerRepository {
             let partnerData = PartnerModel(
                 idPartner: data.value(forKey: "id_partner") as! String,
                 idUser: data.value(forKey: "id_user") as! String,
-                idBusiness: data.value(forKey: "id_business") as! String,
+//                idBusiness: data.value(forKey: "id_business") as! String,
                 type:data.value(forKey: "type") as! PartnerType,
                 name:data.value(forKey: "name") as! String,
                 phone: data.value(forKey: "phone") as! String,
@@ -296,7 +295,7 @@ class PartnerRepository {
             completion(partnerData)
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
-            let partnerData = PartnerModel(idPartner: "", idUser: "", idBusiness: "", type: PartnerType.customer, name:"", phone: "", status: PartnerActivationStatus.active, airtableId: "")
+            let partnerData = PartnerModel(idPartner: "", idUser: "", type: PartnerType.customer, name:"", phone: "", status: PartnerActivationStatus.active, airtableId: "")
             completion(partnerData)
         }
     }
@@ -317,7 +316,7 @@ class PartnerRepository {
                 partnerList.append(PartnerModel(
                     idPartner: partner.value(forKey: "id_parner") as! String,
                     idUser: partner.value(forKey: "id_user") as! String,
-                    idBusiness: partner.value(forKey: "id_business") as! String,
+//                    idBusiness: partner.value(forKey: "id_business") as! String,
                     type: partner.value(forKey: "type") as! PartnerType,
                     name: partner.value(forKey: "name") as! String,
                     phone: partner.value(forKey: "phone") as! String,
