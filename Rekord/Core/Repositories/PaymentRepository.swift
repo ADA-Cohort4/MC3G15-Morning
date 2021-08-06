@@ -78,7 +78,7 @@ class PaymentRepository {
                         payment.idUser = response.records?.first?.fields?.id_user
                         payment.idPayment = response.records?.first?.fields?.id_payment
                         payment.idTransaction = response.records?.first?.fields?.id_transaction
-                        payment.amount = Float(response.records?.first?.fields?.amount ?? "0")
+                        payment.amount = response.records?.first?.fields?.amount
                         payment.createdDate = response.records?.first?.fields?.created_date
                         payment.document = response.records?.first?.fields?.document
                         completion(payment)

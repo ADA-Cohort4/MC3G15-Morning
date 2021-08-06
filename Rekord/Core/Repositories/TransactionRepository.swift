@@ -28,8 +28,8 @@ class TransactionRepository {
                     "id_business": transaction.idBusiness!,
                     "id_partner": transaction.idPartner!,
                     "id_transaction": transaction.idTransaction!,
-                    "total_price": transaction.totalPrice ?? "0.00",
-                    "payment_count": transaction.paymentCount ?? "0",
+                    "total_price": transaction.totalPrice ?? 0,
+                    "payment_count": transaction.paymentCount ?? 0,
                     "document": transaction.document ?? "",
                     "due_date": transaction.dueDate!,
                     "created_date": transaction.createdDate ?? "",
@@ -85,11 +85,11 @@ class TransactionRepository {
                         transaction.idPartner = response.records?.first?.fields?.id_partner
                         transaction.document = response.records?.first?.fields?.document
                         transaction.status = TransactionStatusType(rawValue: (response.records?.first?.fields?.status)!)
-                        transaction.totalPrice = Float(response.records?.first?.fields?.total_price ?? "0")
+                        transaction.totalPrice = response.records?.first?.fields?.total_price ?? 0
                         transaction.createdDate = response.records?.first?.fields?.created_date
                         transaction.dueDate = response.records?.first?.fields?.created_date
                         transaction.updatedDate = response.records?.first?.fields?.due_date
-                        transaction.paymentCount = Int(response.records?.first?.fields?.payment_count ?? "0")
+                        transaction.paymentCount = response.records?.first?.fields?.payment_count ?? 0
                         completion(transaction)
                     } catch let error {
                         print("failed save user = \(error.localizedDescription)")
