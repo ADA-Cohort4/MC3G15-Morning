@@ -67,38 +67,36 @@ class UserRepository {
                     if(response.records?.isEmpty == false){
                         //SAVE CORE DATA
                         DispatchQueue.main.async {
-                            
-                        
-                        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                            print("app delegate nil")
-                            return
-                        }
-                        let managedContext = appDelegate.persistentContainer.viewContext
-                        let userEntity = NSEntityDescription.entity(forEntityName: "User", in: managedContext)!
-                        let userData = NSManagedObject(entity: userEntity, insertInto: managedContext)
-                        //VALUE SET CORE DATA TOBE SAVE
-                        userData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
-                        userData.setValue(response.records?.first?.fields?.apple_id, forKeyPath: "apple_id")
-                        userData.setValue(response.records?.first?.fields?.passcode, forKeyPath: "passcode")
-                        userData.setValue(response.records?.first?.fields?.role, forKeyPath: "role")
-                        userData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "email")
-                        userData.setValue(response.records?.first?.fields?.profile_url, forKeyPath: "profile_url")
-                        userData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
-                        do {
-                            try managedContext.save()
-                            //SET USER CORE DATA TO CONTROLLER
-                            user.airtableId = response.records?.first?.id
-                            user.idUser = response.records?.first?.fields?.id_user
-                            user.appleId = response.records?.first?.fields?.apple_id
-                            user.passcode = response.records?.first?.fields?.passcode
-                            user.role = RoleType(rawValue: (response.records?.first?.fields?.role)!)
-                            user.profileUrl = response.records?.first?.fields?.profile_url
-                            user.email = response.records?.first?.fields?.email
-                            completion(user)
-                        } catch let error {
-                            print("failed save user = \(error.localizedDescription)")
-                            completion(user)
-                        }
+                            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                                print("app delegate nil")
+                                return
+                            }
+                            let managedContext = appDelegate.persistentContainer.viewContext
+                            let userEntity = NSEntityDescription.entity(forEntityName: "User", in: managedContext)!
+                            let userData = NSManagedObject(entity: userEntity, insertInto: managedContext)
+                            //VALUE SET CORE DATA TOBE SAVE
+                            userData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
+                            userData.setValue(response.records?.first?.fields?.apple_id, forKeyPath: "apple_id")
+                            userData.setValue(response.records?.first?.fields?.passcode, forKeyPath: "passcode")
+                            userData.setValue(response.records?.first?.fields?.role, forKeyPath: "role")
+                            userData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "email")
+                            userData.setValue(response.records?.first?.fields?.profile_url, forKeyPath: "profile_url")
+                            userData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
+                            do {
+                                try managedContext.save()
+                                //SET USER CORE DATA TO CONTROLLER
+                                user.airtableId = response.records?.first?.id
+                                user.idUser = response.records?.first?.fields?.id_user
+                                user.appleId = response.records?.first?.fields?.apple_id
+                                user.passcode = response.records?.first?.fields?.passcode
+                                user.role = RoleType(rawValue: (response.records?.first?.fields?.role)!)
+                                user.profileUrl = response.records?.first?.fields?.profile_url
+                                user.email = response.records?.first?.fields?.email
+                                completion(user)
+                            } catch let error {
+                                print("failed save user = \(error.localizedDescription)")
+                                completion(user)
+                            }
                         }
                         //END SAVE CORE DATA
                     }else{
@@ -166,28 +164,30 @@ class UserRepository {
                     //Checking response
                     if(response.records?.isEmpty == false){
                         //SAVE CORE DATA
-                        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                            print("app delegate nil")
-                            return
-                        }
-                        let managedContext = appDelegate.persistentContainer.viewContext
-                        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
-                        fetchRequest.predicate = NSPredicate(format: "id_user = %@", user.idUser!)
-                        //VALUE SET CORE DATA TOBE SAVE
-                        do {
-                            let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
-                            data.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
-                            data.setValue(response.records?.first?.fields?.apple_id, forKeyPath: "apple_id")
-                            data.setValue(response.records?.first?.fields?.passcode, forKeyPath: "passcode")
-                            data.setValue(response.records?.first?.fields?.role, forKeyPath: "role")
-                            data.setValue(response.records?.first?.fields?.id_user, forKeyPath: "email")
-                            data.setValue(response.records?.first?.fields?.profile_url, forKeyPath: "profile_url")
-                            data.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
-                            try managedContext.save()
-                            completion(true)
-                        }catch let err {
-                            print("err = \(err.localizedDescription)")
-                            completion(false)
+                        DispatchQueue.main.async {
+                            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                                print("app delegate nil")
+                                return
+                            }
+                            let managedContext = appDelegate.persistentContainer.viewContext
+                            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
+                            fetchRequest.predicate = NSPredicate(format: "id_user = %@", user.idUser!)
+                            //VALUE SET CORE DATA TOBE SAVE
+                            do {
+                                let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+                                data.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
+                                data.setValue(response.records?.first?.fields?.apple_id, forKeyPath: "apple_id")
+                                data.setValue(response.records?.first?.fields?.passcode, forKeyPath: "passcode")
+                                data.setValue(response.records?.first?.fields?.role, forKeyPath: "role")
+                                data.setValue(response.records?.first?.fields?.id_user, forKeyPath: "email")
+                                data.setValue(response.records?.first?.fields?.profile_url, forKeyPath: "profile_url")
+                                data.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
+                                try managedContext.save()
+                                completion(true)
+                            }catch let err {
+                                print("err = \(err.localizedDescription)")
+                                completion(false)
+                            }
                         }
                         //END SAVE CORE DATA
                     }else{
@@ -236,31 +236,33 @@ class UserRepository {
             //Checking response
             if(response.records?.isEmpty == false){
                 //SAVE CORE DATA
-                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                    print("app delegate nil")
-                    return
-                }
-                let managedContext = appDelegate.persistentContainer.viewContext
-                let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
-                fetchRequest.predicate = NSPredicate(format: "id_user = %@", idUser)
-                do {
-                    let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
-                    data.setValue("inactive", forKeyPath: "status")
-                    try managedContext.save()
-                    completion(true)
-                }catch let err {
-                    print("err = \(err.localizedDescription)")
-                    completion(false)
-                }
-                //VALUE SET CORE DATA TOBE SAVE
-                
-                do {
-                    try managedContext.save()
-                    //SET USER CORE DATA TO CONTROLLER
-                    completion(true)
-                } catch let error {
-                    print("failed save user = \(error.localizedDescription)")
-                    completion(true)
+                DispatchQueue.main.async {
+                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                        print("app delegate nil")
+                        return
+                    }
+                    let managedContext = appDelegate.persistentContainer.viewContext
+                    let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "User")
+                    fetchRequest.predicate = NSPredicate(format: "id_user = %@", idUser)
+                    do {
+                        let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+                        data.setValue("inactive", forKeyPath: "status")
+                        try managedContext.save()
+                        completion(true)
+                    }catch let err {
+                        print("err = \(err.localizedDescription)")
+                        completion(false)
+                    }
+                    //VALUE SET CORE DATA TOBE SAVE
+                    
+                    do {
+                        try managedContext.save()
+                        //SET USER CORE DATA TO CONTROLLER
+                        completion(true)
+                    } catch let error {
+                        print("failed save user = \(error.localizedDescription)")
+                        completion(true)
+                    }
                 }
                 //END SAVE CORE DATA
             }else{
@@ -349,24 +351,23 @@ class UserRepository {
 //                status: data.value(forKey: "status") as! String)
 //            completion(userData)
             let fetchRequestAppleId = try managedContext.fetch(fetchRequest)
-                        if (fetchRequestAppleId.count > 0 ) {
-                            let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
-                            let userData = UserModel(
-                                idUser: data.value(forKey: "id_user") as! String,
-                                appleId: data.value(forKey: "apple_id") as! String,
-                                passcode: "",
-                                role: .owner,
-                                email: data.value(forKey: "email") as! String,
-                                profileUrl: "",
-                                phone: "",
-                                airtableId: data.value(forKey: "airtable_id") as! String,
-                                status: "")
-                            completion(userData)
-                        }else{
-                        let nullUserData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
-                            completion(nullUserData)
-                            
-                        }
+            if (fetchRequestAppleId.count > 0 ) {
+                let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
+                let userData = UserModel(
+                    idUser: data.value(forKey: "id_user") as! String,
+                    appleId: data.value(forKey: "apple_id") as! String,
+                    passcode: "",
+                    role: .owner,
+                    email: data.value(forKey: "email") as! String,
+                    profileUrl: "",
+                    phone: "",
+                    airtableId: data.value(forKey: "airtable_id") as! String,
+                    status: "")
+                completion(userData)
+            }else{
+                let nullUserData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
+                completion(nullUserData)
+            }
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
             let userData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
