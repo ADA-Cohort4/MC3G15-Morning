@@ -32,8 +32,8 @@ class AddTransaction: UIViewController {
     
     
     let partnerList: [PartnerModel] = [
-        PartnerModel(idPartner: "1", idUser: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "2"),
-        PartnerModel(idPartner: "2", idUser: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "1"),
+        PartnerModel(idPartner: "1", idUser: "1", idBusiness: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "2"),
+        PartnerModel(idPartner: "2", idUser: "1", idBusiness: "1", type: .customer, phone: "081377020333", status: .active, airtableId: "1"),
     ]
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
@@ -48,11 +48,15 @@ class AddTransaction: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         partnerType.isHidden = true
         datePicker.datePickerMode = .date
-        
+        totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
     }
     
     @IBAction func selectInvoice(_ sender: Any) {
         selectImageFrom(.photoLibrary)
+    }
+    
+    @objc func editingChanged() {
+        totalPrice.text = self.totalPrice.text?.currencyInputFormatting()
     }
     
     func selectImageFrom(_ source: ImageSource) {

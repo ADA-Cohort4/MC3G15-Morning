@@ -45,4 +45,21 @@ class CommonFunction {
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
+    func formatCurrency(plainData: String) -> String {
+        let intPlainData = Int(plainData)
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "id_ID")
+        formatter.groupingSeparator = "."
+        formatter.numberStyle = .decimal
+        if let formattedTipAmount = formatter.string(from: intPlainData! as NSNumber) {
+            return formattedTipAmount
+        }
+        return ""
+    }
+    
+    func getRegexForAmount() -> NSRegularExpression {
+        let regex = try! NSRegularExpression(pattern: "[^0-9]", options: .caseInsensitive) // swiftlint:disable:this force_try
+        return regex
+    }
+    
 }
