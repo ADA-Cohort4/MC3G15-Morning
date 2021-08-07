@@ -2,8 +2,9 @@
 //  PaymentRepository.swift
 //  Rekord
 //
-//  Created by Maritia Pangaribuan on 03/08/21.
+//  Created by Aqshal Wibisono on 07/08/21.
 //
+
 import UIKit
 import CoreData
 
@@ -25,7 +26,7 @@ class PaymentRepository {
         let json: [String:Any] = [
             "records" : [[
                 "fields" : [
-                    "id_business": payment.idPayment!,
+                    "id_payment": payment.idPayment!,
                     "id_transaction": payment.idTransaction!,
                     "id_user": payment.idUser!,
                     "created_date": payment.createdDate!,
@@ -117,7 +118,7 @@ class PaymentRepository {
                 idTransaction: data.value(forKey: "id_transaction") as! String,
                 idUser: data.value(forKey: "id_user") as! String,
                 createdDate: data.value(forKey: "created_date") as! String,
-                amount: data.value(forKey: "amount")  as! Float,
+                amount: Double(data.value(forKey: "amount")  as! Float),
                 document: data.value(forKey: "document") as! String,
                 airtableId: data.value(forKey: "airtable_id") as! String)
             completion(paymentData)
@@ -159,3 +160,4 @@ class PaymentRepository {
     }
     
 }
+
