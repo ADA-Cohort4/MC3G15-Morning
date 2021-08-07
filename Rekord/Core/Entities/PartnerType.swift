@@ -7,7 +7,7 @@
 
 enum PartnerType: String {
     case customer = "customer"
-    case suplier = "suplier"
+    case suplier = "supplier"
 }
 
 enum PartnerActivationStatus: String {
