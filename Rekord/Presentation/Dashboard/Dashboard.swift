@@ -41,6 +41,11 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
                 CommonFunction.shared.addShadow(view: self.addTransactionBtnFirst)
             }
         }
+        //MARK: -COPAS KALO MAU ADD PAYMENT
+//        PaymentRepository.shared.savePayments(payment: PaymentModel(idPayment:UUID().uuidString , idTransaction: UUID().uuidString, idUser: "1", createdDate: "2021-09-21", amount: 1244000, document: "none", airtableId: "1")) { Result in
+//            print(Result)
+//        }
+        //MARK: -COPAS KALO MAU ADD PARTNER
 //        PartnerRepository.shared.savePartner(partner: PartnerModel(idPartner: "2", idUser: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!, type: .suplier, name: "Epic Partner", phone: "0818021", status: .active, airtableId: "1", address: "jalan goblok", email: "goblok@goblok.com", ownerName: "orang gobs")) { Result in
 //            print("added new partner")
 //        }
