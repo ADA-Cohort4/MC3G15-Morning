@@ -27,13 +27,18 @@ class PartnerRepository {
                 "fields" : [
                     "id_partner": partner.idPartner!,
                     "id_user": partner.idUser!,
+                    "id_business": partner.idBusiness!,
                     "name": partner.name!,
                     "phone": partner.phone!,
-                    "type": partner.type!,
-                    "status": "active"
+                    "type": partner.type!.rawValue,
+                    "status": "active",
+                    "address" : partner.address!,
+                    "email": partner.email!,
+                    "owner_name" : partner.ownerName!
                 ]
             ]]
         ]
+        
         //change type data array to json so our api can retrieve it
         do {
             jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
@@ -41,14 +46,17 @@ class PartnerRepository {
             print(error.localizedDescription)
         }
         
-        //for getting method spesific data
-        let formula = "?filterByFormula=AND(id_partner%3D%22\(String(describing: partner.idPartner))%22%2Cphone%3D%22\(String(describing: partner.phone))%22)"
         
+        //for getting method spesific data
+        let formula = "?filterByFormula=AND(id_business%3D%22\(partner.idBusiness!)%22%2Cphone%3D%22\(partner.phone!)%22)"
+      //  let formula = "?filterByFormula=AND(id_partner%3D%22\(partner.idPartner!)%22)"
         // for filtering tabledata
         let filter = "Partners"
         
         //URL Constant
         let url = Constants.NETWORK_URL
+        print(url)
+        print("filter: ", filter, " formula: ", formula)
         
         // STARTING LOGIC
         // fetch the data from API
@@ -56,10 +64,12 @@ class PartnerRepository {
         PartnersAPIRequest.getPartnersData(url: url, filter: filter+formula, header: Constants.HEADER_URL, showLoader: true) { response in
             // handle response and store it to the data model
             self.partnerNetworkModel = response
+            
             // check if user model not empty means data is exist
             if self.partnerNetworkModel?.records?.isEmpty == true{
                 // post the data to API
                 PartnersAPIRequest.createPartner(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
+                    print(response)
                     //handle if success
                     //Checking response
                     if(response.records?.isEmpty == false){
@@ -75,18 +85,21 @@ class PartnerRepository {
                             //VALUE SET CORE DATA TOBE SAVE
                             partnerData.setValue(response.records?.first?.fields?.id_partner, forKeyPath: "id_partner")
                             partnerData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
-//                            partnerData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
+                            partnerData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
                             partnerData.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
                             partnerData.setValue(response.records?.first?.fields?.phone, forKeyPath: "phone")
                             partnerData.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
                             partnerData.setValue(response.records?.first?.fields?.type, forKeyPath: "type")
                             partnerData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
+                            partnerData.setValue(response.records?.first?.fields?.address, forKey: "address")
+                            partnerData.setValue(response.records?.first?.fields?.email, forKey: "email")
+                            partnerData.setValue(response.records?.first?.fields?.owner_name, forKey: "owner_name")
                             do {
                                 try managedContext.save()
                                 //SET USER CORE DATA TO CONTROLLER
                                 partner.airtableId = response.records?.first?.id
                                 partner.idUser = response.records?.first?.fields?.id_user
-//                                partner.idBusiness = response.records?.first?.fields?.id_business
+                               partner.idBusiness = response.records?.first?.fields?.id_business
                                 partner.idPartner = response.records?.first?.fields?.id_partner
                                 partner.type = PartnerType(rawValue: (response.records?.first?.fields?.status)!)
                                 partner.name = response.records?.first?.fields?.name
@@ -100,7 +113,7 @@ class PartnerRepository {
                         }
                         //END SAVE CORE DATA
                     }else{
-                        print("failed save user error on Airtable")
+                        print("failed save partner error on Airtable")
                         completion(partner)
                     }
                 } failCompletion: { message in
@@ -280,22 +293,29 @@ class PartnerRepository {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Partner")
+        
         do {
+            let fetchRequestPartner = try managedContext.fetch(fetchRequest)
+            if fetchRequestPartner.count > 0{
             let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
             //SET USER CORE DATA TO CONTROLLER
             let partnerData = PartnerModel(
                 idPartner: data.value(forKey: "id_partner") as! String,
                 idUser: data.value(forKey: "id_user") as! String,
-//                idBusiness: data.value(forKey: "id_business") as! String,
-                type:data.value(forKey: "type") as! PartnerType,
-                name:data.value(forKey: "name") as! String,
+                idBusiness: data.value(forKey: "id_business") as! String,
+                type: PartnerType(rawValue: data.value(forKey: "type") as! String)!,
+                name: data.value(forKey: "name") as! String,
                 phone: data.value(forKey: "phone") as! String,
-                status:data.value(forKey: "type") as! PartnerActivationStatus,
-                airtableId: data.value(forKey: "airtable_id") as! String)
+                status: PartnerActivationStatus(rawValue: data.value(forKey: "status") as! String)!,
+                airtableId: data.value(forKey: "airtable_id") as! String,
+                address: data.value(forKey: "address") as! String,
+                email: data.value(forKey: "email") as! String,
+                ownerName: data.value(forKey: "owner_name") as! String)
             completion(partnerData)
+            }
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
-            let partnerData = PartnerModel(idPartner: "", idUser: "", type: PartnerType.customer, name:"", phone: "", status: PartnerActivationStatus.active, airtableId: "")
+            let partnerData = PartnerModel(idPartner: "", idUser: "", idBusiness: "", type: PartnerType.customer, name:"", phone: "", status: PartnerActivationStatus.active, airtableId: "", address: "", email: "", ownerName: "")
             completion(partnerData)
         }
     }
@@ -316,12 +336,15 @@ class PartnerRepository {
                 partnerList.append(PartnerModel(
                     idPartner: partner.value(forKey: "id_parner") as! String,
                     idUser: partner.value(forKey: "id_user") as! String,
-//                    idBusiness: partner.value(forKey: "id_business") as! String,
+                    idBusiness: partner.value(forKey: "id_business") as! String,
                     type: partner.value(forKey: "type") as! PartnerType,
                     name: partner.value(forKey: "name") as! String,
                     phone: partner.value(forKey: "phone") as! String,
                     status: partner.value(forKey: "status") as! PartnerActivationStatus,
-                    airtableId: partner.value(forKey: "airtable_id") as! String))
+                    airtableId: partner.value(forKey: "airtable_id") as! String,
+                    address: partner.value(forKey: "address") as! String,
+                    email: partner.value(forKey: "email") as! String,
+                    ownerName: partner.value(forKey: "owner_name") as! String))
             }
             completion(partnerList, nil)
         } catch let err {
