@@ -21,8 +21,10 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var headerPadding: UIView!
     
+    @IBOutlet weak var filterEndLabel: UILabel!
     @IBOutlet weak var emptyHistoryLabel: UILabel!
     @IBOutlet weak var filterView: FilterView!
+    
     
     private let refreshControl = UIRefreshControl()
     //nanti data hasil query masukin sini, kalo filter / search reload view dan restart query
@@ -34,6 +36,11 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     var selectedCustomerData : String = ""
     var selectedFilter : String = ""
     var selectedEntry : String = ""
+    
+    
+    //USE THIS FOR FILTERING QUERY
+    var filterStartDate : Date = Date()
+    var filterEndDate : Date = Date()
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +58,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         //add target for filter buttons
         typeDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTypeFilterClick)))
         partnerDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onPartnerFilterClick)))
+        dateDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onDateFilterClick)))
         //add target for done button in filter view
         filterView.doneBtn.addTarget(self, action: #selector(self.onFilterDoneBtnClick), for: .touchUpInside)
         //add target for refresh control
@@ -119,15 +127,20 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
             case "partner":
                 filterPartnerLabel.text = selectedCustomerData
                 break
-            case "date":
-                
-                break
+           
             case "type":
                 filterTypeLabel.text = selectedCustomerData
                 break
             default:
                 print("Error")
             }
+        } else{
+            if selectedFilter == "date"{
+                filterEndLabel.text = "Date Filtered"
+                filterStartDate = FilterView.dates[0]
+                filterEndDate = FilterView.dates[1]
+                print(filterStartDate, filterEndDate)
+               }
         }
         
        
@@ -137,6 +150,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     @IBAction func onTypeFilterClick(){
         selectedFilter = "type"
+        filterView.viewMode = selectedFilter
         filterView.cellData = typeData
         filterView.optionsTableView.reloadData()
         filterView.filterTitle.text = "Select Transaction Type"
@@ -152,9 +166,25 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     @IBAction func onPartnerFilterClick(){
         selectedFilter = "partner"
+        filterView.viewMode = selectedFilter
         filterView.cellData = customerData
         filterView.optionsTableView.reloadData()
         filterView.filterTitle.text = "Select Your Partner"
+        if filterView.isHidden == true{
+            containerView.mask = UIView(frame: self.view.frame)
+            containerView.mask?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            filterView.isHidden = false
+        }else{
+            containerView.mask = nil
+            filterView.isHidden = true
+        
+        }
+    }
+    @IBAction func onDateFilterClick(){
+        selectedFilter = "date"
+        filterView.viewMode = selectedFilter
+        filterView.optionsTableView.reloadData()
+        filterView.filterTitle.text = "Filter History by Date"
         if filterView.isHidden == true{
             containerView.mask = UIView(frame: self.view.frame)
             containerView.mask?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
