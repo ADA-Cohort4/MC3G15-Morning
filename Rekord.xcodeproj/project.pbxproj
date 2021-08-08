@@ -29,6 +29,7 @@
 		995083DD26B999E3008350D7 /* NormalOptViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 995083DB26B999E3008350D7 /* NormalOptViewCell.xib */; };
 		995A23C926BD8E1C00FAC69D /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */; };
 		995A23CA26BD8E1C00FAC69D /* DatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */; };
+		995A23CE26BED00400FAC69D /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23CD26BED00400FAC69D /* PaymentRepository.swift */; };
 		99837E1326B9911800EFCA58 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99837E1226B9911800EFCA58 /* FilterView.xib */; };
 		99837E1526B9915E00EFCA58 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99837E1426B9915E00EFCA58 /* FilterView.swift */; };
 		99DC76D526B0577200BFD14D /* dateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC76D426B0577200BFD14D /* dateCell.swift */; };
@@ -140,6 +141,7 @@
 		995083DB26B999E3008350D7 /* NormalOptViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NormalOptViewCell.xib; sourceTree = "<group>"; };
 		995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerCell.xib; sourceTree = "<group>"; };
+		995A23CD26BED00400FAC69D /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
 		99837E1226B9911800EFCA58 /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		99837E1426B9915E00EFCA58 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		99DC76D426B0577200BFD14D /* dateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateCell.swift; sourceTree = "<group>"; };
@@ -220,7 +222,6 @@
 		ECA4ADFC26B91304007C4F74 /* BusinessRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessRepository.swift; sourceTree = "<group>"; };
 		ECA4ADFE26B9133A007C4F74 /* PartnerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerRepository.swift; sourceTree = "<group>"; };
 		ECA4AE0026B91357007C4F74 /* InviteLinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkRepository.swift; sourceTree = "<group>"; };
-		ECA4AE0226B9139E007C4F74 /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
 		ECC223EC26B24DE700DDF743 /* BusinessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
 		ECC223ED26B24DE700DDF743 /* RoleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
 		ECC223EE26B24DE700DDF743 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -628,7 +629,7 @@
 				ECA4ADFC26B91304007C4F74 /* BusinessRepository.swift */,
 				ECA4ADFE26B9133A007C4F74 /* PartnerRepository.swift */,
 				ECA4AE0026B91357007C4F74 /* InviteLinkRepository.swift */,
-				ECA4AE0226B9139E007C4F74 /* PaymentRepository.swift */,
+				995A23CD26BED00400FAC69D /* PaymentRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -732,6 +733,7 @@
 				D444D4E326B6A76300431C1B /* InviteeLinksAPIRequest.swift in Sources */,
 				679A042526BA9A7800676D96 /* PaymentStatusCell.swift in Sources */,
 				679A042126BA97D100676D96 /* UpdateTransaction.swift in Sources */,
+				995A23CE26BED00400FAC69D /* PaymentRepository.swift in Sources */,
 				ECC223FD26B24DE700DDF743 /* PaymentModel.swift in Sources */,
 				995A23C926BD8E1C00FAC69D /* DatePickerCell.swift in Sources */,
 				99DC76D526B0577200BFD14D /* dateCell.swift in Sources */,
