@@ -103,6 +103,7 @@ class ConfirmPinViewController: UIViewController {
                 userDefaults.setValue(false, forKey: "isDummy")
                 
             } else {
+               
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
                 PINlabel2.text = "Wrong PIN"
@@ -123,9 +124,12 @@ class ConfirmPinViewController: UIViewController {
 //    }
     
     @IBAction func deleteCfmPIN(_ sender: UIButton){
-        confirm.removeLast()
-        pass2[confirm.count].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        print("The code is \(confirm)")
+        if confirm.count != 0{
+            confirm.removeLast()
+            pass2[confirm.count].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            print("The code is \(confirm)")
+        }
+       
     }
     
 

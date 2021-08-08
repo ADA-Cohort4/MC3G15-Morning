@@ -61,9 +61,12 @@ class SetupPinViewController: UIViewController {
     
     
     @IBAction func deletePIN(_ sender: UIButton){
+        if code.count != 0{
         code.removeLast()
         pass[code.count].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        click -= 1
         print("The code is \(code)")
+        }
     }
     
     
