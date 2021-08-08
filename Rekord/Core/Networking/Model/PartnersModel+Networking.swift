@@ -20,10 +20,14 @@ struct PartnersNetworkDataResponse: Codable {
 struct PartnersNetworkDataFieldResponse: Codable {
     let id_partner: String?
     let id_user: String?
-//    let id_business: String?
+    let id_business: String?
     let name: String?
     let phone: String?
     let type: String?
     let status: String?
+    let address : String?
+    let email : String?
+    let owner_name : String?
+    
 }
 

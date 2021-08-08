@@ -41,22 +41,30 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
                 CommonFunction.shared.addShadow(view: self.addTransactionBtnFirst)
             }
         }
+        //MARK: -COPAS KALO MAU ADD PAYMENT
+//        PaymentRepository.shared.savePayments(payment: PaymentModel(idPayment:UUID().uuidString , idTransaction: UUID().uuidString, idUser: "1", createdDate: "2021-09-21", amount: 1244000, document: "none", airtableId: "1")) { Result in
+//            print(Result)
+//        }
+        //MARK: -COPAS KALO MAU ADD PARTNER
+//        PartnerRepository.shared.savePartner(partner: PartnerModel(idPartner: "2", idUser: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!, type: .suplier, name: "Epic Partner", phone: "0818021", status: .active, airtableId: "1", address: "jalan goblok", email: "goblok@goblok.com", ownerName: "orang gobs")) { Result in
+//            print("added new partner")
+//        }
         // MARK: -QUERY FOR DASHBOARD
-       /* TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.value(forKey: "businessID") as! String) { resultList, result in
+        TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
             for result in resultList{
-                var partnerID = ""
+                var partnerID = "1"
                 var type = ""
-                PartnerRepository.shared.getPartner { resultPartner in
+            PartnerRepository.shared.getPartner { resultPartner in
                     if resultPartner.idPartner == result.idPartner{
                         partnerID = resultPartner.idPartner!
                         type = resultPartner.type!.rawValue//CHANGE TO PARTNER NAME
                     }
-                    
+
                 }
                 let list : [String] = [partnerID, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), result.dueDate!]
                 self.transData.append(list)
             }
-        }*/
+        }
        
      
     }
@@ -124,6 +132,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
            
         default:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: "transactionsCell") as! transactionsCell
+            print(transData)
             let dateRemaining = compareDates(dateString: transData[indexPath.row-2][5])
             
             //MARK: Ubah cell text menjadi sesuai transaction
@@ -145,8 +154,15 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
                 cell.dueLabel.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
                 cell.dueAlertIcon.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
             default:
-                cell.dueLabel.textColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
-                cell.dueAlertIcon.isHidden = true
+                if Int(dateRemaining)! > 0{
+                cell.dueLabel.textColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+                    cell.dueAlertIcon.isHidden = true
+                    
+                } else{
+                    cell.dueLabel.text = "Payment Due"
+                    cell.dueLabel.textColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+                    cell.dueAlertIcon.isHidden = false
+                }
             }
             if dateRemaining == "0" { cell.dueLabel.text = "Due Today"}
             
@@ -170,8 +186,11 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     func compareDates(dateString: String) -> String{
         //func untuk calculate due time left
         let dateFormatter = DateFormatter()
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy-mm-dd"
         dateFormatter.dateFormat = "MMM d, yyyy"
-        let dateDue = dateFormatter.date(from: dateString)!
+       
+        let dateDue = (dateFormatter.date(from: dateString) ?? dateFormatter2.date(from: dateString)) ?? Date()
         let dateDiff : Int = Calendar.current.dateComponents([.day], from: Date(), to: dateDue).day!
         return "\(dateDiff)"
     }

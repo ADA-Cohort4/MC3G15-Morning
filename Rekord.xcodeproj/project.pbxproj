@@ -27,6 +27,9 @@
 		67FC69DF26B469AE00836E3F /* SelectFromContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67FC69DD26B469AE00836E3F /* SelectFromContactCell.xib */; };
 		995083DC26B999E3008350D7 /* NormalOptViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995083DA26B999E3008350D7 /* NormalOptViewCell.swift */; };
 		995083DD26B999E3008350D7 /* NormalOptViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 995083DB26B999E3008350D7 /* NormalOptViewCell.xib */; };
+		995A23C926BD8E1C00FAC69D /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */; };
+		995A23CA26BD8E1C00FAC69D /* DatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */; };
+		995A23CE26BED00400FAC69D /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23CD26BED00400FAC69D /* PaymentRepository.swift */; };
 		99837E1326B9911800EFCA58 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99837E1226B9911800EFCA58 /* FilterView.xib */; };
 		99837E1526B9915E00EFCA58 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99837E1426B9915E00EFCA58 /* FilterView.swift */; };
 		99DC76D526B0577200BFD14D /* dateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC76D426B0577200BFD14D /* dateCell.swift */; };
@@ -136,6 +139,9 @@
 		67FC69DD26B469AE00836E3F /* SelectFromContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectFromContactCell.xib; sourceTree = "<group>"; };
 		995083DA26B999E3008350D7 /* NormalOptViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalOptViewCell.swift; sourceTree = "<group>"; };
 		995083DB26B999E3008350D7 /* NormalOptViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NormalOptViewCell.xib; sourceTree = "<group>"; };
+		995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
+		995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerCell.xib; sourceTree = "<group>"; };
+		995A23CD26BED00400FAC69D /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
 		99837E1226B9911800EFCA58 /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		99837E1426B9915E00EFCA58 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		99DC76D426B0577200BFD14D /* dateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateCell.swift; sourceTree = "<group>"; };
@@ -216,7 +222,6 @@
 		ECA4ADFC26B91304007C4F74 /* BusinessRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessRepository.swift; sourceTree = "<group>"; };
 		ECA4ADFE26B9133A007C4F74 /* PartnerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerRepository.swift; sourceTree = "<group>"; };
 		ECA4AE0026B91357007C4F74 /* InviteLinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkRepository.swift; sourceTree = "<group>"; };
-		ECA4AE0226B9139E007C4F74 /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
 		ECC223EC26B24DE700DDF743 /* BusinessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
 		ECC223ED26B24DE700DDF743 /* RoleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
 		ECC223EE26B24DE700DDF743 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -291,6 +296,7 @@
 				995083DB26B999E3008350D7 /* NormalOptViewCell.xib */,
 				679A041E26BA96FA00676D96 /* UpdateTransaction.storyboard */,
 				679A042726BA9E6000676D96 /* PaymentDetail.storyboard */,
+				995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */,
 			);
 			path = "Transactions&History";
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 				99DC76DE26B7B1DB00BFD14D /* TransactionDetails.swift */,
 				99DC76E026B83D9C00BFD14D /* paymentCell.swift */,
 				99DC76E226B84A0300BFD14D /* historyCell.swift */,
+				995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */,
 				99837E1426B9915E00EFCA58 /* FilterView.swift */,
 				679A042026BA97D100676D96 /* UpdateTransaction.swift */,
 				679A042926BA9E8000676D96 /* PaymentDetail.swift */,
@@ -622,7 +629,7 @@
 				ECA4ADFC26B91304007C4F74 /* BusinessRepository.swift */,
 				ECA4ADFE26B9133A007C4F74 /* PartnerRepository.swift */,
 				ECA4AE0026B91357007C4F74 /* InviteLinkRepository.swift */,
-				ECA4AE0226B9139E007C4F74 /* PaymentRepository.swift */,
+				995A23CD26BED00400FAC69D /* PaymentRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -687,6 +694,7 @@
 				99DC76DD26B7B16400BFD14D /* TransactionDetail.storyboard in Resources */,
 				D4D20544266DEF1900CDC2D6 /* LaunchScreen.storyboard in Resources */,
 				D43FEFC026AFB6870057F616 /* LockScreen.storyboard in Resources */,
+				995A23CA26BD8E1C00FAC69D /* DatePickerCell.xib in Resources */,
 				D43FEFBE26AFB6110057F616 /* DataSharing.storyboard in Resources */,
 				99837E1326B9911800EFCA58 /* FilterView.xib in Resources */,
 				D43FEFC226AFB6940057F616 /* Dashboard.storyboard in Resources */,
@@ -725,7 +733,9 @@
 				D444D4E326B6A76300431C1B /* InviteeLinksAPIRequest.swift in Sources */,
 				679A042526BA9A7800676D96 /* PaymentStatusCell.swift in Sources */,
 				679A042126BA97D100676D96 /* UpdateTransaction.swift in Sources */,
+				995A23CE26BED00400FAC69D /* PaymentRepository.swift in Sources */,
 				ECC223FD26B24DE700DDF743 /* PaymentModel.swift in Sources */,
+				995A23C926BD8E1C00FAC69D /* DatePickerCell.swift in Sources */,
 				99DC76D526B0577200BFD14D /* dateCell.swift in Sources */,
 				99DC76D926B058D800BFD14D /* transactionsCell.swift in Sources */,
 				99DC76D726B0587600BFD14D /* balanceCell.swift in Sources */,
@@ -941,13 +951,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = P289J6CTPZ;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maritia.com.Rekord;
+				PRODUCT_BUNDLE_IDENTIFIER = TSG.com.Rekord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -961,13 +971,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = P289J6CTPZ;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maritia.com.Rekord;
+				PRODUCT_BUNDLE_IDENTIFIER = TSG.com.Rekord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
