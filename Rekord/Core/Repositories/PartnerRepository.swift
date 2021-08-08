@@ -290,13 +290,14 @@ class PartnerRepository {
             print("app delegate nil")
             return
         }
-        
+        print("attempting to fetch partners...")
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Partner")
         
         do {
             let fetchRequestPartner = try managedContext.fetch(fetchRequest)
             if fetchRequestPartner.count > 0{
+                print("fetching partners....")
             let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
             //SET USER CORE DATA TO CONTROLLER
             let partnerData = PartnerModel(
@@ -311,7 +312,10 @@ class PartnerRepository {
                 address: data.value(forKey: "address") as! String,
                 email: data.value(forKey: "email") as! String,
                 ownerName: data.value(forKey: "owner_name") as! String)
+                print("Got partner data with id: ", partnerData.idPartner)
             completion(partnerData)
+            }else{
+                print("no partners found.")
             }
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
@@ -334,13 +338,13 @@ class PartnerRepository {
             let result = try managedContext.fetch(fetchRequest) as! [NSManagedObject]
             result.forEach { (partner) in
                 partnerList.append(PartnerModel(
-                    idPartner: partner.value(forKey: "id_parner") as! String,
+                    idPartner: partner.value(forKey: "id_partner") as! String,
                     idUser: partner.value(forKey: "id_user") as! String,
                     idBusiness: partner.value(forKey: "id_business") as! String,
-                    type: partner.value(forKey: "type") as! PartnerType,
+                    type:  PartnerType(rawValue: partner.value(forKey: "type") as! String)!,
                     name: partner.value(forKey: "name") as! String,
                     phone: partner.value(forKey: "phone") as! String,
-                    status: partner.value(forKey: "status") as! PartnerActivationStatus,
+                                    status:  PartnerActivationStatus(rawValue: partner.value(forKey: "status") as! String)!,
                     airtableId: partner.value(forKey: "airtable_id") as! String,
                     address: partner.value(forKey: "address") as! String,
                     email: partner.value(forKey: "email") as! String,

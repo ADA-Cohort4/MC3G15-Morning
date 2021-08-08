@@ -34,7 +34,7 @@ class TransactionRepository {
                     "due_date": transaction.dueDate!,
                     "created_date": transaction.createdDate ?? "",
                     "updated_date": transaction.updatedDate ?? "",
-                    "status": "waiting"
+                    "status": transaction.status?.rawValue ?? ""
                 ]
             ]]
         ]

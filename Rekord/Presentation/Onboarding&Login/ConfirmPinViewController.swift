@@ -97,6 +97,7 @@ class ConfirmPinViewController: UIViewController {
                 userDefaults.setValue(newUser.airtableId, forKey: "airtableId")
                 userDefaults.setValue(newUser.status, forKey: "status")
                 userDefaults.setValue(newBusiness.idBusiness, forKey: "businessID")
+                userDefaults.setValue(false, forKey: "isDummy")
                 
             } else {
                 let generator = UIImpactFeedbackGenerator(style: .light)
