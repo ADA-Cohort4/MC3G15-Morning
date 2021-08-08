@@ -8,6 +8,11 @@
 import UIKit
 
 class PartnerDetailViewController:UIViewController{
+    
+    
+    var partnerID: String!
+ 
+    
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var partnerDetailView: UIView!
     @IBOutlet weak var editPartnerButton: UIButton!
@@ -41,11 +46,24 @@ class PartnerDetailViewController:UIViewController{
     
     
     override func viewDidLoad() {
+        /*
+        PartnerRepository.shared.getPartner(completion: <#T##(PartnerModel) -> ()#>)
+         */
         partnerDetailView.layer.cornerRadius = 10
         detailView.layer.cornerRadius = 10
         editPartnerButton.layer.cornerRadius = 10
         viewTranasctionsButton.layer.cornerRadius = 10
         companyAddress.text = "Jl. Bojong Kenyot No.3\nBlok H2 No.4 RT 012\nRW 012 Sandy Shores,\nLos Santos"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        PartnerRepository.shared.getPartner{ resultPartner in 
+            if self.partnerID == resultPartner.airtableId{
+                self.partnerID = resultPartner.idPartner!
+                self.partnerType.text = resultPartner.type!.rawValue
+                self.contactPersonPhoneNumber.text = resultPartner.phone!
+            }
+        }
     }
     
 }

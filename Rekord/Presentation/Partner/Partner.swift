@@ -8,12 +8,17 @@
 import UIKit
 
 class PartnerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
    
     @IBOutlet weak var partnerListTable: UITableView!
     @IBOutlet weak var roundedUpperView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var addPartnerButton: UIButton!
     
+    var partnerType = ""
+    var partnerPhone = ""
+    var partnerName = ""
+    var userId = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         let gradientLayer = CAGradientLayer()
@@ -26,16 +31,27 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         searchBar.searchTextField.backgroundColor = UIColor.white
         
         roundedUpperView.layer.cornerRadius = 30
-        // Do any additional setup after loading the view.
-        partnerListTable.reloadData()
         self.navigationController?.navigationBar.isHidden = true
-        
         partnerListTable.register(UINib.init(nibName: "PartnerListCell", bundle: nil), forCellReuseIdentifier: "PartnerListCell")
+        partnerListTable.reloadData()
+        
     }
+    
+        
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        PartnerRepository.shared.getAllPartner { partnerList, partner in
+            for partner in partnerList{
+                if partner.idUser == self.userId{
+                    self.partnerType = partner.type!.rawValue
+                    self.partnerName = partner.name!
+                    
+                }
+            }
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,6 +65,8 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = partnerListTable.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath)as! PartnerListCell
+        cell.typeDescription.text = partnerType
+        cell.partnerName.text = partnerName
         return cell
     }
 }

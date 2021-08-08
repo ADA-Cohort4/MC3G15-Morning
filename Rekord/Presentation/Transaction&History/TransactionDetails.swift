@@ -31,7 +31,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         CommonFunction.shared.addShadow(view: baseView)
         
         
-       /* TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.value(forKey: "businessID") as! String) { resultList, result in
+       /*TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.value(forKey: "businessID") as! String) { resultList, result in
              for result in resultList{
                 if result.airtableId == self.selectedID{
                     

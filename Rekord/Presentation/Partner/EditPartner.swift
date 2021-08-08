@@ -8,6 +8,7 @@
 import UIKit
 
 class EditPartnerViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
+    
     @IBOutlet weak var editPartnerTableView: UITableView!
     
     @IBOutlet weak var businessNameTextField: UITextField!

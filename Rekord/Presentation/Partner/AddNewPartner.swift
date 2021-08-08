@@ -9,6 +9,16 @@ import UIKit
 
 class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var businessPartnerName: String?
+    var partnerOwnerName: String?
+    var partnerEmail: String?
+    var partnerPhone: String?
+    var partnerAddress: String?
+    var partnerType: PartnerType?
+    var partner_id: String?
+    var business_id: String?
+    var user_id: String?
+    
     @IBOutlet weak var AddPartnerTableView: UITableView!
     @IBOutlet weak var businessNameTextField: UITextField!
     @IBOutlet weak var OwnerNameTextField: UITextField!
@@ -33,7 +43,10 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerEmailCell.layer.cornerRadius = 10
         partnerPhoneCell.layer.cornerRadius = 10
         partnerAddressCell.layer.cornerRadius = 10
+        
         self.navigationController?.navigationBar.isHidden = false
+        businessPartnerName = businessNameTextField.text
+        partnerPhone = partnerPhoneTextField.text
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,9 +62,24 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
             return cell
         }else{
             let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
+            cell.partnerType.text = self.partnerType?.rawValue
             return cell
 
         }
+    }
+    @IBAction func saveNewPartner(_ sender: Any) {
+        let user_id = UUID().uuidString
+        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id, type: partnerType ?? .customer , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "")
+        PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
+            if result.airtableId != "" || result.airtableId != nil {
+                DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                print("error save")
+            }
+        }
+        
     }
     
 }
