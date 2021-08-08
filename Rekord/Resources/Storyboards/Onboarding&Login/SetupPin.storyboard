@@ -573,10 +573,10 @@
         <!--rootTabBar-->
         <scene sceneID="E94-gk-2AM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="orG-82-pKJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardIdentifier="rootTabBar" storyboardName="rootTabBar" referencedIdentifier="rootTabBar" id="det-GM-dRh" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="o9g-jU-sUc"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="orG-82-pKJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1851" y="101"/>
         </scene>
