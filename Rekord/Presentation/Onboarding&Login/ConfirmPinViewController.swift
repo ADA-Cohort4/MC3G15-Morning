@@ -56,7 +56,9 @@ class ConfirmPinViewController: UIViewController {
             if code == confirm{
                 //navigate ke Page berikutnya
                 let userID = UUID().uuidString
-                let newUser = UserModel(idUser: userID, appleId: appleID!, passcode: confirm, role: .owner, email: email!, profileUrl: "", phone: phone!, airtableId: "", status: "")
+                let businessID = UUID().uuidString
+
+                let newUser = UserModel(idUser: userID, idBusiness: businessID, appleId: appleID!, passcode: confirm, role: .owner, email: email!, profileUrl: "", phone: phone!, airtableId: "", status: "")
                 
                 UserRepository.shared.saveUser(user: newUser) { (result) in
                     if result.airtableId != "" || result.airtableId != nil {
@@ -71,7 +73,6 @@ class ConfirmPinViewController: UIViewController {
                 }
                 
                 
-                let businessID = UUID().uuidString
                 let newBusiness = BusinessModel(idBusiness: businessID, idUser: userID, name: businessName!, email: email!, phone: phone!, address: address!, airtableId: "", status: "active")
                 BusinessRepository.shared.saveBusiness(business: newBusiness) { (result) in
                     if result.airtableId != "" || result.airtableId != nil {
@@ -83,6 +84,8 @@ class ConfirmPinViewController: UIViewController {
                         print("error save")
                     }
                 }
+                
+                
                 
                 performSegue(withIdentifier: "confirmPINSegue", sender: self)
                 print("success")

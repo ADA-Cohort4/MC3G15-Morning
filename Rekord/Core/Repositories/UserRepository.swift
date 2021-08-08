@@ -26,7 +26,7 @@ class UserRepository {
             "records" : [[
                 "fields" : [
                     "id_user": user.idUser!,
-                    "id_business": "",
+                    "id_business": user.idBusiness,
                     "apple_id": user.appleId!,
                     "passcode": user.passcode!,
                     "role": user.role?.rawValue,

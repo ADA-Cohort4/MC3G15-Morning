@@ -23,7 +23,7 @@ class SetupBusinessViewController: UIViewController {
     
     @IBOutlet weak var addressView: UIView!
     @IBOutlet weak var phoneView: UIView!
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
     }
@@ -34,11 +34,35 @@ class SetupBusinessViewController: UIViewController {
         emailView.layer.cornerRadius = 10
         addressView.layer.cornerRadius = 10
         phoneView.layer.cornerRadius = 10
-        // Do any additional setup after loading the view.
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(validateBusiness))
     }
     
     @IBAction func nextButton(_ sender: Any) {
-        performSegue(withIdentifier: "ToSetupPinSegue", sender: self)
+    }
+    
+    @objc func validateBusiness(){
+        if businessNameField.text == "" {
+            businessNameField.placeholder = "Please fill in business name"
+            businessNameField.backgroundColor = #colorLiteral(red: 1, green: 0.8408887982, blue: 0.833807826, alpha: 1)
+        }
+
+        if emailField.text == "" {
+            emailField.placeholder = "Please fill in email"
+            emailField.backgroundColor = #colorLiteral(red: 1, green: 0.8408887982, blue: 0.833807826, alpha: 1)
+        }
+
+        if phoneField.text == "" {
+            phoneField.placeholder = "Please fill in phone"
+            phoneField.backgroundColor = #colorLiteral(red: 1, green: 0.8408887982, blue: 0.833807826, alpha: 1)
+        }
+        if addressField.text == "" {
+            addressField.placeholder = "Please fill in address"
+            addressField.backgroundColor = #colorLiteral(red: 1, green: 0.8408887982, blue: 0.833807826, alpha: 1)
+        }
+
+        if businessNameField.text != "" && emailField.text != "" && phoneField.text != "" && addressField.text != "" {
+            performSegue(withIdentifier: "ToSetupPinSegue", sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
