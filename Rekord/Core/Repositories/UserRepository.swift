@@ -26,6 +26,7 @@ class UserRepository {
             "records" : [[
                 "fields" : [
                     "id_user": user.idUser!,
+                    "id_business": "",
                     "apple_id": user.appleId!,
                     "passcode": user.passcode!,
                     "role": user.role?.rawValue,
@@ -77,6 +78,7 @@ class UserRepository {
                             //VALUE SET CORE DATA TOBE SAVE
                             userData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
                             userData.setValue(response.records?.first?.fields?.apple_id, forKeyPath: "apple_id")
+                            userData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
                             userData.setValue(response.records?.first?.fields?.passcode, forKeyPath: "passcode")
                             userData.setValue(response.records?.first?.fields?.role, forKeyPath: "role")
                             userData.setValue(response.records?.first?.fields?.id_user, forKeyPath: "email")
@@ -87,6 +89,7 @@ class UserRepository {
                                 //SET USER CORE DATA TO CONTROLLER
                                 user.airtableId = response.records?.first?.id
                                 user.idUser = response.records?.first?.fields?.id_user
+                                user.idBusiness = response.records?.first?.fields?.id_business
                                 user.appleId = response.records?.first?.fields?.apple_id
                                 user.passcode = response.records?.first?.fields?.passcode
                                 user.role = RoleType(rawValue: (response.records?.first?.fields?.role)!)
@@ -125,6 +128,7 @@ class UserRepository {
                 "id" : user.airtableId!,
                 "fields" : [
                     "id_user": user.idUser!,
+                    "id_business": user.idBusiness!,
                     "apple_id": user.appleId!,
                     "passcode": user.passcode!,
                     "role": user.role?.rawValue,
@@ -176,6 +180,7 @@ class UserRepository {
                             do {
                                 let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
                                 data.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
+                                data.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
                                 data.setValue(response.records?.first?.fields?.apple_id, forKeyPath: "apple_id")
                                 data.setValue(response.records?.first?.fields?.passcode, forKeyPath: "passcode")
                                 data.setValue(response.records?.first?.fields?.role, forKeyPath: "role")
@@ -310,6 +315,7 @@ class UserRepository {
             //SET USER CORE DATA TO CONTROLLER
             let userData = UserModel(
                 idUser: data.value(forKey: "id_user") as! String,
+                idBusiness: data.value(forKey: "id_business") as! String,
                 appleId: data.value(forKey: "apple_id") as! String,
                 passcode: "",
                 role:data.value(forKey: "role") as! RoleType,
@@ -321,7 +327,7 @@ class UserRepository {
             completion(userData)
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
-            let userData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
+            let userData = UserModel(idUser: "", idBusiness: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
             completion(userData)
         }
     }
@@ -355,6 +361,7 @@ class UserRepository {
                 let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
                 let userData = UserModel(
                     idUser: data.value(forKey: "id_user") as! String,
+                    idBusiness: data.value(forKey: "id_business") as! String,
                     appleId: data.value(forKey: "apple_id") as! String,
                     passcode: "",
                     role: .owner,
@@ -365,12 +372,12 @@ class UserRepository {
                     status: "")
                 completion(userData)
             }else{
-                let nullUserData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
+                let nullUserData = UserModel(idUser: "", idBusiness: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
                 completion(nullUserData)
             }
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
-            let userData = UserModel(idUser: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
+            let userData = UserModel(idUser: "", idBusiness: "", appleId: "", passcode: "", role: RoleType(rawValue: "owner") ?? RoleType.owner, email: "", profileUrl: "", phone: "", airtableId: "", status: "")
             completion(userData)
         }
     }
@@ -391,6 +398,7 @@ class UserRepository {
             result.forEach { (user) in
                 users.append(UserModel(
                     idUser: user.value(forKey: "id_user") as! String,
+                    idBusiness: user.value(forKey: "id_business") as! String,
                     appleId: user.value(forKey: "apple_id") as! String,
                     passcode: user.value(forKey: "passcode") as! String,
                     role: user.value(forKey: "role") as! RoleType,

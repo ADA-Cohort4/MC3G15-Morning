@@ -9,6 +9,7 @@ import Foundation
 
 class UserModel {
     var idUser: String?
+    var idBusiness: String?
     var appleId: String?
     var passcode: String?
     var role: RoleType?
@@ -17,8 +18,9 @@ class UserModel {
     var phone: String?
     var airtableId: String?
     var status: String?
-    init(idUser: String, appleId: String, passcode: String, role: RoleType, email: String, profileUrl: String, phone: String, airtableId: String, status: String) {
+    init(idUser: String, idBusiness: String, appleId: String, passcode: String, role: RoleType, email: String, profileUrl: String, phone: String, airtableId: String, status: String) {
         self.idUser = idUser
+        self.idBusiness = idBusiness
         self.appleId = appleId
         self.passcode = passcode
         self.role = role
