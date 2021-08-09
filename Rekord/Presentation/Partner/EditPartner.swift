@@ -26,6 +26,10 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     @IBOutlet weak var SaveButton: UIButton!
     @IBOutlet weak var deletePartnerButton: UIButton!
     
+    var updatePartner: PartnerModel!
+    var partnerType: PartnerType!
+    var partnerId: String?
+    var partnerTypeDescription: String?
     override func viewDidLoad() {
         editPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
         editPartnerTableView.reloadData()
@@ -37,6 +41,43 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
         SaveButton.layer.cornerRadius = 10
         deletePartnerButton.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //Partner ID perlu diganti kalau mau coba akses
+        partnerId = "256xDjrm"
+        PartnerRepository.shared.getAllPartner { partnerList, partner in
+            for updatePartner in partnerList{
+                if updatePartner.idPartner == self.partnerId{
+                    self.OwnerNameTextField.text = updatePartner.ownerName
+                    self.businessNameTextField.text = updatePartner.name
+                    self.partnerAddressTextView.text = updatePartner.address
+                    self.partnerEmailTextField.text = updatePartner.email
+                    self.partnerPhoneTextField.text = updatePartner.phone
+                    self.partnerType = updatePartner.type
+                    switch self.partnerType {
+                    case .customer:
+                        self.partnerTypeDescription = "Customer"
+                        break
+                    case .suplier:
+                        self.partnerTypeDescription = "Supplier"
+                        break
+                    default:
+                        print("error")
+                    }
+                }
+            }
+        }
+        editPartnerTableView.reloadData()
+    }
+    
+    @IBAction func saveUpdatedPartner(_ sender: Any) {
+        updatePartner.type = self.partnerType
+        updatePartner.address = self.partnerAddressTextView.text
+        updatePartner.email = self.partnerEmailTextField.text
+        updatePartner.phone = self.partnerPhoneTextField.text
+        updatePartner.ownerName = self.OwnerNameTextField.text
+        
         
     }
     
@@ -50,6 +91,7 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = editPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
+        cell.partnerType.text = partnerTypeDescription
         return cell
     }
 }

@@ -128,18 +128,17 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerOwnerName = OwnerNameTextField.text
         partnerAddress = partnerAddressTextView.text
         
-//        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id, idBusiness: business_id, type: partnerType ?? .customer
-//                                      , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
-//        PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
-//            if result.airtableId != "" || result.airtableId != nil {
-//                DispatchQueue.main.async {
-//                self.navigationController?.popViewController(animated: true)
-//                }
-//            } else {
-//                print("error save")
-//            }
-//        }
-        
+        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id, idBusiness: business_id, type: partnerType ?? .customer
+                                      , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
+        PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
+            if result.airtableId != "" || result.airtableId != nil {
+                DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                print("error save partner")
+            }
+        }
     }
     
 }

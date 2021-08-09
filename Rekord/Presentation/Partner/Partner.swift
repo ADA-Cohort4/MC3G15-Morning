@@ -42,33 +42,9 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-        
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-        PartnerRepository.shared.getAllPartner { partnerList, partner in
-            for partner in partnerList{
-                if partner.idBusiness == self.businessId{
-                    self.partnerType = partner.type!.rawValue
-                    self.partnerName = partner.name!
-                    self.partnerCount += 1
-                    
-                    TransactionRepository.shared.getAllTransaction(_idBusiness: self.businessId) { transactions, transaction in
-                        for transaction in transactions{
-                            if transaction.idPartner == self.partnerId{
-                                if transaction.status == .paid{
-                                    self.totalTransactionsDone += 1
-                                    self.transactionAmount += transaction.totalPrice!
-                                }
-                            }
-                        }
-                    }
-                    
-                }
-            }
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
