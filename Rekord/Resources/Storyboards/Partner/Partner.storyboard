@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FfA-Fd-FMz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rax-B4-vWR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -180,6 +180,11 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="91N-fX-QWt" customClass="FilterView" customModule="Rekord" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="502" width="414" height="394"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Z8z-aN-Vjc"/>
                         <color key="backgroundColor" red="0.066666666669999999" green="0.33725490200000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -209,6 +214,7 @@
                         <outlet property="partnerOwnerCell" destination="g0Q-2x-eHM" id="iae-Gc-egF"/>
                         <outlet property="partnerPhoneCell" destination="CJH-4h-t3V" id="zdO-Lg-tml"/>
                         <outlet property="partnerPhoneTextField" destination="2Mn-kB-DGw" id="7a0-M1-Juv"/>
+                        <outlet property="partnerTypeView" destination="91N-fX-QWt" id="6PD-jG-bop"/>
                         <outlet property="savePartnerButton" destination="Hpw-Pi-Pd9" id="PxI-aC-sfl"/>
                     </connections>
                 </viewController>

@@ -16,8 +16,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     var partnerAddress: String?
     var partnerType: PartnerType?
     var partner_id: String?
-    var business_id: String?
-    var user_id: String?
+ 
     
     @IBOutlet weak var AddPartnerTableView: UITableView!
     @IBOutlet weak var businessNameTextField: UITextField!
@@ -34,19 +33,31 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var savePartnerButton: UIBarButtonItem!
     
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var partnerTypeView: FilterView!
+    
+    let partnerTypes = ["Customer", "Supplier"]
+    var selectedType = ""
+    var selectedPartnerType = ""
+    var selectedData = ""
+    
     override func viewDidLoad() {
         AddPartnerTableView.register(UINib.init(nibName: "SelectFromContactCell", bundle: nil), forCellReuseIdentifier: "SelectFromContactCell")
         AddPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
         AddPartnerTableView.reloadData()
+        
         partnerBusinessCell.layer.cornerRadius = 10
         partnerOwnerCell.layer.cornerRadius = 10
         partnerEmailCell.layer.cornerRadius = 10
         partnerPhoneCell.layer.cornerRadius = 10
         partnerAddressCell.layer.cornerRadius = 10
+        partnerTypeView.layer.cornerRadius = 10
         
         self.navigationController?.navigationBar.isHidden = false
-        businessPartnerName = businessNameTextField.text
-        partnerPhone = partnerPhoneTextField.text
+        
+        partnerTypeView.isHidden = true
+        
+        partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,23 +73,72 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
             return cell
         }else{
             let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
-            cell.partnerType.text = self.partnerType?.rawValue
+            cell.partnerType.text! = selectedData
             return cell
-
         }
+        
     }
-    @IBAction func saveNewPartner(_ sender: Any) {
-        let user_id = UUID().uuidString
-        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id, type: partnerType ?? .customer , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "")
-        PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
-            if result.airtableId != "" || result.airtableId != nil {
-                DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
-                }
-            } else {
-                print("error save")
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 1 {
+            selectedType = "partner"
+            partnerTypeView.viewMode = selectedType
+            partnerTypeView.cellData = partnerTypes
+            partnerTypeView.optionsTableView.reloadData()
+            partnerTypeView.filterTitle.text = "Select Partner Type"
+            if partnerTypeView.isHidden == true {
+//                containerView.mask = UIView(frame: self.view.frame)
+//                containerView.mask?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+                partnerTypeView.isHidden = false
+            }else{
+                containerView.mask = nil
+                partnerTypeView.isHidden = true
             }
         }
+    }
+    
+    @IBAction func onDoneButtonClicked(){
+        if partnerTypeView.selectedOption != "" {
+            selectedData = partnerTypeView.selectedOption
+            switch selectedData{
+            case "Customer":
+                partnerType = .customer
+                selectedPartnerType = "Customer"
+                break
+            case "Supplier":
+                partnerType = .suplier
+                selectedPartnerType = "Supplier"
+                break
+            default:
+                print("Error")
+            }
+        }
+        partnerTypeView.isHidden = true
+        AddPartnerTableView.reloadData()
+    }
+    
+    @IBAction func saveNewPartner(_ sender: Any) {
+        let user_id = UUID().uuidString
+        let business_id = UUID().uuidString
+        partner_id = CommonFunction.shared.randomString(length: 8)
+        businessPartnerName = businessNameTextField.text
+        partnerPhone = partnerPhoneTextField.text
+        partnerEmail = partnerEmailTextField.text
+        partnerOwnerName = OwnerNameTextField.text
+        partnerAddress = partnerAddressTextView.text
+        
+//        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id, idBusiness: business_id, type: partnerType ?? .customer
+//                                      , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
+//        PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
+//            if result.airtableId != "" || result.airtableId != nil {
+//                DispatchQueue.main.async {
+//                self.navigationController?.popViewController(animated: true)
+//                }
+//            } else {
+//                print("error save")
+//            }
+//        }
         
     }
     

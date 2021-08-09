@@ -16,9 +16,14 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var addPartnerButton: UIButton!
     
     var partnerType = ""
-    var partnerPhone = ""
     var partnerName = ""
     var userId = ""
+    var businessId = ""
+    var partnerId = ""
+    var totalTransactionsDone = 0
+    var partnerCount = 0
+    var transactionAmount: Double = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let gradientLayer = CAGradientLayer()
@@ -45,9 +50,21 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         
         PartnerRepository.shared.getAllPartner { partnerList, partner in
             for partner in partnerList{
-                if partner.idUser == self.userId{
+                if partner.idBusiness == self.businessId{
                     self.partnerType = partner.type!.rawValue
                     self.partnerName = partner.name!
+                    self.partnerCount += 1
+                    
+                    TransactionRepository.shared.getAllTransaction(_idBusiness: self.businessId) { transactions, transaction in
+                        for transaction in transactions{
+                            if transaction.idPartner == self.partnerId{
+                                if transaction.status == .paid{
+                                    self.totalTransactionsDone += 1
+                                    self.transactionAmount += transaction.totalPrice!
+                                }
+                            }
+                        }
+                    }
                     
                 }
             }
@@ -67,6 +84,12 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = partnerListTable.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath)as! PartnerListCell
         cell.typeDescription.text = partnerType
         cell.partnerName.text = partnerName
+        cell.numberOfTransactions.text = "\(totalTransactionsDone)"
+        cell.totalTranasationValue.text = "\(transactionAmount)"
         return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        partnerCount
     }
 }

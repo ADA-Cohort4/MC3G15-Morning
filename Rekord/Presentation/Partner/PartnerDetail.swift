@@ -46,9 +46,6 @@ class PartnerDetailViewController:UIViewController{
     
     
     override func viewDidLoad() {
-        /*
-        PartnerRepository.shared.getPartner(completion: <#T##(PartnerModel) -> ()#>)
-         */
         partnerDetailView.layer.cornerRadius = 10
         detailView.layer.cornerRadius = 10
         editPartnerButton.layer.cornerRadius = 10
@@ -58,10 +55,12 @@ class PartnerDetailViewController:UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         PartnerRepository.shared.getPartner{ resultPartner in 
-            if self.partnerID == resultPartner.airtableId{
-                self.partnerID = resultPartner.idPartner!
+            if self.partnerID == resultPartner.idPartner{
                 self.partnerType.text = resultPartner.type!.rawValue
                 self.contactPersonPhoneNumber.text = resultPartner.phone!
+                self.companyAddress.text = resultPartner.address!
+                self.contactPersonName.text = resultPartner.ownerName!
+                self.emailAddress.text = resultPartner.email!
             }
         }
     }
