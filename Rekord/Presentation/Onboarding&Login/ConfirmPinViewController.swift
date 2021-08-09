@@ -56,7 +56,9 @@ class ConfirmPinViewController: UIViewController {
             if code == confirm{
                 //navigate ke Page berikutnya
                 let userID = UUID().uuidString
-                let newUser = UserModel(idUser: userID, appleId: appleID!, passcode: confirm, role: .owner, email: email!, profileUrl: "", phone: phone!, airtableId: "", status: "")
+                let businessID = UUID().uuidString
+
+                let newUser = UserModel(idUser: userID, idBusiness: businessID, appleId: appleID!, passcode: confirm, role: .owner, email: email!, profileUrl: "", phone: phone!, airtableId: "", status: "")
                 
                 UserRepository.shared.saveUser(user: newUser) { (result) in
                     if result.airtableId != "" || result.airtableId != nil {
@@ -71,7 +73,6 @@ class ConfirmPinViewController: UIViewController {
                 }
                 
                 
-                let businessID = UUID().uuidString
                 let newBusiness = BusinessModel(idBusiness: businessID, idUser: userID, name: businessName!, email: email!, phone: phone!, address: address!, airtableId: "", status: "active")
                 BusinessRepository.shared.saveBusiness(business: newBusiness) { (result) in
                     if result.airtableId != "" || result.airtableId != nil {
@@ -83,6 +84,8 @@ class ConfirmPinViewController: UIViewController {
                         print("error save")
                     }
                 }
+                
+                
                 
                 performSegue(withIdentifier: "confirmPINSegue", sender: self)
                 print("success")
@@ -97,8 +100,10 @@ class ConfirmPinViewController: UIViewController {
                 userDefaults.setValue(newUser.airtableId, forKey: "airtableId")
                 userDefaults.setValue(newUser.status, forKey: "status")
                 userDefaults.setValue(newBusiness.idBusiness, forKey: "businessID")
+                userDefaults.setValue(false, forKey: "isDummy")
                 
             } else {
+               
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
                 PINlabel2.text = "Wrong PIN"
@@ -119,9 +124,12 @@ class ConfirmPinViewController: UIViewController {
 //    }
     
     @IBAction func deleteCfmPIN(_ sender: UIButton){
-        confirm.removeLast()
-        pass2[confirm.count].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        print("The code is \(confirm)")
+        if confirm.count != 0{
+            confirm.removeLast()
+            pass2[confirm.count].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            print("The code is \(confirm)")
+        }
+       
     }
     
 

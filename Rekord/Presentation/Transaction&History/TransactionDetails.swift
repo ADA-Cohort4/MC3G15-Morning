@@ -23,7 +23,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var paymentTable: UITableView!
     
-    var inputArray : [String] = ["Sinar Jaya", "TR#10928329103", "Supplier", "Incomplete", "Rp24.000.000", "Rp11.000.000", "2 of 4"]
+    var inputArray : [String] = ["Sinar Jaya", "TR#10928329103", "Supplier", "Incomplete", "Rp24.000.000", "11000000", "2 of 4"]
     var paymentArray : [String] = ["14/6/21", "23/7/21"]
     var selectedID : String = ""
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +31,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         CommonFunction.shared.addShadow(view: baseView)
         
         
+
        /*TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.value(forKey: "businessID") as! String) { resultList, result in
              for result in resultList{
                 if result.airtableId == self.selectedID{
@@ -58,7 +59,8 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.navigationBar.isHidden = false
         
         super.viewDidLoad()
-        
+        queryForHistory()
+        print(inputArray)
         configViews()
         paymentTable.delegate = self
         paymentTable.dataSource = self
@@ -77,8 +79,10 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         TRIDLabel.text = inputArray[1]
         typeLabel.text = inputArray[2]
         statusLabel.text = inputArray[3]
-        totalValueLabel.text = inputArray[4]
-        totalDueLabel.text = inputArray[5]
+        
+        configNumberFormats()
+        
+       
         paymentCountLabel.text = inputArray[6]
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,6 +97,42 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         cell.paymentDateLabel.text = paymentArray[indexPath.row]
         cell.paymentCountLabel.text = "Payment \(indexPath.row+1)"
         return cell
+    }
+    
+    func queryForHistory(){
+        TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
+             for result in resultList{
+                if result.idTransaction == self.inputArray[1]{
+                    
+                 var partnerID = ""
+                 var type = ""
+                    
+                 PartnerRepository.shared.getPartner { resultPartner in
+                     if resultPartner.idPartner == result.idPartner{
+                         partnerID = resultPartner.idPartner!
+                         type = resultPartner.type!.rawValue//CHANGE TO PARTNER NAME
+                     }
+                     
+                 }
+                    let list : [String] = [partnerID, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), "11000000", String(result.paymentCount!)]
+                    
+                self.inputArray = list
+                        
+                    
+                }
+                
+             }
+         }
+    }
+    func configNumberFormats(){
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currencyAccounting
+        formatter.currencySymbol = "Rp"
+        formatter.currencyCode = "ID"
+        print(inputArray[4])
+        totalValueLabel.text = formatter.string(from: NSNumber(value: Double(inputArray[4])!))
+        totalDueLabel.text = formatter.string(from: NSNumber(value: Double(inputArray[5])!))
     }
     
 

@@ -39,6 +39,7 @@ class LockScreen: UIViewController {
                 performSegue(withIdentifier: "toDashboardSegue", sender: self)
                 print(userCode)
             } else {
+                click = 0
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
                 PINlabel.text = "Wrong pin"
@@ -61,9 +62,13 @@ class LockScreen: UIViewController {
     }
     
     @IBAction func deletePIN(_ sender: UIButton){
-        code.removeLast()
-        pass[code.count].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        print("The code is \(code)")
+        if code.count != 0{
+            code.removeLast()
+            pass[code.count].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            click -= 1
+            print("The code is \(code)")
+        }
+        
     }
     
     override func viewDidLoad(){
