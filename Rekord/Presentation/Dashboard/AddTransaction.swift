@@ -72,7 +72,11 @@ class AddTransaction: UIViewController {
     }
     
     @IBAction func createTransaction(_ sender: Any) {
+
+//        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Double(Float(totalPrice.text ?? "0") ?? 0), paymentCount: 2, document: imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: "1")
+
         let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Double(totalPrice.text ?? "0") ?? 0, paymentCount: 2, document: "none" , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
+
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
