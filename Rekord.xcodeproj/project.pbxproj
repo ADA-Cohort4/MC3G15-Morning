@@ -30,6 +30,7 @@
 		995A23C926BD8E1C00FAC69D /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */; };
 		995A23CA26BD8E1C00FAC69D /* DatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */; };
 		995A23CE26BED00400FAC69D /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23CD26BED00400FAC69D /* PaymentRepository.swift */; };
+		995A23D226C03ADA00FAC69D /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23D126C03ADA00FAC69D /* RootTabBarController.swift */; };
 		99837E1326B9911800EFCA58 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99837E1226B9911800EFCA58 /* FilterView.xib */; };
 		99837E1526B9915E00EFCA58 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99837E1426B9915E00EFCA58 /* FilterView.swift */; };
 		99DC76D526B0577200BFD14D /* dateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC76D426B0577200BFD14D /* dateCell.swift */; };
@@ -142,6 +143,7 @@
 		995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerCell.xib; sourceTree = "<group>"; };
 		995A23CD26BED00400FAC69D /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
+		995A23D126C03ADA00FAC69D /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		99837E1226B9911800EFCA58 /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		99837E1426B9915E00EFCA58 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		99DC76D426B0577200BFD14D /* dateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateCell.swift; sourceTree = "<group>"; };
@@ -434,6 +436,8 @@
 		D4A90314266F09E7007D5D2E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				995A23D126C03ADA00FAC69D /* RootTabBarController.swift */,
+				D4A90313266F09CD007D5D2E /* Application */,
 				D43FEFD926AFB9CE0057F616 /* Onboarding&Login */,
 				D43FEFD826AFB9C90057F616 /* Dashboard */,
 				D43FEFD726AFB9C10057F616 /* Transaction&History */,
@@ -544,7 +548,6 @@
 				D4A90316266F0A08007D5D2E /* Core */,
 				D4A90315266F09F1007D5D2E /* Resources */,
 				D4A90314266F09E7007D5D2E /* Presentation */,
-				D4A90313266F09CD007D5D2E /* Application */,
 				D4D20545266DEF1900CDC2D6 /* Info.plist */,
 			);
 			path = Rekord;
@@ -775,6 +778,7 @@
 				D4D3D36C26706386005A4ABA /* BarChartPresenter.swift in Sources */,
 				ECA4ADFD26B91304007C4F74 /* BusinessRepository.swift in Sources */,
 				D48BC0DC26B52C1B001D7D9C /* BusinessModel+Networking.swift in Sources */,
+				995A23D226C03ADA00FAC69D /* RootTabBarController.swift in Sources */,
 				D444D4E126B6A62700431C1B /* PaymentsAPIRequest.swift in Sources */,
 				D43FEFB526AFA7D50057F616 /* Rekord.xcdatamodeld in Sources */,
 				D48BC0E026B52E69001D7D9C /* PaymentsModel+Networking.swift in Sources */,
