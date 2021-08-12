@@ -29,9 +29,8 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     private let refreshControl = UIRefreshControl()
     //nanti data hasil query masukin sini, kalo filter / search reload view dan restart query
     //URUTAN: 0 = partner name, 1 = trid, 2 = type, 3 = status, 4 = total
-    var transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Paid", "Rp14,000,000"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000"]]
-    //let transData : [[String]] = []
-    let customerData : [String] = ["Sinar Jaya", "Epic Corp"]
+    var transData : [[String]] = []
+    let customerData : [String] = []
     let typeData : [String] = ["Customer", "Supplier"]
     var selectedCustomerData : String = ""
     var selectedFilter : String = ""
@@ -56,7 +55,6 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         historyTable.dataSource = self
         historyTable.delegate = self
         configViews()
-        //filterView.customerData = customerData
         //add target for filter buttons
         typeDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTypeFilterClick)))
         partnerDrop.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onPartnerFilterClick)))
@@ -226,7 +224,6 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
                     formatter.currencySymbol = "Rp"
                     formatter.currencyCode = "ID"
                     
-//                    ARLabel.text = formatter.string(from: NSNumber(value: ARValue))
                     let rupiah = formatter.string(from: NSNumber(value: result.totalPrice ?? 0))
                     let list : [String] = [partnerName, "TR#\(result.idTransaction!)", type.capitalized, (result.status!.rawValue).capitalized, rupiah!, result.dueDate!]
                 

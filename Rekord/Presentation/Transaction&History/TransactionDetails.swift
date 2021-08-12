@@ -23,7 +23,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var paymentTable: UITableView!
     
-    var inputArray : [String] = ["Sinar Jaya", "TR#10928329103", "Supplier", "Incomplete", "Rp24.000.000", "11000000", "2 of 4"]
+    var inputArray : [String] = []
     var paymentArray : [String] = ["14/6/21", "23/7/21"]
     var selectedID : String = ""
     override func viewWillAppear(_ animated: Bool) {

@@ -88,11 +88,8 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
             partnerTypeView.optionsTableView.reloadData()
             partnerTypeView.filterTitle.text = "Select Partner Type"
             if partnerTypeView.isHidden == true {
-//                containerView.mask = UIView(frame: self.view.frame)
-//                containerView.mask?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
                 partnerTypeView.isHidden = false
             }else{
-                containerView.mask = nil
                 partnerTypeView.isHidden = true
             }
         }

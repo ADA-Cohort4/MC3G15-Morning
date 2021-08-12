@@ -50,7 +50,6 @@ class PartnerDetailViewController:UIViewController{
         detailView.layer.cornerRadius = 10
         editPartnerButton.layer.cornerRadius = 10
         viewTranasctionsButton.layer.cornerRadius = 10
-        companyAddress.text = "Jl. Bojong Kenyot No.3\nBlok H2 No.4 RT 012\nRW 012 Sandy Shores,\nLos Santos"
     }
     
     override func viewWillAppear(_ animated: Bool) {

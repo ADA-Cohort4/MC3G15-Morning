@@ -346,7 +346,7 @@ class PartnerRepository {
                     phone: partner.value(forKey: "phone") as! String,
                                     status:  PartnerActivationStatus(rawValue: partner.value(forKey: "status") as! String)!,
                     airtableId: partner.value(forKey: "airtable_id") as! String,
-                    address: partner.value(forKey: "address") as! String,
+                    address: partner.value(forKey: "address") as? String ?? "blank" ,
                     email: partner.value(forKey: "email") as! String,
                     ownerName: partner.value(forKey: "owner_name") as! String))
             }

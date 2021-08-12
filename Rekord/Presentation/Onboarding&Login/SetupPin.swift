@@ -71,7 +71,6 @@ class SetupPinViewController: UIViewController {
     
     
     
-//    func
     
     //MARK: UI View
     override func viewDidLoad(){
@@ -86,7 +85,6 @@ class SetupPinViewController: UIViewController {
         for j in 0..<10{
             numPad[j].layer.cornerRadius = 37.5
         }
-        // num[10] face id, num[11] delete
     }
 }
 

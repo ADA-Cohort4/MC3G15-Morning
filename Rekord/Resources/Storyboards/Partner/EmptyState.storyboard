@@ -69,6 +69,14 @@
             </objects>
             <point key="canvasLocation" x="132" y="89"/>
         </scene>
+        <!--Partner-->
+        <scene sceneID="Csu-vj-7p8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Partner" id="keW-ta-Xtx" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="td4-eY-XbN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="924" y="73"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AddButton" width="36" height="36"/>

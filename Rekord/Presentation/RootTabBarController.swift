@@ -12,7 +12,7 @@ class RootTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let item = UITabBarItem()
 
         // Do any additional setup after loading the view.
     }
