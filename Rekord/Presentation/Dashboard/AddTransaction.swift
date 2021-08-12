@@ -26,15 +26,20 @@ class AddTransaction: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var totalPrice: UITextField!
     @IBOutlet weak var invoiceView: UIImageView!
+    @IBOutlet weak var dueDateView: UIView!
+    @IBOutlet weak var paymentCount: UITextField!
     
     var imagePicker: UIImagePickerController!
     var imageName = ""
     
     
-    let partnerList: [PartnerModel] = [
-        PartnerModel(idPartner: "1", idUser: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!, type: .customer, name: "Test 1", phone: "081377020333", status: .active, airtableId: "2",address: "gatau", email: "owh", ownerName: "lahh"),
-        PartnerModel(idPartner: "2", idUser: "1", idBusiness:  UserDefaults.standard.string(forKey: "businessID")!, type: .customer, name: "Test 2", phone: "081377020333", status: .active, airtableId: "1", address: "hahh??", email: "bruhMoment@bruh.com", ownerName: "owh gitu"),
-    ]
+//    let partnerList: [PartnerModel] = [
+//        PartnerModel(idPartner: "1", idUser: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!, type: .customer, name: "Test 1", phone: "081377020333", status: .active, airtableId: "2",address: "gatau", email: "owh", ownerName: "lahh"),
+//        PartnerModel(idPartner: "2", idUser: "1", idBusiness:  UserDefaults.standard.string(forKey: "businessID")!, type: .customer, name: "Test 2", phone: "081377020333", status: .active, airtableId: "1", address: "hahh??", email: "bruhMoment@bruh.com", ownerName: "owh gitu"),
+//    ]
+    var partnerList: [PartnerModel]!
+    var selectedPartner: PartnerModel!
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
@@ -49,6 +54,17 @@ class AddTransaction: UIViewController {
         partnerType.isHidden = true
         datePicker.datePickerMode = .date
         totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        dueDateView.layer.cornerRadius = 4
+        self.getPartnerList()
+    }
+    
+    func getPartnerList() {
+        PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
+            print("resultPartnerList")
+            print(resultPartnerList[0].name)
+            self.partnerList = resultPartnerList
+        }
+        
     }
     
     @IBAction func selectInvoice(_ sender: Any) {
@@ -72,7 +88,11 @@ class AddTransaction: UIViewController {
     }
     
     @IBAction func createTransaction(_ sender: Any) {
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Double(totalPrice.text ?? "0") ?? 0, paymentCount: 2, document: "none" , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
+
+//        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Double(Float(totalPrice.text ?? "0") ?? 0), paymentCount: 2, document: imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: "1")
+
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: selectedPartner.idPartner!, totalPrice: Double(totalPrice.text ?? "0") ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
+
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
@@ -111,8 +131,9 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectPartner.text = partnerList[row].idPartner
+        selectPartner.text = partnerList[row].name
         selectPartner.resignFirstResponder()
+        self.selectedPartner = partnerList[row]
         self.view.endEditing(true)
     }
     
