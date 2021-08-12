@@ -32,6 +32,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         DispatchQueue.main.async {
             self.navigationController?.navigationBar.isHidden = true
             self.tabBarController?.tabBar.isHidden = false
+            self.navigationController?.tabBarItem.image = UIImage(systemName: "book")
             self.tabBarController?.tabBarItem.image = UIImage(systemName: "book")
             self.tabBarController?.tabBarItem.title = "Dashboard"
             self.tabBarController?.navigationController?.navigationBar.isHidden = true
