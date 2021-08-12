@@ -346,9 +346,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         TransactionRepository.shared.saveTransaction(transaction: TransactionModel(idTransaction: "XJSHDS", idPartner: "1", totalPrice: 14000000, paymentCount: 2, document: "https://icloud.com", dueDate: "2021-09-08", createdDate: "2021-08-08", updatedDate: "2021-08-15", status: .ongoing, airtableId: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!)) { Result in
             print("added transaction")
         }
-        TransactionRepository.shared.saveTransaction(transaction: TransactionModel(idTransaction: "XHJSAS", idPartner: "2", totalPrice: 10000000, paymentCount: 2, document: "https://icloud.com", dueDate: "2021-09-30", createdDate: "2021-08-08", updatedDate: "2021-08-30", status: .ongoing, airtableId: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!)) { Result in
-            print("added transaction")
-        }
+        
         TransactionRepository.shared.saveTransaction(transaction: TransactionModel(idTransaction: "TEST", idPartner: "5", totalPrice: 999999, paymentCount: 1, document: "https://icloud.com", dueDate: "2021-08-08", createdDate: "2021-07-08", updatedDate: "2021-08-08", status: .paid, airtableId: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!)) { Result in
                     print("added transaction")
         }
