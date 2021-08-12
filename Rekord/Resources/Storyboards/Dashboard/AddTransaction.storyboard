@@ -155,9 +155,11 @@
                         <outlet property="paymentCount" destination="rbZ-TU-ovr" id="pOC-Tq-oji"/>
                         <outlet property="selectPartner" destination="khA-90-58G" id="OmC-ld-Qfg"/>
                         <outlet property="totalPrice" destination="6kw-s0-2Ih" id="fuI-eT-tlf"/>
+                        <segue destination="v1M-Pa-WUE" kind="unwind" identifier="unwindToDashboard" unwindAction="unwindToDashboardWithSegue:" id="9G6-tw-u52"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="v1M-Pa-WUE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="135.38461538461539" y="130.09478672985782"/>
         </scene>

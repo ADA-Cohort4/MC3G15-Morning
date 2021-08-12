@@ -19,6 +19,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     @IBOutlet weak var receiptImage: UIImageView!
     
+    private let refreshControl = UIRefreshControl()
+    
     
     var selectedEntry : String = ""
     //DUMMY DATA FOR TESTING, NTAR DIAPUS AJA
@@ -85,6 +87,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             welcomeLabel.isHidden = false
             
         }
+        refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
+        mainTableView.addSubview(refreshControl)
         
        
         headerPadding.layer.cornerRadius = 10
@@ -125,6 +129,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             //MARK: Ubah cell text menjadi sesuai transaction
             cell.selectedBackgroundView = UIView()
             //-2 karena ngikutin jumlah cell di dashboard
+            let count = transData.count
+            //mulai dari paling baru dibuat
             cell.partnerNameLabel.text = transData[indexPath.row-2][0]
             cell.TRIDLabel.text = transData[indexPath.row-2][1]
             cell.typeLabel.text = transData[indexPath.row-2][2]
@@ -243,6 +249,14 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             }
         }
     }
+    @IBAction func onRefreshPull(){
+        transData = []
+        queryForDashboard()
+        mainTableView.reloadData()
+        self.refreshControl.endRefreshing()
+        
+    }
+    
     
     
     

@@ -23,7 +23,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var paymentTable: UITableView!
     
-    var inputArray : [String] = []
+    var inputArray : [String] = ["", "", "", "", "", "" ,"", ""]
     var paymentArray : [String] = ["14/6/21", "23/7/21"]
     var selectedID : String = ""
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +58,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         typeLabel.text = inputArray[2]
         statusLabel.text = inputArray[3]
         
+        
         configNumberFormats()
         
        
@@ -84,15 +85,20 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
                     
                  var partnerID = ""
                  var type = ""
+                    var partnerName = ""
                     
-                 PartnerRepository.shared.getPartner { resultPartner in
-                     if resultPartner.idPartner == result.idPartner{
-                         partnerID = resultPartner.idPartner!
-                         type = resultPartner.type!.rawValue//CHANGE TO PARTNER NAME
-                     }
+                 PartnerRepository.shared.getAllPartner { resultPartner, str in
+                    for partner in resultPartner{
+                        if partner.idPartner == result.idPartner{
+                            partnerID = partner.idPartner!
+                            type = partner.type!.rawValue
+                            partnerName = partner.name ?? "No Name" //CHANGE TO PARTNER NAME
+                        }
+                    }
+                     
                      
                  }
-                    let list : [String] = [partnerID, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), "11000000", String(result.paymentCount!)]
+                    let list : [String] = [partnerName, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), "11000000", String(result.paymentCount!)]
                     
                 self.inputArray = list
                         
