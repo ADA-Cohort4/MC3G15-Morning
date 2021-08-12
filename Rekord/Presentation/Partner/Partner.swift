@@ -14,7 +14,10 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var roundedUpperView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var addPartnerButton: UIButton!
+    @IBOutlet weak var emptyImage: UIImageView!
     
+    @IBOutlet weak var emptyButton: UIButton!
+    @IBOutlet weak var emptyLabel: UILabel!
     var partnerType = ""
     var partnerName = ""
     var userId = ""
@@ -27,6 +30,17 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         queryPartners()
+        if partnerArray.count == 0 {
+            partnerListTable.isHidden = true
+            emptyImage.isHidden = false
+            emptyButton.isHidden = false
+            emptyLabel.isHidden = false
+        } else {
+            partnerListTable.isHidden = false
+            emptyImage.isHidden = true
+            emptyButton.isHidden = true
+            emptyLabel.isHidden = true
+        }
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
@@ -42,6 +56,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         roundedUpperView.layer.cornerRadius = 30
         self.navigationController?.navigationBar.isHidden = true
         partnerListTable.register(UINib.init(nibName: "PartnerListCell", bundle: nil), forCellReuseIdentifier: "PartnerListCell")
+        
         partnerListTable.reloadData()
         
     }
@@ -60,6 +75,10 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         1
     }
     
+    @IBAction func emptyButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "toAddPartnerSegue", sender: self)
+        
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = partnerListTable.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath)as! PartnerListCell
         cell.typeDescription.text = partnerArray[indexPath.row][5]

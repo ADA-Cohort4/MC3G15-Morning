@@ -58,7 +58,6 @@
 		D43FEFE626AFBAB80057F616 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE526AFBAB80057F616 /* Dashboard.swift */; };
 		D43FEFE826AFBAC60057F616 /* AddTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE726AFBAC60057F616 /* AddTransaction.swift */; };
 		D43FEFEA26AFBAD10057F616 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE926AFBAD10057F616 /* History.swift */; };
-		D43FEFEC26AFBAE80057F616 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFEB26AFBAE80057F616 /* Transaction.swift */; };
 		D43FEFEE26AFBAF40057F616 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFED26AFBAF40057F616 /* DocumentView.swift */; };
 		D43FEFF026AFBB000057F616 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFEF26AFBB000057F616 /* Partner.swift */; };
 		D43FEFF226AFC1AE0057F616 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFF126AFC1AE0057F616 /* Settings.swift */; };
@@ -99,6 +98,7 @@
 		D4D3D374267063B3005A4ABA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D373267063B3005A4ABA /* Constants.swift */; };
 		D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D375267063C8005A4ABA /* CommonFunction.swift */; };
 		D4D3D37926706523005A4ABA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D3D37826706523005A4ABA /* Colors.xcassets */; };
+		E756E9D126C4EE080046BB33 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756E9D026C4EE080046BB33 /* DummyData.swift */; };
 		E790D39726BB5BB5000D8435 /* ConfirmPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */; };
 		E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */; };
 		EC68569B26B3B1C400148313 /* InviteLinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68569A26B3B1C400148313 /* InviteLinkModel.swift */; };
@@ -171,7 +171,6 @@
 		D43FEFE526AFBAB80057F616 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		D43FEFE726AFBAC60057F616 /* AddTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransaction.swift; sourceTree = "<group>"; };
 		D43FEFE926AFBAD10057F616 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
-		D43FEFEB26AFBAE80057F616 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		D43FEFED26AFBAF40057F616 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
 		D43FEFEF26AFBB000057F616 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
 		D43FEFF126AFC1AE0057F616 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -214,6 +213,7 @@
 		D4D3D373267063B3005A4ABA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4D3D375267063C8005A4ABA /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		D4D3D37826706523005A4ABA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		E756E9D026C4EE080046BB33 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPinViewController.swift; sourceTree = "<group>"; };
 		E7A9B69A26B64064009C2876 /* Rekord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rekord.entitlements; sourceTree = "<group>"; };
 		E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupBusinessViewController.swift; sourceTree = "<group>"; };
@@ -348,7 +348,6 @@
 			children = (
 				D43FEFE926AFBAD10057F616 /* History.swift */,
 				995083DA26B999E3008350D7 /* NormalOptViewCell.swift */,
-				D43FEFEB26AFBAE80057F616 /* Transaction.swift */,
 				D43FEFED26AFBAF40057F616 /* DocumentView.swift */,
 				99DC76DE26B7B1DB00BFD14D /* TransactionDetails.swift */,
 				99DC76E026B83D9C00BFD14D /* paymentCell.swift */,
@@ -477,6 +476,7 @@
 				D4D3D36726706356005A4ABA /* Library */,
 				D4D3D36626706344005A4ABA /* Constant */,
 				D4D3D351267062AF005A4ABA /* Extension */,
+				E756E9D026C4EE080046BB33 /* DummyData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -756,6 +756,7 @@
 				ECC223F726B24DE700DDF743 /* UserModel.swift in Sources */,
 				D4D3D362267062EF005A4ABA /* TableViewCell+Extension.swift in Sources */,
 				D4D3D35F267062EF005A4ABA /* UIImage+Extension.swift in Sources */,
+				E756E9D126C4EE080046BB33 /* DummyData.swift in Sources */,
 				ECC223F926B24DE700DDF743 /* TransactionModel.swift in Sources */,
 				D48BC0DE26B52D52001D7D9C /* TransactionsModel+Networking.swift in Sources */,
 				D43FEFF026AFBB000057F616 /* Partner.swift in Sources */,
@@ -782,7 +783,6 @@
 				D444D4E126B6A62700431C1B /* PaymentsAPIRequest.swift in Sources */,
 				D43FEFB526AFA7D50057F616 /* Rekord.xcdatamodeld in Sources */,
 				D48BC0E026B52E69001D7D9C /* PaymentsModel+Networking.swift in Sources */,
-				D43FEFEC26AFBAE80057F616 /* Transaction.swift in Sources */,
 				EC6F600C26BC2FEE000A3302 /* String+Extension.swift in Sources */,
 				D4D3D35C267062EF005A4ABA /* UIColor+Extension.swift in Sources */,
 				D444D4DD26B6A25500431C1B /* TransactionsAPIRequest.swift in Sources */,
@@ -955,13 +955,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = H7G3L89F8C;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maritia.com.Rekord;
+				PRODUCT_BUNDLE_IDENTIFIER = PeterLee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -975,13 +975,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = H7G3L89F8C;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maritia.com.Rekord;
+				PRODUCT_BUNDLE_IDENTIFIER = PeterLee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

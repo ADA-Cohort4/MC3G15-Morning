@@ -67,8 +67,6 @@ class SetupBusinessViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-//        let destinationNavigationController = segue.destination as! UINavigationController
-//        let targetController = destinationNavigationController.topViewController
         if segue.identifier == "ToSetupPinSegue"{
             let destinationVC = segue.destination as! SetupPinViewController
             destinationVC.appleID = userID
@@ -81,6 +79,7 @@ class SetupBusinessViewController: UIViewController {
     }
     
     @IBAction func skipThisButton(_ sender: Any) {
+        print("skip")
     }
     /*
     // MARK: - Navigation

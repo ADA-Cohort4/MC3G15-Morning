@@ -37,7 +37,6 @@ class ConfirmPinViewController: UIViewController {
         for j in 0..<10{
             numPad2[j].layer.cornerRadius = 37.5
         }
-        // num[10] face id, num[11] delete
     }
     
     @IBAction func buttonsTap2(_ sender: UIButton){
@@ -65,7 +64,6 @@ class ConfirmPinViewController: UIViewController {
                         DispatchQueue.main.async {
                             
                         
-//                        self.navigationController?.popViewController(animated: true)
                         }
                     } else {
                         print("error save")
@@ -78,7 +76,6 @@ class ConfirmPinViewController: UIViewController {
                     if result.airtableId != "" || result.airtableId != nil {
                         DispatchQueue.main.async {
                             
-//                        self.navigationController?.popViewController(animated: true)
                         }
                     } else {
                         print("error save")
@@ -117,11 +114,7 @@ class ConfirmPinViewController: UIViewController {
         }
         
     }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "confirmPINSegue" {
-//            let destinationVC = segue.destination as!
-//        }
-//    }
+
     
     @IBAction func deleteCfmPIN(_ sender: UIButton){
         if confirm.count != 0{
