@@ -62,25 +62,52 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = partnerListTable.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath)as! PartnerListCell
-        cell.typeDescription.text = partnerType
+        cell.typeDescription.text = partnerArray[indexPath.row][5]
+        cell.lastTransactionDate.text = partnerArray[indexPath.row][4]
         cell.partnerName.text = partnerArray[indexPath.row][1]
-        cell.numberOfTransactions.text = "\(totalTransactionsDone)"
-        cell.totalTranasationValue.text = "\(transactionAmount)"
+        cell.numberOfTransactions.text = partnerArray[indexPath.row][2]
+        cell.totalTranasationValue.text = partnerArray[indexPath.row][3]
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        partnerCount
+        partnerArray.count
     }
     func queryPartners(){
         
         PartnerRepository.shared.getAllPartner { list, str in
             for partner in list{
                 if partner.idBusiness == UserDefaults.standard.string(forKey: "businessID"){
-                    let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner"]
-                    self.partnerArray.append(list)
+                    var transactionCount: Int = 0
+                    var transactionValue: Double = 0
+                    var transactionDate: String = ""
+                
+                    
+                    TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) {transactionArr, str in
+                        for transaction in transactionArr {
+                            if transaction.idPartner == partner.idPartner{
+                                transactionCount += 1
+                                transactionValue += transaction.totalPrice ?? 0
+                                transactionDate = transaction.updatedDate ?? "1990-03-03"
+                                
+                            }
+                        }
+                        let formatter = NumberFormatter()
+                        formatter.locale = Locale.current
+                        formatter.numberStyle = .currencyAccounting
+                        formatter.currencySymbol = "Rp"
+                        formatter.currencyCode = "ID"
+                        
+    //                    ARLabel.text = formatter.string(from: NSNumber(value: ARValue))
+                        let rupiah = formatter.string(from: NSNumber(value: transactionValue))
+                        let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount), String(rupiah ?? "Rp. 0"), transactionDate, partner.type?.rawValue ?? "error"]
+                        self.partnerArray.append(list)
+                    }
+                    
                 }
+                
             }
         }
+        
     }
 }
