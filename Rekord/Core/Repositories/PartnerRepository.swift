@@ -105,7 +105,9 @@ class PartnerRepository {
                                 partner.name = response.records?.first?.fields?.name
                                 partner.phone = response.records?.first?.fields?.phone
                                 partner.status = PartnerActivationStatus(rawValue: (response.records?.first?.fields?.status)!)
+                                print("Try to save partner")
                                 completion(partner)
+                                print(partner)
                             } catch let error {
                                 print("failed save partner = \(error.localizedDescription)")
                                 completion(partner)

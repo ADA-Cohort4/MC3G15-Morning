@@ -27,9 +27,11 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     var partnerCount = 1
     var transactionAmount: Double = 0.0
     var partnerArray : [[String]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         queryPartners()
+        print(partnerArray)
         if partnerArray.count == 0 {
             partnerListTable.isHidden = true
             emptyImage.isHidden = false
@@ -104,11 +106,15 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) {transactionArr, str in
                         for transaction in transactionArr {
-                            if transaction.idPartner == partner.idPartner{
+                            if transaction.idPartner == partner.idPartner && transactionArr.count != 0 {
                                 transactionCount += 1
                                 transactionValue += transaction.totalPrice ?? 0
                                 transactionDate = transaction.updatedDate ?? "1990-03-03"
                                 
+                            }else if transactionArr.count == 0 {
+                                transactionCount = 0
+                                transactionValue = 0
+                                transactionDate = "1990-03-03"
                             }
                         }
                         let formatter = NumberFormatter()
@@ -119,7 +125,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                         
     //                    ARLabel.text = formatter.string(from: NSNumber(value: ARValue))
                         let rupiah = formatter.string(from: NSNumber(value: transactionValue))
-                        let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount), String(rupiah ?? "Rp. 0"), transactionDate, partner.type?.rawValue ?? "error"]
+                        let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount) ?? "0", String(rupiah ?? "Rp. 0"), transactionDate ?? "1990-03-03", partner.type?.rawValue ?? "error"]
                         self.partnerArray.append(list)
                     }
                     
@@ -127,6 +133,27 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                 
             }
         }
+     
+
+    }
+}
+
+extension PartnerListViewController{
+    @IBAction func unwindToPartnerList( segue: UIStoryboardSegue){
+        queryPartners()
+        print(partnerArray.count)
+        if partnerArray.count == 0 {
+            partnerListTable.isHidden = true
+            emptyImage.isHidden = false
+            emptyButton.isHidden = false
+            emptyLabel.isHidden = false
+        } else {
+            partnerListTable.isHidden = false
+            emptyImage.isHidden = true
+            emptyButton.isHidden = true
+            emptyLabel.isHidden = true
+        }
+        partnerListTable.reloadData()
         
     }
 }
