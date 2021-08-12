@@ -14,7 +14,10 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var roundedUpperView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var addPartnerButton: UIButton!
+    @IBOutlet weak var emptyImage: UIImageView!
     
+    @IBOutlet weak var emptyButton: UIButton!
+    @IBOutlet weak var emptyLabel: UILabel!
     var partnerType = ""
     var partnerName = ""
     var userId = ""
@@ -27,6 +30,17 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         queryPartners()
+        if partnerArray.count == 0 {
+            partnerListTable.isHidden = true
+            emptyImage.isHidden = false
+            emptyButton.isHidden = false
+            emptyLabel.isHidden = false
+        } else {
+            partnerListTable.isHidden = false
+            emptyImage.isHidden = true
+            emptyButton.isHidden = true
+            emptyLabel.isHidden = true
+        }
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
@@ -42,6 +56,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         roundedUpperView.layer.cornerRadius = 30
         self.navigationController?.navigationBar.isHidden = true
         partnerListTable.register(UINib.init(nibName: "PartnerListCell", bundle: nil), forCellReuseIdentifier: "PartnerListCell")
+        
         partnerListTable.reloadData()
         
     }
@@ -60,27 +75,58 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         1
     }
     
+    @IBAction func emptyButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "toAddPartnerSegue", sender: self)
+        
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = partnerListTable.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath)as! PartnerListCell
-        cell.typeDescription.text = partnerType
+        cell.typeDescription.text = partnerArray[indexPath.row][5]
+        cell.lastTransactionDate.text = partnerArray[indexPath.row][4]
         cell.partnerName.text = partnerArray[indexPath.row][1]
-        cell.numberOfTransactions.text = "\(totalTransactionsDone)"
-        cell.totalTranasationValue.text = "\(transactionAmount)"
+        cell.numberOfTransactions.text = partnerArray[indexPath.row][2]
+        cell.totalTranasationValue.text = partnerArray[indexPath.row][3]
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        partnerCount
+        partnerArray.count
     }
     func queryPartners(){
         
         PartnerRepository.shared.getAllPartner { list, str in
             for partner in list{
                 if partner.idBusiness == UserDefaults.standard.string(forKey: "businessID"){
-                    let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner"]
-                    self.partnerArray.append(list)
+                    var transactionCount: Int = 0
+                    var transactionValue: Double = 0
+                    var transactionDate: String = ""
+                
+                    
+                    TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) {transactionArr, str in
+                        for transaction in transactionArr {
+                            if transaction.idPartner == partner.idPartner{
+                                transactionCount += 1
+                                transactionValue += transaction.totalPrice ?? 0
+                                transactionDate = transaction.updatedDate ?? "1990-03-03"
+                                
+                            }
+                        }
+                        let formatter = NumberFormatter()
+                        formatter.locale = Locale.current
+                        formatter.numberStyle = .currencyAccounting
+                        formatter.currencySymbol = "Rp"
+                        formatter.currencyCode = "ID"
+                        
+    //                    ARLabel.text = formatter.string(from: NSNumber(value: ARValue))
+                        let rupiah = formatter.string(from: NSNumber(value: transactionValue))
+                        let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount), String(rupiah ?? "Rp. 0"), transactionDate, partner.type?.rawValue ?? "error"]
+                        self.partnerArray.append(list)
+                    }
+                    
                 }
+                
             }
         }
+        
     }
 }

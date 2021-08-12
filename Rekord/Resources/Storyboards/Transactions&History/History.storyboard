@@ -222,7 +222,9 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.070264987649999999" green="0.33625107999999998" blue="0.60743623970000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="History" image="clock.arrow.circlepath" catalog="system" selectedImage="clock.arrow.circlepath" id="w4y-YL-2rg"/>
                     <navigationItem key="navigationItem" id="8My-ni-yk1"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="containerView" destination="V6p-he-2IS" id="FB0-D6-Nzf"/>
                         <outlet property="dateDrop" destination="Tdc-kz-f40" id="7G8-lw-BJ9"/>
@@ -256,6 +258,7 @@
     </scenes>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="clock.arrow.circlepath" catalog="system" width="128" height="110"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

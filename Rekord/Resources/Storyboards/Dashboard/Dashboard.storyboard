@@ -12,6 +12,7 @@
         <scene sceneID="zmv-IK-HJf">
             <objects>
                 <navigationController title="Dashboard" id="U3U-Eh-MXF" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UYR-fb-ObL">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -23,6 +24,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTK-8m-vc9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1124" y="-446"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="qM2-3Y-rMJ">
+            <objects>
+                <tabBarController id="7Il-9M-DXe" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aeG-KO-Vmn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eBG-pG-p92" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1171" y="3370"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="s0d-6b-0kx">
@@ -352,7 +367,9 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.070264987649999999" green="0.33625107999999998" blue="0.60743623970000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="speedometer" catalog="system" selectedImage="speedometer" id="Jok-VC-EXL"/>
                     <navigationItem key="navigationItem" id="cMa-ag-E7p"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addTransactionBtnFirst" destination="FoH-09-vM2" id="FgX-2x-OR4"/>
                         <outlet property="headerPadding" destination="ASR-zy-9ZS" id="pqP-YM-c8N"/>
@@ -393,6 +410,7 @@
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="receipt" width="840" height="1545"/>
+        <image name="speedometer" catalog="system" width="128" height="121"/>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

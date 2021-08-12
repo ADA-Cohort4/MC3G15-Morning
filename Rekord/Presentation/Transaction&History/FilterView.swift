@@ -62,7 +62,6 @@ class FilterView : UIView, UITableViewDelegate, UITableViewDataSource {
             let cell = optionsTableView.dequeueReusableCell(withIdentifier: "DatePickerCell") as! DatePickerCell
             
             cell.dateTitle.text = FilterView.picker[indexPath.row]
-           // cellIndex.append(indexPath.row)
             cell.pickerCell.addTarget(self, action: #selector(self.onPickerDone), for: .editingDidEnd)
             cellIndex.append(cell.tag)
             
