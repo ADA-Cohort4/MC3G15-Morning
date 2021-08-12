@@ -222,12 +222,12 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
                         if resultPartner.idPartner == result.idPartner{
                             print("found partner")
                             partnerName = resultPartner.name!
-                            type = resultPartner.type!.rawValue
+                            type = resultPartner.type?.rawValue ?? "customer"
                         }
                     }
                 }
                 if result.status?.rawValue == "ongoing"{
-                let list : [String] = [partnerName, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), result.dueDate!]
+                let list : [String] = [partnerName, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), result.dueDate ?? "1990-01-01"]
                 
                 var dashboardQueryHasSameID : Bool = false
                 
