@@ -27,9 +27,14 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     var partnerCount = 1
     var transactionAmount: Double = 0.0
     var partnerArray : [[String]] = []
+    
+    private let refreshControl = UIRefreshControl()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         queryPartners()
+        print(partnerArray)
         if partnerArray.count == 0 {
             partnerListTable.isHidden = true
             emptyImage.isHidden = false
@@ -57,12 +62,16 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         self.navigationController?.navigationBar.isHidden = true
         partnerListTable.register(UINib.init(nibName: "PartnerListCell", bundle: nil), forCellReuseIdentifier: "PartnerListCell")
         
+        refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
+        partnerListTable.addSubview(refreshControl)
         partnerListTable.reloadData()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        partnerListTable.reloadData()
+        
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
@@ -80,23 +89,30 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = partnerListTable.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath)as! PartnerListCell
-        cell.typeDescription.text = partnerArray[indexPath.row][5]
-        cell.lastTransactionDate.text = partnerArray[indexPath.row][4]
-        cell.partnerName.text = partnerArray[indexPath.row][1]
-        cell.numberOfTransactions.text = partnerArray[indexPath.row][2]
-        cell.totalTranasationValue.text = partnerArray[indexPath.row][3]
+        let cell = partnerListTable.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath) as! PartnerListCell
+        let count = partnerArray.count
+            //mulai dari paling baru dibuat
+        cell.partnerName.text = partnerArray[count-indexPath.section-1][1]
+        cell.typeDescription.text = partnerArray[count-indexPath.section-1][5]
+        cell.lastTransactionDate.text = partnerArray[count-indexPath.section-1][4]
+        
+        cell.numberOfTransactions.text = partnerArray[count-indexPath.section-1][2]
+        cell.totalTranasationValue.text = partnerArray[count-indexPath.section-1][3]
         return cell
     }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         partnerArray.count
     }
+    
     func queryPartners(){
         
         PartnerRepository.shared.getAllPartner { list, str in
             for partner in list{
+              
                 if partner.idBusiness == UserDefaults.standard.string(forKey: "businessID"){
+                    
                     var transactionCount: Int = 0
                     var transactionValue: Double = 0
                     var transactionDate: String = ""
@@ -104,6 +120,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) {transactionArr, str in
                         for transaction in transactionArr {
+                            print("transaction count", transactionArr.count)
                             if transaction.idPartner == partner.idPartner{
                                 transactionCount += 1
                                 transactionValue += transaction.totalPrice ?? 0
@@ -119,14 +136,49 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                         
     //                    ARLabel.text = formatter.string(from: NSNumber(value: ARValue))
                         let rupiah = formatter.string(from: NSNumber(value: transactionValue))
-                        let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount), String(rupiah ?? "Rp. 0"), transactionDate, partner.type?.rawValue ?? "error"]
-                        self.partnerArray.append(list)
+                        if transactionCount == 0{
+                        let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", "0", "Rp 0", "None",  partner.type?.rawValue ?? "error"]
+                            self.partnerArray.append(list)
+                            
+                        } else{
+                            
+                            let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount), String(rupiah ?? "Rp. 0"), transactionDate,  partner.type?.rawValue ?? "error"]
+                            self.partnerArray.append(list)
+                        }
+                        
                     }
                     
                 }
                 
             }
         }
+     
+
+    }
+}
+
+extension PartnerListViewController{
+    @IBAction func unwindToPartnerList( segue: UIStoryboardSegue){
+      print("undwound")
+        print(partnerArray.count)
+        if partnerArray.count == 0 {
+            partnerListTable.isHidden = true
+            emptyImage.isHidden = false
+            emptyButton.isHidden = false
+            emptyLabel.isHidden = false
+        } else {
+            partnerListTable.isHidden = false
+            emptyImage.isHidden = true
+            emptyButton.isHidden = true
+            emptyLabel.isHidden = true
+        }
+        partnerListTable.reloadData()
         
+    }
+    @IBAction func onRefreshPull(){
+        partnerArray = []
+        queryPartners()
+        partnerListTable.reloadData()
+        self.refreshControl.endRefreshing()
     }
 }

@@ -105,7 +105,9 @@ class PartnerRepository {
                                 partner.name = response.records?.first?.fields?.name
                                 partner.phone = response.records?.first?.fields?.phone
                                 partner.status = PartnerActivationStatus(rawValue: (response.records?.first?.fields?.status)!)
+                                print("Try to save partner")
                                 completion(partner)
+                                print(partner)
                             } catch let error {
                                 print("failed save partner = \(error.localizedDescription)")
                                 completion(partner)
@@ -309,7 +311,7 @@ class PartnerRepository {
                 phone: data.value(forKey: "phone") as! String,
                 status: PartnerActivationStatus(rawValue: data.value(forKey: "status") as! String)!,
                 airtableId: data.value(forKey: "airtable_id") as! String,
-                address: data.value(forKey: "address") as! String,
+                address: data.value(forKey: "address") as? String ?? "No Address",
                 email: data.value(forKey: "email") as! String,
                 ownerName: data.value(forKey: "owner_name") as! String)
                 print("Got partner data with id: ", partnerData.idPartner)
@@ -346,7 +348,7 @@ class PartnerRepository {
                     phone: partner.value(forKey: "phone") as! String,
                                     status:  PartnerActivationStatus(rawValue: partner.value(forKey: "status") as! String)!,
                     airtableId: partner.value(forKey: "airtable_id") as! String,
-                    address: partner.value(forKey: "address") as? String ?? "blank" ,
+                    address: partner.value(forKey: "address") as? String ?? "blank",
                     email: partner.value(forKey: "email") as! String,
                     ownerName: partner.value(forKey: "owner_name") as! String))
             }

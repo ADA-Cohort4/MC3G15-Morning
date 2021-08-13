@@ -116,8 +116,8 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func saveNewPartner(_ sender: Any) {
-        let user_id = UUID().uuidString
-        let business_id = UUID().uuidString
+        let user_id = UserDefaults.standard.string(forKey: "userID")
+        let business_id = UserDefaults.standard.string(forKey: "businessID")
         partner_id = CommonFunction.shared.randomString(length: 8)
         businessPartnerName = businessNameTextField.text
         partnerPhone = partnerPhoneTextField.text
@@ -125,7 +125,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerOwnerName = OwnerNameTextField.text
         partnerAddress = partnerAddressTextView.text
         
-        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id, idBusiness: business_id, type: partnerType ?? .customer
+        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id ?? "errorID", idBusiness: business_id ?? "errorID", type: partnerType ?? .customer
                                       , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
         PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
             if result.airtableId != "" || result.airtableId != nil {

@@ -55,7 +55,7 @@ class AddTransaction: UIViewController {
     func getPartnerList() {
         PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
             print("resultPartnerList")
-            print(resultPartnerList[0].name ?? "error")
+            print(resultPartnerList[0].idPartner, resultPartnerList[0].ownerName)
             self.partnerList = resultPartnerList
         }
         
@@ -83,7 +83,7 @@ class AddTransaction: UIViewController {
     
     @IBAction func createTransaction(_ sender: Any) {
 
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: selectedPartner.idPartner!, totalPrice: Double(totalPrice.text ?? "0") ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: selectedPartner.idPartner!, totalPrice: Double(totalPrice.text ?? "0") ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .ongoing, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
 
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
