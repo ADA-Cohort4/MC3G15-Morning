@@ -23,11 +23,12 @@ class AddTransaction: UIViewController {
     
     @IBOutlet weak var selectPartner: UITextField!
     @IBOutlet weak var partnerType: UIPickerView!
-    @IBOutlet weak var datePicker: UIDatePicker!
+//    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var totalPrice: UITextField!
     @IBOutlet weak var invoiceView: UIImageView!
-    @IBOutlet weak var dueDateView: UIView!
+//    @IBOutlet weak var dueDateView: UIView!
     @IBOutlet weak var paymentCount: UITextField!
+    @IBOutlet weak var datePickerTextField: UITextField!
     
     var imagePicker: UIImagePickerController!
     var imageName = ""
@@ -38,7 +39,7 @@ class AddTransaction: UIViewController {
 //        PartnerModel(idPartner: "2", idUser: "1", idBusiness:  UserDefaults.standard.string(forKey: "businessID")!, type: .customer, name: "Test 2", phone: "081377020333", status: .active, airtableId: "1", address: "hahh??", email: "bruhMoment@bruh.com", ownerName: "owh gitu"),
 //    ]
     var partnerList: [PartnerModel]!
-    var selectedPartner: PartnerModel!
+    var selectedPartnerId: String?
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
@@ -47,15 +48,35 @@ class AddTransaction: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         partnerType.dataSource = self
         partnerType.delegate = self
         selectPartner.inputView = partnerType
         self.tabBarController?.tabBar.isHidden = true
         partnerType.isHidden = true
-        datePicker.datePickerMode = .date
-        totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
-        dueDateView.layer.cornerRadius = 4
+        self.datePickerTextField.datePicker(target: self, doneAction: #selector(doneAction), cancelAction: #selector(cancelAction))
+//        datePicker.datePickerMode = .date
+//        totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+//        dueDateView.layer.cornerRadius = 4
         self.getPartnerList()
+    }
+    
+    @objc func cancelAction() {
+        self.datePickerTextField.resignFirstResponder()
+    }
+
+    @objc func doneAction() {
+        if let datePickerView = self.datePickerTextField.inputView as? UIDatePicker {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFormatter.string(from: datePickerView.date)
+            self.datePickerTextField.text = dateString
+                
+            print(datePickerView.date)
+            print(dateString)
+                
+            self.datePickerTextField.resignFirstResponder()
+        }
     }
     
     func getPartnerList() {
@@ -90,8 +111,13 @@ class AddTransaction: UIViewController {
     @IBAction func createTransaction(_ sender: Any) {
 
 //        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Double(Float(totalPrice.text ?? "0") ?? 0), paymentCount: 2, document: imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: "1")
-
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: selectedPartner.idPartner!, totalPrice: Double(totalPrice.text ?? "0") ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
+        let partnerId = selectedPartnerId ?? (partnerList[0].idPartner ?? "0")
+        guard let amount = totalPrice.text else {
+            return
+        }
+        let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
+        print("originalAmount = \(originalAmount)")
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: datePickerTextField.text ?? "", createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
 
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
@@ -133,7 +159,7 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectPartner.text = partnerList[row].name
         selectPartner.resignFirstResponder()
-        self.selectedPartner = partnerList[row]
+        self.selectedPartnerId = partnerList[row].idPartner
         self.view.endEditing(true)
     }
     
