@@ -32,12 +32,6 @@ class AddTransaction: UIViewController {
     
     var imagePicker: UIImagePickerController!
     var imageName = ""
-    
-    
-//    let partnerList: [PartnerModel] = [
-//        PartnerModel(idPartner: "1", idUser: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!, type: .customer, name: "Test 1", phone: "081377020333", status: .active, airtableId: "2",address: "gatau", email: "owh", ownerName: "lahh"),
-//        PartnerModel(idPartner: "2", idUser: "1", idBusiness:  UserDefaults.standard.string(forKey: "businessID")!, type: .customer, name: "Test 2", phone: "081377020333", status: .active, airtableId: "1", address: "hahh??", email: "bruhMoment@bruh.com", ownerName: "owh gitu"),
-//    ]
     var partnerList: [PartnerModel]!
     var selectedPartnerId: String?
     
@@ -82,7 +76,7 @@ class AddTransaction: UIViewController {
     func getPartnerList() {
         PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
             print("resultPartnerList")
-            print(resultPartnerList[0].name)
+            print(resultPartnerList[0].idPartner, resultPartnerList[0].ownerName)
             self.partnerList = resultPartnerList
         }
         
@@ -118,7 +112,6 @@ class AddTransaction: UIViewController {
         let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
         print("originalAmount = \(originalAmount)")
         let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: datePickerTextField.text ?? "", createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
-
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)

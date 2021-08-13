@@ -30,6 +30,7 @@
 		995A23C926BD8E1C00FAC69D /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */; };
 		995A23CA26BD8E1C00FAC69D /* DatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */; };
 		995A23CE26BED00400FAC69D /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23CD26BED00400FAC69D /* PaymentRepository.swift */; };
+		995A23D226C03ADA00FAC69D /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A23D126C03ADA00FAC69D /* RootTabBarController.swift */; };
 		99837E1326B9911800EFCA58 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99837E1226B9911800EFCA58 /* FilterView.xib */; };
 		99837E1526B9915E00EFCA58 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99837E1426B9915E00EFCA58 /* FilterView.swift */; };
 		99DC76D526B0577200BFD14D /* dateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC76D426B0577200BFD14D /* dateCell.swift */; };
@@ -57,7 +58,6 @@
 		D43FEFE626AFBAB80057F616 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE526AFBAB80057F616 /* Dashboard.swift */; };
 		D43FEFE826AFBAC60057F616 /* AddTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE726AFBAC60057F616 /* AddTransaction.swift */; };
 		D43FEFEA26AFBAD10057F616 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFE926AFBAD10057F616 /* History.swift */; };
-		D43FEFEC26AFBAE80057F616 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFEB26AFBAE80057F616 /* Transaction.swift */; };
 		D43FEFEE26AFBAF40057F616 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFED26AFBAF40057F616 /* DocumentView.swift */; };
 		D43FEFF026AFBB000057F616 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFEF26AFBB000057F616 /* Partner.swift */; };
 		D43FEFF226AFC1AE0057F616 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43FEFF126AFC1AE0057F616 /* Settings.swift */; };
@@ -98,6 +98,7 @@
 		D4D3D374267063B3005A4ABA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D373267063B3005A4ABA /* Constants.swift */; };
 		D4D3D376267063C8005A4ABA /* CommonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D3D375267063C8005A4ABA /* CommonFunction.swift */; };
 		D4D3D37926706523005A4ABA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D3D37826706523005A4ABA /* Colors.xcassets */; };
+		E756E9D126C4EE080046BB33 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756E9D026C4EE080046BB33 /* DummyData.swift */; };
 		E790D39726BB5BB5000D8435 /* ConfirmPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */; };
 		E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */; };
 		EC0BA3E026C6059700E2A4D1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0BA3DF26C6059700E2A4D1 /* UIViewController+Extension.swift */; };
@@ -144,6 +145,7 @@
 		995A23C726BD8E1C00FAC69D /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		995A23C826BD8E1C00FAC69D /* DatePickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerCell.xib; sourceTree = "<group>"; };
 		995A23CD26BED00400FAC69D /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
+		995A23D126C03ADA00FAC69D /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		99837E1226B9911800EFCA58 /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		99837E1426B9915E00EFCA58 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		99DC76D426B0577200BFD14D /* dateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateCell.swift; sourceTree = "<group>"; };
@@ -171,7 +173,6 @@
 		D43FEFE526AFBAB80057F616 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		D43FEFE726AFBAC60057F616 /* AddTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransaction.swift; sourceTree = "<group>"; };
 		D43FEFE926AFBAD10057F616 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
-		D43FEFEB26AFBAE80057F616 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		D43FEFED26AFBAF40057F616 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
 		D43FEFEF26AFBB000057F616 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
 		D43FEFF126AFC1AE0057F616 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 		D4D3D373267063B3005A4ABA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4D3D375267063C8005A4ABA /* CommonFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunction.swift; sourceTree = "<group>"; };
 		D4D3D37826706523005A4ABA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		E756E9D026C4EE080046BB33 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPinViewController.swift; sourceTree = "<group>"; };
 		E7A9B69A26B64064009C2876 /* Rekord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rekord.entitlements; sourceTree = "<group>"; };
 		E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupBusinessViewController.swift; sourceTree = "<group>"; };
@@ -350,7 +352,6 @@
 			children = (
 				D43FEFE926AFBAD10057F616 /* History.swift */,
 				995083DA26B999E3008350D7 /* NormalOptViewCell.swift */,
-				D43FEFEB26AFBAE80057F616 /* Transaction.swift */,
 				D43FEFED26AFBAF40057F616 /* DocumentView.swift */,
 				99DC76DE26B7B1DB00BFD14D /* TransactionDetails.swift */,
 				99DC76E026B83D9C00BFD14D /* paymentCell.swift */,
@@ -438,6 +439,8 @@
 		D4A90314266F09E7007D5D2E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				995A23D126C03ADA00FAC69D /* RootTabBarController.swift */,
+				D4A90313266F09CD007D5D2E /* Application */,
 				D43FEFD926AFB9CE0057F616 /* Onboarding&Login */,
 				D43FEFD826AFB9C90057F616 /* Dashboard */,
 				D43FEFD726AFB9C10057F616 /* Transaction&History */,
@@ -477,6 +480,7 @@
 				D4D3D36726706356005A4ABA /* Library */,
 				D4D3D36626706344005A4ABA /* Constant */,
 				D4D3D351267062AF005A4ABA /* Extension */,
+				E756E9D026C4EE080046BB33 /* DummyData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -548,7 +552,6 @@
 				D4A90316266F0A08007D5D2E /* Core */,
 				D4A90315266F09F1007D5D2E /* Resources */,
 				D4A90314266F09E7007D5D2E /* Presentation */,
-				D4A90313266F09CD007D5D2E /* Application */,
 				D4D20545266DEF1900CDC2D6 /* Info.plist */,
 			);
 			path = Rekord;
@@ -760,6 +763,7 @@
 				ECC223F726B24DE700DDF743 /* UserModel.swift in Sources */,
 				D4D3D362267062EF005A4ABA /* TableViewCell+Extension.swift in Sources */,
 				D4D3D35F267062EF005A4ABA /* UIImage+Extension.swift in Sources */,
+				E756E9D126C4EE080046BB33 /* DummyData.swift in Sources */,
 				ECC223F926B24DE700DDF743 /* TransactionModel.swift in Sources */,
 				D48BC0DE26B52D52001D7D9C /* TransactionsModel+Networking.swift in Sources */,
 				D43FEFF026AFBB000057F616 /* Partner.swift in Sources */,
@@ -783,10 +787,10 @@
 				D4D3D36C26706386005A4ABA /* BarChartPresenter.swift in Sources */,
 				ECA4ADFD26B91304007C4F74 /* BusinessRepository.swift in Sources */,
 				D48BC0DC26B52C1B001D7D9C /* BusinessModel+Networking.swift in Sources */,
+				995A23D226C03ADA00FAC69D /* RootTabBarController.swift in Sources */,
 				D444D4E126B6A62700431C1B /* PaymentsAPIRequest.swift in Sources */,
 				D43FEFB526AFA7D50057F616 /* Rekord.xcdatamodeld in Sources */,
 				D48BC0E026B52E69001D7D9C /* PaymentsModel+Networking.swift in Sources */,
-				D43FEFEC26AFBAE80057F616 /* Transaction.swift in Sources */,
 				EC6F600C26BC2FEE000A3302 /* String+Extension.swift in Sources */,
 				D4D3D35C267062EF005A4ABA /* UIColor+Extension.swift in Sources */,
 				D444D4DD26B6A25500431C1B /* TransactionsAPIRequest.swift in Sources */,
@@ -959,13 +963,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = H7G3L89F8C;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maritia.com.Rekord;
+				PRODUCT_BUNDLE_IDENTIFIER = PeterLee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -979,13 +983,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = H7G3L89F8C;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maritia.com.Rekord;
+				PRODUCT_BUNDLE_IDENTIFIER = PeterLee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

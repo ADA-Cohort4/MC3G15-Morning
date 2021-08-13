@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Partner List View Controller-->
+        <!--Partner-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="PartnerListViewController" customModule="Rekord" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,7 +25,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="AddButton"/>
                                         <connections>
-                                            <segue destination="FfA-Fd-FMz" kind="show" id="lgc-pe-ciB"/>
+                                            <segue destination="FfA-Fd-FMz" kind="show" identifier="toAddPartnerSegue" id="lgc-pe-ciB"/>
                                         </connections>
                                     </button>
                                     <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Lww-kW-xEi">
@@ -33,25 +33,53 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="182" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vHK-SN-SQg">
-                                        <rect key="frame" x="23" y="133" width="368" height="757"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="Y6W-OH-hqX" id="Yoc-9l-bE8"/>
-                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="zBi-va-a0q"/>
-                                        </connections>
-                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.066666666669999999" green="0.33725490200000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="182" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vHK-SN-SQg">
+                                <rect key="frame" x="23" y="219" width="368" height="607"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="Yoc-9l-bE8"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="zBi-va-a0q"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pef-Qp-4J6">
+                                <rect key="frame" x="121" y="520" width="172" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Click to Add Partner">
+                                    <color key="titleColor" red="0.066666666669999999" green="0.33725490200000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="emptyButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pSc-MJ-bME"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your partner list is empty!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xU-sd-QdN">
+                                <rect key="frame" x="67" y="453" width="280" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EmptyPartnerListImage" translatesAutoresizingMaskIntoConstraints="NO" id="cCp-mU-wF6">
+                                <rect key="frame" x="129" y="333" width="157.99999999999994" height="88.999999999999787"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Partner" image="person.2.square.stack" catalog="system" id="Q0f-zK-M9j"/>
                     <navigationItem key="navigationItem" id="XJi-qs-vY7"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addPartnerButton" destination="IcK-QC-q7q" id="lvw-Vu-WMI"/>
+                        <outlet property="emptyButton" destination="Pef-Qp-4J6" id="s7z-iJ-8OX"/>
+                        <outlet property="emptyImage" destination="cCp-mU-wF6" id="JLz-wY-qFG"/>
+                        <outlet property="emptyLabel" destination="1xU-sd-QdN" id="wRK-i4-9sA"/>
                         <outlet property="partnerListTable" destination="vHK-SN-SQg" id="koL-Gg-elR"/>
                         <outlet property="roundedUpperView" destination="cQu-CQ-06S" id="VnV-LN-FY4"/>
                         <outlet property="searchBar" destination="Lww-kW-xEi" id="jyw-pz-ayF"/>
@@ -198,6 +226,7 @@
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveNewPartner:" destination="FfA-Fd-FMz" eventType="touchUpInside" id="zCD-JJ-XYI"/>
+                                    <segue destination="1Sj-xQ-6SN" kind="unwind" identifier="unwindToPartnerList" unwindAction="unwindToPartnerListWithSegue:" id="D47-TB-FpW"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -219,6 +248,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nAO-hw-8Up" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="1Sj-xQ-6SN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1834.7826086956522" y="105.80357142857143"/>
         </scene>
@@ -243,6 +273,8 @@
     </scenes>
     <resources>
         <image name="AddButton" width="36" height="36"/>
+        <image name="EmptyPartnerListImage" width="158" height="89"/>
+        <image name="person.2.square.stack" catalog="system" width="113" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

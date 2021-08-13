@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,19 +17,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="328" height="182"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T03-Xf-ECn">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T03-Xf-ECn">
                         <rect key="frame" x="0.0" y="49" width="328" height="133"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jul 14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyH-xP-ZTP">
-                                <rect key="frame" x="268" y="37" width="38" height="17"/>
+                                <rect key="frame" x="224" y="37" width="82" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="140.000.000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUx-0Z-L7V">
-                                <rect key="frame" x="224" y="65" width="82" height="17"/>
+                                <rect key="frame" x="206" y="65" width="100" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
@@ -77,17 +77,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Partner Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joe-oh-IGx">
-                        <rect key="frame" x="96" y="14" width="135" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partner Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joe-oh-IGx">
+                        <rect key="frame" x="32" y="14" width="266" height="21"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="T03-Xf-ECn" firstAttribute="top" secondItem="joe-oh-IGx" secondAttribute="bottom" constant="14" id="DjL-as-rSt"/>
+                    <constraint firstItem="T03-Xf-ECn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Odf-4k-i5X"/>
+                    <constraint firstAttribute="bottom" secondItem="T03-Xf-ECn" secondAttribute="bottom" id="XgP-dC-k99"/>
+                    <constraint firstAttribute="trailing" secondItem="joe-oh-IGx" secondAttribute="trailing" constant="30" id="iJM-dW-UY3"/>
+                    <constraint firstAttribute="trailing" secondItem="T03-Xf-ECn" secondAttribute="trailing" id="iNm-Pj-K9E"/>
+                    <constraint firstItem="joe-oh-IGx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="mKl-54-O9D"/>
+                    <constraint firstItem="joe-oh-IGx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="mWb-Nr-N1U"/>
+                    <constraint firstItem="T03-Xf-ECn" firstAttribute="top" secondItem="joe-oh-IGx" secondAttribute="bottom" constant="14" id="pdD-QU-ju6"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
@@ -100,4 +109,9 @@
             <point key="canvasLocation" x="17.39130434782609" y="104.46428571428571"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

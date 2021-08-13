@@ -9,6 +9,8 @@ import UIKit
 
 class EditPartnerViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     
+    // Unused code (Belum di connect)
+    
     @IBOutlet weak var editPartnerTableView: UITableView!
     
     @IBOutlet weak var businessNameTextField: UITextField!
@@ -45,7 +47,6 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         //Partner ID perlu diganti kalau mau coba akses
-        partnerId = "256xDjrm"
         PartnerRepository.shared.getAllPartner { partnerList, partner in
             for updatePartner in partnerList{
                 if updatePartner.idPartner == self.partnerId{

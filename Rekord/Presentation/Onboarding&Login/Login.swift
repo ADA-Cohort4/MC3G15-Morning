@@ -50,8 +50,6 @@ class Login: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-//        let destinationNavigationController = segue.destination as! UINavigationController
-//        let targetController = destinationNavigationController.topViewController
         if segue.identifier == "ToSetupBusinessSegue"{
            
             let destinationVC = segue.destination as? SetupBusinessViewController
@@ -71,14 +69,10 @@ extension Login: ASAuthorizationControllerDelegate {
         
         case let credentials as ASAuthorizationAppleIDCredential:
             userID = credentials.user
-            var appleIdCore = ""
             
             let appleId = UserRepository.shared.getUserByAppleId(userID){ (result) in
-                print(result.appleId)
                 if result.airtableId != "" || result.airtableId != nil {
-//                    appleIdCore = result.appleId!
                     
-                   // self.navigationController?.popViewController(animated: true)
                     if credentials.user == result.appleId{
                         self.toKeypadSegue()
                     } else {

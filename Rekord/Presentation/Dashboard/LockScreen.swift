@@ -18,7 +18,7 @@ class LockScreen: UIViewController {
     var click: Int = 0
     
     @IBAction func relogin(_ sender: Any) {
-        //navigate to login email (sign in)
+        print("relogin")
     }
     
     @IBAction func buttonsTap(_ sender: UIButton){
@@ -51,14 +51,10 @@ class LockScreen: UIViewController {
             //navigate to dashboard if true, try again if false
         }
     }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toDashboardSegue" {
-//            let destinationVC = segue.destination as! Dashboard
-//        }
-//    }
+
     
     @IBAction func faceID(_ sender: UIButton){
-        //faceID function
+        print("face id")
     }
     
     @IBAction func deletePIN(_ sender: UIButton){
@@ -83,7 +79,6 @@ class LockScreen: UIViewController {
         for j in 0..<10{
             numPad[j].layer.cornerRadius = 37.5
         }
-        // num[10] face id, num[11] delete
         
     }
     
