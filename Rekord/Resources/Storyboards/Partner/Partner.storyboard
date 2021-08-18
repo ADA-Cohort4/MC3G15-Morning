@@ -230,7 +230,7 @@
                         <color key="backgroundColor" red="0.066666666669999999" green="0.33725490200000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="r0Z-FT-Tcu">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="Hpw-Pi-Pd9"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Hpw-Pi-Pd9"/>
                     </navigationItem>
                     <connections>
                         <outlet property="AddPartnerTableView" destination="d2l-h7-ilh" id="BkY-IE-8SN"/>
