@@ -16,9 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQu-CQ-06S">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQu-CQ-06S">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="211"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcK-QC-q7q">
                                         <rect key="frame" x="335" y="96" width="36" height="36"/>
@@ -35,6 +34,9 @@
                                     </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.066666666669999999" green="0.33725490200000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="211" id="ckw-Z3-cA6"/>
+                                </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="182" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vHK-SN-SQg">
                                 <rect key="frame" x="23" y="219" width="368" height="607"/>
@@ -64,13 +66,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EmptyPartnerListImage" translatesAutoresizingMaskIntoConstraints="NO" id="cCp-mU-wF6">
-                                <rect key="frame" x="129" y="333" width="157.99999999999994" height="88.999999999999787"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EmptyPartnerListImage" translatesAutoresizingMaskIntoConstraints="NO" id="cCp-mU-wF6">
+                                <rect key="frame" x="129" y="333" width="158" height="88.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="cCp-mU-wF6" secondAttribute="height" multiplier="157:88" id="pf9-id-yNk"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cCp-mU-wF6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="129" id="9Sf-VZ-gq7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cCp-mU-wF6" secondAttribute="trailing" constant="127" id="Hvo-Wj-MEI"/>
+                            <constraint firstItem="cQu-CQ-06S" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="NDO-0q-vtn"/>
+                            <constraint firstItem="cCp-mU-wF6" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="bottom" constant="122" id="TBI-oo-sSz"/>
+                            <constraint firstItem="cQu-CQ-06S" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="nko-Cp-iEf"/>
+                            <constraint firstItem="cQu-CQ-06S" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="t5b-na-2tS"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Partner" image="person.2.square.stack" catalog="system" id="Q0f-zK-M9j"/>
                     <navigationItem key="navigationItem" id="XJi-qs-vY7"/>

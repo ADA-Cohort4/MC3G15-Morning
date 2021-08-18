@@ -59,6 +59,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         partnerListTable.dataSource = self
         partnerListTable.delegate = self
         roundedUpperView.layer.cornerRadius = 30
+        emptyButton.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isHidden = true
         partnerListTable.register(UINib.init(nibName: "PartnerListCell", bundle: nil), forCellReuseIdentifier: "PartnerListCell")
         
