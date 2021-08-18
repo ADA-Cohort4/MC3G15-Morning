@@ -67,6 +67,9 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         
         partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
         
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
