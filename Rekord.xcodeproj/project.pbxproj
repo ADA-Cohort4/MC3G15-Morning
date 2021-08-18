@@ -101,6 +101,8 @@
 		E756E9D126C4EE080046BB33 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756E9D026C4EE080046BB33 /* DummyData.swift */; };
 		E790D39726BB5BB5000D8435 /* ConfirmPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */; };
 		E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */; };
+		EC0BA3E026C6059700E2A4D1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0BA3DF26C6059700E2A4D1 /* UIViewController+Extension.swift */; };
+		EC0BA3E226C60BF700E2A4D1 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0BA3E126C60BF700E2A4D1 /* UITextField+Extension.swift */; };
 		EC68569B26B3B1C400148313 /* InviteLinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68569A26B3B1C400148313 /* InviteLinkModel.swift */; };
 		EC68569D26B3B6EB00148313 /* AddTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */; };
 		EC6F600C26BC2FEE000A3302 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6F600B26BC2FEE000A3302 /* String+Extension.swift */; };
@@ -217,6 +219,8 @@
 		E790D39626BB5BB5000D8435 /* ConfirmPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPinViewController.swift; sourceTree = "<group>"; };
 		E7A9B69A26B64064009C2876 /* Rekord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rekord.entitlements; sourceTree = "<group>"; };
 		E7A9B69D26B6426D009C2876 /* SetupBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupBusinessViewController.swift; sourceTree = "<group>"; };
+		EC0BA3DF26C6059700E2A4D1 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		EC0BA3E126C60BF700E2A4D1 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		EC68569A26B3B1C400148313 /* InviteLinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkModel.swift; sourceTree = "<group>"; };
 		EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTransaction.storyboard; sourceTree = "<group>"; };
 		EC6F600B26BC2FEE000A3302 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -567,6 +571,8 @@
 				D4D3D355267062EE005A4ABA /* UIImage+Extension.swift */,
 				D4D3D354267062EE005A4ABA /* UIView+Extension.swift */,
 				EC6F600B26BC2FEE000A3302 /* String+Extension.swift */,
+				EC0BA3DF26C6059700E2A4D1 /* UIViewController+Extension.swift */,
+				EC0BA3E126C60BF700E2A4D1 /* UITextField+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -741,6 +747,7 @@
 				995A23C926BD8E1C00FAC69D /* DatePickerCell.swift in Sources */,
 				99DC76D526B0577200BFD14D /* dateCell.swift in Sources */,
 				99DC76D926B058D800BFD14D /* transactionsCell.swift in Sources */,
+				EC0BA3E226C60BF700E2A4D1 /* UITextField+Extension.swift in Sources */,
 				99DC76D726B0587600BFD14D /* balanceCell.swift in Sources */,
 				67FC69DE26B469AE00836E3F /* SelectFromContactCell.swift in Sources */,
 				ECC223FD26B24DE700DDF743 /* PaymentModel.swift in Sources */,
@@ -762,6 +769,7 @@
 				D43FEFF026AFBB000057F616 /* Partner.swift in Sources */,
 				D48BC0CF26B3AE90001D7D9C /* BaseRequest.swift in Sources */,
 				D48BC0D426B3BE42001D7D9C /* UsersModel+Networking.swift in Sources */,
+				EC0BA3E026C6059700E2A4D1 /* UIViewController+Extension.swift in Sources */,
 				D43FEFE626AFBAB80057F616 /* Dashboard.swift in Sources */,
 				D48BC0E226B52ECA001D7D9C /* InviteLinksModel+Networking.swift in Sources */,
 				D43FEFE426AFBAAF0057F616 /* LockScreen.swift in Sources */,
@@ -955,13 +963,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7G3L89F8C;
+				DEVELOPMENT_TEAM = 25T7L593ZA;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = PeterLee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rekordmc3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -975,13 +983,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H7G3L89F8C;
+				DEVELOPMENT_TEAM = 25T7L593ZA;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = PeterLee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rekordmc3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

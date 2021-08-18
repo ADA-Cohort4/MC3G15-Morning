@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="40" id="JHU-6b-ANK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Payment Count" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rbZ-TU-ovr">
                                 <rect key="frame" x="16" y="184" width="358" height="40"/>
@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="40" id="kit-Il-yI5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-GU-orN">
                                 <rect key="frame" x="16" y="300" width="358" height="158"/>
@@ -92,37 +92,11 @@
                                 <rect key="frame" x="0.0" y="682" width="390" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QF5-ce-EHR">
-                                <rect key="frame" x="16" y="242" width="358" height="40"/>
-                                <subviews>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="nZH-Bm-Xoq">
-                                        <rect key="frame" x="244" y="0.0" width="110" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="CYw-KV-xAa"/>
-                                            <constraint firstAttribute="width" constant="110" id="Woi-P4-Ll1"/>
-                                        </constraints>
-                                    </datePicker>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmc-Od-lce">
-                                        <rect key="frame" x="8" y="9.9999999999999982" width="71" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="SSg-eN-UQc"/>
-                                    <constraint firstItem="lmc-Od-lce" firstAttribute="leading" secondItem="QF5-ce-EHR" secondAttribute="leading" constant="8" id="UCY-bh-fBg"/>
-                                    <constraint firstAttribute="trailing" secondItem="nZH-Bm-Xoq" secondAttribute="trailing" constant="4" id="cCf-B1-H48"/>
-                                    <constraint firstItem="nZH-Bm-Xoq" firstAttribute="centerY" secondItem="QF5-ce-EHR" secondAttribute="centerY" id="jOU-TU-t88"/>
-                                    <constraint firstItem="lmc-Od-lce" firstAttribute="centerY" secondItem="QF5-ce-EHR" secondAttribute="centerY" id="jos-Pa-YdM"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusCorner">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Due Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KRK-V1-IWW">
+                                <rect key="frame" x="16" y="245" width="358" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.066666666666666666" green="0.33725490196078434" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -131,25 +105,24 @@
                             <constraint firstItem="rbZ-TU-ovr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="4zX-Qg-qYt"/>
                             <constraint firstItem="6kw-s0-2Ih" firstAttribute="top" secondItem="khA-90-58G" secondAttribute="bottom" constant="18" id="90N-xe-KqK"/>
                             <constraint firstItem="khA-90-58G" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Aed-PO-0hc"/>
+                            <constraint firstItem="9gF-8p-rnu" firstAttribute="top" secondItem="KRK-V1-IWW" secondAttribute="bottom" constant="21" id="CrI-zm-IrR"/>
+                            <constraint firstItem="KRK-V1-IWW" firstAttribute="top" secondItem="rbZ-TU-ovr" secondAttribute="bottom" constant="21" id="GfQ-io-FFD"/>
+                            <constraint firstItem="KRK-V1-IWW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="I94-WM-gI5"/>
                             <constraint firstItem="rbZ-TU-ovr" firstAttribute="top" secondItem="6kw-s0-2Ih" secondAttribute="bottom" constant="18" id="Pb2-7Z-kyh"/>
-                            <constraint firstItem="QF5-ce-EHR" firstAttribute="top" secondItem="rbZ-TU-ovr" secondAttribute="bottom" constant="18" id="XmI-ZS-gXS"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KRK-V1-IWW" secondAttribute="trailing" constant="16" id="Wt1-3G-ZlM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XsF-JT-Pj1" secondAttribute="trailing" constant="100" id="Ypo-sk-HgS"/>
-                            <constraint firstItem="3Nh-GU-orN" firstAttribute="top" secondItem="QF5-ce-EHR" secondAttribute="bottom" constant="18" id="aA3-ZH-Zm2"/>
                             <constraint firstItem="6kw-s0-2Ih" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="aO9-0o-btc"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QF5-ce-EHR" secondAttribute="trailing" constant="16" id="d83-4g-Z39"/>
                             <constraint firstItem="khA-90-58G" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="dSv-2V-BSd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rbZ-TU-ovr" secondAttribute="trailing" constant="16" id="h45-lY-Xcz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="khA-90-58G" secondAttribute="trailing" constant="16" id="lSd-HS-gYI"/>
                             <constraint firstItem="XsF-JT-Pj1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="mit-gn-qUj"/>
-                            <constraint firstItem="QF5-ce-EHR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="prB-Pm-5BG"/>
                             <constraint firstItem="XsF-JT-Pj1" firstAttribute="top" secondItem="3Nh-GU-orN" secondAttribute="bottom" constant="48" id="tkW-cG-Qli"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6kw-s0-2Ih" secondAttribute="trailing" constant="16" id="vYn-NR-uje"/>
                             <constraint firstItem="3Nh-GU-orN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="zzA-A3-xNM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="datePicker" destination="nZH-Bm-Xoq" id="r9d-71-pvr"/>
-                        <outlet property="dueDateView" destination="QF5-ce-EHR" id="ncm-CZ-neL"/>
+                        <outlet property="datePickerTextField" destination="KRK-V1-IWW" id="yb3-oM-6pm"/>
                         <outlet property="invoiceView" destination="9gF-8p-rnu" id="L5G-3Q-jg8"/>
                         <outlet property="partnerType" destination="xej-AS-zXw" id="4Do-X1-rOY"/>
                         <outlet property="paymentCount" destination="rbZ-TU-ovr" id="pOC-Tq-oji"/>
