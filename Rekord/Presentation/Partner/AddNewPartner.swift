@@ -63,6 +63,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         
         self.navigationController?.navigationBar.isHidden = false
         
+        self.navigationItem.title = "Add Partner"
         partnerTypeView.isHidden = true
         
         partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
