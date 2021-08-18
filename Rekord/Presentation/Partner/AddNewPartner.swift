@@ -43,7 +43,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         AddPartnerTableView.register(UINib.init(nibName: "SelectFromContactCell", bundle: nil), forCellReuseIdentifier: "SelectFromContactCell")
-        AddPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
+//        AddPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
         AddPartnerTableView.reloadData()
         
         partnerBusinessCell.layer.cornerRadius = 10
@@ -53,30 +53,42 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerAddressCell.layer.cornerRadius = 10
         partnerTypeView.layer.cornerRadius = 10
         
+        businessNameTextField.placeholder = "Input business name"
+        OwnerNameTextField.placeholder = "Input partner owner name"
+        partnerEmailTextField.placeholder = "Input partner email"
+        partnerPhoneTextField.placeholder = "Input phone number"
+            
+        partnerEmailTextField.keyboardType = UIKeyboardType.emailAddress
+        partnerPhoneTextField.keyboardType = UIKeyboardType.asciiCapableNumberPad
+        
         self.navigationController?.navigationBar.isHidden = false
         
         partnerTypeView.isHidden = true
         
         partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "SelectFromContactCell", for: indexPath)as! SelectFromContactCell
-            return cell
-        }else{
-            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
-            cell.partnerType.text! = selectedData
-            return cell
-        }
-        
+        let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "SelectFromContactCell", for: indexPath)as! SelectFromContactCell
+        return cell
+//        if indexPath.section == 0 {
+//            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "SelectFromContactCell", for: indexPath)as! SelectFromContactCell
+//            return cell
+//        }
+//        else{
+//            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
+//            cell.partnerType.text! = selectedData
+//            return cell
+//        }
+//
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -31,6 +31,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     private let refreshControl = UIRefreshControl()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         queryPartners()
@@ -66,7 +67,6 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
         partnerListTable.addSubview(refreshControl)
         partnerListTable.reloadData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
