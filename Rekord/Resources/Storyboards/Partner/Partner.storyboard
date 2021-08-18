@@ -226,7 +226,6 @@
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveNewPartner:" destination="FfA-Fd-FMz" eventType="touchUpInside" id="zCD-JJ-XYI"/>
-                                    <segue destination="1Sj-xQ-6SN" kind="unwind" identifier="unwindToPartnerList" unwindAction="unwindToPartnerListWithSegue:" id="D47-TB-FpW"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -248,7 +247,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nAO-hw-8Up" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="1Sj-xQ-6SN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1834.7826086956522" y="105.80357142857143"/>
         </scene>
