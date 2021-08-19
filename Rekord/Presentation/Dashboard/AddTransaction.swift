@@ -49,6 +49,7 @@ class AddTransaction: UIViewController {
         selectPartner.inputView = partnerType
         self.tabBarController?.tabBar.isHidden = true
         partnerType.isHidden = true
+     
         self.datePickerTextField.datePicker(target: self, doneAction: #selector(doneAction), cancelAction: #selector(cancelAction))
 //        datePicker.datePickerMode = .date
 //        totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
@@ -125,16 +126,21 @@ class AddTransaction: UIViewController {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
         
-        
+        let alert = UIAlertController(title: "Saving Transaction...", message: "Please wait while we save your transaction.", preferredStyle: .alert)
+        self.present(alert, animated: true)
         TransactionRepository.shared.saveTransaction(transaction: newTransaction){ (result) in
             if result.airtableId != "" || result.airtableId != nil {
                 DispatchQueue.main.async {
-                    do{
-                        sleep(2)
-                    }
+                    alert.dismiss(animated: true, completion: nil)
                     self.navigationController?.popViewController(animated: true)
                 }
             } else {
+                alert.dismiss(animated: true, completion: nil)
+                let alert = UIAlertController(title: "Error", message: "There was an error in saving your transaction. Try checking your internet connection or restarting the app.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)
                 print("error save")
             }
         }

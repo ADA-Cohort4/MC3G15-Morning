@@ -74,6 +74,17 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    override func viewDidAppear(_ animated: Bool) {
+        partnerArray = []
+        queryPartners()
+        if partnerArray.count == 1{ //check apakah transaksi baru dibuat dari empty state
+            self.partnerListTable.isHidden = false
+            self.emptyImage.isHidden = true
+            self.emptyLabel.isHidden = true
+            self.emptyButton.isHidden = true
+        }
+        self.partnerListTable.reloadData()
+    }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

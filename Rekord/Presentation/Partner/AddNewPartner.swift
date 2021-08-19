@@ -58,6 +58,8 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerTypeView.isHidden = true
         
         partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
+        
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -116,6 +118,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func saveNewPartner(_ sender: Any) {
+        
         let user_id = UserDefaults.standard.string(forKey: "userID")
         let business_id = UserDefaults.standard.string(forKey: "businessID")
         partner_id = CommonFunction.shared.randomString(length: 8)
@@ -127,12 +130,22 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         
         let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id ?? "errorID", idBusiness: business_id ?? "errorID", type: partnerType ?? .customer
                                       , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
+        let alert = UIAlertController(title: "Saving Partner...", message: "Please wait while we save your partner.", preferredStyle: .alert)
+        self.present(alert, animated: true)
+        
         PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
             if result.airtableId != "" || result.airtableId != nil {
                 DispatchQueue.main.async {
+                    alert.dismiss(animated: true, completion: nil) //finished alert
                 self.navigationController?.popViewController(animated: true)
                 }
             } else {
+                alert.dismiss(animated: true, completion: nil)
+                let alert = UIAlertController(title: "Error", message: "There was an error in saving your partner. Try checking your internet connection or restarting the app.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alert, animated: true)
                 print("error save partner")
             }
         }
