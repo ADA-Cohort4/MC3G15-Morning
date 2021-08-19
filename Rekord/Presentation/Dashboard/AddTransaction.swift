@@ -40,6 +40,7 @@ class AddTransaction: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -109,9 +110,17 @@ class AddTransaction: UIViewController {
         guard let amount = totalPrice.text else {
             return
         }
+        
+        //DATE FORMATTER
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "id_ID")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let today = dateFormatter.string(from: date)
+        
         let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
         print("originalAmount = \(originalAmount)")
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: datePickerTextField.text ?? "", createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: datePickerTextField.text ?? "", createdDate: today, updatedDate: today, status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
@@ -120,6 +129,9 @@ class AddTransaction: UIViewController {
         TransactionRepository.shared.saveTransaction(transaction: newTransaction){ (result) in
             if result.airtableId != "" || result.airtableId != nil {
                 DispatchQueue.main.async {
+                    do{
+                        sleep(2)
+                    }
                     self.navigationController?.popViewController(animated: true)
                 }
             } else {
