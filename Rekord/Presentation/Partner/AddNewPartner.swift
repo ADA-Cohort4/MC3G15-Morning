@@ -43,7 +43,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         AddPartnerTableView.register(UINib.init(nibName: "SelectFromContactCell", bundle: nil), forCellReuseIdentifier: "SelectFromContactCell")
-        AddPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
+//        AddPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
         AddPartnerTableView.reloadData()
         
         partnerBusinessCell.layer.cornerRadius = 10
@@ -52,33 +52,51 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerPhoneCell.layer.cornerRadius = 10
         partnerAddressCell.layer.cornerRadius = 10
         partnerTypeView.layer.cornerRadius = 10
+        partnerAddressTextView.layer.borderColor = #colorLiteral(red: 0.9140917659, green: 0.9183221459, blue: 0.9286623597, alpha: 1)
+        partnerAddressTextView.layer.borderWidth = 1
+        partnerAddressTextView.layer.cornerRadius = 8
+        businessNameTextField.placeholder = "Input business name"
+        OwnerNameTextField.placeholder = "Input partner owner name"
+        partnerEmailTextField.placeholder = "Input partner email"
+        partnerPhoneTextField.placeholder = "Input phone number"
+            
+        partnerEmailTextField.keyboardType = UIKeyboardType.emailAddress
+        partnerPhoneTextField.keyboardType = UIKeyboardType.asciiCapableNumberPad
         
         self.navigationController?.navigationBar.isHidden = false
         
+        self.navigationItem.title = "Add Partner"
         partnerTypeView.isHidden = true
         
         partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
         
-        
+
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "SelectFromContactCell", for: indexPath)as! SelectFromContactCell
-            return cell
-        }else{
-            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
-            cell.partnerType.text! = selectedData
-            return cell
-        }
-        
+        let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "SelectFromContactCell", for: indexPath)as! SelectFromContactCell
+        return cell
+//        if indexPath.section == 0 {
+//            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "SelectFromContactCell", for: indexPath)as! SelectFromContactCell
+//            return cell
+//        }
+//        else{
+//            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
+//            cell.partnerType.text! = selectedData
+//            return cell
+//        }
+//
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -95,6 +113,13 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
                 partnerTypeView.isHidden = true
             }
         }
+    }
+    
+    func validateEmail(emailToValidate: String)-> Bool{
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        
+        return emailPredicate.evaluate(with: emailToValidate)
     }
     
     @IBAction func onDoneButtonClicked(){
@@ -128,27 +153,36 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerOwnerName = OwnerNameTextField.text
         partnerAddress = partnerAddressTextView.text
         
-        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id ?? "errorID", idBusiness: business_id ?? "errorID", type: partnerType ?? .customer
-                                      , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
-        let alert = UIAlertController(title: "Saving Partner...", message: "Please wait while we save your partner.", preferredStyle: .alert)
-        self.present(alert, animated: true)
-        
-        PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
-            if result.airtableId != "" || result.airtableId != nil {
-                DispatchQueue.main.async {
-                    alert.dismiss(animated: true, completion: nil) //finished alert
-                self.navigationController?.popViewController(animated: true)
-                }
-            } else {
-                alert.dismiss(animated: true, completion: nil)
-                let alert = UIAlertController(title: "Error", message: "There was an error in saving your partner. Try checking your internet connection or restarting the app.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+        if validateEmail(emailToValidate: partnerEmail ?? "Email is empty") == true {
+            let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id ?? "errorID", idBusiness: business_id ?? "errorID", type: partnerType ?? .customer
+                                          , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
+            let alert = UIAlertController(title: "Saving Partner...", message: "Please wait while we save your partner.", preferredStyle: .alert)
+            self.present(alert, animated: true)
+            
+            PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
+                if result.airtableId != "" || result.airtableId != nil {
+                    DispatchQueue.main.async {
+                        alert.dismiss(animated: true, completion: nil) //finished alert
+                    self.navigationController?.popViewController(animated: true)
+                    }
+                } else {
                     alert.dismiss(animated: true, completion: nil)
-                }))
-                self.present(alert, animated: true)
-                print("error save partner")
+                    let alert = UIAlertController(title: "Error", message: "There was an error in saving your partner. Try checking your internet connection or restarting the app.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                        alert.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true)
+                    print("error save partner")
+                }
             }
+        }else{
+            let alert = UIAlertController(title: "Invalid Email", message: "Please input a valid email address.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The alert has been dismissed.")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
+
     }
     
 }

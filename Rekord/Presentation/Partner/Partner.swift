@@ -31,6 +31,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     private let refreshControl = UIRefreshControl()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         queryPartners()
@@ -59,13 +60,13 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         partnerListTable.dataSource = self
         partnerListTable.delegate = self
         roundedUpperView.layer.cornerRadius = 30
+        emptyButton.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isHidden = true
         partnerListTable.register(UINib.init(nibName: "PartnerListCell", bundle: nil), forCellReuseIdentifier: "PartnerListCell")
         
         refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
         partnerListTable.addSubview(refreshControl)
         partnerListTable.reloadData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
