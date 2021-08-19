@@ -156,6 +156,9 @@
                                         <state key="normal" title="Update Payment">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onUpdateBtnClick:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Jzu-oW-tFD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0d3-pK-HfG">
                                         <rect key="frame" x="185" y="499" width="140" height="45"/>
@@ -191,11 +194,22 @@
                         <outlet property="typeLabel" destination="Rgk-xr-BY5" id="tg6-PO-hpn"/>
                         <outlet property="updatePaymentBtn" destination="VdX-qO-fWt" id="iPk-bb-7UO"/>
                         <outlet property="viewInvoiceBtn" destination="0d3-pK-HfG" id="BAX-qg-nWb"/>
+                        <segue destination="wKj-52-InS" kind="show" identifier="toUpdateTransaction" id="2mE-Tl-p0m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-18.46153846153846" y="99.526066350710892"/>
+        </scene>
+        <!--UpdateTransaction-->
+        <scene sceneID="YIZ-I1-82o">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UpdateTransaction" id="wKj-52-InS" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="IPs-2o-yXo"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z4f-cv-E07" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="621" y="119"/>
         </scene>
     </scenes>
     <resources>

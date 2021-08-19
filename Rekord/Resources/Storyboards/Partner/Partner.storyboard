@@ -95,11 +95,22 @@
                         <outlet property="partnerListTable" destination="vHK-SN-SQg" id="koL-Gg-elR"/>
                         <outlet property="roundedUpperView" destination="cQu-CQ-06S" id="VnV-LN-FY4"/>
                         <outlet property="searchBar" destination="Lww-kW-xEi" id="jyw-pz-ayF"/>
+                        <segue destination="40W-s8-51A" kind="show" identifier="toPartnerDetail" id="3Yt-xD-hdU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1013.0434782608696" y="105.80357142857143"/>
+        </scene>
+        <!--PartnerDetail-->
+        <scene sceneID="9De-AK-SyN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PartnerDetail" id="40W-s8-51A" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="VVQ-Xx-Oaw"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z63-5e-fJR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1233" y="564"/>
         </scene>
         <!--Add New Partner View Controlelr-->
         <scene sceneID="8Ca-ko-A7A">

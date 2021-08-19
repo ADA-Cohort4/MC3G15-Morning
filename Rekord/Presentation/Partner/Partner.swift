@@ -27,6 +27,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     var partnerCount = 1
     var transactionAmount: Double = 0.0
     var partnerArray : [[String]] = []
+    var selectedPartnerID : String = ""
     
     private let refreshControl = UIRefreshControl()
     
@@ -112,6 +113,10 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         cell.totalTranasationValue.text = partnerArray[count-indexPath.section-1][3]
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPartnerID = partnerArray[indexPath.row][0]
+        performSegue(withIdentifier: "toPartnerDetail", sender: nil)
+    }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -166,6 +171,13 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         }
      
 
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is PartnerDetailViewController{
+            let vc = segue.destination as? PartnerDetailViewController
+            
+            vc?.partnerID = selectedPartnerID
+        }
     }
 }
 
