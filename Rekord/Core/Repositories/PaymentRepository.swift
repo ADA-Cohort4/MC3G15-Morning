@@ -53,6 +53,7 @@ class PaymentRepository {
         // This is logic to check if Payment that want to be registered already exist or not
         PaymentsAPIRequest.createPayment(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
             //handle if success
+            print(response)
             //Checking response
             if(response.records?.isEmpty == false){
                 //SAVE CORE DATA
@@ -145,7 +146,7 @@ class PaymentRepository {
             result.forEach { (payment) in
                 listPayment.append(PaymentModel(
                 idPayment: payment.value(forKey: "id_payment") as! String,
-                idTransaction: payment.value(forKey: "id_payment") as! String,
+                idTransaction: payment.value(forKey: "id_transaction") as! String,
                 idUser: payment.value(forKey: "id_user") as! String,
                 createdDate: payment.value(forKey: "created_date") as! String,
                 amount: payment.value(forKey: "amount") as! Double,
