@@ -52,7 +52,9 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerPhoneCell.layer.cornerRadius = 10
         partnerAddressCell.layer.cornerRadius = 10
         partnerTypeView.layer.cornerRadius = 10
-        
+        partnerAddressTextView.layer.borderColor = #colorLiteral(red: 0.9140917659, green: 0.9183221459, blue: 0.9286623597, alpha: 1)
+        partnerAddressTextView.layer.borderWidth = 1
+        partnerAddressTextView.layer.cornerRadius = 8
         businessNameTextField.placeholder = "Input business name"
         OwnerNameTextField.placeholder = "Input partner owner name"
         partnerEmailTextField.placeholder = "Input partner email"
@@ -111,6 +113,13 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    func validateEmail(emailToValidate: String)-> Bool{
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        
+        return emailPredicate.evaluate(with: emailToValidate)
+    }
+    
     @IBAction func onDoneButtonClicked(){
         if partnerTypeView.selectedOption != "" {
             selectedData = partnerTypeView.selectedOption
@@ -141,17 +150,26 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerOwnerName = OwnerNameTextField.text
         partnerAddress = partnerAddressTextView.text
         
-        let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id ?? "errorID", idBusiness: business_id ?? "errorID", type: partnerType ?? .customer
-                                      , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
-        PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
-            if result.airtableId != "" || result.airtableId != nil {
-                DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+        if validateEmail(emailToValidate: partnerEmail ?? "Email is empty") == true {
+            let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id ?? "errorID", idBusiness: business_id ?? "errorID", type: partnerType ?? .customer
+                                          , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
+            PartnerRepository.shared.savePartner(partner: newPartner){ (result) in
+                if result.airtableId != "" || result.airtableId != nil {
+                    DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                    }
+                } else {
+                    print("error save partner")
                 }
-            } else {
-                print("error save partner")
             }
+        }else{
+            let alert = UIAlertController(title: "Invalid Email", message: "Please input a valid email address.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The alert has been dismissed.")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
+
     }
     
 }
