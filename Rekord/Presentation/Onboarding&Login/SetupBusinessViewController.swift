@@ -15,7 +15,7 @@ class SetupBusinessViewController: UIViewController {
     @IBOutlet weak var businessNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
-    @IBOutlet weak var addressField: UITextField!
+    @IBOutlet weak var addressField: UITextView!
     
     @IBOutlet weak var businessNameView: UIView!
     
@@ -34,11 +34,27 @@ class SetupBusinessViewController: UIViewController {
         emailView.layer.cornerRadius = 10
         addressView.layer.cornerRadius = 10
         phoneView.layer.cornerRadius = 10
+        
+        addressField.layer.borderWidth = 1.0
+        addressField.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        addressField.layer.cornerRadius = 10
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(validateBusiness))
+        
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+        
     }
+    
+    
     
     @IBAction func nextButton(_ sender: Any) {
     }
+    
+    
+    
+
+    
     
     @objc func validateBusiness(){
         if businessNameField.text == "" {
@@ -56,7 +72,7 @@ class SetupBusinessViewController: UIViewController {
             phoneField.backgroundColor = #colorLiteral(red: 1, green: 0.8408887982, blue: 0.833807826, alpha: 1)
         }
         if addressField.text == "" {
-            addressField.placeholder = "Please fill in address"
+//            addressField. = "Please fill in address"
             addressField.backgroundColor = #colorLiteral(red: 1, green: 0.8408887982, blue: 0.833807826, alpha: 1)
         }
 

@@ -10,7 +10,7 @@ import UIKit
 class PartnerDetailViewController:UIViewController{
     
     
-    var partnerID: String!
+    var partnerID: String = ""
  
     
     @IBOutlet weak var detailView: UIView!

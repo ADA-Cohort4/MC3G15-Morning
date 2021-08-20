@@ -42,9 +42,12 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="startSelectPartner:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="SnA-wB-mhv"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-GU-orN">
-                                <rect key="frame" x="16" y="300" width="358" height="158"/>
+                                <rect key="frame" x="16" y="306" width="358" height="158"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9gF-8p-rnu">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="158"/>
@@ -80,7 +83,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XsF-JT-Pj1">
-                                <rect key="frame" x="100" y="506" width="190" height="30"/>
+                                <rect key="frame" x="100" y="512" width="190" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Create"/>
@@ -93,10 +96,17 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Due Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KRK-V1-IWW">
-                                <rect key="frame" x="16" y="245" width="358" height="34"/>
+                                <rect key="frame" x="16" y="245" width="358" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8DG-zC-pWW"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ijS-4Q-0jV">
+                                <rect key="frame" x="0.0" y="682" width="390" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.066666666666666666" green="0.33725490196078434" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -124,7 +134,7 @@
                     <connections>
                         <outlet property="datePickerTextField" destination="KRK-V1-IWW" id="yb3-oM-6pm"/>
                         <outlet property="invoiceView" destination="9gF-8p-rnu" id="L5G-3Q-jg8"/>
-                        <outlet property="partnerType" destination="xej-AS-zXw" id="4Do-X1-rOY"/>
+                        <outlet property="partnerTypePickerView" destination="xej-AS-zXw" id="HYC-AZ-nZL"/>
                         <outlet property="paymentCount" destination="rbZ-TU-ovr" id="pOC-Tq-oji"/>
                         <outlet property="selectPartner" destination="khA-90-58G" id="OmC-ld-Qfg"/>
                         <outlet property="totalPrice" destination="6kw-s0-2Ih" id="fuI-eT-tlf"/>

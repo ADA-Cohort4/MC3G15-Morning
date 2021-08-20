@@ -10,13 +10,38 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+    let lockScreen = UIStoryboard(name: "LockScreen", bundle: nil)
+    let userDefaults = UserDefaults()
+
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        if let startingView = UserDefaults.standard.array(forKey: "appleID") {
+        if UserDefaults.standard.object(forKey: "appleID") != nil {
+            print("Favorites exists")
+            let vc = lockScreen.instantiateViewController(withIdentifier: "LockScreen") as! LockScreen
+            window = UIWindow(windowScene: windowScene)
+            window?.rootViewController = vc
+            window?.makeKeyAndVisible()
+        } else {
+            
+            guard let rootVC = loginStoryboard.instantiateViewController(identifier: "Login") as? Login else {
+                    print("ViewController not found")
+                    return
+                }
+            let rootNavigationController = UINavigationController(rootViewController: rootVC)
+            window = UIWindow(windowScene: windowScene)
+            window?.rootViewController = rootNavigationController
+            window?.makeKeyAndVisible()
+
+        }
+        
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -27,8 +27,10 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     var partnerCount = 1
     var transactionAmount: Double = 0.0
     var partnerArray : [[String]] = []
+    var selectedPartnerID : String = ""
     
     private let refreshControl = UIRefreshControl()
+    
     
     
     override func viewDidLoad() {
@@ -59,13 +61,13 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         partnerListTable.dataSource = self
         partnerListTable.delegate = self
         roundedUpperView.layer.cornerRadius = 30
+        emptyButton.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isHidden = true
         partnerListTable.register(UINib.init(nibName: "PartnerListCell", bundle: nil), forCellReuseIdentifier: "PartnerListCell")
         
         refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
         partnerListTable.addSubview(refreshControl)
         partnerListTable.reloadData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +75,17 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         partnerListTable.reloadData()
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        partnerArray = []
+        queryPartners()
+        if partnerArray.count == 1{ //check apakah transaksi baru dibuat dari empty state
+            self.partnerListTable.isHidden = false
+            self.emptyImage.isHidden = true
+            self.emptyLabel.isHidden = true
+            self.emptyButton.isHidden = true
+        }
+        self.partnerListTable.reloadData()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -99,6 +112,10 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         cell.numberOfTransactions.text = partnerArray[count-indexPath.section-1][2]
         cell.totalTranasationValue.text = partnerArray[count-indexPath.section-1][3]
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPartnerID = partnerArray[indexPath.row][0]
+        performSegue(withIdentifier: "toPartnerDetail", sender: nil)
     }
     
     
@@ -154,6 +171,13 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         }
      
 
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is PartnerDetailViewController{
+            let vc = segue.destination as? PartnerDetailViewController
+            
+            vc?.partnerID = selectedPartnerID
+        }
     }
 }
 

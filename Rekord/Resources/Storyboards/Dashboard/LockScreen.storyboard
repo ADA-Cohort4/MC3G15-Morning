@@ -265,11 +265,6 @@
                                     <action selector="relogin:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wN6-3C-FkW"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ot6-Kv-Sf4">
-                                <rect key="frame" x="186" y="226" width="19" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.1578157842" green="0.32994335889999998" blue="0.58826267720000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Forgot PIN?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8W-Dx-R6a">
                                 <rect key="frame" x="157" y="280" width="76" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -311,10 +306,10 @@
         <!--rootTabBar-->
         <scene sceneID="wa6-Qv-fK3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jdh-7x-jPo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardIdentifier="rootTabBar" storyboardName="rootTabBar" referencedIdentifier="rootTabBar" id="SC7-nj-q9q" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="wy6-Tv-480"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jdh-7x-jPo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="857" y="117"/>
         </scene>

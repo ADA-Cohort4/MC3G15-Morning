@@ -25,8 +25,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     var selectedEntry : String = ""
     //DUMMY DATA FOR TESTING, NTAR DIAPUS AJA
     //urutan: PartnerName, TRID, Type, Status, Total, NextPayment, idPartner
-   //var transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
-    var transData : [[String]] = []
+   //var Dashboard.transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
+    static var transData : [[String]] = []
     // 0 = receivable, 1 = payable
     let queuedPayment : [[Double]] = [[1450000, 2560000, 1440000], [2445000]]
     
@@ -39,8 +39,6 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             self.tabBarController?.tabBarItem.title = "Dashboard"
             self.tabBarController?.navigationController?.navigationBar.isHidden = true
             self.title = "Dashboard"
-            
-            
         }
         //MARK: -COPAS KALO MAU ADD PAYMENT
 //        PaymentRepository.shared.savePayments(payment: PaymentModel(idPayment:UUID().uuidString , idTransaction: UUID().uuidString, idUser: "1", createdDate: "2021-09-21", amount: 1244000, document: "none", airtableId: "1")) { Result in
@@ -51,18 +49,24 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
 //            print("added new partner")
 //        }
 //
-//        if self.transData.isEmpty{
+//        if self.Dashboard.transData.isEmpty{
 //            CommonFunction.shared.addShadow(view: self.addTransactionBtnFirst)
 //        }
 //
 //
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        Dashboard.transData = []
+        Dashboard.queryForDashboard()
+        self.mainTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        queryForDashboard()
-        print("transaction data: ", transData)
+        Dashboard.queryForDashboard()
+        print("transaction data: ", Dashboard.transData)
         //MARK:Ubah background jadi gradient
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
@@ -77,7 +81,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         mainTableView.delegate = self
         receiptImage.isHidden = true
         
-        if transData.isEmpty {
+        if Dashboard.transData.isEmpty {
             receiptImage.isHidden = false
             mainTableView.isHidden = true
             mainTableView.isUserInteractionEnabled = false
@@ -90,21 +94,17 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
         mainTableView.addSubview(refreshControl)
         
-       
         headerPadding.layer.cornerRadius = 10
-        
-      
-        
     }
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transData.count + 2
+        return Dashboard.transData.count + 2
     }
     //MARK: TODO: Filter by date
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if transData.isEmpty == false{
+        if Dashboard.transData.isEmpty == false{
             
         switch indexPath.row {
         //cell 0 = date picker, cell 1 = balance, cell 2 = ongoing trans
@@ -123,20 +123,20 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
            
         default:
             let cell = mainTableView.dequeueReusableCell(withIdentifier: "transactionsCell") as! transactionsCell
-            print(transData)
-            let dateRemaining = compareDates(dateString: transData[indexPath.row-2][5])
+            print(Dashboard.transData)
+            let dateRemaining = compareDates(dateString: Dashboard.transData[indexPath.row-2][5])
             
             //MARK: Ubah cell text menjadi sesuai transaction
             cell.selectedBackgroundView = UIView()
             //-2 karena ngikutin jumlah cell di dashboard
-            let count = transData.count
+            let count = Dashboard.transData.count
             //mulai dari paling baru dibuat
-            cell.partnerNameLabel.text = transData[indexPath.row-2][0]
-            cell.TRIDLabel.text = transData[indexPath.row-2][1]
-            cell.typeLabel.text = transData[indexPath.row-2][2]
-            cell.statusLabel.text = transData[indexPath.row-2][3]
-            cell.totalPriceLabel.text = transData[indexPath.row-2][4]
-            cell.nextPaymentLabel.text = transData[indexPath.row-2][5]
+            cell.partnerNameLabel.text = Dashboard.transData[indexPath.row-2][0]
+            cell.TRIDLabel.text = Dashboard.transData[indexPath.row-2][1]
+            cell.typeLabel.text = Dashboard.transData[indexPath.row-2][2]
+            cell.statusLabel.text = Dashboard.transData[indexPath.row-2][3]
+            cell.totalPriceLabel.text = Dashboard.transData[indexPath.row-2][4]
+            cell.nextPaymentLabel.text = Dashboard.transData[indexPath.row-2][5]
             cell.dueLabel.text = "Due in \(dateRemaining)d"
             switch dateRemaining { //ubah due alert color tergantung berapa hari sisa
             case "0", "1", "2":
@@ -202,7 +202,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         case 0,1:
             print("Index date filter / balance clicked")
         default:
-            selectedEntry = transData[indexPath.row-2][1]
+            selectedEntry = Dashboard.transData[indexPath.row-2][1]
             performSegue(withIdentifier: "toTransactionDetail", sender: nil)
             
         }
@@ -215,51 +215,46 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         }
     }
     
-    func queryForDashboard(){
+    static func queryForDashboard(){
         // MARK: -QUERY TRANSACTION FOR DASHBOARD
-        TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
-            for result in resultList{
+        TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { transactionArr, err in
+            print(transactionArr)
+            for transaction in transactionArr{
                 var partnerName = ""
                 var type = ""
                 PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
                     for resultPartner in resultPartnerList{
-                        if resultPartner.idPartner == result.idPartner{
+                        if resultPartner.idPartner == transaction.idPartner{
                             print("found partner")
                             partnerName = resultPartner.name!
                             type = resultPartner.type?.rawValue ?? "customer"
                         }
                     }
                 }
-                if result.status?.rawValue == "ongoing"{
-                let list : [String] = [partnerName, result.idTransaction!, type, result.status!.rawValue,  String(result.totalPrice ?? 0), result.dueDate ?? "1990-01-01"]
-                
-                var dashboardQueryHasSameID : Bool = false
-                
-                for transaction in self.transData{
-                    if list[1] == transaction[1]{
-                        dashboardQueryHasSameID = true
-                    }
-                }
-                
-                if dashboardQueryHasSameID == false{
-                    self.transData.append(list)
+                if (transaction.status?.rawValue == "ongoing" || transaction.status?.rawValue == "waiting") {
+                    let list : [String] = [partnerName, transaction.idTransaction!, type, transaction.status!.rawValue,  String(transaction.totalPrice ?? 0), transaction.dueDate ?? "1990-01-01"]
                     
-                }
+                    var dashboardQueryHasSameID : Bool = false
+                    
+                    for transaction in Dashboard.transData{
+                        if list[1] == transaction[1]{
+                            dashboardQueryHasSameID = true
+                        }
+                    }
+                    
+                    if dashboardQueryHasSameID == false{
+                        Dashboard.transData.append(list)
+                        
+                    }
                 }
             }
         }
     }
+    
     @IBAction func onRefreshPull(){
-        transData = []
-        queryForDashboard()
+        Dashboard.transData = []
+        Dashboard.queryForDashboard()
         mainTableView.reloadData()
         self.refreshControl.endRefreshing()
-        
     }
-    
-    
-    
-    
-   
- 
 }

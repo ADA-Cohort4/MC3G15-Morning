@@ -22,32 +22,40 @@ enum ImageSource {
 class AddTransaction: UIViewController {
     
     @IBOutlet weak var selectPartner: UITextField!
-    @IBOutlet weak var partnerType: UIPickerView!
-//    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var partnerTypePickerView: UIPickerView!
+    //    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var totalPrice: UITextField!
     @IBOutlet weak var invoiceView: UIImageView!
 //    @IBOutlet weak var dueDateView: UIView!
     @IBOutlet weak var paymentCount: UITextField!
     @IBOutlet weak var datePickerTextField: UITextField!
+//    @IBOutlet weak var paymentCountPickerView: UIPickerView!
     
     var imagePicker: UIImagePickerController!
     var imageName = ""
     var partnerList: [PartnerModel]!
     var selectedPartnerId: String?
+    let paymentCountPickerView = UIPickerView()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        partnerType.dataSource = self
-        partnerType.delegate = self
-        selectPartner.inputView = partnerType
+        partnerTypePickerView.dataSource = self
+        partnerTypePickerView.delegate = self
+        paymentCountPickerView.dataSource = self
+        paymentCountPickerView.delegate = self
+        selectPartner.inputView = partnerTypePickerView
+        paymentCount.inputView = paymentCountPickerView
         self.tabBarController?.tabBar.isHidden = true
-        partnerType.isHidden = true
+        partnerTypePickerView.isHidden = true
+//        paymentCountPickerView.isHidden = true
+     
         self.datePickerTextField.datePicker(target: self, doneAction: #selector(doneAction), cancelAction: #selector(cancelAction))
 //        datePicker.datePickerMode = .date
 //        totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
@@ -109,27 +117,43 @@ class AddTransaction: UIViewController {
         guard let amount = totalPrice.text else {
             return
         }
+        
+        //DATE FORMATTER
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "id_ID")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let today = dateFormatter.string(from: date)
+        
         let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
         print("originalAmount = \(originalAmount)")
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: datePickerTextField.text ?? "", createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: datePickerTextField.text ?? "", createdDate: today, updatedDate: today, status: .waiting, airtableId: "1",idBusiness: UserDefaults.standard.string(forKey: "businessID")!)
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
         
-        
+        let alert = UIAlertController(title: "Saving Transaction...", message: "Please wait while we save your transaction.", preferredStyle: .alert)
+        self.present(alert, animated: true)
         TransactionRepository.shared.saveTransaction(transaction: newTransaction){ (result) in
             if result.airtableId != "" || result.airtableId != nil {
                 DispatchQueue.main.async {
+                    alert.dismiss(animated: true, completion: nil)
                     self.navigationController?.popViewController(animated: true)
                 }
             } else {
+                alert.dismiss(animated: true, completion: nil)
+                let alert = UIAlertController(title: "Error", message: "There was an error in saving your transaction. Try checking your internet connection or restarting the app.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)
                 print("error save")
             }
         }
     }
     
     @IBAction func startSelectPartner(_ sender: Any) {
-        partnerType.isHidden = false
+        partnerTypePickerView.isHidden = false
     }
     
     
@@ -142,17 +166,31 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView === paymentCountPickerView {
+            print("payment tis")
+            return 10
+        }
         return partnerList.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView === paymentCountPickerView {
+            print("\(row+1)ts")
+            return "\(row+1) gfg"
+        }
         return partnerList[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectPartner.text = partnerList[row].name
-        selectPartner.resignFirstResponder()
-        self.selectedPartnerId = partnerList[row].idPartner
+        if pickerView === paymentCountPickerView {
+            paymentCount.text = "\(row+1)"
+            paymentCount.resignFirstResponder()
+        } else {
+            selectPartner.text = partnerList[row].name
+            selectPartner.resignFirstResponder()
+            self.selectedPartnerId = partnerList[row].idPartner
+        }
+        
         self.view.endEditing(true)
     }
     
