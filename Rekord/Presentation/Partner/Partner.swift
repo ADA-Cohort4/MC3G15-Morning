@@ -115,7 +115,8 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPartnerID = partnerArray[indexPath.row][0]
-        performSegue(withIdentifier: "toPartnerDetail", sender: nil)
+        print(selectedPartnerID)
+        performSegue(withIdentifier: "toPartnerDetail", sender: self)
     }
     
     
@@ -173,10 +174,11 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is PartnerDetailViewController{
-            let vc = segue.destination as? PartnerDetailViewController
-            
-            vc?.partnerID = selectedPartnerID
+        if segue.identifier == "toPartnerDetail"{
+//            let navController = segue.destination as! UINavigationController
+//            let destinationVC = navController.topViewController as! PartnerDetailViewController
+            let vc = segue.destination as! PartnerDetailViewController
+            vc.partnerID = selectedPartnerID
         }
     }
 }
