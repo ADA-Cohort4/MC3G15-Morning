@@ -61,7 +61,6 @@ class LockScreen: UIViewController {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, error in
                 DispatchQueue.main.async {
                     print("successfully Login")
-//                    self?.navigationController?.topViewController
                     self!.performSegue(withIdentifier: "toDashboardSegue", sender: self)
                 }
                 

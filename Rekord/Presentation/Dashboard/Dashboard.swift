@@ -65,6 +65,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         Dashboard.queryForDashboard()
         print("transaction data: ", Dashboard.transData)
         //MARK:Ubah background jadi gradient
