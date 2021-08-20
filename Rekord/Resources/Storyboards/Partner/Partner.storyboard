@@ -105,7 +105,7 @@
         <!--PartnerDetail-->
         <scene sceneID="9De-AK-SyN">
             <objects>
-                <viewControllerPlaceholder storyboardName="PartnerDetail" id="40W-s8-51A" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="PartnerDetailViewController" storyboardName="PartnerDetail" id="40W-s8-51A" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="VVQ-Xx-Oaw"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z63-5e-fJR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
