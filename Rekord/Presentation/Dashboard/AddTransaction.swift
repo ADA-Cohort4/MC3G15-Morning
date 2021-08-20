@@ -22,18 +22,20 @@ enum ImageSource {
 class AddTransaction: UIViewController {
     
     @IBOutlet weak var selectPartner: UITextField!
-    @IBOutlet weak var partnerType: UIPickerView!
-//    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var partnerTypePickerView: UIPickerView!
+    //    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var totalPrice: UITextField!
     @IBOutlet weak var invoiceView: UIImageView!
 //    @IBOutlet weak var dueDateView: UIView!
     @IBOutlet weak var paymentCount: UITextField!
     @IBOutlet weak var datePickerTextField: UITextField!
+//    @IBOutlet weak var paymentCountPickerView: UIPickerView!
     
     var imagePicker: UIImagePickerController!
     var imageName = ""
     var partnerList: [PartnerModel]!
     var selectedPartnerId: String?
+    let paymentCountPickerView = UIPickerView()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
@@ -44,11 +46,15 @@ class AddTransaction: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        partnerType.dataSource = self
-        partnerType.delegate = self
-        selectPartner.inputView = partnerType
+        partnerTypePickerView.dataSource = self
+        partnerTypePickerView.delegate = self
+        paymentCountPickerView.dataSource = self
+        paymentCountPickerView.delegate = self
+        selectPartner.inputView = partnerTypePickerView
+        paymentCount.inputView = paymentCountPickerView
         self.tabBarController?.tabBar.isHidden = true
-        partnerType.isHidden = true
+        partnerTypePickerView.isHidden = true
+//        paymentCountPickerView.isHidden = true
      
         self.datePickerTextField.datePicker(target: self, doneAction: #selector(doneAction), cancelAction: #selector(cancelAction))
 //        datePicker.datePickerMode = .date
@@ -147,7 +153,7 @@ class AddTransaction: UIViewController {
     }
     
     @IBAction func startSelectPartner(_ sender: Any) {
-        partnerType.isHidden = false
+        partnerTypePickerView.isHidden = false
     }
     
     
@@ -160,17 +166,31 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView === paymentCountPickerView {
+            print("payment tis")
+            return 10
+        }
         return partnerList.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView === paymentCountPickerView {
+            print("\(row+1)ts")
+            return "\(row+1) gfg"
+        }
         return partnerList[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectPartner.text = partnerList[row].name
-        selectPartner.resignFirstResponder()
-        self.selectedPartnerId = partnerList[row].idPartner
+        if pickerView === paymentCountPickerView {
+            paymentCount.text = "\(row+1)"
+            paymentCount.resignFirstResponder()
+        } else {
+            selectPartner.text = partnerList[row].name
+            selectPartner.resignFirstResponder()
+            self.selectedPartnerId = partnerList[row].idPartner
+        }
+        
         self.view.endEditing(true)
     }
     

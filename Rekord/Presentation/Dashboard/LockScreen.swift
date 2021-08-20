@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class LockScreen: UIViewController {
     
@@ -37,7 +38,6 @@ class LockScreen: UIViewController {
             let userCode = defaults.value(forKey: "passcode") as? String
             if code == userCode {
                 performSegue(withIdentifier: "toDashboardSegue", sender: self)
-                print(userCode)
             } else {
                 click = 0
                 let generator = UIImpactFeedbackGenerator(style: .light)
@@ -48,13 +48,26 @@ class LockScreen: UIViewController {
                     pass[i].layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
                 }
             }
-            //navigate to dashboard if true, try again if false
         }
     }
 
     
     @IBAction func faceID(_ sender: UIButton){
         print("face id")
+        let context = LAContext()
+        var error: NSError? = nil
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
+            let reason = "Please authorize with face id"
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, error in
+                DispatchQueue.main.async {
+                    print("successfully Login")
+                    self!.performSegue(withIdentifier: "toDashboardSegue", sender: self)
+                }
+                
+            }
+        } else {
+            
+        }
     }
     
     @IBAction func deletePIN(_ sender: UIButton){
