@@ -105,10 +105,6 @@
                                                         <outletCollection property="baseView" destination="RgT-sK-6D2" collectionClass="NSMutableArray" id="ZJ1-KP-FH4"/>
                                                         <outletCollection property="baseView" destination="WMz-dI-lYE" collectionClass="NSMutableArray" id="7k0-No-Pcs"/>
                                                         <outletCollection property="baseView" destination="d9L-ZK-asC" collectionClass="NSMutableArray" id="8Tv-w1-JaL"/>
-                                                        <outletCollection property="edit" destination="QUw-ok-EdR" collectionClass="NSMutableArray" id="ecf-Yy-06g"/>
-                                                        <outletCollection property="edit" destination="bLE-ME-shm" collectionClass="NSMutableArray" id="82I-GW-DJe"/>
-                                                        <outletCollection property="edit" destination="pTR-Cv-ADW" collectionClass="NSMutableArray" id="8Ys-Fj-ESq"/>
-                                                        <outletCollection property="edit" destination="6Eu-cl-JIN" collectionClass="NSMutableArray" id="ksD-5y-ebk"/>
                                                     </connections>
                                                 </view>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RgT-sK-6D2">
@@ -129,6 +125,9 @@
                                                             <state key="normal">
                                                                 <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="editTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3yX-IJ-Vr6"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -151,6 +150,9 @@
                                                             <state key="normal">
                                                                 <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="editTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8lF-Pf-MYc"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -173,6 +175,9 @@
                                                             <state key="normal">
                                                                 <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="editTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9Q3-tC-WON"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>

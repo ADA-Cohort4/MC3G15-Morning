@@ -21,6 +21,9 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var userName = ""
     var cid = ""
     var userId = ""
+    var nameLabel = ""
+    var addressLabel = ""
+    var phoneLabel = ""
     var emailLabel = ""
     var profileData : [[String]] = []
 
@@ -31,14 +34,110 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource{
         profilePicture.layer.cornerRadius = 35
     }
     
-    //MARK: Edit
-    @IBAction func editTap(_ sender: Any) {
-        
+    //MARK: Edit Data
+    @IBAction func editTap(_ sender: UIButton) {
+        //bikin alert buat edit text
+        //bikin switch case edit[i] buat detect button yang mana
+        let count = sender.tag + 1
+
+        switch count{
+        case 1: //MARK: Name
+            let alert = UIAlertController(title: "Edit Name", message: "Enter a text to make changes", preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.text = "\(self.nameLabel)"
+            }
+
+            alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
+                guard let textField = alert?.textFields?[0], let userText = textField.text else { return }
+                print("User text: \(userText)")
+    //            BusinessRepository.updateBusiness //save
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                alert.dismiss(animated: true) {
+                    return
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+            //save ke repository (update Data)
+            
+            return
+        case 2: //MARK: Address
+            let alert = UIAlertController(title: "Edit Address", message: "Enter a text to make changes", preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.text = "\(self.addressLabel)"
+            }
+
+            alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
+                guard let textField = alert?.textFields?[0], let userText = textField.text else { return }
+                print("User text: \(userText)")
+    //            BusinessRepository.updateBusiness //save
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                alert.dismiss(animated: true) {
+                    return
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+            //save ke repository (update Data)
+            
+            return
+        case 3: //MARK: Phone Number
+            let alert = UIAlertController(title: "Edit Phone Number", message: "Enter a text to make changes", preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.text = "\(self.phoneLabel)"
+            }
+
+            alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
+                guard let textField = alert?.textFields?[0], let userText = textField.text else { return }
+                print("User text: \(userText)")
+//                BusinessRepository.updateBusiness //save
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                alert.dismiss(animated: true) {
+                    return
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+            //save ke repository (update Data)
+            
+            return
+        case 4: //MARK: Email
+            let alert = UIAlertController(title: "Edit Email", message: "Enter a text to make changes", preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.text = "\(self.emailLabel)"
+            }
+
+            alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
+                guard let textField = alert?.textFields?[0], let userText = textField.text else { return }
+                print("User text: \(userText)")
+    //            BusinessRepository.updateBusiness //save
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                alert.dismiss(animated: true) {
+                    return
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+            //save ke repository (update Data)
+            
+            return
+        default:
+            return
+        }
     }
     
     //MARK: Logout
     @IBAction func Logout(_ sender: Any) {
         //logout
+        //navigate to login
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,7 +149,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource{
         let cell = mainTable.dequeueReusableCell(withIdentifier: "profileCell") as! profileCell
             
         //MARK: Data Profile
-        BusinessRepository.shared.getBusiness(<#String#>){ resultUser in
+        BusinessRepository.shared.getBusiness(UserDefaults.standard.string(forKey: "businessID")!){ resultUser in
             if self.userId == resultUser.idUser{
                 cell.selectedBackgroundView = UIView()
                 cell.nameLabel.text = resultUser.name
@@ -59,8 +158,12 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 cell.emailLabel.text = resultUser.email
                 self.CID.text = String("CID: \(resultUser.idUser)")
                 self.email.text = resultUser.email
+                self.nameLabel = resultUser.name!
+                self.addressLabel = resultUser.address!
+                self.phoneLabel = resultUser.phone!
+                self.emailLabel = resultUser.email!
             }
         }
+        return cell
     }
 }
-

@@ -15,7 +15,6 @@ class profileCell: UITableViewCell{
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet var edit: [UIButton]!
     
     
     override func awakeFromNib() {
