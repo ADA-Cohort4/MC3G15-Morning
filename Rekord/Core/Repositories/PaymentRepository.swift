@@ -159,6 +159,37 @@ class PaymentRepository {
             completion([], "Error Save")
         }
     }
+    func getAllPaymentByBusiness(_ idBusiness:String, completion: @escaping(_ listPayment: [PaymentModel], _ error: String?) -> ())  {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("app delegate nil")
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Payment")
+        fetchRequest.predicate = NSPredicate(format: "id_business = %@", idBusiness)
+        do {
+            var listPayment: [PaymentModel] = []
+            let result = try managedContext.fetch(fetchRequest) as! [NSManagedObject]
+            result.forEach { (payment) in
+                listPayment.append(PaymentModel(
+                idPayment: payment.value(forKey: "id_payment") as! String,
+                idTransaction: payment.value(forKey: "id_transaction") as! String,
+                idUser: payment.value(forKey: "id_user") as! String,
+                createdDate: payment.value(forKey: "created_date") as! String,
+                amount: payment.value(forKey: "amount") as! Double,
+                document: payment.value(forKey: "document") as! String,
+                airtableId: payment.value(forKey: "document") as! String))
+            }
+            completion(listPayment, nil)
+        } catch let err {
+            print("failed get all users = \(err.localizedDescription)")
+            completion([], "Error Save")
+        }
+    }
+    
+    
+    
     
 }
 

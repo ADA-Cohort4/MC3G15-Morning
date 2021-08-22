@@ -195,6 +195,7 @@
                         <outlet property="updatePaymentBtn" destination="VdX-qO-fWt" id="iPk-bb-7UO"/>
                         <outlet property="viewInvoiceBtn" destination="0d3-pK-HfG" id="BAX-qg-nWb"/>
                         <segue destination="wKj-52-InS" kind="show" identifier="toUpdateTransaction" id="2mE-Tl-p0m"/>
+                        <segue destination="eba-Xi-Zi7" kind="show" identifier="toPaymentDetail" id="TSa-ty-Oqs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -210,6 +211,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4f-cv-E07" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="621" y="119"/>
+        </scene>
+        <!--PaymentDetail-->
+        <scene sceneID="raa-jk-ulX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PaymentDetail" id="eba-Xi-Zi7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="daz-rc-XXr"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dgf-bD-5Fy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="568" y="210"/>
         </scene>
     </scenes>
     <resources>

@@ -28,6 +28,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     var selectedID : String = ""
     var onlyFinalPaymentLeft : Bool = false
     var totalDue : Double = 0
+    var selectedPaymentID : String = ""
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
@@ -78,7 +79,11 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         cell.paymentCountLabel.text = "Payment \(indexPath.row+1)"
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPaymentID = paymentArray[indexPath.row][0]
+        print(inputArray[1])
+        performSegue(withIdentifier: "toPaymentDetail", sender: nil)
+    }
     
     @IBAction func onUpdateBtnClick(_ sender: Any) {
         performSegue(withIdentifier: "toUpdateTransaction", sender: nil)
@@ -86,11 +91,18 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is UpdateTransaction{
             let vc = segue.destination as? UpdateTransaction
-            vc?.selectedTransaction = TRIDLabel.text ?? "errorID"
+            vc?.selectedTransaction = inputArray[1]
             vc?.finalPayment = onlyFinalPaymentLeft
             vc?.totalDue = Double(inputArray[5]) ?? 0
-            
+            print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
+        } else if segue.destination is PaymentDetail{
+            let vc = segue.destination as? PaymentDetail
+            vc?.paymentID = selectedPaymentID
+            vc?.selectedTransaction = inputArray[1]
+            print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
         }
+       
+        
     }
     func queryForDetail(){
         TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
