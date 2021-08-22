@@ -138,6 +138,7 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBAction func Logout(_ sender: Any) {
         //logout
         //navigate to login
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -167,3 +168,4 @@ class Profile: UIViewController, UITableViewDelegate, UITableViewDataSource{
         return cell
     }
 }
+
