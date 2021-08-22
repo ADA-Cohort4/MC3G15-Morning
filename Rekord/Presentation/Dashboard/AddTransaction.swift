@@ -58,7 +58,7 @@ class AddTransaction: UIViewController {
      
         self.datePickerTextField.datePicker(target: self, doneAction: #selector(doneAction), cancelAction: #selector(cancelAction))
 //        datePicker.datePickerMode = .date
-//        totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
 //        dueDateView.layer.cornerRadius = 4
         self.getPartnerList()
     }
