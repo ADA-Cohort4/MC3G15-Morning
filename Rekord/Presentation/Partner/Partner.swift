@@ -35,6 +35,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         queryPartners()
         print(partnerArray)
         if partnerArray.count == 0 {
@@ -73,7 +74,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         partnerListTable.reloadData()
-        
+        self.tabBarController?.tabBar.isHidden = false
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     override func viewDidAppear(_ animated: Bool) {

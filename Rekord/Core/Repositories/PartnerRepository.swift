@@ -139,10 +139,11 @@ class PartnerRepository {
             "records" : [[
                 "id" : partner.airtableId!,
                 "fields" : [
-                    "user": partner.idUser!,
+                    "id_user": partner.idUser!,
                     "name": partner.name!,
                     "phone": partner.phone!,
                     "type": partner.type?.rawValue,
+             
                 ]
             ]]
         ]
@@ -157,7 +158,7 @@ class PartnerRepository {
         let formula = "?filterByFormula=AND(id_partner%3D%22\(partner.idPartner!)%22)"
         
         // for filtering tabledata
-        let filter = "Users"
+        let filter = "Partners"
         
         //URL Constant
         let url = Constants.NETWORK_URL
@@ -168,10 +169,12 @@ class PartnerRepository {
         PartnersAPIRequest.getPartnersData(url: url, filter: filter+formula, header: Constants.HEADER_URL, showLoader: true) { response in
             // handle response and store it to the data model
             self.partnerNetworkModel = response
+            print("response1: ", response)
             // check if user model not empty means data is exist
             if self.partnerNetworkModel?.records?.isEmpty == false{
                 // post the data to API
                 PartnersAPIRequest.editPartner(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
+                    print("response2 : ", response)
                     //handle if success
                     //Checking response
                     if(response.records?.isEmpty == false){

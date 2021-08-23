@@ -53,6 +53,7 @@ class TransactionRepository {
         // STARTING LOGIC
         TransactionsAPIRequest.createTransaction(url: url, filter: filter, header: Constants.HEADER_URL, jsonData:self.jsonData!, showLoader: true) { response in
             //handle if success
+            print(response)
             //Checking response
             if(response.records?.isEmpty == false){
                 //SAVE CORE DATA

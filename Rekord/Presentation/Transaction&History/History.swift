@@ -108,7 +108,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         let cell = historyTable.dequeueReusableCell(withIdentifier: "historyCell") as! historyCell
         cell.selectedBackgroundView = UIView()
         cell.partnerNameLabel.text = transData[indexPath.row][0]
-        cell.transactionIDLabel.text = transData[indexPath.row][1]
+        cell.transactionIDLabel.text = "TR#\(transData[indexPath.row][1])"
         cell.typeLabel.text = transData[indexPath.row][2]
         cell.statusLabel.text = transData[indexPath.row][3]
         cell.totalPriceLabel.text = transData[indexPath.row][4]
@@ -225,7 +225,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
                     formatter.currencyCode = "ID"
                     
                     let rupiah = formatter.string(from: NSNumber(value: result.totalPrice ?? 0))
-                    let list : [String] = [partnerName, "TR#\(result.idTransaction!)", type.capitalized, (result.status!.rawValue).capitalized, rupiah!, result.dueDate!]
+                    let list : [String] = [partnerName, "\(result.idTransaction!)", type.capitalized, (result.status!.rawValue).capitalized, rupiah!, result.dueDate!]
                 
                 var dashboardQueryHasSameID : Bool = false
                 

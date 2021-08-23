@@ -28,6 +28,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     var selectedID : String = ""
     var onlyFinalPaymentLeft : Bool = false
     var totalDue : Double = 0
+    var selectedPaymentID : String = ""
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
@@ -78,19 +79,33 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         cell.paymentCountLabel.text = "Payment \(indexPath.row+1)"
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPaymentID = paymentArray[indexPath.row][0]
+        print(inputArray[1])
+        let showDetail = UIStoryboard(name: "PaymentDetail", bundle: nil)
+        let vc = showDetail.instantiateViewController(identifier: "PaymentDetail") as? PaymentDetail
+        vc?.paymentID = selectedPaymentID
+        vc?.selectedTransaction = inputArray[1]
+        vc?.trPaymentCount = inputArray[6]
+        vc?.paymentQueue[4] = inputArray[0]
+        print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
+        self.navigationController?.pushViewController(vc!, animated: true)
+       
+    }
     
     @IBAction func onUpdateBtnClick(_ sender: Any) {
         performSegue(withIdentifier: "toUpdateTransaction", sender: nil)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is UpdateTransaction{
+        if segue.identifier == "toUpdateTransaction"{
             let vc = segue.destination as? UpdateTransaction
-            vc?.selectedTransaction = TRIDLabel.text ?? "errorID"
+            vc?.selectedTransaction = inputArray[1]
             vc?.finalPayment = onlyFinalPaymentLeft
             vc?.totalDue = Double(inputArray[5]) ?? 0
-            
+            print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
         }
+       
+        
     }
     func queryForDetail(){
         TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in

@@ -33,6 +33,7 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     var partnerId: String?
     var partnerTypeDescription: String?
     override func viewDidLoad() {
+        hideKeyboardWhenTappedAround()
         editPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
         editPartnerTableView.reloadData()
         partnerBusinessCell.layer.cornerRadius = 10
@@ -66,6 +67,7 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
                     default:
                         print("error")
                     }
+                    self.updatePartner = updatePartner
                 }
             }
         }
@@ -73,11 +75,29 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     }
     
     @IBAction func saveUpdatedPartner(_ sender: Any) {
-        updatePartner.type = self.partnerType
-        updatePartner.address = self.partnerAddressTextView.text
-        updatePartner.email = self.partnerEmailTextField.text
-        updatePartner.phone = self.partnerPhoneTextField.text
-        updatePartner.ownerName = self.OwnerNameTextField.text
+        self.updatePartner.type = self.partnerType
+        self.updatePartner.name = self.businessNameTextField.text
+        self.updatePartner.address = self.partnerAddressTextView.text
+        self.updatePartner.email = self.partnerEmailTextField.text
+        self.updatePartner.phone = self.partnerPhoneTextField.text
+        self.updatePartner.ownerName = self.OwnerNameTextField.text
+        print("updatePartner: ", updatePartner.name)
+        let alert = UIAlertController(title: "Saving Partner...", message: "", preferredStyle:.alert)
+        self.present(alert, animated: true, completion: nil)
+        
+        PartnerRepository.shared.updatePartner(partner: updatePartner) { isDone in
+            print("partner update finished by closure")
+            DispatchQueue.main.async {
+                alert.dismiss(animated: true, completion: nil)
+                let alert2 = UIAlertController(title: "Your partner has been saved.", message: "", preferredStyle:.alert)
+                alert2.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                self.present(alert2, animated: true, completion: nil)
+              
+            }
+           
+        }
         
         
     }
