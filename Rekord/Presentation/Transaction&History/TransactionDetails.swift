@@ -82,23 +82,26 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPaymentID = paymentArray[indexPath.row][0]
         print(inputArray[1])
-        performSegue(withIdentifier: "toPaymentDetail", sender: nil)
+        let showDetail = UIStoryboard(name: "PaymentDetail", bundle: nil)
+        let vc = showDetail.instantiateViewController(identifier: "PaymentDetail") as? PaymentDetail
+        vc?.paymentID = selectedPaymentID
+        vc?.selectedTransaction = inputArray[1]
+        vc?.trPaymentCount = inputArray[6]
+        vc?.paymentQueue[4] = inputArray[0]
+        print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
+        self.navigationController?.pushViewController(vc!, animated: true)
+       
     }
     
     @IBAction func onUpdateBtnClick(_ sender: Any) {
         performSegue(withIdentifier: "toUpdateTransaction", sender: nil)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is UpdateTransaction{
+        if segue.identifier == "toUpdateTransaction"{
             let vc = segue.destination as? UpdateTransaction
             vc?.selectedTransaction = inputArray[1]
             vc?.finalPayment = onlyFinalPaymentLeft
             vc?.totalDue = Double(inputArray[5]) ?? 0
-            print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
-        } else if segue.destination is PaymentDetail{
-            let vc = segue.destination as? PaymentDetail
-            vc?.paymentID = selectedPaymentID
-            vc?.selectedTransaction = inputArray[1]
             print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
         }
        

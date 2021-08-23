@@ -25,9 +25,12 @@ class PaymentDetail: UIViewController {
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
     var paymentID : String = ""
-    //paymentid, paymentdate, paymentamount, paymentcount, namapartner, proofpayment
-    var paymentQueue : [String] = ["","","","","","",""]
+    //paymentid, paymentdate, paymentamount, paymentcount, namapartner, proofpayment, userUpload
+    var paymentQueue : [String] = ["","","","","","","",""]
     var selectedTransaction : String = ""
+    var trPaymentCount : String = ""
+    
+    
     override func viewDidLoad() {
         queryForPaymentDetail()
         print("paymentQueue: ", paymentQueue, "paymentID: ", paymentID, " selectedTransasction: ", selectedTransaction)
@@ -42,45 +45,45 @@ class PaymentDetail: UIViewController {
         }
         transactionID.text = paymentQueue[0]
         partnerName.text = paymentQueue[4]
-        paymentDate.text = paymentQueue[1]
-        paymentAmount.text = paymentQueue[2]
+        dateOfPayment.text = paymentQueue[1]
+        paidAmount.text = paymentQueue[2]
         paymentCount.text = paymentQueue[3]
+        paidBy.text = "Uploaded by \(paymentQueue[6])"
         
     }
     func queryForPaymentDetail(){
         
         PaymentRepository.shared.getAllPayment(UserDefaults.standard.string(forKey: "userID") ?? "errorID") { [self] list, str in
-           
-            TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "idBusiness") ?? "errorID") { trList, str in
-                for transaction in trList{
-                    if transaction.idTransaction == self.selectedTransaction{
-                        PartnerRepository.shared.getAllPartner { PartnerList, str in
-                            for partner in PartnerList{
-                                if partner.idPartner == transaction.idPartner{
-                                    paymentQueue[4] = partner.name ?? "errorName"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            var paymentCount : Int = 0
             for payment in list{
-                var paymentCount : Int = 0
+                
                 if payment.idTransaction == self.selectedTransaction{
                     paymentCount += 1
                     if payment.idPayment == self.paymentID{
-                        paymentCount += 1
+                        BusinessRepository.shared.getAllBusiness(UserDefaults.standard.string(forKey: "userID") ?? "errorID") { businessList, str in
+                            for business in businessList{
+                                if business.idBusiness == UserDefaults.standard.string(forKey: "businessID") ?? "errorID"{
+                                    paymentQueue[6] = business.name ?? "errorName"
+                                }
+                                
+                            }
+                        }
+                        
                         paymentQueue[0] = payment.idPayment ?? "errorID"
                         paymentQueue[1] = payment.createdDate ?? "errorDate"
                         paymentQueue[2] = String(payment.amount ?? 0)
                         
                         paymentQueue[3] = String(paymentCount)
                         paymentQueue[5] = payment.document ?? "No Document"
+                        
                     }
                 }
                 
+                
             }
+            paymentQueue[3] += " of \(trPaymentCount)"
             
         }
-}
+    }
+    
 }

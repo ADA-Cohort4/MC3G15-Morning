@@ -46,6 +46,7 @@ class PartnerDetailViewController:UIViewController{
     
     
     override func viewDidLoad() {
+       
         partnerDetailView.layer.cornerRadius = 10
         detailView.layer.cornerRadius = 10
         editPartnerButton.layer.cornerRadius = 10
@@ -53,6 +54,7 @@ class PartnerDetailViewController:UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
         PartnerRepository.shared.getPartner{ resultPartner in 
             if self.partnerID == resultPartner.idPartner{
                 self.partnerType.text = resultPartner.type!.rawValue
@@ -61,6 +63,13 @@ class PartnerDetailViewController:UIViewController{
                 self.contactPersonName.text = resultPartner.ownerName!
                 self.emailAddress.text = resultPartner.email!
             }
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is EditPartnerViewController{
+            let vc = segue.destination as? EditPartnerViewController
+            vc?.partnerId = self.partnerID
+            
         }
     }
     
