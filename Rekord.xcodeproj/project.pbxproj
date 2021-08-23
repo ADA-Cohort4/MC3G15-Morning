@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01B87DA026C4E1B90072DD92 /* profileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B87D9F26C4E1B90072DD92 /* profileCell.swift */; };
 		674415B026B51FF10087BA61 /* PartnerDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 674415AF26B51FF10087BA61 /* PartnerDetail.storyboard */; };
 		674415B226B520AE0087BA61 /* PartnerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674415B126B520AE0087BA61 /* PartnerDetail.swift */; };
 		674415B426B523C70087BA61 /* AddNewPartner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674415B326B523C70087BA61 /* AddNewPartner.swift */; };
@@ -122,6 +123,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01B87D9F26C4E1B90072DD92 /* profileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileCell.swift; sourceTree = "<group>"; };
 		674415AF26B51FF10087BA61 /* PartnerDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PartnerDetail.storyboard; sourceTree = "<group>"; };
 		674415B126B520AE0087BA61 /* PartnerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerDetail.swift; sourceTree = "<group>"; };
 		674415B326B523C70087BA61 /* AddNewPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPartner.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			children = (
 				D43FEFF126AFC1AE0057F616 /* Settings.swift */,
 				D43FEFF326AFC1C30057F616 /* DataSharing.swift */,
+				01B87D9F26C4E1B90072DD92 /* profileCell.swift */,
 			);
 			path = "Settings&DataSharing";
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				D43FEFE226AFBA2B0057F616 /* SetupPin.swift in Sources */,
 				D444D4DB26B6A0E600431C1B /* PartnersAPIRequest.swift in Sources */,
 				D4D3D374267063B3005A4ABA /* Constants.swift in Sources */,
+				01B87DA026C4E1B90072DD92 /* profileCell.swift in Sources */,
 				D4D3D361267062EF005A4ABA /* UIBezierPath+Extension.swift in Sources */,
 				E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */,
 				D4D3D35E267062EF005A4ABA /* UIView+Extension.swift in Sources */,
@@ -963,13 +967,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = FTDV5D2867;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maritia.com.Rekord;
+				PRODUCT_BUNDLE_IDENTIFIER = audrey.rekord.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -983,13 +987,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25T7L593ZA;
+				DEVELOPMENT_TEAM = FTDV5D2867;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maritia.com.Rekord;
+				PRODUCT_BUNDLE_IDENTIFIER = audrey.rekord.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
