@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import Contacts
+import ContactsUI
 
-class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITableViewDataSource , CNContactPickerDelegate{
     
     var businessPartnerName: String?
     var partnerOwnerName: String?
@@ -16,7 +18,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     var partnerAddress: String?
     var partnerType: PartnerType?
     var partner_id: String?
- 
+    
     
     @IBOutlet weak var AddPartnerTableView: UITableView!
     @IBOutlet weak var businessNameTextField: UITextField!
@@ -100,7 +102,9 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.section == 0 {
+            selectContact()
+        }
         if indexPath.section == 1 {
             selectedType = "partner"
             partnerTypeView.viewMode = selectedType
@@ -120,6 +124,53 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
         
         return emailPredicate.evaluate(with: emailToValidate)
+    }
+    
+    func validateFormInput()->Bool{
+        if businessNameTextField.text?.isEmpty == true{
+            return false
+        }else if OwnerNameTextField.text?.isEmpty == true{
+            return false
+        }else if partnerPhoneTextField.text?.isEmpty == true{
+            return false
+        }else if partnerAddressTextView.text?.isEmpty == true{
+            return false
+        }else{
+            return true
+        }
+    }
+    
+    @objc func selectContact(){
+        let contactVC = CNContactPickerViewController()
+        contactVC.delegate = self
+        present(contactVC, animated: true)
+        
+    }
+    
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        OwnerNameTextField.text = contact.givenName + " " + contact.familyName
+        businessNameTextField.text = contact.organizationName
+        if contact.emailAddresses.isEmpty != true {
+            partnerEmailTextField.text = contact.emailAddresses[0].value.description
+        }
+        if contact.postalAddresses.isEmpty != true {
+            if contact.postalAddresses[0].value.street.isEmpty != true {
+                partnerAddressTextView.text = contact.postalAddresses[0].value.street
+            }
+            if contact.postalAddresses[0].value.city.isEmpty != true{
+                partnerAddressTextView.text = partnerAddressTextView.text + "\n" + contact.postalAddresses[0].value.city
+            }
+            if contact.postalAddresses[0].value.state.isEmpty != true {
+                partnerAddressTextView.text = partnerAddressTextView.text + ", " + contact.postalAddresses[0].value.state
+            }
+            if contact.postalAddresses[0].value.postalCode.isEmpty != true {
+                partnerAddressTextView.text = partnerAddressTextView.text + "\n" + contact.postalAddresses[0].value.postalCode
+            }
+        }
+        
+        if contact.phoneNumbers.isEmpty != true {
+            partnerPhoneTextField.text = contact.phoneNumbers[0].value.stringValue
+        }
     }
     
     @IBAction func onDoneButtonClicked(){
