@@ -23,38 +23,26 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     
     var selectedEntry : String = ""
-    //DUMMY DATA FOR TESTING, NTAR DIAPUS AJA
-    //urutan: PartnerName, TRID, Type, Status, Total, NextPayment, idPartner
-   //var Dashboard.transData : [[String]] = [["Sinar Jaya", "TR#1028231", "Customer","Pending Payment", "Rp14,000,000", "Jul 31, 2021"], ["Epic Corp", "TR#213123", "Supplier", "Pending Payment", "Rp14,000,000", "Aug 29, 2021"]]
+    
     static var transData : [[String]] = []
     // 0 = receivable, 1 = payable
-    let queuedPayment : [[Double]] = [[1450000, 2560000, 1440000], [2445000]]
-    
+    var queuedPayment : [[Double]] = [[], []]
+//    var inPayment : Double = 0
+//    var outPayment : Double = 0
+    static var startDate : Date = Date()
+    static var endDate : Date = Date()
     override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.main.async {
             self.navigationController?.navigationBar.isHidden = true
             self.tabBarController?.tabBar.isHidden = false
-//            self.navigationController?.tabBarItem.image = UIImage(systemName: "book")
-//            self.tabBarController?.tabBarItem.image = UIImage(systemName: "book")
+            
             self.tabBarController?.tabBarItem.title = "Dashboard"
             self.tabBarController?.navigationController?.navigationBar.isHidden = true
             self.title = "Dashboard"
         }
-        //MARK: -COPAS KALO MAU ADD PAYMENT
-//        PaymentRepository.shared.savePayments(payment: PaymentModel(idPayment:UUID().uuidString , idTransaction: UUID().uuidString, idUser: "1", createdDate: "2021-09-21", amount: 1244000, document: "none", airtableId: "1")) { Result in
-//            print(Result)
-//        }
-        //MARK: -COPAS KALO MAU ADD PARTNER
-//        PartnerRepository.shared.savePartner(partner: PartnerModel(idPartner: "1", idUser: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID")!, type: .suplier, name: "Epic Partner", phone: "08180261", status: .active, airtableId: "1", address: "jalan goblok", email: "goblok@goblok.com", ownerName: "orang gobs")) { Result in
-//            print("added new partner")
-//        }
-//
-//        if self.Dashboard.transData.isEmpty{
-//            CommonFunction.shared.addShadow(view: self.addTransactionBtnFirst)
-//        }
-//
-//
+        
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         Dashboard.transData = []
@@ -97,7 +85,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         
         headerPadding.layer.cornerRadius = 10
     }
-   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Dashboard.transData.count + 2
     }
@@ -107,71 +95,80 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if Dashboard.transData.isEmpty == false{
             
-        switch indexPath.row {
-        //cell 0 = date picker, cell 1 = balance, cell 2 = ongoing trans
-        case 0:
-            let cell = mainTableView.dequeueReusableCell(withIdentifier: "dateCell") as! dateCell
-            cell.selectedBackgroundView = UIView()
-            return cell
-           
-        case 1:
-            let cell = mainTableView.dequeueReusableCell(withIdentifier: "balanceCell") as! balanceCell
-            cell.selectedBackgroundView = UIView()
-            //add target to button add transaction
-            cell.addTransactionBtn.addTarget(self, action: Selector("onAddBtnClick"), for: .touchUpInside)
-            cell.configBalance(data: queuedPayment)
-            return cell
-           
-        default:
-            let cell = mainTableView.dequeueReusableCell(withIdentifier: "transactionsCell") as! transactionsCell
-            print(Dashboard.transData)
-            let dateRemaining = compareDates(dateString: Dashboard.transData[indexPath.row-2][5])
-            
-            //MARK: Ubah cell text menjadi sesuai transaction
-            cell.selectedBackgroundView = UIView()
-            //-2 karena ngikutin jumlah cell di dashboard
-            let count = Dashboard.transData.count
-            //mulai dari paling baru dibuat
-            cell.partnerNameLabel.text = Dashboard.transData[indexPath.row-2][0]
-            cell.TRIDLabel.text = Dashboard.transData[indexPath.row-2][1]
-            cell.typeLabel.text = Dashboard.transData[indexPath.row-2][2]
-            cell.statusLabel.text = Dashboard.transData[indexPath.row-2][3]
-            cell.totalPriceLabel.text = Dashboard.transData[indexPath.row-2][4]
-            cell.nextPaymentLabel.text = Dashboard.transData[indexPath.row-2][5]
-            cell.dueLabel.text = "Due in \(dateRemaining)d"
-            switch dateRemaining { //ubah due alert color tergantung berapa hari sisa
-            case "0", "1", "2":
-                cell.dueLabel.textColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-                cell.dueAlertIcon.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-                break
-            case "3", "4", "5", "6", "7":
-                cell.dueLabel.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-                cell.dueAlertIcon.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+            switch indexPath.row {
+            //cell 0 = date picker, cell 1 = balance, cell 2 = ongoing trans
+            case 0:
+                let cell = mainTableView.dequeueReusableCell(withIdentifier: "dateCell") as! dateCell
+                cell.selectedBackgroundView = UIView()
+                cell.filterBtn.addTarget(self, action: #selector(self.onFilterBtnClick), for: .touchUpInside)
+                return cell
+                
+            case 1:
+                let cell = mainTableView.dequeueReusableCell(withIdentifier: "balanceCell") as! balanceCell
+                cell.selectedBackgroundView = UIView()
+                //add target to button add transaction
+                cell.addTransactionBtn.addTarget(self, action: #selector(self.onAddBtnClick), for: .touchUpInside)
+              
+
+                cell.configBalance(data: queuedPayment)
+                
+                return cell
+                
             default:
-                if Int(dateRemaining)! > 0{
-                cell.dueLabel.textColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-                    cell.dueAlertIcon.isHidden = true
-                    
-                } else{
-                    cell.dueLabel.text = "Payment Due"
+                let cell = mainTableView.dequeueReusableCell(withIdentifier: "transactionsCell") as! transactionsCell
+                print(Dashboard.transData)
+                let dateRemaining = compareDates(dateString: Dashboard.transData[indexPath.row-2][5])
+                
+                //MARK: Ubah cell text menjadi sesuai transaction
+                cell.selectedBackgroundView = UIView()
+                //-2 karena ngikutin jumlah cell di dashboard
+                let count = Dashboard.transData.count
+                //mulai dari paling baru dibuat
+                cell.partnerNameLabel.text = Dashboard.transData[indexPath.row-2][0]
+                cell.TRIDLabel.text = Dashboard.transData[indexPath.row-2][1]
+                cell.typeLabel.text = Dashboard.transData[indexPath.row-2][2]
+                cell.statusLabel.text = Dashboard.transData[indexPath.row-2][3]
+                cell.totalPriceLabel.text = Dashboard.transData[indexPath.row-2][4]
+                cell.nextPaymentLabel.text = Dashboard.transData[indexPath.row-2][5]
+                cell.dueLabel.text = "Due in \(dateRemaining)d"
+                switch dateRemaining { //ubah due alert color tergantung berapa hari sisa
+                case "0", "1", "2":
                     cell.dueLabel.textColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-                    cell.dueAlertIcon.isHidden = false
+                    cell.dueAlertIcon.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+                    break
+                case "3", "4", "5", "6", "7":
+                    cell.dueLabel.textColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+                    cell.dueAlertIcon.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+                default:
+                    if Int(dateRemaining)! > 0{
+                        cell.dueLabel.textColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+                        cell.dueAlertIcon.isHidden = true
+                        
+                    } else{
+                        cell.dueLabel.text = "Payment Due"
+                        cell.dueLabel.textColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+                        cell.dueAlertIcon.isHidden = false
+                    }
                 }
+                if dateRemaining == "0" { cell.dueLabel.text = "Due Today"}
+                
+                
+                return cell
+                
             }
-            if dateRemaining == "0" { cell.dueLabel.text = "Due Today"}
-            
-           
-            return cell
-        
-        }
         } else{
             return UITableViewCell()
         }
     }
     @IBAction func onAddBtnClick() {
-       // move to add transaction storyboard
+        // move to add transaction storyboard
         performSegue(withIdentifier: "toAddTransaction", sender: nil)
         
+    }
+    @IBAction func onFilterBtnClick(){
+        
+        queryForBalance()
+        mainTableView.reloadData()
     }
     @IBAction func onFirstAddBtnClick(_ sender: Any) {
         performSegue(withIdentifier: "toAddTransaction", sender: nil)
@@ -181,9 +178,9 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         //func untuk calculate due time left
         let dateFormatter = DateFormatter()
         let dateFormatter2 = DateFormatter()
-        dateFormatter2.dateFormat = "yyyy-mm-dd"
+        dateFormatter2.dateFormat = "yyyy-MM-dd"
         dateFormatter.dateFormat = "MMM d, yyyy"
-       
+        
         let dateDue = (dateFormatter.date(from: dateString) ?? dateFormatter2.date(from: dateString)) ?? Date()
         let dateDiff : Int = Calendar.current.dateComponents([.day], from: Date(), to: dateDue).day!
         return "\(dateDiff)"
@@ -191,7 +188,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { //Untuk force height tiap2 cell di dashboard
         switch indexPath.row {
         case 0:
-            return CGFloat(180)
+            return CGFloat(220)
         case 1:
             return CGFloat(305)
         default:
@@ -214,6 +211,42 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             //VC INPUT ARRAY ADALAH TRID
             vc?.inputArray[1] = selectedEntry
         }
+    }
+    func queryForBalance(){ // TEMPORARY NTAR DIGANTI JADI OUTGOING  / INGOING
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        PaymentRepository.shared.getAllPayment(UserDefaults.standard.string(forKey: "userID") ?? "errorID") { paymentList, str in
+            for payment in paymentList{
+                print("found payment list")
+                let paymentDate : Date = formatter.date(from: payment.createdDate ?? "1990-02-02") ?? Date()
+                print(paymentDate)
+                if paymentDate.isWithinFilterDate(date: Dashboard.startDate, andDate: Dashboard.endDate){
+                    print("found payment for filter")
+                    TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID") ?? "errorBusiness") { trList, str in
+                        for transaction in trList{
+                            if transaction.idTransaction == payment.idTransaction{
+                                PartnerRepository.shared.getAllPartner { partnerList, str in
+                                    for partner in partnerList{
+                                        switch partner.type{
+                                        case .customer:
+                                            self.queuedPayment[0].append(payment.amount ?? 0)
+                                            break
+                                        case .suplier:
+                                            self.queuedPayment[1].append( payment.amount ?? 0)
+                                            break
+                                        default:
+                                            print("error type of partner")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        
     }
     
     static func queryForDashboard(){
@@ -257,5 +290,10 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         Dashboard.queryForDashboard()
         mainTableView.reloadData()
         self.refreshControl.endRefreshing()
+    }
+}
+extension Date{
+    func isWithinFilterDate(date startDate : Date, andDate endDate : Date) -> Bool{
+        return (min(startDate, endDate)...max(startDate, endDate)).contains(self)
     }
 }
