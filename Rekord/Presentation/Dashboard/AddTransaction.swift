@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -36,6 +37,7 @@ class AddTransaction: UIViewController {
     var partnerList: [PartnerModel]!
     var selectedPartnerId: String?
     let paymentCountPickerView = UIPickerView()
+    var dueDateNotif: Date?
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
@@ -45,6 +47,7 @@ class AddTransaction: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.hideKeyboardWhenTappedAround()
         partnerTypePickerView.dataSource = self
         partnerTypePickerView.delegate = self
@@ -71,6 +74,7 @@ class AddTransaction: UIViewController {
         if let datePickerView = self.datePickerTextField.inputView as? UIDatePicker {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
+            dueDateNotif = datePickerView.date
             let dateString = dateFormatter.string(from: datePickerView.date)
             self.datePickerTextField.text = dateString
                 
@@ -84,7 +88,7 @@ class AddTransaction: UIViewController {
     func getPartnerList() {
         PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
             print("resultPartnerList")
-            print(resultPartnerList[0].idPartner, resultPartnerList[0].ownerName)
+//            print(resultPartnerList[0].idPartner, resultPartnerList[0].ownerName)
             self.partnerList = resultPartnerList
         }
         
@@ -132,11 +136,14 @@ class AddTransaction: UIViewController {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
         
+        
+        
         let alert = UIAlertController(title: "Saving Transaction...", message: "Please wait while we save your transaction.", preferredStyle: .alert)
         self.present(alert, animated: true)
         TransactionRepository.shared.saveTransaction(transaction: newTransaction){ (result) in
             if result.airtableId != "" || result.airtableId != nil {
                 DispatchQueue.main.async {
+                    
                     alert.dismiss(animated: true, completion: nil)
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -150,7 +157,39 @@ class AddTransaction: UIViewController {
                 print("error save")
             }
         }
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { success, error in
+            if success{
+                self.scheduleNotif()
+                print("success")
+            } else if let error = error {
+                print("error")
+            }
+        })
+        
+        
+        
+        
     }
+    
+    func scheduleNotif(){
+        let content = UNMutableNotificationContent()
+        content.title = "Rekord"
+        content.sound = .default
+        content.body = "You have a payment due today"
+        
+        let targetDate = dueDateNotif
+        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetDate!), repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "test_id", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error != nil {
+                print("error notif")
+            }
+        })
+    }
+    
+    
     
     @IBAction func startSelectPartner(_ sender: Any) {
         partnerTypePickerView.isHidden = false
