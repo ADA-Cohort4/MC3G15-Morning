@@ -23,7 +23,6 @@ struct PartnersNetworkDataFieldResponse: Codable {
     let id_business: String?
     let name: String?
     let phone: String?
-    let type: String?
     let status: String?
     let address : String?
     let email : String?
