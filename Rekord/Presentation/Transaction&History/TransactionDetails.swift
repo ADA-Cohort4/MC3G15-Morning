@@ -120,7 +120,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
                         for partner in resultPartner{
                             if partner.idPartner == result.idPartner{
                                 partnerID = partner.idPartner!
-                                type = partner.type!.rawValue
+                            //    type = partner.type!.rawValue
                                 partnerName = partner.name ?? "No Name" //CHANGE TO PARTNER NAME
                             }
                         }

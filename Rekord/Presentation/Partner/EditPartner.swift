@@ -29,7 +29,7 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     @IBOutlet weak var deletePartnerButton: UIButton!
     
     var updatePartner: PartnerModel!
-    var partnerType: PartnerType!
+    //var partnerType: PartnerType!
     var partnerId: String?
     var partnerTypeDescription: String?
     override func viewDidLoad() {
@@ -56,17 +56,17 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
                     self.partnerAddressTextView.text = updatePartner.address
                     self.partnerEmailTextField.text = updatePartner.email
                     self.partnerPhoneTextField.text = updatePartner.phone
-                    self.partnerType = updatePartner.type
-                    switch self.partnerType {
-                    case .customer:
-                        self.partnerTypeDescription = "Customer"
-                        break
-                    case .suplier:
-                        self.partnerTypeDescription = "Supplier"
-                        break
-                    default:
-                        print("error")
-                    }
+                    //self.partnerType = updatePartner.type
+//                    switch self.partnerType {
+//                    case .customer:
+//                        self.partnerTypeDescription = "Customer"
+//                        break
+//                    case .suplier:
+//                        self.partnerTypeDescription = "Supplier"
+//                        break
+//                    default:
+//                        print("error")
+//                    }
                     self.updatePartner = updatePartner
                 }
             }
@@ -75,7 +75,7 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     }
     
     @IBAction func saveUpdatedPartner(_ sender: Any) {
-        self.updatePartner.type = self.partnerType
+       // self.updatePartner.type = self.partnerType
         self.updatePartner.name = self.businessNameTextField.text
         self.updatePartner.address = self.partnerAddressTextView.text
         self.updatePartner.email = self.partnerEmailTextField.text
