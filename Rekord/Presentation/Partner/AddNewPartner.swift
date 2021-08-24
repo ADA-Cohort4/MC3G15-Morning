@@ -16,7 +16,6 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     var partnerEmail: String?
     var partnerPhone: String?
     var partnerAddress: String?
-    //ar partnerType: PartnerType?
     var partner_id: String?
     
     
@@ -35,8 +34,6 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var savePartnerButton: UIBarButtonItem!
     
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var partnerTypeView: FilterView!
     
     let partnerTypes = ["Customer", "Supplier"]
     var selectedType = ""
@@ -45,7 +42,6 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         AddPartnerTableView.register(UINib.init(nibName: "SelectFromContactCell", bundle: nil), forCellReuseIdentifier: "SelectFromContactCell")
-//        AddPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
         AddPartnerTableView.reloadData()
         
         partnerBusinessCell.layer.cornerRadius = 10
@@ -53,7 +49,6 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerEmailCell.layer.cornerRadius = 10
         partnerPhoneCell.layer.cornerRadius = 10
         partnerAddressCell.layer.cornerRadius = 10
-        partnerTypeView.layer.cornerRadius = 10
         partnerAddressTextView.layer.borderColor = #colorLiteral(red: 0.9140917659, green: 0.9183221459, blue: 0.9286623597, alpha: 1)
         partnerAddressTextView.layer.borderWidth = 1
         partnerAddressTextView.layer.cornerRadius = 8
@@ -68,11 +63,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         self.navigationController?.navigationBar.isHidden = false
         
         self.navigationItem.title = "Add Partner"
-        partnerTypeView.isHidden = true
         
-        //partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
-        
-
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
@@ -89,33 +80,11 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "SelectFromContactCell", for: indexPath)as! SelectFromContactCell
         return cell
-//        if indexPath.section == 0 {
-//            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "SelectFromContactCell", for: indexPath)as! SelectFromContactCell
-//            return cell
-//        }
-//        else{
-//            let cell = AddPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
-//            cell.partnerType.text! = selectedData
-//            return cell
-//        }
-//
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             selectContact()
-        }
-        if indexPath.section == 1 {
-            selectedType = "partner"
-            partnerTypeView.viewMode = selectedType
-            partnerTypeView.cellData = partnerTypes
-            partnerTypeView.optionsTableView.reloadData()
-            partnerTypeView.filterTitle.text = "Select Partner Type"
-            if partnerTypeView.isHidden == true {
-                partnerTypeView.isHidden = false
-            }else{
-                partnerTypeView.isHidden = true
-            }
         }
     }
     
@@ -172,26 +141,6 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
             partnerPhoneTextField.text = contact.phoneNumbers[0].value.stringValue
         }
     }
-    
-//    @IBAction func onDoneButtonClicked(){
-//        if partnerTypeView.selectedOption != "" {
-//            selectedData = partnerTypeView.selectedOption
-//            switch selectedData{
-//            case "Incoming":
-//                partnerType = .customer
-//                selectedPartnerType = "Customer"
-//                break
-//            case "Supplier":
-//                partnerType = .suplier
-//                selectedPartnerType = "Supplier"
-//                break
-//            default:
-//                print("Error")
-//            }
-//        }
-//        partnerTypeView.isHidden = true
-//        AddPartnerTableView.reloadData()
-//    }
     
     @IBAction func saveNewPartner(_ sender: Any) {
         
