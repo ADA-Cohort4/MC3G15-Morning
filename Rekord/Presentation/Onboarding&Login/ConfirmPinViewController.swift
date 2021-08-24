@@ -99,6 +99,8 @@ class ConfirmPinViewController: UIViewController {
                 userDefaults.setValue(newBusiness.idBusiness, forKey: "businessID")
                 userDefaults.setValue(false, forKey: "isDummy")
                 
+                
+                
             } else {
                
                 let generator = UIImpactFeedbackGenerator(style: .light)
