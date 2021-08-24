@@ -28,5 +28,6 @@ struct TransactionsNetworkDataFieldResponse: Codable {
     let created_date: String?
     let updated_date: String?
     let status: String?
+    let type: String?
 }
 

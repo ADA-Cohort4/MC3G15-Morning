@@ -30,7 +30,6 @@ class PartnerRepository {
                     "id_business": partner.idBusiness!,
                     "name": partner.name!,
                     "phone": partner.phone!,
-                    "type": partner.type!.rawValue,
                     "status": "active",
                     "address" : partner.address!,
                     "email": partner.email!,
@@ -89,7 +88,6 @@ class PartnerRepository {
                             partnerData.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
                             partnerData.setValue(response.records?.first?.fields?.phone, forKeyPath: "phone")
                             partnerData.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
-                            partnerData.setValue(response.records?.first?.fields?.type, forKeyPath: "type")
                             partnerData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
                             partnerData.setValue(response.records?.first?.fields?.address, forKey: "address")
                             partnerData.setValue(response.records?.first?.fields?.email, forKey: "email")
@@ -101,7 +99,6 @@ class PartnerRepository {
                                 partner.idUser = response.records?.first?.fields?.id_user
                                partner.idBusiness = response.records?.first?.fields?.id_business
                                 partner.idPartner = response.records?.first?.fields?.id_partner
-                                partner.type = PartnerType(rawValue: (response.records?.first?.fields?.status)!)
                                 partner.name = response.records?.first?.fields?.name
                                 partner.phone = response.records?.first?.fields?.phone
                                 partner.status = PartnerActivationStatus(rawValue: (response.records?.first?.fields?.status)!)
@@ -141,8 +138,7 @@ class PartnerRepository {
                 "fields" : [
                     "id_user": partner.idUser!,
                     "name": partner.name!,
-                    "phone": partner.phone!,
-                    "type": partner.type?.rawValue,
+                    "phone": partner.phone!
              
                 ]
             ]]
@@ -193,7 +189,6 @@ class PartnerRepository {
                                 data.setValue(response.records?.first?.fields?.id_user, forKeyPath: "id_user")
                                 data.setValue(response.records?.first?.fields?.name, forKeyPath: "name")
                                 data.setValue(response.records?.first?.fields?.phone, forKeyPath: "phone")
-                                data.setValue(response.records?.first?.fields?.type, forKeyPath: "type")
                                 try managedContext.save()
                                 completion(true)
                             }catch let err {
@@ -309,7 +304,6 @@ class PartnerRepository {
                 idPartner: data.value(forKey: "id_partner") as! String,
                 idUser: data.value(forKey: "id_user") as! String,
                 idBusiness: data.value(forKey: "id_business") as! String,
-                type: PartnerType(rawValue: data.value(forKey: "type") as! String)!,
                 name: data.value(forKey: "name") as! String,
                 phone: data.value(forKey: "phone") as! String,
                 status: PartnerActivationStatus(rawValue: data.value(forKey: "status") as! String)!,
@@ -324,7 +318,7 @@ class PartnerRepository {
             }
         } catch let err {
             print("failed get all card = \(err.localizedDescription)")
-            let partnerData = PartnerModel(idPartner: "", idUser: "", idBusiness: "", type: PartnerType.customer, name:"", phone: "", status: PartnerActivationStatus.active, airtableId: "", address: "", email: "", ownerName: "")
+            let partnerData = PartnerModel(idPartner: "", idUser: "", idBusiness: "", name:"", phone: "", status: PartnerActivationStatus.active, airtableId: "", address: "", email: "", ownerName: "")
             completion(partnerData)
         }
     }
@@ -346,7 +340,6 @@ class PartnerRepository {
                     idPartner: partner.value(forKey: "id_partner") as! String,
                     idUser: partner.value(forKey: "id_user") as! String,
                     idBusiness: partner.value(forKey: "id_business") as! String,
-                    type:  PartnerType(rawValue: partner.value(forKey: "type") as! String)!,
                     name: partner.value(forKey: "name") as! String,
                     phone: partner.value(forKey: "phone") as! String,
                                     status:  PartnerActivationStatus(rawValue: partner.value(forKey: "status") as! String)!,

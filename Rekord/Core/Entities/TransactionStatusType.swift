@@ -11,3 +11,9 @@ enum TransactionStatusType: String {
     case waiting = "waiting"
     case void = "void"
 }
+
+enum TransactionType: String {
+    case incoming = "incoming"
+    case outgoing = "outgoing"
+}
+
