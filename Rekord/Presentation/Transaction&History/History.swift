@@ -213,7 +213,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
                         if resultPartner.idPartner == result.idPartner{
                             print("found partner")
                             partnerName = resultPartner.name!
-                            type = resultPartner.type!.rawValue
+                            //type = resultPartner.type!.rawValue
                         }
                     }
                 }

@@ -107,7 +107,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         let count = partnerArray.count
             //mulai dari paling baru dibuat
         cell.partnerName.text = partnerArray[count-indexPath.section-1][1]
-        cell.typeDescription.text = partnerArray[count-indexPath.section-1][5]
+       // cell.typeDescription.text = partnerArray[count-indexPath.section-1][5]
         cell.lastTransactionDate.text = partnerArray[count-indexPath.section-1][4]
         
         cell.numberOfTransactions.text = partnerArray[count-indexPath.section-1][2]
@@ -156,12 +156,14 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     //                    ARLabel.text = formatter.string(from: NSNumber(value: ARValue))
                         let rupiah = formatter.string(from: NSNumber(value: transactionValue))
                         if transactionCount == 0{
-                        let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", "0", "Rp 0", "None",  partner.type?.rawValue ?? "error"]
+                        let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", "0", "Rp 0", "None" // partner.type?.rawValue ?? "error"
+                        ]
                             self.partnerArray.append(list)
                             
                         } else{
                             
-                            let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount), String(rupiah ?? "Rp. 0"), transactionDate,  partner.type?.rawValue ?? "error"]
+                            let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount), String(rupiah ?? "Rp. 0"), transactionDate  //partner.type?.rawValue ?? "error"
+                            ]
                             self.partnerArray.append(list)
                         }
                         

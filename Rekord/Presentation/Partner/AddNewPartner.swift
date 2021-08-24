@@ -16,7 +16,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
     var partnerEmail: String?
     var partnerPhone: String?
     var partnerAddress: String?
-    var partnerType: PartnerType?
+    //ar partnerType: PartnerType?
     var partner_id: String?
     
     
@@ -70,7 +70,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         self.navigationItem.title = "Add Partner"
         partnerTypeView.isHidden = true
         
-        partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
+        //partnerTypeView.doneBtn.addTarget(self, action: #selector(self.onDoneButtonClicked), for: .touchUpInside)
         
 
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -173,25 +173,25 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    @IBAction func onDoneButtonClicked(){
-        if partnerTypeView.selectedOption != "" {
-            selectedData = partnerTypeView.selectedOption
-            switch selectedData{
-            case "Customer":
-                partnerType = .customer
-                selectedPartnerType = "Customer"
-                break
-            case "Supplier":
-                partnerType = .suplier
-                selectedPartnerType = "Supplier"
-                break
-            default:
-                print("Error")
-            }
-        }
-        partnerTypeView.isHidden = true
-        AddPartnerTableView.reloadData()
-    }
+//    @IBAction func onDoneButtonClicked(){
+//        if partnerTypeView.selectedOption != "" {
+//            selectedData = partnerTypeView.selectedOption
+//            switch selectedData{
+//            case "Incoming":
+//                partnerType = .customer
+//                selectedPartnerType = "Customer"
+//                break
+//            case "Supplier":
+//                partnerType = .suplier
+//                selectedPartnerType = "Supplier"
+//                break
+//            default:
+//                print("Error")
+//            }
+//        }
+//        partnerTypeView.isHidden = true
+//        AddPartnerTableView.reloadData()
+//    }
     
     @IBAction func saveNewPartner(_ sender: Any) {
         
@@ -205,7 +205,7 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerAddress = partnerAddressTextView.text
         
         if validateEmail(emailToValidate: partnerEmail ?? "Email is empty") == true {
-            let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id ?? "errorID", idBusiness: business_id ?? "errorID", type: partnerType ?? .customer
+            let newPartner = PartnerModel(idPartner: partner_id!, idUser: user_id ?? "errorID", idBusiness: business_id ?? "errorID"
                                           , name: businessPartnerName!, phone: partnerPhone!, status: .active, airtableId: "", address: partnerAddress!, email: partnerEmail!, ownerName: partnerOwnerName!)
             let alert = UIAlertController(title: "Saving Partner...", message: "Please wait while we save your partner.", preferredStyle: .alert)
             self.present(alert, animated: true)
