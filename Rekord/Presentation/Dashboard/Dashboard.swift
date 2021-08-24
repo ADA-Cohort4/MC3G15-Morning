@@ -27,8 +27,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
     static var transData : [[String]] = []
     // 0 = receivable, 1 = payable
     var queuedPayment : [[Double]] = [[], []]
-//    var inPayment : Double = 0
-//    var outPayment : Double = 0
+    //    var inPayment : Double = 0
+    //    var outPayment : Double = 0
     static var startDate : Date = Date()
     static var endDate : Date = Date()
     override func viewWillAppear(_ animated: Bool) {
@@ -108,8 +108,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
                 cell.selectedBackgroundView = UIView()
                 //add target to button add transaction
                 cell.addTransactionBtn.addTarget(self, action: #selector(self.onAddBtnClick), for: .touchUpInside)
-              
-
+                
+                
                 cell.configBalance(data: queuedPayment)
                 
                 return cell
@@ -225,19 +225,18 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
                     TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID") ?? "errorBusiness") { trList, str in
                         for transaction in trList{
                             if transaction.idTransaction == payment.idTransaction{
-                                PartnerRepository.shared.getAllPartner { partnerList, str in
-                                    for partner in partnerList{
-                                        switch partner.type{
-                                        case .customer:
-                                            self.queuedPayment[0].append(payment.amount ?? 0)
-                                            break
-                                        case .suplier:
-                                            self.queuedPayment[1].append( payment.amount ?? 0)
-                                            break
-                                        default:
-                                            print("error type of partner")
-                                        }
-                                    }
+                                
+                                switch transaction.type{
+                                case .incoming:
+                                    self.queuedPayment[0].append(payment.amount ?? 0)
+                                    break
+                                case .outgoing:
+                                    self.queuedPayment[1].append( payment.amount ?? 0)
+                                    break
+                                default:
+                                    print("error type of partner")
+                                    
+                                    
                                 }
                             }
                         }
@@ -255,13 +254,13 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             print(transactionArr)
             for transaction in transactionArr{
                 var partnerName = ""
-                var type = ""
+                let type = transaction.type?.rawValue ?? "incoming"
                 PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
                     for resultPartner in resultPartnerList{
                         if resultPartner.idPartner == transaction.idPartner{
                             print("found partner")
                             partnerName = resultPartner.name!
-                            type = resultPartner.type?.rawValue ?? "customer"
+                            //  type = resultPartner.type?.rawValue ?? "customer"
                         }
                     }
                 }
