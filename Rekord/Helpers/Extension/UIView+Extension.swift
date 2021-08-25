@@ -179,110 +179,6 @@ extension UIView {
     
 }
 
-
-@IBDesignable extension UIView {
-    @IBInspectable var widthBorder: CGFloat {
-        set {
-            layer.borderWidth = newValue
-        }
-        get {
-            return layer.borderWidth
-        }
-    }
-  
-    @IBInspectable var radiusCorner: CGFloat {
-        set {
-            layer.cornerRadius = newValue
-        }
-        get {
-            return layer.cornerRadius
-        }
-    }
-
-    @IBInspectable var colorBorder: UIColor? {
-        set {
-            guard let uiColor = newValue else { return }
-            layer.borderColor = uiColor.cgColor
-        }
-        get {
-            guard let color = layer.borderColor else { return nil }
-            return UIColor(cgColor: color)
-        }
-    }
-  
-    @IBInspectable var shadowRadius: CGFloat {
-        get {
-            return layer.shadowRadius
-        }
-        set {
-            layer.shadowRadius = newValue
-        }
-    }
-    
-    @IBInspectable var shadowOpacity: Float {
-        get {
-            return layer.shadowOpacity
-        }
-        set {
-            layer.shadowOpacity = newValue
-        }
-    }
-  
-    @IBInspectable var shadowOffset: CGSize {
-        get {
-            return layer.shadowOffset
-        }
-        set {
-            layer.shadowOffset = newValue
-        }
-    }
-    
-    @IBInspectable var topLeft: Bool {
-        get { return layer.maskedCorners.contains(.layerMinXMinYCorner) }
-        set {
-            if newValue {
-                layer.maskedCorners.insert(.layerMinXMinYCorner)
-            } else {
-                layer.maskedCorners.remove(.layerMinXMinYCorner)
-            }
-        }
-    }
-
-    @IBInspectable var topRight: Bool {
-        get { return layer.maskedCorners.contains(.layerMaxXMinYCorner) }
-        set {
-            if newValue {
-                layer.maskedCorners.insert(.layerMaxXMinYCorner)
-            } else {
-                layer.maskedCorners.remove(.layerMaxXMinYCorner)
-            }
-        }
-    }
-
-    @IBInspectable var bottomLeft: Bool {
-        get { return layer.maskedCorners.contains(.layerMinXMaxYCorner) }
-        set {
-            if newValue {
-                layer.maskedCorners.insert(.layerMinXMaxYCorner)
-            } else {
-                layer.maskedCorners.remove(.layerMinXMaxYCorner)
-            }
-        }
-    }
-
-    @IBInspectable var bottomRight: Bool {
-        get { return layer.maskedCorners.contains(.layerMaxXMaxYCorner) }
-        set {
-            if newValue {
-                layer.maskedCorners.insert(.layerMaxXMaxYCorner)
-            } else {
-                layer.maskedCorners.remove(.layerMaxXMaxYCorner)
-            }
-        }
-    }
-}
-
-
 @IBDesignable
 class DesignableView: UIView {
     
@@ -352,6 +248,38 @@ class DesignableView: UIView {
         }
     }
     
+    @IBInspectable
+    /// Shadow offset of view; also inspectable from Storyboard.
+    public var shadowOffset: CGSize {
+        get {
+            return layer.shadowOffset
+        }
+        set {
+            layer.shadowOffset = newValue
+        }
+    }
+    
+    @IBInspectable
+    /// Shadow opacity of view; also inspectable from Storyboard.
+    public var shadowOpacity: Double {
+        get {
+            return Double(layer.shadowOpacity)
+        }
+        set {
+            layer.shadowOpacity = Float(newValue)
+        }
+    }
+    
+    @IBInspectable
+    /// Shadow radius of view; also inspectable from Storyboard.
+    public var shadowRadius: CGFloat {
+        get {
+            return layer.shadowRadius
+        }
+        set {
+            layer.shadowRadius = newValue
+        }
+    }
     
     @IBInspectable
     /// Shadow path of view; also inspectable from Storyboard.
