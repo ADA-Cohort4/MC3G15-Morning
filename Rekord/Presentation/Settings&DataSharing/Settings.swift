@@ -41,13 +41,14 @@ class Profile: UIViewController{
         //MARK: Name
         let alert = UIAlertController(title: "Edit Name", message: "Enter a text to make changes", preferredStyle: .alert)
         alert.addTextField { (textField) in
-            textField.text = "\(self.profileData.name)"
+            textField.text = self.profileData.name ?? "emptyName"
         }
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
             guard let textField = alert?.textFields?[0], let userText = textField.text else { return }
             print("User text: \(userText)")
             self.profileData.name = userText
-            BusinessRepository.shared.updateBusiness(profileData){ (result) in
+            self.loadData(business: self.profileData)
+            BusinessRepository.shared.updateBusiness(business: self.profileData){ (result) in
                 if result.airtableId != "" || result.airtableId != nil {
                     DispatchQueue.main.async {
                         
@@ -71,14 +72,15 @@ class Profile: UIViewController{
         //MARK: Address
             let alert = UIAlertController(title: "Edit Address", message: "Enter a text to make changes", preferredStyle: .alert)
             alert.addTextField { (textField) in
-                textField.text = "\(self.profileData.address)"
+                textField.text = self.profileData.address ?? "emptyAddress"
             }
 
             alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
                 guard let textField = alert?.textFields?[0], let userText = textField.text else { return }
                 print("User text: \(userText)")
                 self.profileData.address = userText
-                BusinessRepository.shared.updateBusiness(profileData){ (result) in
+                self.loadData(business: self.profileData)
+                BusinessRepository.shared.updateBusiness(business: self.profileData){ (result) in
                     if result.airtableId != "" || result.airtableId != nil {
                         DispatchQueue.main.async {
                             
@@ -102,14 +104,15 @@ class Profile: UIViewController{
         //MARK: Phone Number
         let alert = UIAlertController(title: "Edit Phone Number", message: "Enter a text to make changes", preferredStyle: .alert)
         alert.addTextField { (textField) in
-            textField.text = "\(self.profileData.phone)"
+            textField.text = self.profileData.phone ?? "noPhone"
         }
 
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
             guard let textField = alert?.textFields?[0], let userText = textField.text else { return }
             print("User text: \(userText)")
             self.profileData.phone = userText
-            BusinessRepository.shared.updateBusiness(profileData){ (result) in
+            self.loadData(business: self.profileData)
+            BusinessRepository.shared.updateBusiness(business: self.profileData){ (result) in
                 if result.airtableId != "" || result.airtableId != nil {
                     DispatchQueue.main.async {
                         
@@ -133,14 +136,15 @@ class Profile: UIViewController{
         //MARK: Email
         let alert = UIAlertController(title: "Edit Email", message: "Enter a text to make changes", preferredStyle: .alert)
         alert.addTextField { (textField) in
-            textField.text = "\(self.profileData.email)"
+            textField.text = self.profileData.email ?? "noEmail"
         }
 
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
             guard let textField = alert?.textFields?[0], let userText = textField.text else { return }
             print("User text: \(userText)")
             self.profileData.email = userText
-            BusinessRepository.shared.updateBusiness(profileData){ (result) in
+            self.loadData(business: self.profileData)
+            BusinessRepository.shared.updateBusiness(business: self.profileData){ (result) in
                 if result.airtableId != "" || result.airtableId != nil {
                     DispatchQueue.main.async {
                         
@@ -173,8 +177,8 @@ class Profile: UIViewController{
         addressLabel.text = business.address
         phoneNumLabel.text = business.phone
         emailLabel.text = business.email
-        self.CID.text = String("CID: \(business.idBusiness)")
-        self.email.text = String("\(business.email)")
+        self.CID.text = "CID: \(business.idBusiness)"
+        self.email.text = business.email
     }
     
     func queryBusiness(){
