@@ -191,7 +191,7 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.016064569349999998" green="0.078678242859999997" blue="0.32943230870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" selectedImage="person.crop.circle" catalog="system" id="dIK-tA-yKz"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.crop.circle" catalog="system" selectedImage="person.crop.circle" id="dIK-tA-yKz"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="CID" destination="a2a-FV-vy0" id="aWf-rG-Ugw"/>
