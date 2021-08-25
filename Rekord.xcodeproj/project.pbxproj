@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		009CFD5D815C9FB975B43A5A /* Pods_Rekord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE05978CF97EFB1047FF010D /* Pods_Rekord.framework */; };
 		01B87DA026C4E1B90072DD92 /* profileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B87D9F26C4E1B90072DD92 /* profileCell.swift */; };
 		674415B026B51FF10087BA61 /* PartnerDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 674415AF26B51FF10087BA61 /* PartnerDetail.storyboard */; };
 		674415B226B520AE0087BA61 /* PartnerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674415B126B520AE0087BA61 /* PartnerDetail.swift */; };
@@ -124,6 +125,8 @@
 
 /* Begin PBXFileReference section */
 		01B87D9F26C4E1B90072DD92 /* profileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileCell.swift; sourceTree = "<group>"; };
+		134B1E8CB892E38AF6146A3A /* Pods-Rekord.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rekord.debug.xcconfig"; path = "Target Support Files/Pods-Rekord/Pods-Rekord.debug.xcconfig"; sourceTree = "<group>"; };
+		2B13223760004B2B8407F4AB /* Pods-Rekord.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rekord.release.xcconfig"; path = "Target Support Files/Pods-Rekord/Pods-Rekord.release.xcconfig"; sourceTree = "<group>"; };
 		674415AF26B51FF10087BA61 /* PartnerDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PartnerDetail.storyboard; sourceTree = "<group>"; };
 		674415B126B520AE0087BA61 /* PartnerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerDetail.swift; sourceTree = "<group>"; };
 		674415B326B523C70087BA61 /* AddNewPartner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPartner.swift; sourceTree = "<group>"; };
@@ -239,6 +242,7 @@
 		ECC223F226B24DE700DDF743 /* PartnerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerType.swift; sourceTree = "<group>"; };
 		ECC223F426B24DE700DDF743 /* PaymentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		ECC223FF26B24E3900DDF743 /* UserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		FE05978CF97EFB1047FF010D /* Pods_Rekord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rekord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,12 +250,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				009CFD5D815C9FB975B43A5A /* Pods_Rekord.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		082CA80AE87110F088A4E5E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE05978CF97EFB1047FF010D /* Pods_Rekord.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		644F7C8075B867814E1AB11B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				134B1E8CB892E38AF6146A3A /* Pods-Rekord.debug.xcconfig */,
+				2B13223760004B2B8407F4AB /* Pods-Rekord.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		679A042226BA9A5000676D96 /* Update Transaction Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +558,8 @@
 			children = (
 				D4D20533266DEF1900CDC2D6 /* Rekord */,
 				D4D20532266DEF1900CDC2D6 /* Products */,
+				644F7C8075B867814E1AB11B /* Pods */,
+				082CA80AE87110F088A4E5E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -653,9 +678,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4D20548266DEF1900CDC2D6 /* Build configuration list for PBXNativeTarget "Rekord" */;
 			buildPhases = (
+				CFDDAC0B94ACAFBD3781B602 /* [CP] Check Pods Manifest.lock */,
 				D4D2052D266DEF1900CDC2D6 /* Sources */,
 				D4D2052E266DEF1900CDC2D6 /* Frameworks */,
 				D4D2052F266DEF1900CDC2D6 /* Resources */,
+				BC5C20D38BDBF46EEAAB3AF9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -735,6 +762,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BC5C20D38BDBF46EEAAB3AF9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rekord/Pods-Rekord-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rekord/Pods-Rekord-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rekord/Pods-Rekord-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFDDAC0B94ACAFBD3781B602 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rekord-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D4D2052D266DEF1900CDC2D6 /* Sources */ = {
@@ -962,18 +1031,19 @@
 		};
 		D4D20549266DEF1900CDC2D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 134B1E8CB892E38AF6146A3A /* Pods-Rekord.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FTDV5D2867;
+				DEVELOPMENT_TEAM = 25T7L593ZA;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = audrey.rekord.com;
+				PRODUCT_BUNDLE_IDENTIFIER = tia.rekord.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -982,18 +1052,19 @@
 		};
 		D4D2054A266DEF1900CDC2D6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B13223760004B2B8407F4AB /* Pods-Rekord.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rekord/Rekord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FTDV5D2867;
+				DEVELOPMENT_TEAM = 25T7L593ZA;
 				INFOPLIST_FILE = Rekord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = audrey.rekord.com;
+				PRODUCT_BUNDLE_IDENTIFIER = tia.rekord.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
