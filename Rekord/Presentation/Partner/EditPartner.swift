@@ -31,6 +31,8 @@ class EditPartnerViewController: UIViewController{
     var updatePartner: PartnerModel!
     var partnerId: String?
     var partnerTypeDescription: String?
+    var airTableID : String?
+    var partnerName : String?
     override func viewDidLoad() {
         hideKeyboardWhenTappedAround()
         partnerBusinessCell.layer.cornerRadius = 10
@@ -41,6 +43,7 @@ class EditPartnerViewController: UIViewController{
         SaveButton.layer.cornerRadius = 10
         deletePartnerButton.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isHidden = false
+        deletePartnerButton.addTarget(self, action: #selector(deletePartner), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +56,8 @@ class EditPartnerViewController: UIViewController{
                     self.partnerEmailTextField.text = updatePartner.email
                     self.partnerPhoneTextField.text = updatePartner.phone
                     self.updatePartner = updatePartner
+                    self.airTableID = updatePartner.airtableId
+                    self.partnerName = updatePartner.name
                 }
             }
         }
@@ -83,6 +88,27 @@ class EditPartnerViewController: UIViewController{
            
         }
         
+        
+    }
+    @IBAction func deletePartner(){
+        var alert = UIAlertController(title: "Are you sure you want to delete \(partnerName ?? "partner")?", message: "\(partnerName ?? "partner")'s transaction data will be kept, but you won't be able to use this partner to transact again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+            alert = UIAlertController(title: "Performing partner deletion...", message: nil, preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            PartnerRepository.shared.deletePartner("inactive", self.partnerId ?? "errorID", self.airTableID ?? "errorAirtable") { isDone in
+                alert.dismiss(animated: true, completion: nil)
+                alert = UIAlertController(title: "Your partner has been deleted.", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { alertAction in
+                   
+                }))
+                self.navigationController?.popToRootViewController(animated: true)
+                print("delete partner done through closure")
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
     
