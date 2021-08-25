@@ -28,6 +28,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     var transactionAmount: Double = 0.0
     var partnerArray : [[String]] = []
     var selectedPartnerID : String = ""
+    var lastTransactionDate: String = ""
     
     private let refreshControl = UIRefreshControl()
     
@@ -109,7 +110,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         cell.partnerName.text = partnerArray[count-indexPath.section-1][1]
        // cell.typeDescription.text = partnerArray[count-indexPath.section-1][5]
         cell.lastTransactionDate.text = partnerArray[count-indexPath.section-1][4]
-        
+        lastTransactionDate = partnerArray[count-indexPath.section-1][4]
         cell.numberOfTransactions.text = partnerArray[count-indexPath.section-1][2]
         cell.totalTranasationValue.text = partnerArray[count-indexPath.section-1][3]
         return cell
@@ -147,6 +148,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                                 
                             }
                         }
+                        self.totalTransactionsDone = transactionCount
                         let formatter = NumberFormatter()
                         formatter.locale = Locale.current
                         formatter.numberStyle = .currencyAccounting
@@ -167,6 +169,8 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                             self.partnerArray.append(list)
                         }
                         
+                        self.transactionAmount = transactionValue
+                        
                     }
                     
                 }
@@ -182,6 +186,9 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
 //            let destinationVC = navController.topViewController as! PartnerDetailViewController
             let vc = segue.destination as! PartnerDetailViewController
             vc.partnerID = selectedPartnerID
+            vc.transactionAmount = transactionAmount
+            vc.totalTransactionsDone = totalTransactionsDone
+            vc.transactionDate = lastTransactionDate
         }
     }
 }
