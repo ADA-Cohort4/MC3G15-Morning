@@ -52,10 +52,10 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         partnerAddressTextView.layer.borderColor = #colorLiteral(red: 0.9140917659, green: 0.9183221459, blue: 0.9286623597, alpha: 1)
         partnerAddressTextView.layer.borderWidth = 1
         partnerAddressTextView.layer.cornerRadius = 8
-        businessNameTextField.placeholder = "Input business name"
-        OwnerNameTextField.placeholder = "Input partner owner name"
-        partnerEmailTextField.placeholder = "Input partner email"
-        partnerPhoneTextField.placeholder = "Input phone number"
+        businessNameTextField.placeholder = "Your partner's business"
+        OwnerNameTextField.placeholder = "Your partner's owner"
+        partnerEmailTextField.placeholder = "Your partner's email"
+        partnerPhoneTextField.placeholder = "Your partner's phone"
             
         partnerEmailTextField.keyboardType = UIKeyboardType.emailAddress
         partnerPhoneTextField.keyboardType = UIKeyboardType.asciiCapableNumberPad
