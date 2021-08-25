@@ -23,18 +23,21 @@ enum ImageSource {
 
 class AddTransaction: UIViewController, EasyTipViewDelegate {
     @IBOutlet weak var selectPartner: UITextField!
-    @IBOutlet weak var partnerTypePickerView: UIPickerView!
     @IBOutlet weak var totalPrice: UITextField!
     @IBOutlet weak var invoiceView: UIImageView!
     @IBOutlet weak var paymentCount: UITextField!
     @IBOutlet weak var datePickerTextField: UITextField!
     @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet weak var selectTypeTextField: UITextField!
     
     var imagePicker: UIImagePickerController!
+    
     var imageName = ""
     var partnerList: [PartnerModel] = []
     var selectedPartnerId: String?
     let paymentCountPickerView = UIPickerView()
+    let transactionTypePickerView = UIPickerView()
+    let partnerTypePickerView = UIPickerView()
     var dueDateNotif: Date?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +54,12 @@ class AddTransaction: UIViewController, EasyTipViewDelegate {
         partnerTypePickerView.delegate = self
         paymentCountPickerView.dataSource = self
         paymentCountPickerView.delegate = self
+        transactionTypePickerView.dataSource = self
+        transactionTypePickerView.delegate = self
         selectPartner.inputView = partnerTypePickerView
         paymentCount.inputView = paymentCountPickerView
+        selectTypeTextField.inputView = transactionTypePickerView
         self.tabBarController?.tabBar.isHidden = true
-        partnerTypePickerView.isHidden = true
         self.datePickerTextField.datePicker(target: self, doneAction: #selector(doneAction), cancelAction: #selector(cancelAction))
         totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         self.getPartnerList()
@@ -144,7 +149,10 @@ class AddTransaction: UIViewController, EasyTipViewDelegate {
         
         let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
         print("originalAmount = \(originalAmount)")
-        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: self.imageName , dueDate: datePickerTextField.text ?? "", createdDate: today, updatedDate: today, status: .waiting, type: .incoming, airtableId: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID") ?? "errorID")
+        let imageData = self.invoiceView.image?.jpegData(compressionQuality: 0.1)
+        guard let imageBase64String = imageData?.base64EncodedString() else { return }
+        
+        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: imageBase64String , dueDate: datePickerTextField.text ?? "", createdDate: today, updatedDate: today, status: .waiting, type: TransactionType(rawValue: selectTypeTextField.text!)! , airtableId: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID") ?? "errorID")
         repeat {
             newTransaction.idTransaction = CommonFunction.shared.randomString(length: 8)
         } while !TransactionRepository.shared.checkTransactionId(id: newTransaction.idTransaction!)
@@ -234,13 +242,18 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView === paymentCountPickerView {
             return 10
+        } else if pickerView === transactionTypePickerView {
+            return 2
         }
+        
         return partnerList.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView === paymentCountPickerView {
             return "\(row+1)"
+        } else if pickerView === transactionTypePickerView {
+            return TransactionType.allCases[row].rawValue
         }
         return partnerList[row].name
     }
@@ -249,6 +262,10 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
         if pickerView === paymentCountPickerView {
             paymentCount.text = "\(row+1)"
             paymentCount.resignFirstResponder()
+        } else if pickerView === transactionTypePickerView {
+            selectTypeTextField.text = TransactionType.allCases[row].rawValue
+            selectTypeTextField.resignFirstResponder()
+            
         } else {
             selectPartner.text = partnerList[row].name
             selectPartner.resignFirstResponder()
