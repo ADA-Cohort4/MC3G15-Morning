@@ -16,10 +16,12 @@ class FilterView : UIView, UITableViewDelegate, UITableViewDataSource {
   
     var cellData : [String] = []
     var selectedOption : String = ""
+    var selectedIndex : Int = 0
     static var picker : [String] = ["Start Date", "End Date"]
     var viewMode = ""
     static var dates : [Date] = [Date(), Date()] // 0 = start, 1 = end
     var cellIndex : [Int] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -74,6 +76,7 @@ class FilterView : UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if viewMode != "date"{
             selectedOption = cellData[indexPath.row]
+            selectedIndex = indexPath.row
         }
         
     }

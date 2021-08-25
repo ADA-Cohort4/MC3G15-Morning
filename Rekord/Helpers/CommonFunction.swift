@@ -63,3 +63,18 @@ class CommonFunction {
     }
     
 }
+extension Date{
+    func isWithinFilterDate(date startDate : Date, andDate endDate : Date) -> Bool{
+        return (min(startDate, endDate)...max(startDate, endDate)).contains(self)
+    }
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+      return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+      self = self.capitalizingFirstLetter()
+    }
+}
