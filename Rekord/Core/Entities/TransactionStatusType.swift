@@ -12,7 +12,7 @@ enum TransactionStatusType: String {
     case void = "void"
 }
 
-enum TransactionType: String {
+enum TransactionType: String, CaseIterable {
     case incoming = "incoming"
     case outgoing = "outgoing"
 }

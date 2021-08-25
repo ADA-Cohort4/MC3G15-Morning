@@ -110,6 +110,12 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     func queryForDetail(){
         TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
             for result in resultList{
+                print(result.document)
+                
+//                let newImageData = Data(base64Encoded: result.document!)
+//                if let newImageData = newImageData {
+//                    self.docImageView.image = UIImage(data: newImageData)
+//                }
                 if result.idTransaction == self.inputArray[1]{
                     
                     var partnerID = ""

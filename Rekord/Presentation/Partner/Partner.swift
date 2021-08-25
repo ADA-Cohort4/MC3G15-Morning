@@ -29,6 +29,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     var partnerArray : [[String]] = []
     var selectedPartnerID : String = ""
     var lastTransactionDate: String = ""
+    var individualPartner: [String] = []
     
     private let refreshControl = UIRefreshControl()
     
@@ -105,19 +106,23 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = partnerListTable.dequeueReusableCell(withIdentifier: "PartnerListCell", for: indexPath) as! PartnerListCell
-        let count = partnerArray.count
             //mulai dari paling baru dibuat
-        cell.partnerName.text = partnerArray[count-indexPath.section-1][1]
+        cell.partnerName.text = partnerArray[indexPath.section][1]
        // cell.typeDescription.text = partnerArray[count-indexPath.section-1][5]
-        cell.lastTransactionDate.text = partnerArray[count-indexPath.section-1][4]
-        lastTransactionDate = partnerArray[count-indexPath.section-1][4]
-        cell.numberOfTransactions.text = partnerArray[count-indexPath.section-1][2]
-        cell.totalTranasationValue.text = partnerArray[count-indexPath.section-1][3]
+        cell.lastTransactionDate.text = partnerArray[indexPath.section][4]
+        lastTransactionDate = partnerArray[indexPath.section][4]
+        cell.numberOfTransactions.text = partnerArray[indexPath.section][2]
+        cell.totalTranasationValue.text = partnerArray[indexPath.section][3]
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedPartnerID = partnerArray[indexPath.row][0]
-        print(selectedPartnerID)
+        selectedPartnerID = partnerArray[indexPath.section][0]
+        transactionAmount = Double(partnerArray[indexPath.section][3]) ?? 0.0
+        totalTransactionsDone = Int(partnerArray[indexPath.section][2]) ?? 0
+        lastTransactionDate = partnerArray[indexPath.section][4]
+        individualPartner = partnerArray[indexPath.section]
+//        print(partnerArray)
+        partnerName = partnerArray[indexPath.section][1]
         performSegue(withIdentifier: "toPartnerDetail", sender: self)
     }
     
@@ -125,6 +130,8 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     func numberOfSections(in tableView: UITableView) -> Int {
         partnerArray.count
     }
+    
+    
     
     func queryPartners(){
         
@@ -160,13 +167,14 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                         if transactionCount == 0{
                         let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", "0", "Rp 0", "None" // partner.type?.rawValue ?? "error"
                         ]
-                            self.partnerArray.append(list)
+                            self.partnerArray.insert(list, at: 0)
                             
                         } else{
                             
                             let list : [String] = [partner.idPartner ?? "00", partner.name ?? "nullPartner", String(transactionCount), String(rupiah ?? "Rp. 0"), transactionDate  //partner.type?.rawValue ?? "error"
                             ]
-                            self.partnerArray.append(list)
+//                            self.partnerArray.append(list)
+                            self.partnerArray.insert(list, at: 0)
                         }
                         
                         self.transactionAmount = transactionValue
@@ -189,6 +197,8 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
             vc.transactionAmount = transactionAmount
             vc.totalTransactionsDone = totalTransactionsDone
             vc.transactionDate = lastTransactionDate
+            vc.partnerArray = individualPartner
+            vc.name = partnerName
         }
     }
 }
