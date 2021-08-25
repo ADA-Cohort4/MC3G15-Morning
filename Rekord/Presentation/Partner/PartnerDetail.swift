@@ -11,6 +11,9 @@ class PartnerDetailViewController:UIViewController{
     
     
     var partnerID: String = ""
+    var totalTransactionsDone: Int = 0
+    var transactionAmount: Double = 0.0
+    var transactionDate: String = ""
  
     
     @IBOutlet weak var detailView: UIView!
@@ -62,6 +65,9 @@ class PartnerDetailViewController:UIViewController{
                 self.companyAddress.text = resultPartner.address!
                 self.contactPersonName.text = resultPartner.ownerName!
                 self.emailAddress.text = resultPartner.email!
+                self.totalTransactionValue.text = String(self.transactionAmount)
+                self.totalTransactions.text = String(self.totalTransactionsDone)
+                self.lastTransactionDate.text = self.transactionDate
             }
         }
     }

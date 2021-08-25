@@ -128,7 +128,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
                 cell.TRIDLabel.text = Dashboard.transData[indexPath.row-2][1]
                 cell.typeLabel.text = Dashboard.transData[indexPath.row-2][2]
                 cell.statusLabel.text = Dashboard.transData[indexPath.row-2][3]
-                cell.totalPriceLabel.text = Dashboard.transData[indexPath.row-2][4]
+                cell.totalPriceLabel.text = configNumber(number: Dashboard.transData[indexPath.row-2][4])
                 cell.nextPaymentLabel.text = Dashboard.transData[indexPath.row-2][5]
                 cell.dueLabel.text = "Due in \(dateRemaining)d"
                 switch dateRemaining { //ubah due alert color tergantung berapa hari sisa
@@ -160,6 +160,18 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             return UITableViewCell()
         }
     }
+    
+    func configNumber(number:String) -> String{
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currencyAccounting
+        formatter.currencySymbol = "Rp"
+        formatter.currencyCode = "ID"
+        let totalValueRupiah: Double = Double(number ?? "") ?? 0.0
+        let rupiah = formatter.string(from: NSNumber(value: totalValueRupiah))
+        return rupiah ?? "Rp.x"
+    }
+    
     @IBAction func onAddBtnClick() {
         // move to add transaction storyboard
         performSegue(withIdentifier: "toAddTransaction", sender: nil)

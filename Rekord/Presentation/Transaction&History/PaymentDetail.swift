@@ -29,10 +29,15 @@ class PaymentDetail: UIViewController {
     var paymentQueue : [String] = ["","","","","","","",""]
     var selectedTransaction : String = ""
     var trPaymentCount : String = ""
+    var phone: String = ""
     
     
     override func viewDidLoad() {
         queryForPaymentDetail()
+        
+        
+        
+        
         print("paymentQueue: ", paymentQueue, "paymentID: ", paymentID, " selectedTransasction: ", selectedTransaction)
         self.navigationItem.backButtonTitle = "Back"
         self.navigationItem.title = "Payment Details"
@@ -49,7 +54,18 @@ class PaymentDetail: UIViewController {
         paidAmount.text = paymentQueue[2]
         paymentCount.text = paymentQueue[3]
         paidBy.text = "Uploaded by \(paymentQueue[6])"
+        configNumber()
         
+    }
+    func configNumber() {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currencyAccounting
+        formatter.currencySymbol = "Rp"
+        formatter.currencyCode = "ID"
+        let totalValueRupiah: Double = Double(paidAmount.text ?? "") ?? 0.0
+        let rupiah = formatter.string(from: NSNumber(value: totalValueRupiah))
+        paidAmount.text = rupiah ?? "Rp.x"
     }
     func queryForPaymentDetail(){
         
@@ -83,6 +99,19 @@ class PaymentDetail: UIViewController {
             }
             paymentQueue[3] += " of \(trPaymentCount)"
             
+        }
+    }
+    
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        let urlWhats = "https://wa.me/\(phone)/?text=Testing Rekord app"
+        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
+          if let whatsappURL = NSURL(string: urlString) {
+            if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+              UIApplication.shared.open(whatsappURL as URL, options: [:], completionHandler: nil)
+            } else {
+              print("Cannot Open Whatsapp")
+            }
+          }
         }
     }
     
