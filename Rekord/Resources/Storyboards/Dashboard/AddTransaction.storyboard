@@ -87,11 +87,6 @@
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Create"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="radiusCorner">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="createTransaction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7kP-g0-NRB"/>
                                 </connections>
@@ -112,19 +107,6 @@
                                 <rect key="frame" x="0.0" y="682" width="390" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6o-3R-FAV">
-                                <rect key="frame" x="342" y="192" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="OP2-pv-Wpg"/>
-                                    <constraint firstAttribute="width" constant="30" id="f1D-O4-qax"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button" image="info.circle" catalog="system"/>
-                                <connections>
-                                    <action selector="paymentCountInfo:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="VCO-vZ-9sP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.066666666666666666" green="0.33725490196078434" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -134,11 +116,9 @@
                             <constraint firstItem="6kw-s0-2Ih" firstAttribute="top" secondItem="khA-90-58G" secondAttribute="bottom" constant="18" id="90N-xe-KqK"/>
                             <constraint firstItem="khA-90-58G" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Aed-PO-0hc"/>
                             <constraint firstItem="9gF-8p-rnu" firstAttribute="top" secondItem="KRK-V1-IWW" secondAttribute="bottom" constant="21" id="CrI-zm-IrR"/>
-                            <constraint firstItem="m6o-3R-FAV" firstAttribute="leading" secondItem="rbZ-TU-ovr" secondAttribute="trailing" constant="-32" id="Dmk-Je-90r"/>
                             <constraint firstItem="KRK-V1-IWW" firstAttribute="top" secondItem="rbZ-TU-ovr" secondAttribute="bottom" constant="21" id="GfQ-io-FFD"/>
                             <constraint firstItem="KRK-V1-IWW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="I94-WM-gI5"/>
                             <constraint firstItem="rbZ-TU-ovr" firstAttribute="top" secondItem="6kw-s0-2Ih" secondAttribute="bottom" constant="18" id="Pb2-7Z-kyh"/>
-                            <constraint firstItem="rbZ-TU-ovr" firstAttribute="top" secondItem="m6o-3R-FAV" secondAttribute="bottom" constant="-38" id="TnJ-o5-bHw"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KRK-V1-IWW" secondAttribute="trailing" constant="16" id="Wt1-3G-ZlM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XsF-JT-Pj1" secondAttribute="trailing" constant="100" id="Ypo-sk-HgS"/>
                             <constraint firstItem="6kw-s0-2Ih" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="aO9-0o-btc"/>
@@ -153,7 +133,6 @@
                     </view>
                     <connections>
                         <outlet property="datePickerTextField" destination="KRK-V1-IWW" id="yb3-oM-6pm"/>
-                        <outlet property="infoButton" destination="m6o-3R-FAV" id="DIh-B5-Izb"/>
                         <outlet property="invoiceView" destination="9gF-8p-rnu" id="L5G-3Q-jg8"/>
                         <outlet property="partnerTypePickerView" destination="xej-AS-zXw" id="HYC-AZ-nZL"/>
                         <outlet property="paymentCount" destination="rbZ-TU-ovr" id="pOC-Tq-oji"/>
@@ -170,7 +149,6 @@
     </scenes>
     <resources>
         <image name="folder" catalog="system" width="128" height="97"/>
-        <image name="info.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
