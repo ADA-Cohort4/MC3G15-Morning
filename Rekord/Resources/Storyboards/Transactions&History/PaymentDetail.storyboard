@@ -61,7 +61,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="11 Jun 2021" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLq-U6-1WT">
-                                        <rect key="frame" x="225" y="118" width="89" height="21"/>
+                                        <rect key="frame" x="167" y="118" width="147" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -114,12 +114,10 @@
                         <color key="backgroundColor" red="0.066666666669999999" green="0.33725490200000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="VDh-Sh-iHs">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="sn6-Tw-f7F">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q7b-8X-Em1">
-                                <rect key="frame" x="375" y="11" width="19" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="square.and.arrow.up" catalog="system"/>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.arrow.up" catalog="system" id="a1F-h6-jpU">
+                            <connections>
+                                <action selector="shareButtonPressed:" destination="Y6W-OH-hqX" id="rOX-yT-gTN"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -133,7 +131,7 @@
                         <outlet property="paymentDate" destination="RT7-fb-2LH" id="rPY-hO-uAd"/>
                         <outlet property="paymentDetailCard" destination="lsE-9A-ruB" id="AnN-rK-2nz"/>
                         <outlet property="proofOfPayment" destination="fM6-55-aQA" id="CrJ-Zp-SbF"/>
-                        <outlet property="shareButton" destination="sn6-Tw-f7F" id="Bwv-r4-0SS"/>
+                        <outlet property="shareButton" destination="a1F-h6-jpU" id="HYv-KP-4oZ"/>
                         <outlet property="toDocumentView" destination="8L6-lP-xF9" id="7SK-qs-ZzE"/>
                         <outlet property="transactionID" destination="TTE-u3-ScG" id="ZTD-1U-8TV"/>
                     </connections>
@@ -172,6 +170,7 @@
         <!--Navigation Controller-->
         <scene sceneID="1jz-qN-i6t">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mAx-Qf-gR5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9S7-dx-lf7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KY1-pi-xga">
@@ -183,7 +182,6 @@
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="tei-gm-kqR"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mAx-Qf-gR5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-17.39130434782609" y="83.705357142857139"/>
         </scene>

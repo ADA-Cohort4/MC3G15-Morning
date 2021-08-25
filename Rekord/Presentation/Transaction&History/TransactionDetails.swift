@@ -29,6 +29,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     var onlyFinalPaymentLeft : Bool = false
     var totalDue : Double = 0
     var selectedPaymentID : String = ""
+    var telephoneNumber: String = ""
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
@@ -88,7 +89,8 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         vc?.selectedTransaction = inputArray[1]
         vc?.trPaymentCount = inputArray[6]
         vc?.paymentQueue[4] = inputArray[0]
-        print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
+        vc?.phone = telephoneNumber
+        print("payment id sent: ", selectedPaymentID, "selected transaction: ", inputArray[1])
         self.navigationController?.pushViewController(vc!, animated: true)
        
     }
@@ -104,8 +106,6 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
             vc?.totalDue = Double(inputArray[5]) ?? 0
             print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
         }
-       
-        
     }
     func queryForDetail(){
         TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
@@ -120,7 +120,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
                         for partner in resultPartner{
                             if partner.idPartner == result.idPartner{
                                 partnerID = partner.idPartner!
-                            //    type = partner.type!.rawValue
+                                self.telephoneNumber = partner.phone ?? "0"
                                 partnerName = partner.name ?? "No Name" //CHANGE TO PARTNER NAME
                             }
                         }
