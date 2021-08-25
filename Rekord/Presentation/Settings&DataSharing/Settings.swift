@@ -49,7 +49,7 @@ class Profile: UIViewController{
             self.profileData.name = userText
             self.loadData(business: self.profileData)
             BusinessRepository.shared.updateBusiness(business: self.profileData){ (result) in
-                if result.airtableId != "" || result.airtableId != nil {
+                if result{
                     DispatchQueue.main.async {
                         
                     
@@ -81,7 +81,7 @@ class Profile: UIViewController{
                 self.profileData.address = userText
                 self.loadData(business: self.profileData)
                 BusinessRepository.shared.updateBusiness(business: self.profileData){ (result) in
-                    if result.airtableId != "" || result.airtableId != nil {
+                    if result{
                         DispatchQueue.main.async {
                             
                         
@@ -113,7 +113,7 @@ class Profile: UIViewController{
             self.profileData.phone = userText
             self.loadData(business: self.profileData)
             BusinessRepository.shared.updateBusiness(business: self.profileData){ (result) in
-                if result.airtableId != "" || result.airtableId != nil {
+                if result{
                     DispatchQueue.main.async {
                         
                     
@@ -145,7 +145,7 @@ class Profile: UIViewController{
             self.profileData.email = userText
             self.loadData(business: self.profileData)
             BusinessRepository.shared.updateBusiness(business: self.profileData){ (result) in
-                if result.airtableId != "" || result.airtableId != nil {
+                if result{
                     DispatchQueue.main.async {
                         
                     
@@ -177,14 +177,14 @@ class Profile: UIViewController{
         addressLabel.text = business.address
         phoneNumLabel.text = business.phone
         emailLabel.text = business.email
-        self.CID.text = "CID: \(business.idBusiness)"
+        self.CID.text = "CID: \(business.idBusiness!)"
         self.email.text = business.email
     }
     
     func queryBusiness(){
-        BusinessRepository.shared.getAllBusiness(UserDefaults.standard.string(forKey: "userID")) { businessList, str in
+        BusinessRepository.shared.getAllBusiness(UserDefaults.standard.string(forKey: "userID") ?? "errorID") { businessList, str in
             for business in businessList{
-                if business.idBusiness == UserDefaults.standard.string(forKey: "businessID"){
+                if business.idBusiness == UserDefaults.standard.string(forKey: "businessID" ?? "errorID"){
                     loadData(business: business)
                     self.profileData = business
                 }
