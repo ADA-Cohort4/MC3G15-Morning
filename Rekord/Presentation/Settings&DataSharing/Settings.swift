@@ -173,19 +173,19 @@ class Profile: UIViewController{
     }
     
     func loadData(business: BusinessModel) {
-        nameLabel.text = business.name
-        addressLabel.text = business.address
-        phoneNumLabel.text = business.phone
-        emailLabel.text = business.email
-        self.CID.text = "CID: \(business.idBusiness!)"
-        self.email.text = business.email
+        nameLabel.text = business.name ?? "noName"
+        addressLabel.text = business.address ?? "noAddress"
+        phoneNumLabel.text = business.phone ?? "noPhone"
+        emailLabel.text = business.email ?? "noEmail"
+        self.CID.text = "CID: \(business.idBusiness ?? "noID")"
+        self.email.text = business.email ?? "noEmail"
     }
     
     func queryBusiness(){
         BusinessRepository.shared.getAllBusiness(UserDefaults.standard.string(forKey: "userID") ?? "errorID") { businessList, str in
             for business in businessList{
-                if business.idBusiness == UserDefaults.standard.string(forKey: "businessID" ?? "errorID"){
-                    loadData(business: business)
+                if business.idBusiness == UserDefaults.standard.string(forKey: "businessID") ?? "errorID"{
+                    self.loadData(business: business)
                     self.profileData = business
                 }
 
