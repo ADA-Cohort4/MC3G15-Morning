@@ -202,14 +202,6 @@ class AddTransaction: UIViewController, EasyTipViewDelegate {
         })
     }
     
-    
-    
-    @IBAction func startSelectPartner(_ sender: Any) {
-        partnerTypePickerView.isHidden = false
-    }
-    
-    
-    
     @IBAction func startSelectPartner(_ sender: Any) {
         partnerTypePickerView.isHidden = false
     }
