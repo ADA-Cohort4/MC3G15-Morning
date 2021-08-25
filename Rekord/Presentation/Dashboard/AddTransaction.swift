@@ -21,21 +21,18 @@ enum ImageSource {
     case camera
 }
 
-class AddTransaction: UIViewController {
-    
+class AddTransaction: UIViewController, EasyTipViewDelegate {
     @IBOutlet weak var selectPartner: UITextField!
     @IBOutlet weak var partnerTypePickerView: UIPickerView!
-    //    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var totalPrice: UITextField!
     @IBOutlet weak var invoiceView: UIImageView!
-//    @IBOutlet weak var dueDateView: UIView!
     @IBOutlet weak var paymentCount: UITextField!
     @IBOutlet weak var datePickerTextField: UITextField!
-//    @IBOutlet weak var paymentCountPickerView: UIPickerView!
+    @IBOutlet weak var infoButton: UIButton!
     
     var imagePicker: UIImagePickerController!
     var imageName = ""
-    var partnerList: [PartnerModel]!
+    var partnerList: [PartnerModel] = []
     var selectedPartnerId: String?
     let paymentCountPickerView = UIPickerView()
     var dueDateNotif: Date?
@@ -58,13 +55,22 @@ class AddTransaction: UIViewController {
         paymentCount.inputView = paymentCountPickerView
         self.tabBarController?.tabBar.isHidden = true
         partnerTypePickerView.isHidden = true
-//        paymentCountPickerView.isHidden = true
-     
         self.datePickerTextField.datePicker(target: self, doneAction: #selector(doneAction), cancelAction: #selector(cancelAction))
-//        datePicker.datePickerMode = .date
         totalPrice.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
-//        dueDateView.layer.cornerRadius = 4
         self.getPartnerList()
+        self.view.endEditing(true)
+        self.initiateTooltip()
+    }
+    
+    func initiateTooltip() {
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+        preferences.drawing.foregroundColor = .black
+        preferences.drawing.backgroundColor = .white
+        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.top
+        preferences.drawing.borderWidth = 1
+        preferences.drawing.borderColor = .black
+        EasyTipView.globalPreferences = preferences
     }
     
     @objc func cancelAction() {
@@ -89,7 +95,15 @@ class AddTransaction: UIViewController {
     func getPartnerList() {
         PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
             print("resultPartnerList")
-//            print(resultPartnerList[0].idPartner, resultPartnerList[0].ownerName)
+            if (resultPartnerList.count == 0) {
+                let alert = UIAlertController(title: "Error", message: "You don't have any partner yet, add your partner first", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            print(resultPartnerList[0].idPartner, resultPartnerList[0].ownerName)
             self.partnerList = resultPartnerList
         }
         
@@ -116,8 +130,6 @@ class AddTransaction: UIViewController {
     }
     
     @IBAction func createTransaction(_ sender: Any) {
-
-//        let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: "1", totalPrice: Double(Float(totalPrice.text ?? "0") ?? 0), paymentCount: 2, document: imageName , dueDate: dateFormatter.string(from: datePicker.date), createdDate: "1998-02-02", updatedDate: "1998-02-02", status: .waiting, airtableId: "1",idBusiness: "1")
         let partnerId = selectedPartnerId ?? (partnerList[0].idPartner ?? "0")
         guard let amount = totalPrice.text else {
             return
@@ -202,6 +214,22 @@ class AddTransaction: UIViewController {
         partnerTypePickerView.isHidden = false
     }
     
+    @IBAction func paymentCountInfo(_ sender: Any) {
+        let text = "Payment count is the number of payment will be done when the total price completed. Tap to dismiss."
+        EasyTipView.show(forView: self.infoButton,
+            withinSuperview: self.navigationController?.view,
+            text: text,
+            delegate : self)
+    }
+    
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        print("Did dismis")
+    }
+    
+    func easyTipViewDidTap(_ tipView: EasyTipView) {
+        print("didtap")
+    }
+    
     
 }
 
@@ -213,7 +241,6 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView === paymentCountPickerView {
-            print("payment tis")
             return 10
         }
         return partnerList.count
@@ -221,8 +248,7 @@ extension AddTransaction: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView === paymentCountPickerView {
-            print("\(row+1)ts")
-            return "\(row+1) gfg"
+            return "\(row+1)"
         }
         return partnerList[row].name
     }
