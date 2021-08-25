@@ -251,7 +251,7 @@ class TransactionRepository {
                     idPartner: transaction.value(forKey: "id_partner") as! String,
                     totalPrice: transaction.value(forKey: "total_price") as! Double,
                     paymentCount: transaction.value(forKey: "payment_count") as! Int,
-                    document: "",
+                    document: transaction.value(forKey: "document") as! String,
                     dueDate: transaction.value(forKey: "due_date") as! String,
                     createdDate: transaction.value(forKey: "created_date") as! String,
                     updatedDate: transaction.value(forKey: "updated_date") as! String,
