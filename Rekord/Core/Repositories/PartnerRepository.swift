@@ -233,7 +233,7 @@ class PartnerRepository {
             print(error.localizedDescription)
         }
         // for filtering tabledata
-        let filter = "Users"
+        let filter = "Partners"
         
         //URL Constant
         let url = Constants.NETWORK_URL

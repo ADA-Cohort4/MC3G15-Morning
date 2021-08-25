@@ -170,7 +170,10 @@ class AddNewPartnerViewControlelr: UIViewController, UITableViewDelegate, UITabl
         
         if contact.phoneNumbers.isEmpty != true {
             partnerPhoneTextField.text = contact.phoneNumbers[0].value.stringValue
+            partnerPhone = contact.phoneNumbers[0].value.stringValue.filter {!$0.isWhitespace}
+                        partnerPhoneTextField.text = partnerPhone
         }
+        
     }
     
 //    @IBAction func onDoneButtonClicked(){

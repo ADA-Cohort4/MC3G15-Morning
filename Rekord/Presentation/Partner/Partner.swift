@@ -130,7 +130,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         PartnerRepository.shared.getAllPartner { list, str in
             for partner in list{
               
-                if partner.idBusiness == UserDefaults.standard.string(forKey: "businessID"){
+                if partner.idBusiness == UserDefaults.standard.string(forKey: "businessID") && partner.status == .active{ //check untuk active partner sadja
                     
                     var transactionCount: Int = 0
                     var transactionValue: Double = 0
