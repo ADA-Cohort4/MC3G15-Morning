@@ -57,7 +57,7 @@ class PartnerDetailViewController:UIViewController{
         self.tabBarController?.tabBar.isHidden = true
         PartnerRepository.shared.getPartner{ resultPartner in 
             if self.partnerID == resultPartner.idPartner{
-                self.partnerType.text = resultPartner.type!.rawValue
+               //self.partnerType.text = resultPartner.type!.rawValue
                 self.contactPersonPhoneNumber.text = resultPartner.phone!
                 self.companyAddress.text = resultPartner.address!
                 self.contactPersonName.text = resultPartner.ownerName!

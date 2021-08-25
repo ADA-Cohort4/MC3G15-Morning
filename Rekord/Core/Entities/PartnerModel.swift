@@ -8,7 +8,6 @@
 class PartnerModel {
     var idPartner: String?
     var idUser: String?
-    var type: PartnerType?
     var name: String?
     var phone: String?
     var status: PartnerActivationStatus?
@@ -18,12 +17,11 @@ class PartnerModel {
     var email: String?
     var ownerName : String?
     
-    init(idPartner: String, idUser: String, idBusiness: String, type: PartnerType, name:String, phone: String, status: PartnerActivationStatus, airtableId: String, address: String, email: String, ownerName : String) {
+    init(idPartner: String, idUser: String, idBusiness: String, name:String, phone: String, status: PartnerActivationStatus, airtableId: String, address: String, email: String, ownerName : String) {
         self.idPartner = idPartner
         self.idUser = idUser
         self.idBusiness = idBusiness
         self.name = name
-        self.type = type
         self.phone = phone
         self.status = status
         self.airtableId = airtableId

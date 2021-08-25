@@ -34,7 +34,8 @@ class TransactionRepository {
                     "due_date": transaction.dueDate!,
                     "created_date": transaction.createdDate ?? "",
                     "updated_date": transaction.updatedDate ?? "",
-                    "status": transaction.status?.rawValue ?? ""
+                    "status": transaction.status?.rawValue ?? "",
+                    "type": transaction.type?.rawValue ?? "incoming"
                 ]
             ]]
         ]
@@ -70,6 +71,7 @@ class TransactionRepository {
                     transactionData.setValue(response.records?.first?.fields?.id_business, forKeyPath: "id_business")
                     transactionData.setValue(response.records?.first?.fields?.id_partner, forKeyPath: "id_partner")
                     transactionData.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
+                    transactionData.setValue(response.records?.first?.fields?.type, forKeyPath: "type")
                     transactionData.setValue(response.records?.first?.fields?.document, forKeyPath: "document")
                     transactionData.setValue(response.records?.first?.fields?.total_price, forKeyPath: "total_price")
                     transactionData.setValue(response.records?.first?.fields?.created_date, forKeyPath: "created_date")
@@ -77,6 +79,8 @@ class TransactionRepository {
                     transactionData.setValue(response.records?.first?.fields?.due_date, forKeyPath: "due_date")
                     transactionData.setValue(response.records?.first?.fields?.payment_count, forKeyPath: "payment_count")
                     transactionData.setValue(response.records?.first?.id, forKeyPath: "airtable_id")
+                    transactionData.setValue(response.records?.first?.fields?.type, forKeyPath: "type")
+                    
                     do {
                         try managedContext.save()
                         //SET USER CORE DATA TO CONTROLLER
@@ -86,12 +90,16 @@ class TransactionRepository {
                         transaction.idPartner = response.records?.first?.fields?.id_partner
                         transaction.document = response.records?.first?.fields?.document
                         transaction.status = TransactionStatusType(rawValue: (response.records?.first?.fields?.status)!)
-                       transaction.totalPrice = response.records?.first?.fields?.total_price ?? 0
+                        transaction.type = TransactionType(rawValue: (response.records?.first?.fields?.type)!)
+                        transaction.totalPrice = response.records?.first?.fields?.total_price ?? 0
                         transaction.createdDate = response.records?.first?.fields?.created_date
                         transaction.dueDate = response.records?.first?.fields?.created_date
                         transaction.updatedDate = response.records?.first?.fields?.due_date
                         transaction.paymentCount = response.records?.first?.fields?.payment_count ?? 0
+                        transaction.type = TransactionType(rawValue: response.records?.first?.fields?.type ?? "incoming")
+                        
                         completion(transaction)
+                        
                     } catch let error {
                         print("failed save user = \(error.localizedDescription)")
                         completion(transaction)
@@ -120,6 +128,7 @@ class TransactionRepository {
                 "id" : transaction.airtableId!,
                 "fields" : [
                     "status": transaction.status?.rawValue ?? "waiting",
+                    "type": transaction.type?.rawValue ?? "incoming",
                     "total_price": transaction.totalPrice ?? "0",
                     "payment_count": transaction.paymentCount ?? "0",
                     "updated_date": transaction.updatedDate ?? ""
@@ -170,6 +179,7 @@ class TransactionRepository {
                                 let data = try managedContext.fetch(fetchRequest)[0] as! NSManagedObject
                                 //VALUE SET CORE DATA TOBE SAVE
                                 data.setValue(response.records?.first?.fields?.status, forKeyPath: "status")
+                                data.setValue(response.records?.first?.fields?.type, forKeyPath: "type")
                                 data.setValue(response.records?.first?.fields?.total_price, forKeyPath: "total_price")
                                 data.setValue(response.records?.first?.fields?.updated_date, forKeyPath: "updated_date")
                                 data.setValue(response.records?.first?.fields?.payment_count, forKeyPath: "payment_count")
@@ -245,9 +255,12 @@ class TransactionRepository {
                     dueDate: transaction.value(forKey: "due_date") as! String,
                     createdDate: transaction.value(forKey: "created_date") as! String,
                     updatedDate: transaction.value(forKey: "updated_date") as! String,
-                                        status: TransactionStatusType(rawValue: transaction.value(forKey: "status") as! String )!,
+                    status: TransactionStatusType(rawValue: transaction.value(forKey: "status") as! String )!
+                                        ,type: TransactionType(rawValue: transaction.value(forKey: "type") as? String ?? "incoming") ?? .incoming,
+
                     airtableId: transaction.value(forKey: "airtable_id") as! String,
-                    idBusiness: transaction.value(forKey: "id_business") as! String))
+                                        idBusiness: transaction.value(forKey: "id_business") as! String)
+        )
             }
             print("performed query with transaction list: ", listTransaction)
             completion(listTransaction, nil)
