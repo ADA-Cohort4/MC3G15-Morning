@@ -7,11 +7,11 @@
 
 import UIKit
 
-class EditPartnerViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
+class EditPartnerViewController: UIViewController{
     
     // Unused code (Belum di connect)
     
-    @IBOutlet weak var editPartnerTableView: UITableView!
+    
     
     @IBOutlet weak var businessNameTextField: UITextField!
     @IBOutlet weak var OwnerNameTextField: UITextField!
@@ -29,15 +29,12 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     @IBOutlet weak var deletePartnerButton: UIButton!
     
     var updatePartner: PartnerModel!
-    //var partnerType: PartnerType!
     var partnerId: String?
     var partnerTypeDescription: String?
     var airTableID : String?
     var partnerName : String?
     override func viewDidLoad() {
         hideKeyboardWhenTappedAround()
-        editPartnerTableView.register(UINib.init(nibName: "PartnerTypeCell", bundle: nil), forCellReuseIdentifier: "PartnerTypeCell")
-        editPartnerTableView.reloadData()
         partnerBusinessCell.layer.cornerRadius = 10
         partnerOwnerCell.layer.cornerRadius = 10
         partnerEmailCell.layer.cornerRadius = 10
@@ -50,7 +47,6 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //Partner ID perlu diganti kalau mau coba akses
         PartnerRepository.shared.getAllPartner { partnerList, partner in
             for updatePartner in partnerList{
                 if updatePartner.idPartner == self.partnerId{
@@ -65,7 +61,6 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
                 }
             }
         }
-        editPartnerTableView.reloadData()
     }
     
     @IBAction func saveUpdatedPartner(_ sender: Any) {
@@ -117,17 +112,5 @@ class EditPartnerViewController: UIViewController , UITableViewDelegate, UITable
         
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = editPartnerTableView.dequeueReusableCell(withIdentifier: "PartnerTypeCell", for: indexPath)as! PartnerTypeCell
-        cell.partnerType.text = partnerTypeDescription
-        return cell
-    }
+
 }
