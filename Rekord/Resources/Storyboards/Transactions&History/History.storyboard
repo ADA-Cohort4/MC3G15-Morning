@@ -59,7 +59,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" text="" placeholder="Search by TR#" translatesAutoresizingMaskIntoConstraints="NO" id="Dk0-dY-lES">
-                                                <rect key="frame" x="20" y="52" width="345" height="51"/>
+                                                <rect key="frame" x="20" y="52" width="292" height="51"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
@@ -99,6 +99,17 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eli-gx-5uO">
+                                                <rect key="frame" x="319" y="52" width="46" height="51"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="Reset">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onResetFIlterBtnClick:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vvd-hg-9Qf"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.070264987649999999" green="0.33625107999999998" blue="0.60743623970000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
@@ -236,6 +247,7 @@
                         <outlet property="headerPadding" destination="nxn-zw-56o" id="m29-II-nF3"/>
                         <outlet property="historyTable" destination="MWJ-JQ-uxD" id="MnC-cl-aVb"/>
                         <outlet property="partnerDrop" destination="aAj-fO-W3c" id="MdR-13-ncR"/>
+                        <outlet property="resetFIlterBtn" destination="eli-gx-5uO" id="E87-Zq-gRY"/>
                         <outlet property="searchBar" destination="Dk0-dY-lES" id="RKd-HH-4F5"/>
                         <outlet property="typeDrop" destination="FYX-KB-e2p" id="Gxn-d8-wDy"/>
                         <segue destination="ObF-dm-r2h" kind="show" identifier="toTransactionDetail" id="twT-d7-wy4"/>

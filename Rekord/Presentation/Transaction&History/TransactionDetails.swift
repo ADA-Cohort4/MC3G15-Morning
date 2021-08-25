@@ -22,6 +22,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var viewInvoiceBtn: UIButton!
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var paymentTable: UITableView!
+    
     //name, trid, type , status, totalvalue, totaldue, paymentcount
     var inputArray : [String] = ["", "", "", "", "", "" ,"", ""]
     var paymentArray : [[String]] = [] //0 = paymentID, 1 = paymentDate
@@ -30,6 +31,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     var totalDue : Double = 0
     var selectedPaymentID : String = ""
     var telephoneNumber: String = ""
+    var isEditable : Bool = true
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
@@ -63,7 +65,11 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         
         
         configNumberFormats()
-        
+        if isEditable == false{
+            updatePaymentBtn.isEnabled = false
+            updatePaymentBtn.layer.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            updatePaymentBtn.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .disabled)
+        }
         
         paymentCountLabel.text = inputArray[6]
     }
@@ -119,7 +125,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
                 if result.idTransaction == self.inputArray[1]{
                     
                     var partnerID = ""
-                    var type = ""
+                    var type = result.type?.rawValue ?? "noType"
                     var partnerName = ""
                     
                     PartnerRepository.shared.getAllPartner { resultPartner, str in
