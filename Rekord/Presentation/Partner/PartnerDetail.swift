@@ -16,6 +16,7 @@ class PartnerDetailViewController:UIViewController{
     var transactionDate: String = ""
     var partnerArray: [String]?
     var name: String = ""
+    var rupiah: String = ""
  
     
     @IBOutlet weak var detailView: UIView!
@@ -65,11 +66,17 @@ class PartnerDetailViewController:UIViewController{
         PartnerRepository.shared.getAllPartner{ resultPartner,err  in
             for partner in resultPartner{
                 if self.partnerID == partner.idPartner{
+                    let formatter = NumberFormatter()
+                    formatter.locale = Locale.current
+                    formatter.numberStyle = .currencyAccounting
+                    formatter.currencySymbol = "Rp"
+                    formatter.currencyCode = "ID"
+                    self.rupiah = formatter.string(from: NSNumber(value: self.transactionAmount)) ?? ""
                     self.contactPersonPhoneNumber.text = partner.phone!
                     self.companyAddress.text = partner.address!
                     self.contactPersonName.text = partner.ownerName!
                     self.emailAddress.text = partner.email!
-                    self.totalTransactionValue.text = String(self.transactionAmount)
+                    self.totalTransactionValue.text = self.rupiah
                     self.totalTransactions.text = String(self.totalTransactionsDone)
                     self.lastTransactionDate.text = self.transactionDate
                 }
@@ -77,6 +84,7 @@ class PartnerDetailViewController:UIViewController{
             
         }
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is EditPartnerViewController{
             let vc = segue.destination as? EditPartnerViewController
