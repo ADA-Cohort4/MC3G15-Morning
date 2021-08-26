@@ -32,6 +32,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     var selectedPaymentID : String = ""
     var telephoneNumber: String = ""
     var isEditable : Bool = true
+    var transaction: TransactionModel!
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
@@ -104,6 +105,11 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func onUpdateBtnClick(_ sender: Any) {
         performSegue(withIdentifier: "toUpdateTransaction", sender: nil)
     }
+    
+    @IBAction func viewInvoice(_ sender: Any) {
+        performSegue(withIdentifier: "viewInvoice", sender: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toUpdateTransaction"{
             let vc = segue.destination as? UpdateTransaction
@@ -111,12 +117,16 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
             vc?.finalPayment = onlyFinalPaymentLeft
             vc?.totalDue = Double(inputArray[5]) ?? 0
             print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
+        } else if segue.identifier == "viewInvoice"{
+            let vc = segue.destination as? InvoiceDetail
+            vc?.transaction = transaction
         }
     }
     func queryForDetail(){
         TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
             for result in resultList{
                 print(result.document)
+                self.transaction = result
                 
 //                let newImageData = Data(base64Encoded: result.document!)
 //                if let newImageData = newImageData {
