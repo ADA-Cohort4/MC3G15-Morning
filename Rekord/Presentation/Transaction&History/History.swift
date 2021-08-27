@@ -34,7 +34,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     var transData : [[String]] = []
     var filteredTrans : [[String]] = []
     let customerData : [String] = []
-    let typeData : [String] = ["Customer", "Supplier"]
+//    let typeData : [String] = ["Customer", "Supplier"]
     var partnerData : [[String]] = [] // for filter list and filter query, id, name
     let typeData : [String] = ["Incoming", "Outgoing"]
 
@@ -140,7 +140,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
        filteredTrans = []
         if searchText == "" {
             transData = []
-            queryForHistory()
+            queryForHistory(isFilter: false, filterType: "epic")
             print(transData[0])
         }else{
             var count = 0

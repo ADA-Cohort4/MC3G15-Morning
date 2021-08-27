@@ -219,7 +219,6 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
                 if partnerArray[num][1].lowercased().contains(searchText.lowercased()){
                         filteredPartner.append(partner)
                     }
-                print(self.filteredPartner)
                 num += 1
             }
             partnerArray = []
