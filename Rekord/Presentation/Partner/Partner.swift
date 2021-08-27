@@ -7,8 +7,7 @@
 
 import UIKit
 
-class PartnerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class PartnerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
    
     @IBOutlet weak var partnerListTable: UITableView!
     @IBOutlet weak var roundedUpperView: UIView!
@@ -27,6 +26,7 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
     var partnerCount = 1
     var transactionAmount: Double = 0.0
     var partnerArray : [[String]] = []
+    var filteredPartner: [[String]] = []
     var selectedPartnerID : String = ""
     var lastTransactionDate: String = ""
     
@@ -70,6 +70,12 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
         refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
         partnerListTable.addSubview(refreshControl)
         partnerListTable.reloadData()
+        
+        searchBar.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,6 +196,27 @@ class PartnerListViewController: UIViewController, UITableViewDelegate, UITableV
             vc.totalTransactionsDone = totalTransactionsDone
             vc.transactionDate = lastTransactionDate
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredPartner = []
+        if searchText == ""{
+            partnerArray = []
+            queryPartners()
+        }else{
+            var num = 0
+            for partner in partnerArray{
+                if partnerArray[num][1].lowercased().contains(searchText.lowercased()){
+                        filteredPartner.append(partner)
+                    }
+                print(self.filteredPartner)
+                num += 1
+            }
+            partnerArray = []
+            partnerArray = filteredPartner
+            self.partnerListTable.reloadData()
+        }
+        self.partnerListTable.reloadData()
     }
 }
 
