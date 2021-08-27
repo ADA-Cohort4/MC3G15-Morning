@@ -25,6 +25,8 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     @IBOutlet weak var emptyHistoryLabel: UILabel!
     @IBOutlet weak var filterView: FilterView!
     
+    @IBOutlet weak var resetFIlterBtn: UIButton!
+    
     
     private let refreshControl = UIRefreshControl()
     //nanti data hasil query masukin sini, kalo filter / search reload view dan restart query
@@ -33,7 +35,12 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     var filteredTrans : [[String]] = []
     let customerData : [String] = []
     let typeData : [String] = ["Customer", "Supplier"]
+    var partnerData : [[String]] = [] // for filter list and filter query, id, name
+    let typeData : [String] = ["Incoming", "Outgoing"]
+
     var selectedCustomerData : String = ""
+    var selectedCustomerIndex : Int = 0
+    var selectedType : String = ""
     var selectedFilter : String = ""
     var selectedEntry : String = ""
     
@@ -49,10 +56,10 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
       
     }
     override func viewDidLoad() {
-        
        
         super.viewDidLoad()
-        queryForHistory()
+        hideKeyboardWhenTappedAround()
+        queryForHistory(isFilter: false, filterType: "epic")
         historyTable.dataSource = self
         historyTable.delegate = self
         configViews()
@@ -71,17 +78,20 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
+        filterTypeLabel.text = "Type"
+        filterPartnerLabel.text = "Partner"
+
     }
     
     func configViews(){
         filterView.layer.cornerRadius = 10
         filterView.baseView.layer.cornerRadius = 10
-        filterTypeLabel.text = "Type"
-        filterPartnerLabel.text = "Partner"
+
         dateDrop.layer.cornerRadius = 10
         partnerDrop.layer.cornerRadius = 10
         typeDrop.layer.cornerRadius = 10
         emptyHistoryLabel.isHidden = true
+        historyTable.isHidden = false
         
         if transData.isEmpty{
             historyTable.isHidden = true
@@ -151,13 +161,22 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         if filterView.selectedOption != "" {
             selectedCustomerData = filterView.selectedOption
+            selectedCustomerIndex = filterView.selectedIndex
             switch selectedFilter{
             case "partner":
                 filterPartnerLabel.text = selectedCustomerData
+                self.queryForHistory(isFilter: true, filterType: selectedFilter)
+                print("transData1 ", transData)
+                self.historyTable.reloadData()
+                filterView.selectedOption = ""
                 break
            
             case "type":
-                filterTypeLabel.text = selectedCustomerData
+                selectedType = filterView.selectedOption
+                filterTypeLabel.text = selectedType
+                queryForHistory(isFilter: true, filterType: selectedFilter)
+                self.historyTable.reloadData()
+                filterView.selectedOption = ""
                 break
             default:
                 print("Error")
@@ -167,6 +186,7 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                 filterEndLabel.text = "Date Filtered"
                 filterStartDate = FilterView.dates[0]
                 filterEndDate = FilterView.dates[1]
+                queryForHistory(isFilter: true, filterType: selectedFilter)
                 print(filterStartDate, filterEndDate)
                }
         }
@@ -194,8 +214,14 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     }
     @IBAction func onPartnerFilterClick(){
         selectedFilter = "partner"
+        partnerData = []
+        partnerFilterQuery()
         filterView.viewMode = selectedFilter
-        filterView.cellData = customerData
+        var filterData : [String] = []
+        for i in partnerData{
+            filterData.append(i[1])
+        }
+        filterView.cellData = filterData
         filterView.optionsTableView.reloadData()
         filterView.filterTitle.text = "Select Your Partner"
         if filterView.isHidden == true{
@@ -223,6 +249,27 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
         }
     }
+    
+    @IBAction func onResetFIlterBtnClick(_ sender: Any) {
+        filterView.selectedOption = ""
+        self.filterEndDate = Date()
+        self.filterStartDate = Date()
+        self.selectedType = ""
+        self.selectedFilter = ""
+        self.selectedEntry = ""
+        self.selectedCustomerData = ""
+        self.selectedCustomerIndex = 0
+        filterPartnerLabel.text = "Partner"
+        filterTypeLabel.text = "Type"
+        filterEndLabel.text = "Date"
+        
+        queryForHistory(isFilter: false, filterType: "none")
+        print(transData)
+        self.historyTable.reloadData()
+        configViews()
+        
+    }
+    
     @IBAction func onRefreshPull(){
         print("refreshed")
         
@@ -230,21 +277,14 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         
     }
     
-    func queryForHistory(){
+    func queryForHistory(isFilter : Bool, filterType : String){
+        transData = []
         // MARK: -QUERY TRANSACTION FOR DASHBOARD
         TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
             for result in resultList{
                 var partnerName = ""
-                var type = ""
-                PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
-                    for resultPartner in resultPartnerList{
-                        if resultPartner.idPartner == result.idPartner{
-                            print("found partner")
-                            partnerName = resultPartner.name!
-                            //type = resultPartner.type!.rawValue
-                        }
-                    }
-                }
+                let type = result.type?.rawValue ?? "errorType"
+               
                 if result.status?.rawValue == "paid"{
                     let formatter = NumberFormatter()
                     formatter.locale = Locale.current
@@ -252,6 +292,14 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                     formatter.currencySymbol = "Rp"
                     formatter.currencyCode = "ID"
                     
+                    PartnerRepository.shared.getAllPartner { resultPartnerList, resultString in
+                        for resultPartner in resultPartnerList{
+                            if resultPartner.idPartner == result.idPartner{
+                                print("found partner")
+                                partnerName = resultPartner.name!
+                            }
+                        }
+                    }
                     let rupiah = formatter.string(from: NSNumber(value: result.totalPrice ?? 0))
                     let list : [String] = [partnerName, "\(result.idTransaction!)", type.capitalized, (result.status!.rawValue).capitalized, rupiah!, result.dueDate!]
                 
@@ -264,36 +312,67 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
                 }
                 
                 if dashboardQueryHasSameID == false{
-                    self.transData.append(list)
-                    
+                    print(self.selectedType, " ", list[2])
+                    if isFilter == true{
+                        switch filterType{
+                        case "partner":
+                            if list[0] == self.selectedCustomerData{
+                                self.transData.append(list)
+                            }
+                            break
+                        case "type":
+                            if list[2] == self.selectedType{
+                                self.transData.append(list)
+                            }
+                            break
+                        case "date":
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "yyyy-MM-dd"
+                            let date = formatter.date(from: result.updatedDate ?? "1990-02-02")
+                            print("Date: ", date, "StartDate: ", self.filterStartDate, "endDate: ", self.filterEndDate)
+                            //check if transaction date is within filter
+                            if date?.isWithinFilterDate(date: self.filterStartDate, andDate: self.filterEndDate) == true{
+                                self.transData.append(list)
+                            }
+                            break
+                        default:
+                            print("error in filter")
+                            break
+                            
+                        }
+                    }else{
+                        self.transData.append(list)
+                    }
                 }
                     
                 }
             }
         }
+        configViews()
     }
-    
-    
-
-    
-    
+    func partnerFilterQuery(){
+        partnerData = []
+        PartnerRepository.shared.getAllPartner { partnerList, str in
+            for partner in partnerList{
+                if partner.idBusiness == UserDefaults.standard.string(forKey: "businessID") ?? "errorID"{
+                    let partnerName = partner.name ?? "errorName"
+                    let partnerID = partner.idPartner ?? "errorID"
+                    
+                    self.partnerData.append([partnerID, partnerName])        }
+            }
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is TransactionDetails{
             let vc = segue.destination as? TransactionDetails
             vc?.inputArray[1] = selectedEntry
+            vc?.isEditable = false
         }
     }
     
 }
 
-extension String {
-    func capitalizingFirstLetter() -> String {
-      return prefix(1).uppercased() + self.lowercased().dropFirst()
-    }
 
-    mutating func capitalizeFirstLetter() {
-      self = self.capitalizingFirstLetter()
-    }
-}
+
 

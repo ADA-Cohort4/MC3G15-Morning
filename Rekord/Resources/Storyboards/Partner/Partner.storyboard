@@ -42,8 +42,11 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="182" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vHK-SN-SQg">
-                                <rect key="frame" x="23" y="219" width="368" height="607"/>
+                                <rect key="frame" x="10" y="219" width="394" height="607"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="607" id="5JL-uu-7vJ"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="Yoc-9l-bE8"/>
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="zBi-va-a0q"/>
@@ -80,15 +83,15 @@
                             <constraint firstItem="cQu-CQ-06S" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="5X6-md-rH7"/>
                             <constraint firstItem="cCp-mU-wF6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="129" id="9Sf-VZ-gq7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cCp-mU-wF6" secondAttribute="trailing" constant="127" id="Hvo-Wj-MEI"/>
-                            <constraint firstItem="vHK-SN-SQg" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="bottom" constant="8" symbolic="YES" id="MEK-b6-tCr"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vHK-SN-SQg" secondAttribute="trailing" constant="23" id="Mww-9s-Ay0"/>
                             <constraint firstItem="cQu-CQ-06S" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="NDO-0q-vtn"/>
                             <constraint firstItem="Pef-Qp-4J6" firstAttribute="top" secondItem="1xU-sd-QdN" secondAttribute="bottom" constant="39.5" id="Npb-cw-eoE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cCp-mU-wF6" secondAttribute="trailing" constant="127" id="RDS-A3-TRu"/>
                             <constraint firstItem="cCp-mU-wF6" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="bottom" constant="122" id="TBI-oo-sSz"/>
                             <constraint firstItem="1xU-sd-QdN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="64.530000000000001" id="TDm-Ci-fx5"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="vHK-SN-SQg" secondAttribute="bottom" constant="-13" id="f7C-cu-QKr"/>
+                            <constraint firstItem="vHK-SN-SQg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="dHp-oN-Zq3"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vHK-SN-SQg" secondAttribute="trailing" constant="10" id="fKY-0E-uzH"/>
                             <constraint firstItem="cQu-CQ-06S" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="gDk-I5-nBh"/>
+                            <constraint firstItem="vHK-SN-SQg" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="bottom" constant="8" symbolic="YES" id="hZE-tU-eK3"/>
                             <constraint firstItem="cQu-CQ-06S" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="haZ-gj-PCQ"/>
                             <constraint firstItem="Pef-Qp-4J6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="118.81999999999999" id="kUM-3d-Mnr"/>
                             <constraint firstItem="cQu-CQ-06S" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="nko-Cp-iEf"/>
@@ -96,7 +99,6 @@
                             <constraint firstItem="cQu-CQ-06S" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="t5b-na-2tS"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Pef-Qp-4J6" secondAttribute="trailing" constant="123.18000000000001" id="uek-47-pbq"/>
                             <constraint firstItem="1xU-sd-QdN" firstAttribute="top" secondItem="cCp-mU-wF6" secondAttribute="bottom" constant="31.5" id="vxS-f2-TFH"/>
-                            <constraint firstItem="vHK-SN-SQg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="23" id="yJ0-ze-ejV"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Partner" image="person.2.square.stack" catalog="system" id="Q0f-zK-M9j"/>

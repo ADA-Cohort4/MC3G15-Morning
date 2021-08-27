@@ -22,6 +22,7 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var viewInvoiceBtn: UIButton!
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var paymentTable: UITableView!
+    
     //name, trid, type , status, totalvalue, totaldue, paymentcount
     var inputArray : [String] = ["", "", "", "", "", "" ,"", ""]
     var paymentArray : [[String]] = [] //0 = paymentID, 1 = paymentDate
@@ -30,6 +31,8 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     var totalDue : Double = 0
     var selectedPaymentID : String = ""
     var telephoneNumber: String = ""
+    var isEditable : Bool = true
+    var transaction: TransactionModel!
     override func viewWillAppear(_ animated: Bool) {
         self.title = "Transaction Details"
         CommonFunction.shared.addShadow(view: baseView)
@@ -63,7 +66,11 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
         
         
         configNumberFormats()
-        
+        if isEditable == false{
+            updatePaymentBtn.isEnabled = false
+            updatePaymentBtn.layer.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            updatePaymentBtn.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .disabled)
+        }
         
         paymentCountLabel.text = inputArray[6]
     }
@@ -98,6 +105,11 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func onUpdateBtnClick(_ sender: Any) {
         performSegue(withIdentifier: "toUpdateTransaction", sender: nil)
     }
+    
+    @IBAction func viewInvoice(_ sender: Any) {
+        performSegue(withIdentifier: "viewInvoice", sender: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toUpdateTransaction"{
             let vc = segue.destination as? UpdateTransaction
@@ -105,15 +117,25 @@ class TransactionDetails: UIViewController, UITableViewDelegate, UITableViewData
             vc?.finalPayment = onlyFinalPaymentLeft
             vc?.totalDue = Double(inputArray[5]) ?? 0
             print("payment id sent: ", selectedPaymentID, "selected transaaction: ", inputArray[1])
+        } else if segue.identifier == "viewInvoice"{
+            let vc = segue.destination as? InvoiceDetail
+            vc?.transaction = transaction
         }
     }
     func queryForDetail(){
         TransactionRepository.shared.getAllTransaction(_idBusiness: UserDefaults.standard.string(forKey: "businessID")!) { resultList, result in
             for result in resultList{
+                print(result.document)
+                self.transaction = result
+                
+//                let newImageData = Data(base64Encoded: result.document!)
+//                if let newImageData = newImageData {
+//                    self.docImageView.image = UIImage(data: newImageData)
+//                }
                 if result.idTransaction == self.inputArray[1]{
                     
                     var partnerID = ""
-                    var type = ""
+                    var type = result.type?.rawValue ?? "noType"
                     var partnerName = ""
                     
                     PartnerRepository.shared.getAllPartner { resultPartner, str in

@@ -303,8 +303,4 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         self.refreshControl.endRefreshing()
     }
 }
-extension Date{
-    func isWithinFilterDate(date startDate : Date, andDate endDate : Date) -> Bool{
-        return (min(startDate, endDate)...max(startDate, endDate)).contains(self)
-    }
-}
+

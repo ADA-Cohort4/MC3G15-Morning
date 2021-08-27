@@ -14,6 +14,9 @@ class PartnerDetailViewController:UIViewController{
     var totalTransactionsDone: Int = 0
     var transactionAmount: Double = 0.0
     var transactionDate: String = ""
+    var partnerArray: [String]?
+    var name: String = ""
+    var rupiah: String = ""
  
     
     @IBOutlet weak var detailView: UIView!
@@ -54,23 +57,34 @@ class PartnerDetailViewController:UIViewController{
         detailView.layer.cornerRadius = 10
         editPartnerButton.layer.cornerRadius = 10
         viewTranasctionsButton.layer.cornerRadius = 10
+        partnerName.text = name
+        partnerName.textAlignment = .center
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        PartnerRepository.shared.getPartner{ resultPartner in 
-            if self.partnerID == resultPartner.idPartner{
-               //self.partnerType.text = resultPartner.type!.rawValue
-                self.contactPersonPhoneNumber.text = resultPartner.phone!
-                self.companyAddress.text = resultPartner.address!
-                self.contactPersonName.text = resultPartner.ownerName!
-                self.emailAddress.text = resultPartner.email!
-                self.totalTransactionValue.text = String(self.transactionAmount)
-                self.totalTransactions.text = String(self.totalTransactionsDone)
-                self.lastTransactionDate.text = self.transactionDate
+        PartnerRepository.shared.getAllPartner{ resultPartner,err  in
+            for partner in resultPartner{
+                if self.partnerID == partner.idPartner{
+                    let formatter = NumberFormatter()
+                    formatter.locale = Locale.current
+                    formatter.numberStyle = .currencyAccounting
+                    formatter.currencySymbol = "Rp"
+                    formatter.currencyCode = "ID"
+                    self.rupiah = formatter.string(from: NSNumber(value: self.transactionAmount)) ?? ""
+                    self.contactPersonPhoneNumber.text = partner.phone!
+                    self.companyAddress.text = partner.address!
+                    self.contactPersonName.text = partner.ownerName!
+                    self.emailAddress.text = partner.email!
+                    self.totalTransactionValue.text = self.rupiah
+                    self.totalTransactions.text = String(self.totalTransactionsDone)
+                    self.lastTransactionDate.text = self.transactionDate
+                }
             }
+            
         }
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is EditPartnerViewController{
             let vc = segue.destination as? EditPartnerViewController

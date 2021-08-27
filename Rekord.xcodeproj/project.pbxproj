@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -109,6 +109,7 @@
 		EC68569D26B3B6EB00148313 /* AddTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */; };
 		EC6F600C26BC2FEE000A3302 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6F600B26BC2FEE000A3302 /* String+Extension.swift */; };
 		EC87E50426B78A9A0098148B /* TransactionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC87E50326B78A9A0098148B /* TransactionRepository.swift */; };
+		EC914F4926D746CE0097B8F0 /* InvoiceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC914F4826D746CE0097B8F0 /* InvoiceDetail.swift */; };
 		ECA4ADFD26B91304007C4F74 /* BusinessRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4ADFC26B91304007C4F74 /* BusinessRepository.swift */; };
 		ECA4ADFF26B9133A007C4F74 /* PartnerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4ADFE26B9133A007C4F74 /* PartnerRepository.swift */; };
 		ECA4AE0126B91357007C4F74 /* InviteLinkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4AE0026B91357007C4F74 /* InviteLinkRepository.swift */; };
@@ -230,6 +231,7 @@
 		EC68569C26B3B6EB00148313 /* AddTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTransaction.storyboard; sourceTree = "<group>"; };
 		EC6F600B26BC2FEE000A3302 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		EC87E50326B78A9A0098148B /* TransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
+		EC914F4826D746CE0097B8F0 /* InvoiceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetail.swift; sourceTree = "<group>"; };
 		ECA4ADFC26B91304007C4F74 /* BusinessRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessRepository.swift; sourceTree = "<group>"; };
 		ECA4ADFE26B9133A007C4F74 /* PartnerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerRepository.swift; sourceTree = "<group>"; };
 		ECA4AE0026B91357007C4F74 /* InviteLinkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteLinkRepository.swift; sourceTree = "<group>"; };
@@ -271,7 +273,6 @@
 				134B1E8CB892E38AF6146A3A /* Pods-Rekord.debug.xcconfig */,
 				2B13223760004B2B8407F4AB /* Pods-Rekord.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -386,6 +387,7 @@
 				99837E1426B9915E00EFCA58 /* FilterView.swift */,
 				679A042026BA97D100676D96 /* UpdateTransaction.swift */,
 				679A042926BA9E8000676D96 /* PaymentDetail.swift */,
+				EC914F4826D746CE0097B8F0 /* InvoiceDetail.swift */,
 			);
 			path = "Transaction&History";
 			sourceTree = "<group>";
@@ -828,6 +830,7 @@
 				D444D4DB26B6A0E600431C1B /* PartnersAPIRequest.swift in Sources */,
 				D4D3D374267063B3005A4ABA /* Constants.swift in Sources */,
 				01B87DA026C4E1B90072DD92 /* profileCell.swift in Sources */,
+				EC914F4926D746CE0097B8F0 /* InvoiceDetail.swift in Sources */,
 				D4D3D361267062EF005A4ABA /* UIBezierPath+Extension.swift in Sources */,
 				E7A9B69E26B6426D009C2876 /* SetupBusinessViewController.swift in Sources */,
 				D4D3D35E267062EF005A4ABA /* UIView+Extension.swift in Sources */,
