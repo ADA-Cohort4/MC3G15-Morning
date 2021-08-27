@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
+class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
     @IBOutlet weak var historyTable: UITableView!
     
@@ -32,8 +32,12 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     //nanti data hasil query masukin sini, kalo filter / search reload view dan restart query
     //URUTAN: 0 = partner name, 1 = trid, 2 = type, 3 = status, 4 = total
     var transData : [[String]] = []
+    var filteredTrans : [[String]] = []
+    let customerData : [String] = []
+//    let typeData : [String] = ["Customer", "Supplier"]
     var partnerData : [[String]] = [] // for filter list and filter query, id, name
     let typeData : [String] = ["Incoming", "Outgoing"]
+
     var selectedCustomerData : String = ""
     var selectedCustomerIndex : Int = 0
     var selectedType : String = ""
@@ -67,8 +71,16 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
         filterView.doneBtn.addTarget(self, action: #selector(self.onFilterDoneBtnClick), for: .touchUpInside)
         //add target for refresh control
         refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
+        
+        searchBar.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+        
         filterTypeLabel.text = "Type"
         filterPartnerLabel.text = "Partner"
+
     }
     
     func configViews(){
@@ -122,6 +134,27 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedEntry = transData[indexPath.row][1]
         performSegue(withIdentifier: "toTransactionDetail", sender: nil)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+       filteredTrans = []
+        if searchText == "" {
+            transData = []
+            queryForHistory(isFilter: false, filterType: "epic")
+            print(transData[0])
+        }else{
+            var count = 0
+            for transaction in transData{
+                if transData[count][1].lowercased().contains(searchText.lowercased()) {
+                    filteredTrans.append(transaction)
+                }
+                count += 1
+            }
+            transData = []
+            transData = filteredTrans
+            self.historyTable.reloadData()
+        }
+        self.historyTable.reloadData()
     }
     
     @IBAction func onFilterDoneBtnClick(){
