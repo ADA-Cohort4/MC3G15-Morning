@@ -42,14 +42,34 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         }
         
     }
-    
-    
+
     override func viewDidAppear(_ animated: Bool) {
         Dashboard.transData = []
         Dashboard.queryForDashboard()
         self.mainTableView.reloadData()
+        showHideContextViews()
+        
     }
-    
+    func showHideContextViews(){
+        if Dashboard.transData.isEmpty {
+            receiptImage.isHidden = false
+            mainTableView.isHidden = true
+            mainTableView.isUserInteractionEnabled = false
+            addTransactionBtnFirst.isHidden = false
+            addTransactionBtnFirst.layer.cornerRadius = 10
+            yourTListEmpty.isHidden = false
+            welcomeLabel.isHidden = false
+            
+        }else{
+            yourTListEmpty.isHidden = true
+            welcomeLabel.isHidden = true
+            addTransactionBtnFirst.isHidden = true
+            mainTableView.isHidden = false
+            mainTableView.dataSource = self
+            mainTableView.delegate = self
+            receiptImage.isHidden = true
+        }
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -62,24 +82,8 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         gradientLayer.colors = [UIColor.white.cgColor, UIColor.init(displayP3Red: 17.0/255.0, green: 86.0/255.0, blue: 155.0/255.0, alpha: 1.0).cgColor]
         self.view.layer.insertSublayer(gradientLayer, at: 0)
         
-        yourTListEmpty.isHidden = true
-        welcomeLabel.isHidden = true
-        addTransactionBtnFirst.isHidden = true
-        mainTableView.isHidden = false
-        mainTableView.dataSource = self
-        mainTableView.delegate = self
-        receiptImage.isHidden = true
+        showHideContextViews()
         
-        if Dashboard.transData.isEmpty {
-            receiptImage.isHidden = false
-            mainTableView.isHidden = true
-            mainTableView.isUserInteractionEnabled = false
-            addTransactionBtnFirst.isHidden = false
-            addTransactionBtnFirst.layer.cornerRadius = 10
-            yourTListEmpty.isHidden = false
-            welcomeLabel.isHidden = false
-            
-        }
         refreshControl.addTarget(self, action: #selector(self.onRefreshPull), for: .valueChanged)
         mainTableView.addSubview(refreshControl)
         
