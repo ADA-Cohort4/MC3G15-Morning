@@ -149,8 +149,12 @@ class AddTransaction: UIViewController, EasyTipViewDelegate {
         
         let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
         print("originalAmount = \(originalAmount)")
-        let imageData = self.invoiceView.image?.jpegData(compressionQuality: 0.1)
-        guard let imageBase64String = imageData?.base64EncodedString() else { return }
+        var imageBase64String : String = ""
+        if let imageData = self.invoiceView.image?.jpegData(compressionQuality: 0.1){
+            imageBase64String = imageData.base64EncodedString()
+        }
+       
+     
         
         let newTransaction = TransactionModel(idTransaction: CommonFunction.shared.randomString(length: 8), idPartner: partnerId, totalPrice: Double(originalAmount) ?? 0, paymentCount: Int(paymentCount.text ?? "1")!, document: imageBase64String , dueDate: datePickerTextField.text ?? "", createdDate: today, updatedDate: today, status: .waiting, type: TransactionType(rawValue: selectTypeTextField.text!)! , airtableId: "1", idBusiness: UserDefaults.standard.string(forKey: "businessID") ?? "errorID")
         repeat {

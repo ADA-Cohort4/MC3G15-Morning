@@ -49,6 +49,7 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
         self.mainTableView.reloadData()
         showHideContextViews()
         
+        
     }
     func showHideContextViews(){
         if Dashboard.transData.isEmpty {
@@ -64,10 +65,12 @@ class Dashboard : UIViewController, UITableViewDataSource, UITableViewDelegate{
             yourTListEmpty.isHidden = true
             welcomeLabel.isHidden = true
             addTransactionBtnFirst.isHidden = true
-            mainTableView.isHidden = false
             mainTableView.dataSource = self
             mainTableView.delegate = self
+            mainTableView.isUserInteractionEnabled = true
+            mainTableView.isHidden = false
             receiptImage.isHidden = true
+            
         }
     }
     override func viewDidLoad() {
