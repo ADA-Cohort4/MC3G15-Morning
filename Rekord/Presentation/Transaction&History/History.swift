@@ -55,6 +55,12 @@ class History : UIViewController, UITableViewDelegate, UITableViewDataSource, UI
         self.tabBarController?.tabBar.isHidden = false
       
     }
+    override func viewDidAppear(_ animated: Bool) {
+        transData = []
+        queryForHistory(isFilter: false, filterType: "none")
+        self.historyTable.reloadData()
+        configViews()
+    }
     override func viewDidLoad() {
        
         super.viewDidLoad()

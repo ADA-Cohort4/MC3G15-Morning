@@ -26,13 +26,14 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     override func viewDidLoad() {
-        PaymentStatus.register(UINib.init(nibName: "PaymentStatusCell", bundle: nil), forCellReuseIdentifier: "PaymentStatusCell")
-        PaymentStatus.reloadData()
+//        PaymentStatus.register(UINib.init(nibName: "PaymentStatusCell", bundle: nil), forCellReuseIdentifier: "PaymentStatusCell")
+//        PaymentStatus.reloadData()
         self.hideKeyboardWhenTappedAround()
         AmountPaidCell.layer.cornerRadius = 10
-        TermOfPaymentCell.layer.cornerRadius = 10
+       // TermOfPaymentCell.layer.cornerRadius = 10
         UploadDocumentView.layer.cornerRadius = 10
         voidTranasctionButton.layer.cornerRadius = 10
+        updatePaymentBtn.layer.cornerRadius = 10
         print("final payment: ", finalPayment, "total due: ", totalDue)
     }
     
@@ -90,7 +91,9 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.alertSave.dismiss(animated: true, completion: nil)
                 let alert2 = UIAlertController(title: "Your payment and transaction has been saved.", message: nil, preferredStyle: .alert)
                 alert2.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                    
+                    if self.finalPayment == false{
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 }))
                 self.present(alert2, animated: true, completion: nil)
                 

@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQu-CQ-06S">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="211"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="152"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcK-QC-q7q">
                                         <rect key="frame" x="335" y="96" width="36" height="36"/>
@@ -26,7 +26,7 @@
                                             <segue destination="FfA-Fd-FMz" kind="show" identifier="toAddPartnerSegue" id="lgc-pe-ciB"/>
                                         </connections>
                                     </button>
-                                    <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Lww-kW-xEi">
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search by Partner Name" translatesAutoresizingMaskIntoConstraints="NO" id="Lww-kW-xEi">
                                         <rect key="frame" x="35" y="89" width="290" height="51"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
@@ -37,15 +37,15 @@
                                     <constraint firstItem="Lww-kW-xEi" firstAttribute="leading" secondItem="cQu-CQ-06S" secondAttribute="leading" constant="35" id="2Hk-ox-1mC"/>
                                     <constraint firstAttribute="trailing" secondItem="IcK-QC-q7q" secondAttribute="trailing" constant="43" id="GuN-T2-rMX"/>
                                     <constraint firstItem="IcK-QC-q7q" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="top" constant="96" id="S9q-Nz-x1Q"/>
-                                    <constraint firstAttribute="height" constant="211" id="ckw-Z3-cA6"/>
+                                    <constraint firstAttribute="height" constant="152" id="ckw-Z3-cA6"/>
                                     <constraint firstItem="IcK-QC-q7q" firstAttribute="leading" secondItem="Lww-kW-xEi" secondAttribute="trailing" constant="10" id="gDC-8g-b1L"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="182" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vHK-SN-SQg">
-                                <rect key="frame" x="10" y="219" width="394" height="607"/>
+                                <rect key="frame" x="10" y="160" width="394" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="607" id="5JL-uu-7vJ"/>
+                                    <constraint firstAttribute="height" constant="666" id="5JL-uu-7vJ"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="Yoc-9l-bE8"/>
@@ -79,14 +79,14 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cCp-mU-wF6" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="bottom" constant="122" id="4KR-Ju-REj"/>
+                            <constraint firstItem="cCp-mU-wF6" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="bottom" constant="181" id="4KR-Ju-REj"/>
                             <constraint firstItem="cQu-CQ-06S" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="5X6-md-rH7"/>
                             <constraint firstItem="cCp-mU-wF6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="129" id="9Sf-VZ-gq7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cCp-mU-wF6" secondAttribute="trailing" constant="127" id="Hvo-Wj-MEI"/>
                             <constraint firstItem="cQu-CQ-06S" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="NDO-0q-vtn"/>
                             <constraint firstItem="Pef-Qp-4J6" firstAttribute="top" secondItem="1xU-sd-QdN" secondAttribute="bottom" constant="39.5" id="Npb-cw-eoE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cCp-mU-wF6" secondAttribute="trailing" constant="127" id="RDS-A3-TRu"/>
-                            <constraint firstItem="cCp-mU-wF6" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="bottom" constant="122" id="TBI-oo-sSz"/>
+                            <constraint firstItem="cCp-mU-wF6" firstAttribute="top" secondItem="cQu-CQ-06S" secondAttribute="bottom" constant="181" id="TBI-oo-sSz"/>
                             <constraint firstItem="1xU-sd-QdN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="64.530000000000001" id="TDm-Ci-fx5"/>
                             <constraint firstItem="vHK-SN-SQg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="dHp-oN-Zq3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vHK-SN-SQg" secondAttribute="trailing" constant="10" id="fKY-0E-uzH"/>
