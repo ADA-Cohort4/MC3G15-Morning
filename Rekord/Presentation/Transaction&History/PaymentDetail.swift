@@ -36,14 +36,10 @@ class PaymentDetail: UIViewController {
     
     override func viewDidLoad() {
         queryForPaymentDetail()
-        
-        
-        
-        
+        generateImage()
         print("paymentQueue: ", paymentQueue, "paymentID: ", paymentID, " selectedTransasction: ", selectedTransaction)
         self.navigationItem.backButtonTitle = "Back"
         self.navigationItem.title = "Payment Details"
-        proofOfPayment.image = UIImage.init(named: "receipt")
         paymentDetailCard.layer.cornerRadius = 10
         if proofOfPayment.image != nil {
             toDocumentView.isEnabled = true
@@ -59,6 +55,21 @@ class PaymentDetail: UIViewController {
         configNumber()
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewDetailInvoice"{
+            let vc = segue.destination as? DocumentView
+            vc?.documentFile = paymentQueue[5]
+            vc?.transactionNumber = paymentQueue[0]
+        }
+    }
+    func generateImage() {
+        let newImageData = Data(base64Encoded: paymentQueue[5])
+        if let newImageData = newImageData {
+            self.proofOfPayment.image = UIImage(data: newImageData)
+        }
+    }
+    
     func configNumber() {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
@@ -105,7 +116,7 @@ class PaymentDetail: UIViewController {
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
-        let urlWhats = "https://wa.me/\(phone)/?text=Hello \(partnerName.text)!, I have performed the payment on \(paymentDate.text) for total amount \(paidAmount.text) with invoice number \(paymentID)"
+        let urlWhats = "https://wa.me/\(phone)/?text=Hello \(partnerName.text ?? "partner")!, I have performed the payment on \(dateOfPayment.text ?? "payment date") for total amount \(paidAmount.text ?? "paid amount") with invoice number \(paymentID)"
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
           if let whatsappURL = NSURL(string: urlString) {
             if UIApplication.shared.canOpenURL(whatsappURL as URL) {

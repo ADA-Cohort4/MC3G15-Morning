@@ -77,8 +77,12 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
     
     @IBAction func onUpdateBtnClick(_ sender: Any) {
         print("attempting to save the transaction....")
+        guard let amount = amountPaid.text else {
+            return
+        }
+        let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
         if finalPayment == true{
-            if Double(amountPaid.text ?? "0") == totalDue{
+            if Double(originalAmount ?? "0") == totalDue{
             let alert = UIAlertController(title: "Final Payment Confirmation", message: "You are about to enter the final payment. Are you sure you want to finalize this transaction? The transaction will no longer be updateable.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { alertAction in
                
@@ -111,9 +115,14 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-
+        
+        guard let amount = amountPaid.text else {
+            return
+        }
+        let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
+        
         let newDate =  dateFormatter.string(from: Date())
-        let newPayment = PaymentModel(idPayment: CommonFunction.shared.randomString(length: 10), idTransaction: selectedTransaction, idUser: UserDefaults.standard.string(forKey: "userID") ?? "errorUser", createdDate: newDate, amount: Double(amountPaid.text ?? "0") ?? 0, document: imageBase64String, airtableId: "1")
+        let newPayment = PaymentModel(idPayment: CommonFunction.shared.randomString(length: 10), idTransaction: selectedTransaction, idUser: UserDefaults.standard.string(forKey: "userID") ?? "errorUser", createdDate: newDate, amount: Double(originalAmount) ?? 0, document: imageBase64String, airtableId: "1")
         self.present(alertSave, animated: true, completion: nil)
         
         PaymentRepository.shared.savePayments(payment: newPayment) { payment in
