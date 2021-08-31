@@ -36,14 +36,10 @@ class PaymentDetail: UIViewController {
     
     override func viewDidLoad() {
         queryForPaymentDetail()
-        
-        
-        
-        
+        generateImage()
         print("paymentQueue: ", paymentQueue, "paymentID: ", paymentID, " selectedTransasction: ", selectedTransaction)
         self.navigationItem.backButtonTitle = "Back"
         self.navigationItem.title = "Payment Details"
-        proofOfPayment.image = UIImage.init(named: "receipt")
         paymentDetailCard.layer.cornerRadius = 10
         if proofOfPayment.image != nil {
             toDocumentView.isEnabled = true
@@ -59,6 +55,20 @@ class PaymentDetail: UIViewController {
         configNumber()
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewDetailInvoice"{
+            let vc = segue.destination as? DocumentView
+            vc?.documentFile = paymentQueue[5]
+        }
+    }
+    func generateImage() {
+        let newImageData = Data(base64Encoded: paymentQueue[5])
+        if let newImageData = newImageData {
+            self.proofOfPayment.image = UIImage(data: newImageData)
+        }
+    }
+    
     func configNumber() {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current

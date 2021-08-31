@@ -111,9 +111,14 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
         }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        guard let amount = amountPaid.text else {
+            return
+        }
+        let originalAmount = amount.getOriginalAmount(pattern: CommonFunction.shared.getRegexForAmount())
 
         let newDate =  dateFormatter.string(from: Date())
-        let newPayment = PaymentModel(idPayment: CommonFunction.shared.randomString(length: 10), idTransaction: selectedTransaction, idUser: UserDefaults.standard.string(forKey: "userID") ?? "errorUser", createdDate: newDate, amount: Double(amountPaid.text ?? "0") ?? 0, document: imageBase64String, airtableId: "1")
+        let newPayment = PaymentModel(idPayment: CommonFunction.shared.randomString(length: 10), idTransaction: selectedTransaction, idUser: UserDefaults.standard.string(forKey: "userID") ?? "errorUser", createdDate: newDate, amount: Double(originalAmount) ?? 0, document: imageBase64String, airtableId: "1")
         self.present(alertSave, animated: true, completion: nil)
         
         PaymentRepository.shared.savePayments(payment: newPayment) { payment in
