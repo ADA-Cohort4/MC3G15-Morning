@@ -12,12 +12,12 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var AmountPaidCell: UIView!
     @IBOutlet weak var TermOfPaymentCell: UIView!
     
+    @IBOutlet weak var documentView: UIImageView!
     @IBOutlet weak var PaymentStatus: UITableView!
     @IBOutlet weak var uploadDocumentButton: UIButton!
     @IBOutlet weak var amountPaid: UITextField!
     @IBOutlet weak var termOfPayment: UITextField!
     @IBOutlet weak var voidTranasctionButton: UIButton!
-    
     @IBOutlet weak var updatePaymentBtn: UIButton!
     
     enum ImageSource {
@@ -39,7 +39,6 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
         self.hideKeyboardWhenTappedAround()
         AmountPaidCell.layer.cornerRadius = 10
        // TermOfPaymentCell.layer.cornerRadius = 10
-        UploadDocumentView.layer.cornerRadius = 10
         voidTranasctionButton.layer.cornerRadius = 10
         updatePaymentBtn.layer.cornerRadius = 10
         amountPaid.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
@@ -106,15 +105,15 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     func savePayment(){
-        
-        if let imageData = self.UploadDocumentView.image?.jpegData(compressionQuality: 0.1){
+        var imageBase64String : String = ""
+        if let imageData = self.documentView.image?.jpegData(compressionQuality: 0.1){
             imageBase64String = imageData.base64EncodedString()
         }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
 
         let newDate =  dateFormatter.string(from: Date())
-        let newPayment = PaymentModel(idPayment: CommonFunction.shared.randomString(length: 10), idTransaction: selectedTransaction, idUser: UserDefaults.standard.string(forKey: "userID") ?? "errorUser", createdDate: newDate, amount: Double(amountPaid.text ?? "0") ?? 0, document: "none", airtableId: "1")
+        let newPayment = PaymentModel(idPayment: CommonFunction.shared.randomString(length: 10), idTransaction: selectedTransaction, idUser: UserDefaults.standard.string(forKey: "userID") ?? "errorUser", createdDate: newDate, amount: Double(amountPaid.text ?? "0") ?? 0, document: imageBase64String, airtableId: "1")
         self.present(alertSave, animated: true, completion: nil)
         
         PaymentRepository.shared.savePayments(payment: newPayment) { payment in
@@ -160,7 +159,38 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
       
         
     }
+}
+extension UpdateTransaction {
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            imageName = url.lastPathComponent
+            print("imageName = \(imageName)")
+        }
+
+        imagePicker.dismiss(animated: true, completion: nil)
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            print("Image not found!")
+            return
+        }
+        let fileManager = FileManager.default
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+        let imageData = selectedImage.pngData()
+        fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
+
+        //Retrieving the image
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths2               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath = paths2.first {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName)
+            if let imageRetrieved = UIImage(contentsOfFile: imageURL.path) {
+                //do whatever you want with this image
+                print(imageRetrieved)
+            }
+        }
+        documentView.image = selectedImage
+    }
     
 }
 
