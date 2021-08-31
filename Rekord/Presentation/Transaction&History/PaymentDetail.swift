@@ -30,6 +30,8 @@ class PaymentDetail: UIViewController {
     var selectedTransaction : String = ""
     var trPaymentCount : String = ""
     var phone: String = ""
+    var documentInteractionController:UIDocumentInteractionController!
+
     
     
     override func viewDidLoad() {
@@ -103,7 +105,7 @@ class PaymentDetail: UIViewController {
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
-        let urlWhats = "https://wa.me/\(phone)/?text=Testing Rekord app"
+        let urlWhats = "https://wa.me/\(phone)/?text=Hello \(partnerName.text)!, I have performed the payment on \(paymentDate.text) for total amount \(paidAmount.text) with invoice number \(paymentID)"
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) {
           if let whatsappURL = NSURL(string: urlString) {
             if UIApplication.shared.canOpenURL(whatsappURL as URL) {
@@ -113,6 +115,8 @@ class PaymentDetail: UIViewController {
             }
           }
         }
+        
+        
     }
     
 }

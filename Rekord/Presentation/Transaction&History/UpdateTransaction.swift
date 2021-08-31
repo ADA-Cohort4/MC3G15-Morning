@@ -7,18 +7,25 @@
 
 import UIKit
 
-class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     
     @IBOutlet weak var AmountPaidCell: UIView!
     @IBOutlet weak var TermOfPaymentCell: UIView!
-    @IBOutlet weak var UploadDocumentView: UIView!
+    
+    @IBOutlet weak var documentView: UIImageView!
     @IBOutlet weak var PaymentStatus: UITableView!
     @IBOutlet weak var uploadDocumentButton: UIButton!
     @IBOutlet weak var amountPaid: UITextField!
     @IBOutlet weak var termOfPayment: UITextField!
     @IBOutlet weak var voidTranasctionButton: UIButton!
-    
     @IBOutlet weak var updatePaymentBtn: UIButton!
+    
+    enum ImageSource {
+        case photoLibrary
+        case camera
+    }
+    var imageName = ""
+    var imagePicker: UIImagePickerController!
     var selectedTransaction : String = ""
     var finalPayment : Bool = false
     var totalDue : Double = 0
@@ -28,13 +35,18 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
 //        PaymentStatus.register(UINib.init(nibName: "PaymentStatusCell", bundle: nil), forCellReuseIdentifier: "PaymentStatusCell")
 //        PaymentStatus.reloadData()
+        
         self.hideKeyboardWhenTappedAround()
         AmountPaidCell.layer.cornerRadius = 10
        // TermOfPaymentCell.layer.cornerRadius = 10
-        UploadDocumentView.layer.cornerRadius = 10
         voidTranasctionButton.layer.cornerRadius = 10
         updatePaymentBtn.layer.cornerRadius = 10
+        amountPaid.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         print("final payment: ", finalPayment, "total due: ", totalDue)
+    }
+    
+    @objc func editingChanged() {
+        amountPaid.text = self.amountPaid.text?.currencyInputFormatting()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,6 +57,24 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
         let cell = PaymentStatus.dequeueReusableCell(withIdentifier: "PaymentStatusCell", for: indexPath)as! PaymentStatusCell
         return cell
     }
+    
+    func selectImageFrom(_ source: ImageSource) {
+        imagePicker =  UIImagePickerController()
+        imagePicker.delegate = self
+        switch source {
+        case .camera:
+            imagePicker.sourceType = .camera
+        case .photoLibrary:
+            imagePicker.sourceType = .photoLibrary
+        }
+        present(imagePicker, animated: true, completion: nil)
+    }
+
+    @IBAction func uploadProofClick(_ sender: Any) {
+        selectImageFrom(.photoLibrary)
+    }
+    
+    
     @IBAction func onUpdateBtnClick(_ sender: Any) {
         print("attempting to save the transaction....")
         if finalPayment == true{
@@ -75,11 +105,15 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     func savePayment(){
+        var imageBase64String : String = ""
+        if let imageData = self.documentView.image?.jpegData(compressionQuality: 0.1){
+            imageBase64String = imageData.base64EncodedString()
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
 
         let newDate =  dateFormatter.string(from: Date())
-        let newPayment = PaymentModel(idPayment: CommonFunction.shared.randomString(length: 10), idTransaction: selectedTransaction, idUser: UserDefaults.standard.string(forKey: "userID") ?? "errorUser", createdDate: newDate, amount: Double(amountPaid.text ?? "0") ?? 0, document: "none", airtableId: "1")
+        let newPayment = PaymentModel(idPayment: CommonFunction.shared.randomString(length: 10), idTransaction: selectedTransaction, idUser: UserDefaults.standard.string(forKey: "userID") ?? "errorUser", createdDate: newDate, amount: Double(amountPaid.text ?? "0") ?? 0, document: imageBase64String, airtableId: "1")
         self.present(alertSave, animated: true, completion: nil)
         
         PaymentRepository.shared.savePayments(payment: newPayment) { payment in
@@ -125,7 +159,38 @@ class UpdateTransaction: UIViewController, UITableViewDelegate, UITableViewDataS
       
         
     }
+}
+extension UpdateTransaction {
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            imageName = url.lastPathComponent
+            print("imageName = \(imageName)")
+        }
+
+        imagePicker.dismiss(animated: true, completion: nil)
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            print("Image not found!")
+            return
+        }
+        let fileManager = FileManager.default
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(imageName)
+        let imageData = selectedImage.pngData()
+        fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
+
+        //Retrieving the image
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths2               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath = paths2.first {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName)
+            if let imageRetrieved = UIImage(contentsOfFile: imageURL.path) {
+                //do whatever you want with this image
+                print(imageRetrieved)
+            }
+        }
+        documentView.image = selectedImage
+    }
     
 }
 
