@@ -60,6 +60,7 @@ class PaymentDetail: UIViewController {
         if segue.identifier == "viewDetailInvoice"{
             let vc = segue.destination as? DocumentView
             vc?.documentFile = paymentQueue[5]
+            vc?.transactionNumber = paymentQueue[0]
         }
     }
     func generateImage() {
